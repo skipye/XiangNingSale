@@ -1,0 +1,116 @@
+﻿@{Layout = null;}
+
+@Html.Action("_Meta","Home")
+
+
+<article class="page-container">
+	<form class="form form-horizontal" id="form-article-add">
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>采购名称：</label>
+			<div class="formControls col-xs-7 col-sm-7">
+				<input type="text" class="input-text" value="" placeholder="" id="articletitle" name="articletitle">
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">数量：</label>
+			<div class="formControls col-xs-7 col-sm-7">
+				<input type="text" class="input-text" value="0" placeholder="" id="articlesort" name="articlesort">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">单位：</label>
+			<div class="formControls col-xs-7 col-sm-7">
+				<input type="text" class="input-text" value="" placeholder="" id="keywords" name="keywords">
+			</div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">采购说明：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<textarea name="abstract" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="采购说明不能为空！" onKeyUp="$.Huitextarealength(this,200)"></textarea>
+				<p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
+				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</article>
+
+@Html.Action("_Footer","Home")
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/jquery.validate.js"></script> 
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/validate-methods.js"></script> 
+<script type="text/javascript" src="lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+	
+	//表单验证
+	$("#form-article-add").validate({
+		rules:{
+			articletitle:{
+				required:true,
+			},
+			articletitle2:{
+				required:true,
+			},
+			articlecolumn:{
+				required:true,
+			},
+			articletype:{
+				required:true,
+			},
+			articlesort:{
+				required:true,
+			},
+			keywords:{
+				required:true,
+			},
+			abstract:{
+				required:true,
+			},
+			author:{
+				required:true,
+			},
+			sources:{
+				required:true,
+			},
+			allowcomments:{
+				required:true,
+			},
+			commentdatemin:{
+				required:true,
+			},
+			commentdatemax:{
+				required:true,
+			},
+
+		},
+		onkeyup:false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler:function(form){
+			//$(form).ajaxSubmit();
+			var index = parent.layer.getFrameIndex(window.name);
+			//parent.$('.btn-refresh').click();
+			parent.layer.close(index);
+		}
+	});
+	
+	
+	
+});
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>
