@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="XNArticleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="A_News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="ConvertPic" Type="nvarchar" MaxLength="100" />
+          <Property Name="KeyWord" Type="nvarchar" MaxLength="150" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsTop" Type="bit" />
+          <Property Name="IsShow" Type="bit" />
+          <Property Name="HitTimes" Type="int" />
+          <Property Name="StrContent" Type="nvarchar(max)" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UpTime" Type="datetime" />
+          <Property Name="State" Type="bit" />
+        </EntityType>
+        <EntityType Name="A_News_File">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="NewsId" Type="int" />
+          <Property Name="PublishUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="ThumbnailsUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sequence" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="State" Type="bit" />
+        </EntityType>
+        <EntityType Name="A_NewsType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Rank" Type="int" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="State" Type="bit" />
+        </EntityType>
+        <EntityType Name="A_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telphone" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="State" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_A_News_A_NewsType">
+          <End Role="A_NewsType" Type="Self.A_NewsType" Multiplicity="0..1" />
+          <End Role="A_News" Type="Self.A_News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_NewsType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_News">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_News_File_A_News">
+          <End Role="A_News" Type="Self.A_News" Multiplicity="0..1" />
+          <End Role="A_News_File" Type="Self.A_News_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_News">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_News_File">
+              <PropertyRef Name="NewsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_NewsType_A_NewsType">
+          <End Role="A_NewsType" Type="Self.A_NewsType" Multiplicity="1" />
+          <End Role="A_NewsType1" Type="Self.A_NewsType" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="A_NewsType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_NewsType1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="XNArticleModelStoreContainer">
+          <EntitySet Name="A_News" EntityType="Self.A_News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_News_File" EntityType="Self.A_News_File" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_NewsType" EntityType="Self.A_NewsType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_User" EntityType="Self.A_User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_A_News_A_NewsType" Association="Self.FK_A_News_A_NewsType">
+            <End Role="A_NewsType" EntitySet="A_NewsType" />
+            <End Role="A_News" EntitySet="A_News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_News_File_A_News" Association="Self.FK_A_News_File_A_News">
+            <End Role="A_News" EntitySet="A_News" />
+            <End Role="A_News_File" EntitySet="A_News_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_NewsType_A_NewsType" Association="Self.FK_A_NewsType_A_NewsType">
+            <End Role="A_NewsType" EntitySet="A_NewsType" />
+            <End Role="A_NewsType1" EntitySet="A_NewsType" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XNArticleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="A_News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="ConvertPic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KeyWord" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsTop" Type="Boolean" />
+          <Property Name="IsShow" Type="Boolean" />
+          <Property Name="HitTimes" Type="Int32" />
+          <Property Name="StrContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpTime" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="Boolean" />
+          <NavigationProperty Name="A_NewsType" Relationship="Self.FK_A_News_A_NewsType" FromRole="A_News" ToRole="A_NewsType" />
+          <NavigationProperty Name="A_News_File" Relationship="Self.FK_A_News_File_A_News" FromRole="A_News" ToRole="A_News_File" />
+        </EntityType>
+        <EntityType Name="A_News_File">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NewsId" Type="Int32" />
+          <Property Name="PublishUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailsUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sequence" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="Boolean" />
+          <NavigationProperty Name="A_News" Relationship="Self.FK_A_News_File_A_News" FromRole="A_News_File" ToRole="A_News" />
+        </EntityType>
+        <EntityType Name="A_NewsType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rank" Type="Int32" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="Boolean" />
+          <NavigationProperty Name="A_News" Relationship="Self.FK_A_News_A_NewsType" FromRole="A_NewsType" ToRole="A_News" />
+          <NavigationProperty Name="A_NewsType1" Relationship="Self.FK_A_NewsType_A_NewsType" FromRole="A_NewsType" ToRole="A_NewsType1" />
+          <NavigationProperty Name="A_NewsType2" Relationship="Self.FK_A_NewsType_A_NewsType" FromRole="A_NewsType1" ToRole="A_NewsType" />
+        </EntityType>
+        <EntityType Name="A_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telphone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="State" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_A_News_A_NewsType">
+          <End Role="A_NewsType" Type="Self.A_NewsType" Multiplicity="0..1" />
+          <End Role="A_News" Type="Self.A_News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_NewsType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_News">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_News_File_A_News">
+          <End Role="A_News" Type="Self.A_News" Multiplicity="0..1" />
+          <End Role="A_News_File" Type="Self.A_News_File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_News">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_News_File">
+              <PropertyRef Name="NewsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_NewsType_A_NewsType">
+          <End Role="A_NewsType" Type="Self.A_NewsType" Multiplicity="1" />
+          <End Role="A_NewsType1" Type="Self.A_NewsType" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="A_NewsType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_NewsType1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="XNArticleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="A_News" EntityType="Self.A_News" />
+          <EntitySet Name="A_News_File" EntityType="Self.A_News_File" />
+          <EntitySet Name="A_NewsType" EntityType="Self.A_NewsType" />
+          <EntitySet Name="A_User" EntityType="Self.A_User" />
+          <AssociationSet Name="FK_A_News_A_NewsType" Association="Self.FK_A_News_A_NewsType">
+            <End Role="A_NewsType" EntitySet="A_NewsType" />
+            <End Role="A_News" EntitySet="A_News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_News_File_A_News" Association="Self.FK_A_News_File_A_News">
+            <End Role="A_News" EntitySet="A_News" />
+            <End Role="A_News_File" EntitySet="A_News_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_NewsType_A_NewsType" Association="Self.FK_A_NewsType_A_NewsType">
+            <End Role="A_NewsType" EntitySet="A_NewsType" />
+            <End Role="A_NewsType1" EntitySet="A_NewsType" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XNArticleModelStoreContainer" CdmEntityContainer="XNArticleEntities">
+          <EntitySetMapping Name="A_News">
+            <EntityTypeMapping TypeName="XNArticleModel.A_News">
+              <MappingFragment StoreEntitySet="A_News">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="ConvertPic" ColumnName="ConvertPic" />
+                <ScalarProperty Name="KeyWord" ColumnName="KeyWord" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="IsTop" ColumnName="IsTop" />
+                <ScalarProperty Name="IsShow" ColumnName="IsShow" />
+                <ScalarProperty Name="HitTimes" ColumnName="HitTimes" />
+                <ScalarProperty Name="StrContent" ColumnName="StrContent" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UpTime" ColumnName="UpTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_News_File">
+            <EntityTypeMapping TypeName="XNArticleModel.A_News_File">
+              <MappingFragment StoreEntitySet="A_News_File">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NewsId" ColumnName="NewsId" />
+                <ScalarProperty Name="PublishUrl" ColumnName="PublishUrl" />
+                <ScalarProperty Name="ThumbnailsUrl" ColumnName="ThumbnailsUrl" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_NewsType">
+            <EntityTypeMapping TypeName="XNArticleModel.A_NewsType">
+              <MappingFragment StoreEntitySet="A_NewsType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_User">
+            <EntityTypeMapping TypeName="XNArticleModel.A_User">
+              <MappingFragment StoreEntitySet="A_User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Telphone" ColumnName="Telphone" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
