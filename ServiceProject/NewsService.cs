@@ -51,14 +51,6 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
-        public bool DeleteOne(int Id)
-        {
-            try { IDal.DeleteOne(Id); return true; }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
         public bool DeleteMore(string ListId)
         {
             try { IDal.DeleteMore(ListId); return true; }

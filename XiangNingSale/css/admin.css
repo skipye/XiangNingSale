@@ -135,3 +135,6 @@ a{color:#333}a:hover,a:focus,.maincolor,.maincolor a{color:#06c}
 .portfolio-area li .textbox{ display: none; margin-top: 5px;}
 .portfolio-area li.hover .textbox{ display: block;}
 .portfolio-area li label{ display:block; cursor:pointer}
+
+
+.table-sort tbody td {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}

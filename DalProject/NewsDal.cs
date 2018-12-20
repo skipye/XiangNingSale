@@ -11,12 +11,24 @@ namespace DalProject
     public class NewsDal
     {
         public List<NewsModel> GetPageList(SNewsModel SModel)
-        { 
-            using(var db=new XNArticleEntities())
+        {
+            DateTime StartTime = Convert.ToDateTime("1900-01-01");
+            DateTime EndTime = Convert.ToDateTime("2900-12-30");
+            if (!string.IsNullOrEmpty(SModel.StartTime))
+            {
+                StartTime = Convert.ToDateTime(SModel.StartTime);
+            }
+            if (!string.IsNullOrEmpty(SModel.EndTime))
+            {
+                EndTime = Convert.ToDateTime(SModel.EndTime);
+            }
+            using (var db=new XNArticleEntities())
             {
                 var List = (from p in db.A_News.Where(k => k.State == true)
                             where !string.IsNullOrEmpty(SModel.Name) ? p.Name.Contains(SModel.Name) : true
                             where SModel.TypeId!=null && SModel.TypeId>0 ? p.TypeId==SModel.TypeId : true
+                            where p.CreateTime>=StartTime
+                            where  p.CreateTime<EndTime
                             orderby p.CreateTime descending
                             select new NewsModel
                             {
@@ -25,7 +37,8 @@ namespace DalProject
                                 TypeId = p.TypeId,
                                 TypeName = p.A_NewsType.Name,
                                 Remarks = p.Remarks,
-                                CreateTime = p.CreateTime
+                                CreateTime = p.CreateTime,
+                                HitTimes=p.HitTimes,
                             }).ToList();
                 return List;
             }
@@ -149,15 +162,7 @@ namespace DalProject
                 return tables;
             }
         }
-        public void DeleteOne(int Id)
-        {
-            using (var db = new XNArticleEntities())
-            {
-                var tables = db.A_News.Where(k => k.Id == Id).SingleOrDefault();
-                tables.State = true;
-                db.SaveChanges();
-            }
-        }
+       
         public void DeleteMore(string ListId)
         {
             using (var db = new XNArticleEntities())
@@ -169,7 +174,7 @@ namespace DalProject
                     {
                         int Id = Convert.ToInt32(item);
                         var tables = db.A_News.Where(k => k.Id == Id).SingleOrDefault();
-                        tables.State = true;
+                        tables.State = false;
                     }
                 }
                 db.SaveChanges();

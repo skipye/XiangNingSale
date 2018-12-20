@@ -19,9 +19,12 @@ namespace ModelProject
         public string KeyWord { get; set; }
         public List<SelectListItem> TypeDroList { get; set; }
         public string GalleryItems { get; set; }
+        public int? HitTimes { get; set; }
     }
     public class SNewsModel
     {
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public string Name { get; set; }
         public int? TypeId { get; set; }
         public List<SelectListItem> TypeDroList { get; set; }
