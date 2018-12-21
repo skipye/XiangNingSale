@@ -59,6 +59,14 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
+        public bool Checked(string ListId, int CheckedId, int UserId)
+        {
+            try { IDal.CheckedMore(ListId, CheckedId, UserId); return true; }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public List<SelectListItem> GetNewTypeDrolist(int? pId)
         {
             try { return IDal.GetNewTypeDrolist(pId); }

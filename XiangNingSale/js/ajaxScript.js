@@ -12,11 +12,93 @@
 //    }
 //});
 
+
+//删除
+function del(obj,id) {
+    var ListId = "";
+    var PostUrl = $(obj).attr("data-url");
+    var ListId = "";
+    if (id > 0) {
+        ListId = id + "$";
+    } else {
+        debugger;
+        var NewObj = $(obj).parent().siblings("div.checkmodel").find("table.table");
+        NewObj.find("input[type='checkbox']:checked").each(function () {
+            ListId += $(this).val() + "$";
+        });
+    }
+    if (ListId != "" && ListId != undefined) {
+        $.post(PostUrl, { ListId: ListId }, function (d) {
+            if (d == "True") {
+                layer.msg('已删除!', { icon: 1, time: 1000 });
+                ResetWindow();
+            }
+            else { layer.msg('服务器错误!', { icon: 2, time: 1000 }); }
+        });
+    }
+    else { layer.alert("请先去选中！"); }
+}
+/*审核*/
+function checked(obj, id) {
+    var PostUrl = $(obj).attr("data-url");
+    var ListId = "";
+    if (id > 0) {
+        ListId = id + "$";
+    } else {
+        
+        var NewObj = $(obj).parent().siblings("div.checkmodel").find("table.table");
+        NewObj.find("input[type='checkbox']:checked").each(function () {
+            ListId += $(this).val() + "$";
+        });
+    }
+    if (ListId == "" || ListId == undefined) {
+        layer.alert("请先去选中！");
+        return false;
+    }
+    layer.confirm('审核文章？', {
+        btn: ['通过', '不通过', '取消'],
+        shade: false,
+        closeBtn: 0
+    },
+	function () {
+	    $.post(PostUrl, { ListId: ListId, CheckedId: 1 }, function (d) {
+	        if (d == "True")
+	        {
+	            layer.msg('已审核', { icon: 6, time: 1000 });
+	            if (id > 0) {
+	                $(obj).parents("tr").find(".checkedstatus").html('<span class="label label-success radius">通过</span>');
+	                $(obj).remove();
+	            } else { ResetWindow();}
+	        }
+	    });
+	},
+	function () {
+	    $.post(PostUrl, { ListId: ListId, CheckedId: 2 }, function (d) {
+	        if (d == "True") {
+	            layer.msg('未通过', { icon: 5, time: 1000 });
+	            if (id > 0) {
+	                $(obj).parents("tr").find(".checkedstatus").html('<span class="label label-danger radius">被驳回</span>');
+	                $(obj).remove();
+	            } else { ResetWindow(); }
+	        }
+	    });
+	});
+}
+/*编辑*/
+function edit(title, url, id, w, h) {
+    var index = layer.open({
+        type: 2,
+        title: title,
+        content: url
+    });
+    layer.full(index);
+}
 function ajaxRequest(requestType, url, params, backFuc) {
     $.ajax({
         method : requestType,
         url : url,
-        data : params,
+        data: params,
+        dataType: "json",
         success : function (data) {
             backFuc(data);
         }
@@ -176,4 +258,9 @@ function loadJScript() {
 //获取bitNumber上第bit位的数值为0还是1
 function getNumberBitValue(bitNumber, bit) {
     return ((1 << bit) & bitNumber) >> bit;
+}
+
+//并刷新父页面
+function ResetWindow() {
+    setTimeout(function () { window.location.reload(); }, 500);//0.5秒后强制刷新
 }

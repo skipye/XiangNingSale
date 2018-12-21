@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SerProject
+namespace ServiceProject
 {
     public class UserService
     {

@@ -1,6 +1,11 @@
 ﻿@model ModelProject.SNewsModel
 @{
     Layout = null;
+    List<SelectListItem> SelItem = new List<SelectListItem>();
+    SelItem.Add(new SelectListItem { Text = "请选择状态", Value = "" });
+    SelItem.Add(new SelectListItem { Text = "未审核", Value = "0" });
+    SelItem.Add(new SelectListItem { Text = "通过", Value = "1" });
+    SelItem.Add(new SelectListItem { Text = "被驳回", Value = "2" });
 }
 @Html.Action("_Meta","Home")
 <nav class="breadcrumb">
@@ -12,15 +17,21 @@
         <span class="select-box inline">
             @Html.DropDownListFor(k => k.TypeId, Model.TypeDroList, new { @class = "select" })
         </span>
+        <span class="select-box inline">
+            @Html.DropDownListFor(k => k.CheckedStatus, SelItem, new { @class = "select" })
+        </span>
 		日期范围：
 		<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
 		-
 		<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
-        @Html.TextBoxFor(k => k.Name, new { @placeholder = "资讯名称" ,@style = "width:250px" ,@class="input-text"})
+        @Html.TextBoxFor(k => k.Name, new { @placeholder = "标题" ,@style = "width:150px" ,@class="input-text"})
 		<button id="btnSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜资讯</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a> <a class="btn btn-primary radius" data-title="添加资讯" data-href="article-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加资讯</a></span> </div>
-	<div class="mt-20">
+	<div class="cl pd-5 bg-1 bk-gray mt-20">
+        <a href="javascript:void(0);" onclick="del(this, '0')" class="btn btn-danger radius" data-url="@Url.Action("Delete","Article")"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a> 
+        <a href="javascript:void(0);" onclick="checked(this,'0')" class="btn btn-primary radius" data-url="@Url.Action("Checked","Article")" ><i class="Hui-iconfont">&#xe615;</i>批量审核</a>
+    </div>
+	<div class="mt-20 checkmodel">
 		@*@Html.Action("PageList","Article")*@
         <table class="table table-border table-bordered table-bg table-hover table-sort">
             <thead>
@@ -31,6 +42,8 @@
                     <th>摘要</th>
                     <th width="120">创建时间</th>
                     <th width="75">浏览次数</th>
+                    <th width="75">上传人</th>
+                    <th width="75">审核状态</th>
                     <th width="120">操作</th>
                 </tr>
             </thead>
@@ -44,11 +57,10 @@
  @Html.Action("_Footer","Home")
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="~/js/DatePicker/4.8/WdatePicker.js"></script> 
-<script type="text/javascript" src="~/js/jquery.dataTables.min.js"></script> 
-<script type="text/javascript" src="~/js/laypage.js"></script>
-<script type="text/javascript" src="~/js/ajaxScript.js?v=2"></script>
+<script type="text/javascript" src="~/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="~/js/ajaxScript.js?v=1"></script>
 <script type="text/javascript">
-    
+
     var param = {};
     $(function () { searchArticle(param); });
     $("#btnSearch").click(function () {
@@ -57,11 +69,13 @@
         var Name = $("#Name").val().trim();
         var StartTime = $("#logmin").val().trim();
         var EndTime = $("#logmax").val().trim();
+        var CheckedStatus = $("#CheckedStatus").val().trim();
         //搜索
         param["TypeId"] = TypeId;
         param["Name"] = Name;
         param["StartTime"] = StartTime;
         param["EndTime"] = EndTime;
+        param["CheckedStatus"] = CheckedStatus;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
         searchArticle(param);
@@ -90,16 +104,22 @@
                         return '<input type="checkbox" value="' + row.Id + '" >';
                     }
                 }, {
-                    targets: 6,//把第九列的样式改为超链接
+                    targets: 8,//把第九列的样式改为超链接
                     render: function (data, type, row) {
-                        return '<a style="text-decoration:none" class="ml-10" onclick="Institution_edit(\'机构编辑\', \'Institution-add.html\', \'' + row.Id + '\', \'800\', \'500\')" href="javascript:void(0);" title="机构编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
-                               '<a style="text-decoration:none" class="ml-10" onClick="article_del(this,\'' + row.Id + '\')" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>';
+                        var StrCheck = "";
+                        if (row.CheckedStatus == 0)
+                        {
+                            StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="checked(this, \'' + row.Id + '\')" data-url=\'Article/Checked\' title="审核"><i class="Hui-iconfont f-14">&#xe615;</i></a>';
+                        }
+                        return StrCheck +
+                               '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'资讯编辑\',\'/Article/Add\', \'' + row.Id + '\', \'800\', \'500\')" title="资讯编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                               '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'Article/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
                     }
                 }
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "Id" },
-                        { "data": "Name" },  
+                        { "data": "Name", "className": "text-overflow" },
                         { "data": "TypeName", "defaultContent": "" },
                         { "data": "Remarks", "defaultContent": "" },
                         {
@@ -109,6 +129,16 @@
                             }
                         },
                         { "data": "HitTimes", "defaultContent": "" },
+                        { "data": "UploadName", "defaultContent": "" },
+                        {
+                            "data": "CheckedStatus", "render": function (data) {
+                                var StatusName = "<span class=\"label label-warning radius\">未审核</span>";
+                                if (data == 1)
+                                { StatusName = "<span class=\"label label-success radius\">通过</span>"; }
+                                if (data == 2) { StatusName = "<span class=\"label label-danger radius\">被驳回</span>"; }
+                                return StatusName;
+                            }, "className": "checkedstatus",
+                        },
             ]
         });
     };
@@ -121,73 +151,8 @@ function article_add(title,url,w,h){
 	});
 	layer.full(index);
 }
-/*资讯-编辑*/
-function article_edit(title,url,id,w,h){
-	var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index);
-}
-/*资讯-删除*/
-function article_del(obj,id){
-    layer.confirm('确认要删除吗？', function (index) {
-        $.post('/Article/DeleteOne', { "Id": id }, function (data) {
-            alert(data);
-            if (data == "True") {
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!', { icon: 1, time: 1000 });
-            } else { layer.msg('服务器错误!', { icon: 2, time: 1000 }); }
-        });
-		
-	});
-}
 
-/*资讯-审核*/
-function article_shenhe(obj,id){
-	layer.confirm('审核文章？', {
-		btn: ['通过','不通过','取消'], 
-		shade: false,
-		closeBtn: 0
-	},
-	function(){
-		$(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_start(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
-		$(obj).remove();
-		layer.msg('已发布', {icon:6,time:1000});
-	},
-	function(){
-		$(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_shenqing(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-danger radius">未通过</span>');
-		$(obj).remove();
-    	layer.msg('未通过', {icon:5,time:1000});
-	});	
-}
-/*资讯-下架*/
-function article_stop(obj,id){
-	layer.confirm('确认要下架吗？',function(index){
-		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已下架</span>');
-		$(obj).remove();
-		layer.msg('已下架!',{icon: 5,time:1000});
-	});
-}
 
-/*资讯-发布*/
-function article_start(obj,id){
-	layer.confirm('确认要发布吗？',function(index){
-		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
-		$(obj).remove();
-		layer.msg('已发布!',{icon: 6,time:1000});
-	});
-}
-/*资讯-申请上线*/
-function article_shenqing(obj,id){
-	$(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">待审核</span>');
-	$(obj).parents("tr").find(".td-manage").html("");
-	layer.msg('已提交申请，耐心等待审核!', {icon: 1,time:2000});
-}
+
 
 </script> 

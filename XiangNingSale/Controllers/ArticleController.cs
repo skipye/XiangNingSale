@@ -11,8 +11,7 @@ namespace XiangNingSale.Controllers
 {
     public class ArticleController : Controller
     {
-        //
-        // GET: /Article/
+        private static readonly UserService USer = new UserService();
         private static readonly NewsService NSer = new NewsService();
         public ActionResult Index(SNewsModel Smodels)
         {
@@ -48,18 +47,9 @@ namespace XiangNingSale.Controllers
             }
             else { return View(Models); }
         }
-        //删除单个
-        public ActionResult DeleteOne(int Id)
-        {
-            string ListId = Id + "$";
-            if (NSer.DeleteMore(ListId) == true)
-            {
-                return Content("True");
-            }
-            else return Content("False");
-        }
+        
         //删除多个
-        public ActionResult DeleteMore(string ListId)
+        public ActionResult Delete(string ListId)
         {
             if (string.IsNullOrEmpty(ListId) == true)
             {
@@ -68,6 +58,24 @@ namespace XiangNingSale.Controllers
             else
             {
                 if (NSer.DeleteMore(ListId) == true)
+                {
+                    return Content("True");
+                }
+                else return Content("False");
+            }
+        }
+        public ActionResult Checked(string ListId,int CheckedId)
+        {
+            var UserId = USer.GetCurrentUserName().UserId;
+            if (UserId <= 0)
+            { UserId = 1; }
+            if (string.IsNullOrEmpty(ListId) == true)
+            {
+                return Content("False");
+            }
+            else
+            {
+                if (NSer.Checked(ListId, CheckedId, UserId) == true)
                 {
                     return Content("True");
                 }

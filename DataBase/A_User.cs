@@ -14,11 +14,20 @@ namespace DataBase
     
     public partial class A_User
     {
+        public A_User()
+        {
+            this.A_News = new HashSet<A_News>();
+            this.A_News1 = new HashSet<A_News>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
         public string Telphone { get; set; }
         public System.DateTime CreateTime { get; set; }
         public bool State { get; set; }
+    
+        public virtual ICollection<A_News> A_News { get; set; }
+        public virtual ICollection<A_News> A_News1 { get; set; }
     }
 }

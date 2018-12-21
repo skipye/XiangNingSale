@@ -27,6 +27,7 @@ namespace DalProject
                 var List = (from p in db.A_News.Where(k => k.State == true)
                             where !string.IsNullOrEmpty(SModel.Name) ? p.Name.Contains(SModel.Name) : true
                             where SModel.TypeId!=null && SModel.TypeId>0 ? p.TypeId==SModel.TypeId : true
+                            where SModel.CheckedStatus >=0 ? p.CheckedStatus == SModel.CheckedStatus : true
                             where p.CreateTime>=StartTime
                             where  p.CreateTime<EndTime
                             orderby p.CreateTime descending
@@ -39,6 +40,9 @@ namespace DalProject
                                 Remarks = p.Remarks,
                                 CreateTime = p.CreateTime,
                                 HitTimes=p.HitTimes,
+                                UploadName=p.A_User.Name,
+                                EidtAuthorName=p.A_User.Name,
+                                CheckedStatus = p.CheckedStatus,
                             }).ToList();
                 return List;
             }
@@ -96,6 +100,7 @@ namespace DalProject
                     table.KeyWord = Models.KeyWord;
                     table.StrContent = Models.StrContent;
                     table.ConvertPic = Models.ConvertImg;
+                    table.EidtAuthorId = Models.EidtAuthorId;
                     db.SaveChanges();
                 }
                 else
@@ -113,6 +118,9 @@ namespace DalProject
                     table.CreateTime = DateTime.Now;
                     table.HitTimes = 10;
                     table.State = true;
+                    table.CheckedStatus = 1;
+                    table.UploadAuthorId = Models.UploadAuthorId;
+                    table.EidtAuthorId = Models.EidtAuthorId;
                     db.A_News.Add(table);
                     db.SaveChanges();
                     Models.Id = table.Id;
@@ -175,6 +183,26 @@ namespace DalProject
                         int Id = Convert.ToInt32(item);
                         var tables = db.A_News.Where(k => k.Id == Id).SingleOrDefault();
                         tables.State = false;
+                    }
+                }
+                db.SaveChanges();
+            }
+        }
+        public void CheckedMore(string ListId,int CheckedId,int UserId)
+        {
+            using (var db = new XNArticleEntities())
+            {
+                string[] ArrId = ListId.Split('$');
+                foreach (var item in ArrId)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        int Id = Convert.ToInt32(item);
+                        var tables = db.A_News.Where(k => k.Id == Id).SingleOrDefault();
+                        if (tables.CheckedStatus == 0) { 
+                        tables.CheckedStatus = CheckedId;
+                        tables.CheckedUserId = UserId;
+                        }
                     }
                 }
                 db.SaveChanges();

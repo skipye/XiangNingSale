@@ -20,6 +20,11 @@ namespace ModelProject
         public List<SelectListItem> TypeDroList { get; set; }
         public string GalleryItems { get; set; }
         public int? HitTimes { get; set; }
+        public string UploadName { get; set; }
+        public int? CheckedStatus { get; set; }
+        public int? UploadAuthorId { get; set; }
+        public string EidtAuthorName { get; set; }
+        public int? EidtAuthorId { get; set; }
     }
     public class SNewsModel
     {
@@ -28,6 +33,7 @@ namespace ModelProject
         public string Name { get; set; }
         public int? TypeId { get; set; }
         public List<SelectListItem> TypeDroList { get; set; }
+        public int? CheckedStatus { get; set; }
     }
     public class NewsItmeModel
     {

@@ -27,7 +27,5 @@ namespace DataBase
         public Nullable<bool> State { get; set; }
     
         public virtual ICollection<A_News> A_News { get; set; }
-        public virtual A_NewsType A_NewsType1 { get; set; }
-        public virtual A_NewsType A_NewsType2 { get; set; }
     }
 }

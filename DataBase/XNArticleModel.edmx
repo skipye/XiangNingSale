@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="XNArticleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="XNArticleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="A_News">
           <Key>
             <PropertyRef Name="Id" />
@@ -22,6 +22,10 @@
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="UpTime" Type="datetime" />
           <Property Name="State" Type="bit" />
+          <Property Name="CheckedStatus" Type="int" />
+          <Property Name="UploadAuthorId" Type="int" />
+          <Property Name="EidtAuthorId" Type="int" />
+          <Property Name="CheckedUserId" Type="int" />
         </EntityType>
         <EntityType Name="A_News_File">
           <Key>
@@ -70,6 +74,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_A_News_A_User">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_News" Type="Self.A_News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_News">
+              <PropertyRef Name="UploadAuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_News_A_User1">
+          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
+          <End Role="A_News" Type="Self.A_News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_News">
+              <PropertyRef Name="EidtAuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_A_News_File_A_News">
           <End Role="A_News" Type="Self.A_News" Multiplicity="0..1" />
           <End Role="A_News_File" Type="Self.A_News_File" Multiplicity="*" />
@@ -103,6 +131,14 @@
             <End Role="A_NewsType" EntitySet="A_NewsType" />
             <End Role="A_News" EntitySet="A_News" />
           </AssociationSet>
+          <AssociationSet Name="FK_A_News_A_User" Association="Self.FK_A_News_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_News" EntitySet="A_News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_News_A_User1" Association="Self.FK_A_News_A_User1">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_News" EntitySet="A_News" />
+          </AssociationSet>
           <AssociationSet Name="FK_A_News_File_A_News" Association="Self.FK_A_News_File_A_News">
             <End Role="A_News" EntitySet="A_News" />
             <End Role="A_News_File" EntitySet="A_News_File" />
@@ -112,11 +148,10 @@
             <End Role="A_NewsType1" EntitySet="A_NewsType" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="XNArticleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="XNArticleModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityType Name="A_News">
           <Key>
             <PropertyRef Name="Id" />
@@ -136,6 +171,12 @@
           <Property Name="State" Type="Boolean" />
           <NavigationProperty Name="A_NewsType" Relationship="Self.FK_A_News_A_NewsType" FromRole="A_News" ToRole="A_NewsType" />
           <NavigationProperty Name="A_News_File" Relationship="Self.FK_A_News_File_A_News" FromRole="A_News" ToRole="A_News_File" />
+          <Property Name="CheckedStatus" Type="Int32" />
+          <Property Name="UploadAuthorId" Type="Int32" />
+          <Property Name="EidtAuthorId" Type="Int32" />
+          <NavigationProperty Name="A_User" Relationship="XNArticleModel.FK_A_News_A_User" FromRole="A_News" ToRole="A_User" />
+          <NavigationProperty Name="A_User1" Relationship="XNArticleModel.FK_A_News_A_User1" FromRole="A_News" ToRole="A_User" />
+          <Property Name="CheckedUserId" Type="Int32" />
         </EntityType>
         <EntityType Name="A_News_File">
           <Key>
@@ -162,8 +203,6 @@
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="State" Type="Boolean" />
           <NavigationProperty Name="A_News" Relationship="Self.FK_A_News_A_NewsType" FromRole="A_NewsType" ToRole="A_News" />
-          <NavigationProperty Name="A_NewsType1" Relationship="Self.FK_A_NewsType_A_NewsType" FromRole="A_NewsType" ToRole="A_NewsType1" />
-          <NavigationProperty Name="A_NewsType2" Relationship="Self.FK_A_NewsType_A_NewsType" FromRole="A_NewsType1" ToRole="A_NewsType" />
         </EntityType>
         <EntityType Name="A_User">
           <Key>
@@ -175,6 +214,8 @@
           <Property Name="Telphone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="State" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="A_News" Relationship="XNArticleModel.FK_A_News_A_User" FromRole="A_User" ToRole="A_News" />
+          <NavigationProperty Name="A_News1" Relationship="XNArticleModel.FK_A_News_A_User1" FromRole="A_User" ToRole="A_News" />
         </EntityType>
         <Association Name="FK_A_News_A_NewsType">
           <End Role="A_NewsType" Type="Self.A_NewsType" Multiplicity="0..1" />
@@ -200,18 +241,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_A_NewsType_A_NewsType">
-          <End Role="A_NewsType" Type="Self.A_NewsType" Multiplicity="1" />
-          <End Role="A_NewsType1" Type="Self.A_NewsType" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="A_NewsType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="A_NewsType1">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="XNArticleEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="A_News" EntityType="Self.A_News" />
           <EntitySet Name="A_News_File" EntityType="Self.A_News_File" />
@@ -225,20 +254,52 @@
             <End Role="A_News" EntitySet="A_News" />
             <End Role="A_News_File" EntitySet="A_News_File" />
           </AssociationSet>
-          <AssociationSet Name="FK_A_NewsType_A_NewsType" Association="Self.FK_A_NewsType_A_NewsType">
-            <End Role="A_NewsType" EntitySet="A_NewsType" />
-            <End Role="A_NewsType1" EntitySet="A_NewsType" />
+          <AssociationSet Name="FK_A_News_A_User" Association="XNArticleModel.FK_A_News_A_User">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_News" EntitySet="A_News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_News_A_User1" Association="XNArticleModel.FK_A_News_A_User1">
+            <End Role="A_User" EntitySet="A_User" />
+            <End Role="A_News" EntitySet="A_News" />
           </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_A_News_A_User">
+          <End Type="XNArticleModel.A_User" Role="A_User" Multiplicity="0..1" />
+          <End Type="XNArticleModel.A_News" Role="A_News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_News">
+              <PropertyRef Name="UploadAuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_News_A_User1">
+          <End Type="XNArticleModel.A_User" Role="A_User" Multiplicity="0..1" />
+          <End Type="XNArticleModel.A_News" Role="A_News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_News">
+              <PropertyRef Name="EidtAuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="XNArticleModelStoreContainer" CdmEntityContainer="XNArticleEntities">
           <EntitySetMapping Name="A_News">
             <EntityTypeMapping TypeName="XNArticleModel.A_News">
               <MappingFragment StoreEntitySet="A_News">
+                <ScalarProperty Name="CheckedUserId" ColumnName="CheckedUserId" />
+                <ScalarProperty Name="EidtAuthorId" ColumnName="EidtAuthorId" />
+                <ScalarProperty Name="UploadAuthorId" ColumnName="UploadAuthorId" />
+                <ScalarProperty Name="CheckedStatus" ColumnName="CheckedStatus" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="TypeId" ColumnName="TypeId" />
@@ -298,22 +359,22 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
-    <Connection>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
-      </DesignerInfoPropertySet>
-    </Connection>
-    <Options>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
-      </DesignerInfoPropertySet>
-    </Options>
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="false" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
-  </Designer>
+    <edmx:Diagrams />
+  </edmx:Designer>
 </edmx:Edmx>

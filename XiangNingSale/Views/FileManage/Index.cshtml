@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+    string TabId = ViewBag.TabId;
+}
+<script type="text/javascript" src="~/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/js/jquery.form.js")"></script>
+
+<form id="fileForm" method="post" action="/FileManage/UploadImg" enctype="multipart/form-data">
+
+    <div style="clear: both;">
+        <div class="editor-label">
+            选择文件：
+        </div>
+        <div class="editor-field">
+            <input type="file" name="upImage" id="upImage">
+        </div>
+    </div>
+
+    <div style="text-align: center; clear:both;">
+        <input type="button" value="保存"  class="btn btn-primary radius" id="FileUpload" style="width:50px;height:30px;" />
+    </div>
+
+</form>
+<input type="text" value="@TabId" />
+<script src="~/js/layer/layer.js"></script>
+
+<script type="text/javascript">
+
+    $("#FileUpload").click(function () {
+        if ($("#upImage").val() == "") {
+            alert("请选择一个文件，再点击上传。");
+            return;
+        };
+        $("#fileForm").ajaxSubmit({
+            success: function (msg) {
+                var TabId = "@TabId";
+                if (msg != "0")
+                {
+                    layer.alert("上传成功！");
+                    debugger;
+                    var Obj = parent.$("#" + TabId);
+                    parent.$("#" + TabId).val(msg);
+                    
+                    parent.$("." + TabId).attr("src", msg);
+                }
+                else { layer.alert("上传失败！"); }
+            }
+
+        });
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    });
+</script>
