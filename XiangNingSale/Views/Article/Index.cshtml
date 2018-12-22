@@ -58,7 +58,7 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="~/js/DatePicker/4.8/WdatePicker.js"></script> 
 <script type="text/javascript" src="~/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="~/js/ajaxScript.js?v=1"></script>
+<script type="text/javascript" src="~/js/ajaxScript.js?v=2"></script>
 <script type="text/javascript">
 
     var param = {};
@@ -113,7 +113,7 @@
                         }
                         return StrCheck +
                                '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'资讯编辑\',\'/Article/Add\', \'' + row.Id + '\', \'800\', \'500\')" title="资讯编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
-                               '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'Article/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
+                               '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'/Article/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
                     }
                 }
             ],
@@ -142,17 +142,6 @@
             ]
         });
     };
-/*资讯-添加*/
-function article_add(title,url,w,h){
-	var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index);
-}
-
-
 
 
 </script> 

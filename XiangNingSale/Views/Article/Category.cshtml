@@ -1,0 +1,136 @@
+﻿@model ModelProject.SCategoryModel
+@{
+    Layout = null;
+}
+@Html.Action("_Meta", "Home")
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i>首页<span class="c-gray en">&gt;</span>资讯管理<span class="c-gray en">&gt;</span>资讯类别
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="page-container">
+    <div class="text-c">
+        <span class="select-box inline">
+            @Html.DropDownListFor(k => k.TypeId, Model.TypeDroList, new { @class = "select" })
+        </span>
+        日期范围：
+        <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
+        -
+        <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
+        @Html.TextBoxFor(k => k.Name, new { @placeholder = "标题", @style = "width:150px", @class = "input-text" })
+        <button id="btnSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜资讯</button>
+    </div>
+    <div class="cl pd-5 bg-1 bk-gray mt-20">
+        <a href="javascript:void(0);" onclick="del(this, '0')" class="btn btn-danger radius" data-url="@Url.Action("Delete","Article")"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
+    </div>
+    <div class="mt-20 checkmodel">
+        @*@Html.Action("PageList","Article")*@
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+                <tr class="text-l">
+                    <th width="25"><input type="checkbox" name="" value=""></th>
+                    <th width="140">标题</th>
+                    <th width="80">分类</th>
+                    <th>摘要</th>
+                    <th width="120">创建时间</th>
+                    <th width="75">浏览次数</th>
+                    <th width="75">上传人</th>
+                    <th width="75">审核状态</th>
+                    <th width="120">操作</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@Html.Action("_Footer", "Home")
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="~/js/DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="~/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="~/js/ajaxScript.js?v=2"></script>
+<script type="text/javascript">
+
+    var param = {};
+    $(function () { searchArticle(param); });
+    $("#btnSearch").click(function () {
+        //搜索条件
+        var TypeId = $("#TypeId").val().trim();
+        var Name = $("#Name").val().trim();
+        var StartTime = $("#logmin").val().trim();
+        var EndTime = $("#logmax").val().trim();
+        var CheckedStatus = $("#CheckedStatus").val().trim();
+        //搜索
+        param["TypeId"] = TypeId;
+        param["Name"] = Name;
+        param["StartTime"] = StartTime;
+        param["EndTime"] = EndTime;
+        param["CheckedStatus"] = CheckedStatus;
+        //初始化，然后绑定
+        $('.table-sort').DataTable().destroy();
+        searchArticle(param);
+    });
+
+    function searchArticle(param) {
+        $('.table-sort').dataTable({
+            "bStateSave": true,
+            "pading": false,
+            "destroy": true,
+            "searching": true,
+            "autoWidth": true,
+            "ordering": false, //设置所有不排序
+            "ajax": function (data, callback, settings) {
+                ajaxRequest("post", "/Article/PageList", param, function (result) {
+                    //封装返回数据
+                    var returnData = {};
+                    returnData.data = result;
+                    callback(returnData);
+                });
+            },
+            "columnDefs": [//对table格式的定义（表格的列从0开始）
+                {
+                    targets: 0,
+                    render: function (data, type, row) {
+                        return '<input type="checkbox" value="' + row.Id + '" >';
+                    }
+                }, {
+                    targets: 8,//把第九列的样式改为超链接
+                    render: function (data, type, row) {
+                        var StrCheck = "";
+                        if (row.CheckedStatus == 0)
+                        {
+                            StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="checked(this, \'' + row.Id + '\')" data-url=\'Article/Checked\' title="审核"><i class="Hui-iconfont f-14">&#xe615;</i></a>';
+                        }
+                        return StrCheck +
+                               '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'资讯编辑\',\'/Article/Add\', \'' + row.Id + '\', \'800\', \'500\')" title="资讯编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                               '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'Article/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
+                    }
+                }
+            ],
+            "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
+                        { "data": "Id" },
+                        { "data": "Name", "className": "text-overflow" },
+                        { "data": "TypeName", "defaultContent": "" },
+                        { "data": "Remarks", "defaultContent": "" },
+                        {
+                            "data": "CreateTime", "render": function (data) {
+                                var NewTime = parseInt(data.replace(/\D/igm, ""));
+                                return formatDateTime(NewTime);
+                            }
+                        },
+                        { "data": "HitTimes", "defaultContent": "" },
+                        { "data": "UploadName", "defaultContent": "" },
+                        {
+                            "data": "CheckedStatus", "render": function (data) {
+                                var StatusName = "<span class=\"label label-warning radius\">未审核</span>";
+                                if (data == 1)
+                                { StatusName = "<span class=\"label label-success radius\">通过</span>"; }
+                                if (data == 2) { StatusName = "<span class=\"label label-danger radius\">被驳回</span>"; }
+                                return StatusName;
+                            }, "className": "checkedstatus",
+                        },
+            ]
+        });
+    };
+
+
+</script> 

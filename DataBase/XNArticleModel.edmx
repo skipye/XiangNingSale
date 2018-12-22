@@ -110,18 +110,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_A_NewsType_A_NewsType">
-          <End Role="A_NewsType" Type="Self.A_NewsType" Multiplicity="1" />
-          <End Role="A_NewsType1" Type="Self.A_NewsType" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="A_NewsType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="A_NewsType1">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="XNArticleModelStoreContainer">
           <EntitySet Name="A_News" EntityType="Self.A_News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_News_File" EntityType="Self.A_News_File" Schema="dbo" store:Type="Tables" />
@@ -142,10 +130,6 @@
           <AssociationSet Name="FK_A_News_File_A_News" Association="Self.FK_A_News_File_A_News">
             <End Role="A_News" EntitySet="A_News" />
             <End Role="A_News_File" EntitySet="A_News_File" />
-          </AssociationSet>
-          <AssociationSet Name="FK_A_NewsType_A_NewsType" Association="Self.FK_A_NewsType_A_NewsType">
-            <End Role="A_NewsType" EntitySet="A_NewsType" />
-            <End Role="A_NewsType1" EntitySet="A_NewsType" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -203,6 +187,8 @@
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="State" Type="Boolean" />
           <NavigationProperty Name="A_News" Relationship="Self.FK_A_News_A_NewsType" FromRole="A_NewsType" ToRole="A_News" />
+          <NavigationProperty Name="A_NewsType1" Relationship="XNArticleModel.FK_A_NewsType_A_NewsType" FromRole="A_NewsType" ToRole="A_NewsType1" />
+          <NavigationProperty Name="A_NewsType2" Relationship="XNArticleModel.FK_A_NewsType_A_NewsType" FromRole="A_NewsType1" ToRole="A_NewsType" />
         </EntityType>
         <EntityType Name="A_User">
           <Key>
@@ -262,6 +248,10 @@
             <End Role="A_User" EntitySet="A_User" />
             <End Role="A_News" EntitySet="A_News" />
           </AssociationSet>
+          <AssociationSet Name="FK_A_NewsType_A_NewsType" Association="XNArticleModel.FK_A_NewsType_A_NewsType">
+            <End Role="A_NewsType" EntitySet="A_NewsType" />
+            <End Role="A_NewsType1" EntitySet="A_NewsType" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_A_News_A_User">
           <End Type="XNArticleModel.A_User" Role="A_User" Multiplicity="0..1" />
@@ -284,6 +274,18 @@
             </Principal>
             <Dependent Role="A_News">
               <PropertyRef Name="EidtAuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_NewsType_A_NewsType">
+          <End Type="XNArticleModel.A_NewsType" Role="A_NewsType" Multiplicity="0..1" />
+          <End Type="XNArticleModel.A_NewsType" Role="A_NewsType1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_NewsType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_NewsType1">
+              <PropertyRef Name="ParentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

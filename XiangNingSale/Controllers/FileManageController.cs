@@ -1,4 +1,5 @@
 ﻿using Common;
+using LitJson;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -120,8 +121,11 @@ namespace XiangNingSale.Controllers
             }
         }
         [HttpPost]
-        public string UploadTextImages()
+        public ActionResult UploadTextImages()
         {
+            //定义允许上传的文件扩展名
+            Hashtable hash = new Hashtable();
+            
             //定义错误消息
             string msg = "";
             //接受上传文件
@@ -130,6 +134,10 @@ namespace XiangNingSale.Controllers
             {
                 //获取上传目录 转换为物理路径
                 string uploadPath = Server.MapPath("~/UpLoads/");
+                if (!Directory.Exists(uploadPath))
+                {
+                    Directory.CreateDirectory(uploadPath);
+                }
                 //获取文件名
                 string fileName = DateTime.Now.Ticks.ToString() + System.IO.Path.GetExtension(hp.FileName);
                 //获取文件大小
@@ -138,7 +146,7 @@ namespace XiangNingSale.Controllers
                 if (contentLength > 1024 * 1024 * 10)
                 {
                     msg = "文件大小超过限制要求.";
-                    return msg;
+                    //return msg;
                 }
                 //保存文件的物理路径
                 string saveFile = uploadPath + fileName;
@@ -146,22 +154,12 @@ namespace XiangNingSale.Controllers
                 hp.SaveAs(saveFile);
                 msg = "/UpLoads/" + fileName;
 
-                Hashtable hash = new Hashtable();
+                
                 hash["error"] = 0;
-                hash["url"] = saveFile;
-
-                //return JsonMapper.ToJson(hash);
+                hash["url"] = msg;
+                
             }
-            try
-            {
-                return msg;
-                //msg = "1";
-            }
-            catch
-            {
-                msg = "上传失败.";
-                return msg;
-            }
+            return Content(JsonMapper.ToJson(hash));
         }
     }
 }

@@ -13,10 +13,12 @@ namespace XiangNingSale.Controllers
     {
         private static readonly UserService USer = new UserService();
         private static readonly NewsService NSer = new NewsService();
-        public ActionResult Index(SNewsModel Smodels)
+      
+        public ActionResult Index()
         {
-            Smodels.TypeDroList = NSer.GetNewTypeDrolist(Smodels.TypeId);
-            return View(Smodels);
+            SNewsModel SModels = new SNewsModel();
+            SModels.TypeDroList = NSer.GetNewTypeDrolist(SModels.TypeId);
+            return View(SModels);
         }
         public ActionResult PageList(SNewsModel SRmodels)
         {
@@ -33,21 +35,30 @@ namespace XiangNingSale.Controllers
             if (Id != null && Id > 0)
             {
                 Models = NSer.GetDetailById(Id.Value);
+                Models.EidtAuthorId = GetUserId();
             }
             Models.TypeDroList = NSer.GetNewTypeDrolist(Models.TypeId);
             return View(Models);
         }
-        [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Add(NewsModel Models)
+        public ActionResult PostAdd(NewsModel Models)
         {
+            Models.UploadAuthorId= GetUserId();
+            Models.EidtAuthorId = GetUserId();
             if (NSer.AddOrUpdate(Models) == true)
             {
-                return RedirectToAction("Index", "News");
+                return Content("1");
             }
             else { return View(Models); }
         }
-        
+        //用户自己的内容
+        public ActionResult UserIndex()
+        {
+            SNewsModel SModels = new SNewsModel();
+            SModels.UploadAuthorId= GetUserId();
+            SModels.TypeDroList = NSer.GetNewTypeDrolist(SModels.TypeId);
+            return View(SModels);
+        }
         //删除多个
         public ActionResult Delete(string ListId)
         {
@@ -66,16 +77,14 @@ namespace XiangNingSale.Controllers
         }
         public ActionResult Checked(string ListId,int CheckedId)
         {
-            var UserId = USer.GetCurrentUserName().UserId;
-            if (UserId <= 0)
-            { UserId = 1; }
+            
             if (string.IsNullOrEmpty(ListId) == true)
             {
                 return Content("False");
             }
             else
             {
-                if (NSer.Checked(ListId, CheckedId, UserId) == true)
+                if (NSer.Checked(ListId, CheckedId, GetUserId()) == true)
                 {
                     return Content("True");
                 }
@@ -87,6 +96,14 @@ namespace XiangNingSale.Controllers
         {
             var list = NSer.GetFileInfoList(Id);
             return View(list);
+        }
+        //获取当前用户，如果为空，设置默认1
+        public int GetUserId()
+        {
+            var UserId = USer.GetCurrentUserName().UserId;
+            if (UserId <= 0)
+            { UserId = 1; }
+            return UserId;
         }
     }
 }

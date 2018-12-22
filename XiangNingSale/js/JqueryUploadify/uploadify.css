@@ -22,6 +22,73 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
+.upload_image_wrapper
+{
+    float:left;
+    position:relative;
+    display:block;
+    width:60px;
+    height:60px;
+    margin-left:4px; 
+}
+.upload_image_wrapper a.del
+{
+    position:absolute;
+    right:0px;
+    display:block;
+    width:20px;
+    height:20px;
+    background:red;
+    text-indent:-9999px;
+    z-index:1001;
+    background:url(images/btn_del.png) 0px 0px;
+}
+.upload_image_wrapper a.del:hover
+{
+    position:absolute;
+    right:0px;
+    display:block;
+    width:20px;
+    height:20px;
+    background:red;
+    text-indent:-9999px;
+    z-index:1001;
+    background:url(images/btn_del.png) 0px -20px;
+}
+.upload_image_wrapper a.ins
+{
+    position:absolute;
+    right:0px;
+    bottom:0px;
+    display:block;
+    width:20px;
+    height:20px;
+    background:red;
+    text-indent:-9999px;
+    z-index:1001;
+    background:url(images/btn_ins.png) 0px 0px;
+}
+.upload_image_wrapper a.ins:hover
+{
+    position:absolute;
+    right:0px;
+    bottom:0px;
+    display:block;
+    width:20px;
+    height:20px;
+    background:red;
+    text-indent:-9999px;
+    z-index:1001;
+    background:url(images/btn_ins.png) 0px -20px;
+}
+.upload_image_wrapper img
+{
+    position:absolute;
+    display:block;
+    width:60px;
+    height:60px;
+    z-index:1000;
+}
 .uploadifyQueueItem {
 	font: 11px Verdana, Geneva, sans-serif;
 	border: 2px solid #E5E5E5;

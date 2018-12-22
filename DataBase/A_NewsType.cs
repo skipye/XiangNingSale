@@ -17,6 +17,7 @@ namespace DataBase
         public A_NewsType()
         {
             this.A_News = new HashSet<A_News>();
+            this.A_NewsType1 = new HashSet<A_NewsType>();
         }
     
         public int Id { get; set; }
@@ -27,5 +28,7 @@ namespace DataBase
         public Nullable<bool> State { get; set; }
     
         public virtual ICollection<A_News> A_News { get; set; }
+        public virtual ICollection<A_NewsType> A_NewsType1 { get; set; }
+        public virtual A_NewsType A_NewsType2 { get; set; }
     }
 }

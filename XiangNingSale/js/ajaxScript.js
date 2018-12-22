@@ -89,7 +89,15 @@ function edit(title, url, id, w, h) {
     var index = layer.open({
         type: 2,
         title: title,
-        content: url
+        content: url + "?Id=" + id
+    });
+    layer.full(index);
+}
+function add(title, url, w, h) {
+    var index = layer.open({
+        type: 2,
+        title: title,
+        content: url 
     });
     layer.full(index);
 }
@@ -262,5 +270,5 @@ function getNumberBitValue(bitNumber, bit) {
 
 //并刷新父页面
 function ResetWindow() {
-    setTimeout(function () { window.location.reload(); }, 500);//0.5秒后强制刷新
+    setTimeout(function () { window.location.reload(); }, 1000);//0.5秒后强制刷新
 }

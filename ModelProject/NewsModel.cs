@@ -34,6 +34,7 @@ namespace ModelProject
         public int? TypeId { get; set; }
         public List<SelectListItem> TypeDroList { get; set; }
         public int? CheckedStatus { get; set; }
+        public int? UploadAuthorId { get; set; }
     }
     public class NewsItmeModel
     {

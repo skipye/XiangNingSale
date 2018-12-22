@@ -32,11 +32,10 @@ function StartUploadify(objectid,yearmonth) {
 }
 
 function SetLi_UpdateFiles(objectid, objFile, d, e) {
-    debugger;
     var src = $("input[name='" + objectid + "']").val();
     $("input[name='" + objectid + "']").val(src+d+";");
     $("img[id='" + objectid + "']").attr("src", d);
-    var img = "<span class='upload_image_wrapper'><a href='javascript:void(0);' title='从图片栏中删除该图片' class='del' onclick='delThisImage(this);'></a><a href='javascript:void(0);' title='将该图插入到描述' class='ins' onclick='insThisImage(this)'>插入</a><img name='tmpimg" + index + "' src='" + d + "' /></span>";
+    var img = "<span class='upload_image_wrapper'><a href='javascript:void(0);' title='从图片栏中删除该图片' class='del' onclick='delThisImage(this);'></a><a data-url='" + d + "' href='javascript:void(0);' title='将该图插入到封面' class='ins' onclick='insThisImage(this)'>插入</a><img name='tmpimg" + index + "' src='" + d + "' /></span>";
     $("#garage").append(img);
     index++;
 }

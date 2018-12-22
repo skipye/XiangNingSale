@@ -22,6 +22,8 @@
 
 </form>
 <input type="text" value="@TabId" />
+<script src="~/js/static/common.min.js"></script>
+<script src="~/js/static/admin.js"></script>
 <script src="~/js/layer/layer.js"></script>
 
 <script type="text/javascript">
@@ -34,14 +36,16 @@
         $("#fileForm").ajaxSubmit({
             success: function (msg) {
                 var TabId = "@TabId";
+                alert(msg);
                 if (msg != "0")
                 {
                     layer.alert("上传成功！");
+                    alert(msg);
                     debugger;
-                    var Obj = parent.$("#" + TabId);
-                    parent.$("#" + TabId).val(msg);
+                    $(window.parent.document).find("#" + TabId).val(msg);
+                    $(window.parent.document).find("." + TabId).attr("src", msg);
                     
-                    parent.$("." + TabId).attr("src", msg);
+                    //parent.$("." + TabId).attr("src", msg);
                 }
                 else { layer.alert("上传失败！"); }
             }

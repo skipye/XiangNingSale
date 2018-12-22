@@ -28,6 +28,7 @@ namespace DalProject
                             where !string.IsNullOrEmpty(SModel.Name) ? p.Name.Contains(SModel.Name) : true
                             where SModel.TypeId!=null && SModel.TypeId>0 ? p.TypeId==SModel.TypeId : true
                             where SModel.CheckedStatus >=0 ? p.CheckedStatus == SModel.CheckedStatus : true
+                            where SModel.UploadAuthorId > 0 ? p.UploadAuthorId == SModel.UploadAuthorId : true
                             where p.CreateTime>=StartTime
                             where  p.CreateTime<EndTime
                             orderby p.CreateTime descending
@@ -214,11 +215,11 @@ namespace DalProject
             items.Add(new SelectListItem() { Text = "请选择新闻类别", Value = "" });
             using (var db = new XNArticleEntities())
             {
-                List<A_NewsType> model = db.A_NewsType.Where(b => b.State == true && b.ParentId==0 ).OrderBy(k => k.Id).ToList();
+                List<A_NewsType> model = db.A_NewsType.Where(b => b.State == true && b.ParentId==0 ).OrderBy(k => k.Rank).ToList();
                 foreach (var item in model)
                 {
                     items.Add(new SelectListItem() { Text = "╋" + item.Name, Value = item.Id.ToString(), Selected = pId.HasValue && item.Id.Equals(pId) });
-                    List<A_NewsType> childrenmodel = db.A_NewsType.Where(b => b.State == true && b.ParentId == item.Id).OrderBy(k => k.Id).ToList();
+                    List<A_NewsType> childrenmodel = db.A_NewsType.Where(b => b.State == true && b.ParentId == item.Id).OrderBy(k => k.Rank).ToList();
                     if (childrenmodel != null && childrenmodel.Any())
                     {
                         foreach (var Citem in childrenmodel)
