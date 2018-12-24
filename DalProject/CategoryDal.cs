@@ -17,7 +17,7 @@ namespace DalProject
                 var List = (from p in db.A_NewsType.Where(k => k.State == true)
                             where !string.IsNullOrEmpty(SModel.Name) ? p.Name.Contains(SModel.Name) : true
                             where SModel.TypeId != null && SModel.TypeId > 0 ? p.Id == SModel.TypeId : true
-                            orderby p.CreateTime descending
+                            orderby p.Rank
                             select new CategoryModel
                             {
                                 Id = p.Id,
@@ -61,6 +61,7 @@ namespace DalProject
                 if (Models.Id > 0)
                 {
                     var table = db.A_NewsType.Where(k => k.Id == Models.Id).SingleOrDefault();
+                    table.ParentId = Models.ParentId;
                     table.Name = Models.Name;
                     table.Rank = Models.Rank;
                     table.ParentId = Models.ParentId;

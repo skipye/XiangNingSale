@@ -17,6 +17,7 @@
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
         <a href="javascript:void(0);" onclick="del(this, '0')" class="btn btn-danger radius" data-url="@Url.Action("Delete","Category")"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
+        <a href="javascript:void(0);" onclick="addwindow('添加类别', '/Category/Add', '600', '300')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加类别</a>
     </div>
     <div class="mt-20 checkmodel">
         @*@Html.Action("PageList","Article")*@
@@ -39,7 +40,7 @@
 @Html.Action("_Footer", "Home")
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="~/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="~/js/ajaxScript.js?v=2"></script>
+<script type="text/javascript" src="~/js/ajaxScript.js?v=3"></script>
 <script type="text/javascript">
 
     var param = {};
@@ -67,7 +68,6 @@
             "ajax": function (data, callback, settings) {
                 ajaxRequest("post", "/Category/PageList", param, function (result) {
                     //封装返回数据
-                    debugger;
                     var returnData = {};
                     returnData.data = result;
                     callback(returnData);
@@ -82,7 +82,7 @@
                 }, {
                     targets: 5,
                     render: function (data, type, row) {
-                        return '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'类别编辑\',\'/Category/Add\', \'' + row.Id + '\', \'800\', \'500\')" title="类别编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                        return '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="editwindow(\'类别编辑\',\'/Category/Add\', \'' + row.Id + '\', \'600\', \'300\')" title="类别编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'/Category/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
                     }
                 }

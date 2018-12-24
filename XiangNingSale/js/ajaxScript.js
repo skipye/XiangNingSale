@@ -84,7 +84,6 @@ function checked(obj, id) {
 	    });
 	});
 }
-/*编辑*/
 function edit(title, url, id, w, h) {
     var index = layer.open({
         type: 2,
@@ -100,6 +99,12 @@ function add(title, url, w, h) {
         content: url 
     });
     layer.full(index);
+}
+function editwindow(title, url, id, w, h) {
+    layer_show(title, url + "?Id=" + id, w, h);
+}
+function addwindow(title, url, w, h) {
+    layer_show(title, url, w, h);
 }
 function ajaxRequest(requestType, url, params, backFuc) {
     $.ajax({

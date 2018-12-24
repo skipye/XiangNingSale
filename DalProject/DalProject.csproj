@@ -51,6 +51,7 @@
     <Compile Include="CategoryDal.cs" />
     <Compile Include="NewsDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchaseOrderDal.cs" />
     <Compile Include="UserDal.cs" />
   </ItemGroup>
   <ItemGroup>

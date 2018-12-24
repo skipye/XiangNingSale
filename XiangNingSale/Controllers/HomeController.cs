@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceProject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,8 @@ namespace XiangNingSale.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
+        private static readonly UserService USer = new UserService();
+        [Authorize]
 
         public ActionResult Index()
         {
@@ -22,7 +23,8 @@ namespace XiangNingSale.Controllers
         }
         public ActionResult _Header()
         {
-            return View();
+            var Models = USer.GetCurrentUserName();
+            return View(Models);
         }
         public ActionResult _Menu()
         {

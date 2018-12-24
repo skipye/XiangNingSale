@@ -446,11 +446,11 @@ input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit
 .col-xs-offset-2 {margin-left: 16.66666667%}
 .col-xs-offset-1 {margin-left: 8.33333333%}
 .col-xs-offset-0 {margin-left: 0}
-@media (max-width:767px){
+@media (max-width:567px){
 	.responsive [class^="col-"],.responsive [class*=" col-"]{float:none!important;width:auto!important}
 	.responsive [class^="col-offset-"],.responsive [class*=" col-offset-"]{ margin-left:0!important}
 }
-@media(min-width:768px){
+@media(min-width:568px){
 	.col-sm-1,.col-sm-10,.col-sm-11,.col-sm-12,.col-sm-2,.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-6,.col-sm-7,.col-sm-8,.col-sm-9{float:left}
 	.col-sm-12{width:100%}
 	.col-sm-11{width:91.66666666666666%}
@@ -634,7 +634,7 @@ input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit
 .visible-lg-inline,
 .visible-lg-inline-block {
   display: none !important}
-@media ( max-width : 767px) {
+@media ( max-width : 567px) {
 	.visible-xs {display: block !important}
 	table.visible-xs {display: table}
 	tr.visible-xs {display: table-row !important}
@@ -644,7 +644,7 @@ input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit
 	.visible-xs-inline {display: inline !important}
 	.visible-xs-inline-block {display: inline-block !important}
 }
-@media ( min-width : 768px) and (max-width: 991px) {
+@media ( min-width : 568px) and (max-width: 991px) {
 	.visible-sm {display: block !important}
 	table.visible-sm {display: table}
 	tr.visible-sm {display: table-row !important}
@@ -693,7 +693,7 @@ input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit
 .containBox {background-color:#fff;position:relative;z-index:100;zoom:1;-moz-transition:-moz-transform .2s ease-out;-webkit-transition:-webkit-transform .2s ease-out;-o-transition:-o-transform .2s ease-out;transition:transform .2s ease-out;top:0px;}
 .sideBox {display:none}
 	.containBox-bg{ display: none}
-@media (max-width:767px) {
+@media (max-width:567px) {
     body,.content {font-size:16px;line-height:1.6}
 	html,body{height: 100%}
 	.containBox{ position:fixed; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden;
@@ -1102,7 +1102,7 @@ a.btn.size-L,span.btn.size-L{ line-height:23px}
 a.btn.size-XL,span.btn.size-XL{ line-height:26px}
 .btn.size-XL{ padding:10px 24px}
 
-@media (max-width: 767px) {
+@media (max-width: 567px) {
 	.responsive .input-text.size-MINI,.responsive .btn.size-MINI{height:24px}
 	.responsive .input-text.size-S,.responsive .btn.size-S{ font-size:14px; height:30px}
 	.responsive .input-text,.btn,.responsive .input-text.size-M,.responsive .btn.size-M{ font-size:16px; height:36px}
@@ -1138,7 +1138,7 @@ ol.linenums li{ line-height:28px; padding-left:10px}
 pre ol.linenums{margin:0 0 0 33px}
 pre ol.linenums li{padding-left:12px;color:#bbb;line-height:18px;text-shadow:0 1px 0 #fff}
 
-@media (max-width: 767px) {
+@media (max-width: 567px) {
 	pre ol.linenums{ margin-left:0; list-style:none}
 	ol.linenums li{ padding-left:0}
 	.prettyprint.linenums{box-shadow:inset 0px 0 0 #fbfbfc,inset 0px 0 0 #ececf0}
@@ -1250,7 +1250,7 @@ table.dataTable thead .sorting_desc {background-image:url(../images/dataTable/so
   </table>
 </div>
 */
-@media (max-width: 767px) {
+@media (max-width: 567px) {
 	/*.table-responsive {width: 100%;margin-bottom: 15px;overflow-x: scroll;overflow-y: hidden;border: 1px solid #ddd;-ms-overflow-style: -ms-autohiding-scrollbar;-webkit-overflow-scrolling: touch}
 	.table-responsive > .table {margin-bottom: 0}
 	.table-responsive > .table > thead > tr > th,
@@ -1359,7 +1359,7 @@ input[type="radio"],input[type="checkbox"] {line-height: normal; margin-top:-4px
 .iradio-yellow,
 .iradio-pink,
 .iradio-purple {position: absolute;top:4px;left: 0}
-@media (max-width: 767px) {
+@media (max-width: 567px) {
 	.responsive .check-box,
 	.responsive .radio-box{ display:block}
 }
@@ -1765,7 +1765,7 @@ input[type="radio"],input[type="checkbox"] {line-height: normal; margin-top:-4px
 .select-box.size-XL{padding:10px 5px}
 .size-XL .select{font-size: 18px}
 
-@media (max-width: 767px) {
+@media (max-width: 567px) {
 	.responsive .select-box{ border:none}
 	.responsive .select-box .select,
 	.responsive .select{border:solid 1px #ddd; padding:10px;font-size:16px}
@@ -1827,7 +1827,7 @@ squid.swing.jselect()
 .input-file{position:absolute; right:0; top:0; cursor: pointer; z-index:1; font-size:30em;opacity:0;filter: alpha(opacity=0)}
 .form-group .upload-btn{ margin-left:-1px}
 .btn-upload .icon-add,.btn-upload .icon-minus{cursor: pointer;display: inline-block;font-family: Arial;font-size: 30px;height: 31px;line-height: 31px;text-align: center;vertical-align: middle;width: 36px}
-@media (max-width: 767px) {
+@media (max-width: 567px) {
 	.upload-btn{ display:none}
 	.upload-url{ display:none}
 }
@@ -1876,7 +1876,7 @@ label,.placeholder{font-size:14px}
 ::-moz-placeholder {color:#b3b3b3}/* Mozilla Firefox 19+ */
 :-ms-input-placeholder {color:#b3b3b3}/* Internet Explorer 10+ */
 .placeholder{color:#adb0be; position:absolute; z-index:9}/*不兼容placeholder属性的浏览器，可使用<span class="placeholder">表单默认值</span>*/
-@media (max-width: 767px) {
+@media (max-width: 567px) {
 	.form-horizontal .form-label{ text-align:left}
 }
 /*3.4.8 表单验证*/
@@ -1905,7 +1905,7 @@ label.error{ position: absolute; right: 18px; top: 5px;color:#ef392b; font-size:
 #Validform_msg a.Validform_close:link,#Validform_msg a.Validform_close:visited{position:absolute; right:8px; top:6px; color:#fff; text-decoration:none; font-family:Verdana}
 #Validform_msg a.Validform_close:hover{color:#fff}
 #Validform_msg .Validform_info{padding:10px;border:1px solid #bbb; border-top:none; text-align:left}
-@media (max-width: 767px) {
+@media (max-width: 567px) {
 	.responsive .Validform_checktip{margin-top:10px}
 }
 

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="XingNingSaleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Purchase_Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SN" Type="nvarchar" MaxLength="50" />
+          <Property Name="ApplyUserId" Type="int" />
+          <Property Name="ApplyUserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ApplyDateTime" Type="datetime" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="CheckedStatus" Type="int" />
+          <Property Name="CheckedUserId" Type="int" />
+          <Property Name="CheckedName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CheckedDateTime" Type="datetime" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="DeleteFlag" Type="bit" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="XingNingSaleModelStoreContainer">
+          <EntitySet Name="Purchase_Order" EntityType="Self.Purchase_Order" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XingNingSaleModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="XiangNingSaleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Purchase_Order" EntityType="XingNingSaleModel.Purchase_Order" />
+        </EntityContainer>
+        <EntityType Name="Purchase_Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApplyUserId" Type="Int32" />
+          <Property Name="ApplyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApplyDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="CheckedStatus" Type="Int32" />
+          <Property Name="CheckedUserId" Type="Int32" />
+          <Property Name="CheckedName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteFlag" Type="Boolean" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XingNingSaleModelStoreContainer" CdmEntityContainer="XiangNingSaleEntities">
+          <EntitySetMapping Name="Purchase_Order">
+            <EntityTypeMapping TypeName="XingNingSaleModel.Purchase_Order">
+              <MappingFragment StoreEntitySet="Purchase_Order">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CheckedDateTime" ColumnName="CheckedDateTime" />
+                <ScalarProperty Name="CheckedName" ColumnName="CheckedName" />
+                <ScalarProperty Name="CheckedUserId" ColumnName="CheckedUserId" />
+                <ScalarProperty Name="CheckedStatus" ColumnName="CheckedStatus" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ApplyDateTime" ColumnName="ApplyDateTime" />
+                <ScalarProperty Name="ApplyUserName" ColumnName="ApplyUserName" />
+                <ScalarProperty Name="ApplyUserId" ColumnName="ApplyUserId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

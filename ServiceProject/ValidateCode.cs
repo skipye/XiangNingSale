@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Common;
 
-namespace SerProject
+namespace ServiceProject
 {
     public class ValidateCode
     {
