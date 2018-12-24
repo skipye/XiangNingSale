@@ -9,12 +9,11 @@
 }
 @Html.Action("_Meta", "Home")
 <nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i>首页<span class="c-gray en">&gt;</span>采购管理<span class="c-gray en">&gt;</span>采购列表
+    <i class="Hui-iconfont">&#xe67f;</i>首页<span class="c-gray en">&gt;</span>采购管理<span class="c-gray en">&gt;</span>采购申请
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
 <div class="page-container">
     <div class="text-c">
-        
         <span class="select-box inline">
             @Html.DropDownListFor(k => k.CheckedStatus, SelItem, new { @class = "select" })
         </span>
@@ -26,10 +25,10 @@
         <button id="btnSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
-        <a href="javascript:void(0);" onclick="del(this, '0')" class="btn btn-danger radius" data-url="@Url.Action("Delete","Purchase")"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-        <a href="javascript:void(0);" onclick="checked(this,'0')" class="btn btn-primary radius" data-url="@Url.Action("Checked","Purchase")"><i class="Hui-iconfont">&#xe615;</i>批量审核</a>
+        <a href="javascript:void(0);" onclick="add('采购申请', '/Purchase/Add', '600', '400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>采购申请</a>
     </div>
     <div class="mt-20 checkmodel">
+        @*@Html.Action("PageList","Article")*@
         <table class="table table-border table-bordered table-bg table-hover table-sort">
             <thead>
                 <tr class="text-l">
@@ -60,6 +59,7 @@
     var param = {};
     $(function () { search(param); });
     $("#btnSearch").click(function () {
+        var ApplyUserId = "@Model.ApplyUserId";
         //搜索条件
         var Name = $("#Name").val().trim();
         var StartTime = $("#logmin").val().trim();
@@ -70,6 +70,7 @@
         param["StartTime"] = StartTime;
         param["EndTime"] = EndTime;
         param["CheckedStatus"] = CheckedStatus;
+        param["ApplyUserId"] = ApplyUserId;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
         search(param);
@@ -101,13 +102,11 @@
                     targets: 9,//把第九列的样式改为超链接
                     render: function (data, type, row) {
                         var StrCheck = "";
-                        if (row.CheckedStatus == 0)
-                        {
-                            StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="checked(this, \'' + row.Id + '\')" data-url=\'/Purchase/Checked\' title="审核"><i class="Hui-iconfont f-14">&#xe615;</i></a>';
+                        if (row.CheckedStatus == 0 || row.CheckedStatus == 2) {
+                            StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'采购编辑\',\'/Purchase/Add\', \'' + row.Id + '\', \'800\', \'500\')" title="采购编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                                       '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'/Purchase/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
                         }
-                        return StrCheck +
-                               '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'采购编辑\',\'/Purchase/Add\', \'' + row.Id + '\', \'800\', \'500\')" title="采购编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
-                               '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'/Purchase/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
+                        return StrCheck;
                     }
                 }
             ],
@@ -123,7 +122,7 @@
                                 return formatDateTime(NewTime);
                             }
                         },
-                        { "data": "Remark", "defaultContent": "" },
+                        { "data": "Remark", "defaultContent": "", "className": "textoverflow" },
                         { "data": "CheckedName", "defaultContent": "" },
                         {
                             "data": "CheckedStatus", "render": function (data) {

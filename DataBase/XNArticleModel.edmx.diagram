@@ -14,6 +14,7 @@
         <AssociationConnector Association="XNArticleModel.FK_A_News_A_User" />
         <AssociationConnector Association="XNArticleModel.FK_A_News_A_User1" />
         <AssociationConnector Association="XNArticleModel.FK_A_NewsType_A_NewsType" />
+        <EntityTypeShape EntityType="XNArticleModel.A_Role" Width="1.5" PointX="7.875" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

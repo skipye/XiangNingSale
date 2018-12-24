@@ -51,6 +51,19 @@
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="State" Type="bit" />
         </EntityType>
+        <EntityType Name="A_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="DeleteFlag" Type="bit" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="A_User">
           <Key>
             <PropertyRef Name="Id" />
@@ -61,6 +74,8 @@
           <Property Name="Telphone" Type="nvarchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="State" Type="bit" Nullable="false" />
+          <Property Name="LoginTimes" Type="int" />
+          <Property Name="LastTimes" Type="datetime" />
         </EntityType>
         <Association Name="FK_A_News_A_NewsType">
           <End Role="A_NewsType" Type="Self.A_NewsType" Multiplicity="0..1" />
@@ -114,6 +129,7 @@
           <EntitySet Name="A_News" EntityType="Self.A_News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_News_File" EntityType="Self.A_News_File" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_NewsType" EntityType="Self.A_NewsType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="A_Role" EntityType="Self.A_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_User" EntityType="Self.A_User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_A_News_A_NewsType" Association="Self.FK_A_News_A_NewsType">
             <End Role="A_NewsType" EntitySet="A_NewsType" />
@@ -202,6 +218,8 @@
           <Property Name="State" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="A_News" Relationship="XNArticleModel.FK_A_News_A_User" FromRole="A_User" ToRole="A_News" />
           <NavigationProperty Name="A_News1" Relationship="XNArticleModel.FK_A_News_A_User1" FromRole="A_User" ToRole="A_News" />
+          <Property Name="LoginTimes" Type="Int32" />
+          <Property Name="LastTimes" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_A_News_A_NewsType">
           <End Role="A_NewsType" Type="Self.A_NewsType" Multiplicity="0..1" />
@@ -252,6 +270,7 @@
             <End Role="A_NewsType" EntitySet="A_NewsType" />
             <End Role="A_NewsType1" EntitySet="A_NewsType" />
           </AssociationSet>
+          <EntitySet Name="A_Role" EntityType="XNArticleModel.A_Role" />
         </EntityContainer>
         <Association Name="FK_A_News_A_User">
           <End Type="XNArticleModel.A_User" Role="A_User" Multiplicity="0..1" />
@@ -289,6 +308,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="A_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DeleteFlag" Type="Boolean" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -347,12 +379,28 @@
           <EntitySetMapping Name="A_User">
             <EntityTypeMapping TypeName="XNArticleModel.A_User">
               <MappingFragment StoreEntitySet="A_User">
+                <ScalarProperty Name="LastTimes" ColumnName="LastTimes" />
+                <ScalarProperty Name="LoginTimes" ColumnName="LoginTimes" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Telphone" ColumnName="Telphone" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Role">
+            <EntityTypeMapping TypeName="XNArticleModel.A_Role">
+              <MappingFragment StoreEntitySet="A_Role">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

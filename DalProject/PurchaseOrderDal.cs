@@ -75,7 +75,7 @@ namespace DalProject
                     table.ApplyDateTime = DateTime.Now;
                     table.CheckedStatus = 0;
                     table.CreateTime = DateTime.Now;
-
+                    table.DeleteFlag = false;
                     db.Purchase_Order.Add(table);
                 }
                 db.SaveChanges();

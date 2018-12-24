@@ -26,6 +26,8 @@ namespace DataBase
         public string Telphone { get; set; }
         public System.DateTime CreateTime { get; set; }
         public bool State { get; set; }
+        public Nullable<int> LoginTimes { get; set; }
+        public Nullable<System.DateTime> LastTimes { get; set; }
     
         public virtual ICollection<A_News> A_News { get; set; }
         public virtual ICollection<A_News> A_News1 { get; set; }

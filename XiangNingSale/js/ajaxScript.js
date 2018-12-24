@@ -277,3 +277,7 @@ function getNumberBitValue(bitNumber, bit) {
 function ResetWindow() {
     setTimeout(function () { window.location.reload(); }, 1000);//0.5秒后强制刷新
 }
+function removeIframe() {
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.close(index);
+}

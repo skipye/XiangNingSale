@@ -58,6 +58,9 @@
     <Compile Include="A_News_File.cs">
       <DependentUpon>XNArticleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="A_Role.cs">
+      <DependentUpon>XNArticleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="A_User.cs">
       <DependentUpon>XNArticleModel.tt</DependentUpon>
     </Compile>
