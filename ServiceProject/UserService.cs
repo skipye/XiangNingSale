@@ -36,7 +36,7 @@ namespace ServiceProject
         }
         public bool Delete(string ListId)
         {
-            try { UDal.Delete(ListId); return false; }
+            try { UDal.Delete(ListId); return true; }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);

@@ -14,6 +14,11 @@ namespace DataBase
     
     public partial class A_Role
     {
+        public A_Role()
+        {
+            this.A_Role1 = new HashSet<A_Role>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public Nullable<int> ParentId { get; set; }
@@ -22,5 +27,9 @@ namespace DataBase
         public string Remark { get; set; }
         public Nullable<bool> DeleteFlag { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
+        public Nullable<int> Rank { get; set; }
+    
+        public virtual ICollection<A_Role> A_Role1 { get; set; }
+        public virtual A_Role A_Role2 { get; set; }
     }
 }

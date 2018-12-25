@@ -63,6 +63,7 @@
           <Property Name="Remark" Type="nvarchar" MaxLength="500" />
           <Property Name="DeleteFlag" Type="bit" />
           <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Rank" Type="int" />
         </EntityType>
         <EntityType Name="A_User">
           <Key>
@@ -271,6 +272,10 @@
             <End Role="A_NewsType1" EntitySet="A_NewsType" />
           </AssociationSet>
           <EntitySet Name="A_Role" EntityType="XNArticleModel.A_Role" />
+          <AssociationSet Name="A_RoleA_Role" Association="XNArticleModel.A_RoleA_Role">
+            <End Role="A_Role" EntitySet="A_Role" />
+            <End Role="A_Role1" EntitySet="A_Role" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_A_News_A_User">
           <End Type="XNArticleModel.A_User" Role="A_User" Multiplicity="0..1" />
@@ -320,7 +325,22 @@
           <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DeleteFlag" Type="Boolean" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Rank" Type="Int32" />
+          <NavigationProperty Name="A_Role1" Relationship="XNArticleModel.A_RoleA_Role" FromRole="A_Role" ToRole="A_Role1" />
+          <NavigationProperty Name="A_Role2" Relationship="XNArticleModel.A_RoleA_Role" FromRole="A_Role1" ToRole="A_Role" />
         </EntityType>
+        <Association Name="A_RoleA_Role">
+          <End Type="XNArticleModel.A_Role" Role="A_Role" Multiplicity="0..1" />
+          <End Type="XNArticleModel.A_Role" Role="A_Role1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="A_Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_Role1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -393,6 +413,7 @@
           <EntitySetMapping Name="A_Role">
             <EntityTypeMapping TypeName="XNArticleModel.A_Role">
               <MappingFragment StoreEntitySet="A_Role">
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />

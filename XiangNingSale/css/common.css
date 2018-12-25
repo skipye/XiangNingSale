@@ -3322,7 +3322,7 @@ a.logo:hover{ text-decoration:none}
 	  <li>导航三<i></i><em></em></li>
 	</ul>
 */
-.acrossTab,.acrossTab li,.acrossTab li em{ background-image:url(../images/acrossTab/acrossTab-bg.png)}
+.acrossTab,.acrossTab li,.acrossTab li em{ background-image:url(../images/acrossTab-bg.png)}
 .acrossTab{height:29px; background-repeat: repeat-x; background-position: 0 0; padding-top:1px}
 .acrossTab li,.acrossTab li em{ background-repeat:no-repeat; background-position:0 0}
 .acrossTab li{position:relative;float:left; display:inline-block; height:29px; line-height:29px; font-size:12px;cursor:pointer;padding:0 30px; white-space:nowrap;color:#282828; background-position:0 0}
@@ -3331,7 +3331,7 @@ a.logo:hover{ text-decoration:none}
 .acrossTab li:hover em{background-position:right -90px}
 .acrossTab li.active{background-position:0 -120px; z-index:99}
 .acrossTab li.active em{background-position:right -150px}
-.acrossTab li i{position:absolute; display:block; width:13px; height:13px; top:50%; margin-top:-6px; right:5px; font-size:0; line-height:0; cursor:pointer; background-image:url(../images/acrossTab/acrossTab-close.png); background-repeat:no-repeat; background-position:0 0}
+.acrossTab li i{position:absolute; display:block; width:13px; height:13px; top:50%; margin-top:-6px; right:5px; font-size:0; line-height:0; cursor:pointer; background-image:url(../images/acrossTab-close.png); background-repeat:no-repeat; background-position:0 0}
 .acrossTab li i:hover{background-position:0 bottom}
 
 /*4.3.1 下拉菜单
