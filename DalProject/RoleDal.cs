@@ -93,8 +93,11 @@ namespace DalProject
         {
             using (var db = new XNArticleEntities())
             {
+                string Return = "";
                 var StrMenu = db.A_Role.Where(k => k.UserId == UserId).FirstOrDefault();
-                return StrMenu.MenuList;
+                if(StrMenu!=null)
+                { Return= StrMenu.MenuList; }
+                return Return;
             }
         }
         

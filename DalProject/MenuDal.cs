@@ -152,28 +152,25 @@ namespace DalProject
                 if (!string.IsNullOrEmpty(UserMenuList))
                 {
                     MenuItemModel PModels = new MenuItemModel();
-                    IEnumerable<MenuSonItemModel> LSonModel = new List<MenuSonItemModel>();
-                    List<MenuSonItemModel> LLSonModel = new List<MenuSonItemModel>();
-                    MenuSonItemModel MSModel = new MenuSonItemModel();
-
                     foreach (var NItem in tables)
                     {
                         var PMenuId = "$" + NItem.Id + ",";
                         if (UserMenuList.Contains(PMenuId) == true)
                         {
                             PModels = NItem;
-                            LSonModel = NItem.SonItemList;
-                            PModels.SonItemList = new List<MenuSonItemModel>();
+                            //LSonModel = NItem.SonItemList;
+                            //PModels.SonItemList = new List<MenuSonItemModel>();
                         }
-                        foreach (var SNItem in LSonModel)
+                        List<MenuSonItemModel> LLSonModel = new List<MenuSonItemModel>();
+                        foreach (var SNItem in PModels.SonItemList)
                         {
                             var SMenuId = "$" + SNItem.Id + ",";
-                            if (UserMenuList.Contains(SMenuId) != true)
+                            if (UserMenuList.Contains(SMenuId) == true)
                             {
                                 LLSonModel.Add(SNItem);
                             }
+                            PModels.SonItemList = LLSonModel;
                         }
-                        PModels.SonItemList = LLSonModel;
                         Models.Add(PModels);
                     }
                     

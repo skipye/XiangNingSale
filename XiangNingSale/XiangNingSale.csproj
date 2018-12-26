@@ -44,8 +44,7 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="LitJSON, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="LitJSON">
       <HintPath>..\packages\LitJSON.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />

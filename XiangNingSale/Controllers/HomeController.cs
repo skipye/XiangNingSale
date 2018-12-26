@@ -32,7 +32,13 @@ namespace XiangNingSale.Controllers
         {
             var Models = USer.GetCurrentUserName();
             var StrMenuList = RSer.GetUserMenuByUserId(Models.UserId);
-            var MenuItemList = MSer.GetMenuItemList(StrMenuList);
+            var MenuItemList = new List<ModelProject.MenuItemModel>();
+            if (!string.IsNullOrEmpty(StrMenuList))
+            { MenuItemList = MSer.GetMenuItemList(StrMenuList); }
+            if (Models.UserId == 1)
+            {
+                MenuItemList = MSer.GetMenuItemList("");
+            }
             return View(MenuItemList);
         }
         public ActionResult _Footer()
