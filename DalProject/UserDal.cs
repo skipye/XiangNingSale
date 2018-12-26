@@ -5,6 +5,7 @@ using System.Text;
 using ModelProject;
 using DataBase;
 using System.Web.Security;
+using System.Web.Mvc;
 
 namespace DalProject
 {
@@ -132,6 +133,20 @@ namespace DalProject
                 }
                 db.SaveChanges();
             }
+        }
+        public List<SelectListItem> GetUserDrolist(int? pId)
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem() { Text = "请选择用户", Value = "" });
+            using (var db = new XNArticleEntities())
+            {
+                List<A_User> model = db.A_User.Where(b => b.State == true).OrderBy(k => k.CreateTime).ToList();
+                foreach (var item in model)
+                {
+                    items.Add(new SelectListItem() { Text = "╋" + item.Name, Value = item.Id.ToString(), Selected = pId.HasValue && item.Id.Equals(pId) });
+                }
+            }
+            return items;
         }
     }
 }

@@ -6,17 +6,16 @@ using System.Web.Script.Serialization;
 
 namespace XiangNingSale.Controllers
 {
-    public class RoleController : Controller
+    public class MenuController : Controller
     {
-        private static readonly RoleService CSer = new RoleService();
-        private static readonly MenuService MSer = new MenuService();
-        private static readonly UserService User = new UserService();
+        private static readonly MenuService CSer = new MenuService();
         public ActionResult Index()
         {
-            SRoleModel SModels = new SRoleModel();
+            SMenuModel SModels = new SMenuModel();
+            SModels.TypeDroList = CSer.GetParentType(SModels.TypeId);
             return View(SModels);
         }
-        public ActionResult PageList(SRoleModel SModels)
+        public ActionResult PageList(SMenuModel SModels)
         {
             var PageList = CSer.GetPageList(SModels);
             return new ContentResult
@@ -27,23 +26,22 @@ namespace XiangNingSale.Controllers
         }
         public ActionResult Add(int? Id)
         {
-            RoleModel Models = new RoleModel();
+            MenuModel Models = new MenuModel();
             if (Id != null && Id > 0)
             {
                 Models = CSer.GetDetailById(Id.Value);
             }
-            Models.MenuItemList = MSer.GetMenuItemList("");
-            Models.UserDroList = User.GetUserDrolist(Models.UserId);
+            Models.TypeDroList = CSer.GetParentType(Models.TypeId);
             return View(Models);
         }
         [ValidateInput(false)]
-        public ActionResult PostAdd(RoleModel Models)
+        public ActionResult PostAdd(MenuModel Models)
         {
             if (CSer.AddOrUpdate(Models) == true)
             {
                 return Content("1");
             }
-            else { Models.UserDroList = User.GetUserDrolist(Models.UserId); Models.MenuItemList = MSer.GetMenuItemList(Models.MenuList); return View(Models); }
+            else { return View(Models); }
         }
 
         //删除多个
@@ -62,6 +60,5 @@ namespace XiangNingSale.Controllers
                 else return Content("False");
             }
         }
-
     }
 }

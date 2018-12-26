@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Mvc;
 
 namespace ServiceProject
 {
@@ -54,6 +55,14 @@ namespace ServiceProject
         public UserCurrentModel GetCurrentUserName()
         {
             try { return UDal.GetCurrentUserName(); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public List<SelectListItem> GetUserDrolist(int? pId)
+        {
+            try { return UDal.GetUserDrolist(pId); }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);

@@ -8,44 +8,39 @@
     <form class="form form-horizontal" id="formadd">
         @Html.HiddenFor(k => k.Id)
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>父类别：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <span class="select-box" style="width:150px;">
-                    @Html.DropDownListFor(k => k.ParentId, Model.TypeDroList, new { @class = "select" })
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>选择用户：</label>
+            <div class="formControls col-xs-8 col-sm-7">
+                <span class="select-box inline">
+                    @Html.DropDownListFor(k => k.UserId, Model.UserDroList, new { @class = "select", @style = "width:200px;" })
                 </span>
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>选择权限：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                @Html.TextBoxFor(k => k.Name, new { @class = "input-text" })
+                @if (Model.MenuItemList != null && Model.MenuItemList.Any())
+                {
+                    foreach (var item in Model.MenuItemList)
+                    {
+                        var data = "$" + item.Id + ",";
+                        <dl class="permission-list">
+                            <dt><label><input type="checkbox" value="@item.Id" data-rel="@data">@item.Name</label></dt>
+                            <dd>
+                                @foreach (var Sonitem in item.SonItemList)
+                                {
+                                    var Sondata = "$"+Sonitem.Id+",";
+                                    <label class="mr-15"><input type="checkbox" value="@Sonitem.Id" class="mr-5" data-rel="@Sondata">@Sonitem.Name</label>
+                                }
+                            </dd>
+                        </dl>
+                    }
+                }
+
+                @Html.HiddenFor(k => k.MenuList,new { @class = "input-text" })
+                @Html.HiddenFor(k => k.UserName)
             </div>
         </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">排序：</label>
-            <div class="formControls col-xs-8 col-sm-5">
-                @Html.TextBoxFor(k => k.Rank, new { @class = "input-text" })
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>Action：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                @Html.TextBoxFor(k => k.Action, new { @class = "input-text" })
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>Controller：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                @Html.TextBoxFor(k => k.Controller, new { @class = "input-text" })
-            </div>
-        </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-2">备注说明：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                @Html.TextAreaFor(k => k.Remark, new { @class = "textarea", @placeholder = "说点什么...您可以把要采购的连接地址和内容这里说明！" })
-                <p class="textarea-numberbar"><em class="textarea-length">0</em>/400</p>
-            </div>
-        </div>
+
         <div class="row cl">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
                 <button class="btn btn-primary radius" type="submit" style="width:120px;"><i class="Hui-iconfont">&#xe632;</i>保存</button>
@@ -60,50 +55,80 @@
 <script type="text/javascript" src="~/js/jquery.validation/messages_zh.js"></script>
 <script type="text/javascript">
 
-$(function(){
+    $(function () {
+        var StrLeve = "@Model.MenuList";
+        $.each($('.permission-list input:checkbox'), function () {
+            var _this = $(this);
+            var CrrVal = _this.attr("data-rel");
+            if (StrLeve.indexOf(CrrVal) > -1) {
+                _this.attr("checked", true);
+            }
+        });
+        //表单验证
+        $("#formadd").validate({
+            rules: {
+                UserId: {
+                    required: true,
+                },
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                //构造上传数据
+                var param = {};
+                var paramArray = $(form).serializeArray();
+                for (var i = 0; i < paramArray.length; ++i) {
+                    var o = paramArray[i];
+                    param[o["name"]] = o["value"];
+                };
+                ajaxRequest("post", "/Role/PostAdd", param, function (d) {
 
-	//表单验证
-	$("#formadd").validate({
-		rules:{
-		    Name: {
-				required:true,
-		    },
-		},
-		onkeyup: false,
-		focusCleanup:true,
-		success:"valid",
-		submitHandler: function (form) {
-		    //构造上传数据
-		    var param = {};
-		    var paramArray = $(form).serializeArray();
-		    for (var i = 0; i < paramArray.length; ++i) {
-		        var o = paramArray[i];
-		        param[o["name"]] = o["value"];
-		    };
-		    ajaxRequest("post", "/Role/PostAdd", param, function (d) {
+                    if (d == "1") {
+                        if (editModel(window.location.href)) {
+                            layer.msg("编辑成功！", { icon: 1, time: 1000 });
+                        } else {
+                            layer.msg("添加成功！", { icon: 1, time: 1000 });
+                        }
+                    } else {
+                        layer.msg("服务器错误！", { icon: 2, time: 1000 });
+                    }
+                    setTimeout(function () {
+                        parent.window.location.reload();
+                        var index = parent.layer.getFrameIndex(window.name);
+                        parent.layer.close(index);
+                    }, 1000);
 
-		        if (d == "1") {
-		            if (editModel(window.location.href)) {
-		                layer.msg("编辑成功！", { icon: 1, time: 1000 });
-		            } else {
-		                layer.msg("添加成功！", { icon: 1, time: 1000 });
-		            }
-		        } else {
-		            layer.msg("服务器错误！", { icon: 2, time: 1000 });
-		        }
-		        setTimeout(function () {
-		            parent.window.location.reload();
-		            var index = parent.layer.getFrameIndex(window.name);
-		            parent.layer.close(index);
-		        }, 1000);
+                });
 
-		    });
+            }
+        });
 
-		}
-	});
+    });
+    $("#UserId").change(function () {
+        var StrText = $(this).find("option:selected").text().replace("╋", "");
+        $("#UserName").val(StrText);
+    });
 
-});
+    $(function () {
 
+        $(".permission-list dt input:checkbox").click(function () {
+            var MenuList = "";
+            $(this).closest("dl").find("dd input:checkbox").prop("checked", $(this).prop("checked"));
+            $.each($("dl input[type='checkbox']:checked"), function () {
+                MenuList += "$" + $(this).val() + ",";
+            });
+
+            $("#MenuList").val(MenuList);
+        });
+        $(".permission-list dd input:checkbox").click(function () {
+            var MenuList = "";
+            $.each($("dl input[type='checkbox']:checked"), function () {
+                MenuList += "$" + $(this).val() + ",";
+            });
+            $("#MenuList").val(MenuList);
+        });
+    });
 
 </script>
 <!--/请在上方写此页面业务相关的脚本-->

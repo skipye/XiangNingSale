@@ -8,10 +8,10 @@ using System.Web.Mvc;
 
 namespace ServiceProject
 {
-    public class RoleService
+    public class MenuService
     {
-        private static readonly RoleDal CDal = new RoleDal();
-        public List<RoleModel> GetPageList(SRoleModel SModel)
+        private static readonly MenuDal CDal = new MenuDal();
+        public List<MenuModel> GetPageList(SMenuModel SModel)
         {
             try { return CDal.GetPageList(SModel); }
             catch (Exception ex)
@@ -19,8 +19,15 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
-        
-        public bool AddOrUpdate(RoleModel Models)
+        public List<SelectListItem> GetParentType(int? pId)
+        {
+            try { return CDal.GetParentType(pId); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public bool AddOrUpdate(MenuModel Models)
         {
             try { CDal.AddOrUpdate(Models); return true; }
             catch (Exception ex)
@@ -28,7 +35,7 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
-        public RoleModel GetDetailById(int Id)
+        public MenuModel GetDetailById(int Id)
         {
             try { return CDal.GetDetailById(Id); }
             catch (Exception ex)
@@ -44,13 +51,14 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
-        public string GetUserMenuByUserId(int UserId)
+        public List<MenuItemModel> GetMenuItemList(string UserMenuList)
         {
-            try { return CDal.GetUserMenuByUserId(UserId); }
+            try { return CDal.GetMenuItemList(UserMenuList); }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
+        
     }
 }

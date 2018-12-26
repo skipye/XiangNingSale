@@ -15,44 +15,18 @@ namespace DalProject
             using (var db = new XNArticleEntities())
             {
                 var List = (from p in db.A_Role.Where(k => k.DeleteFlag == true)
-                            where !string.IsNullOrEmpty(SModel.Name) ? p.Name.Contains(SModel.Name) : true
-                            where SModel.TypeId != null && SModel.TypeId > 0 ? p.Id == SModel.TypeId : true
+                            where !string.IsNullOrEmpty(SModel.Name) ? p.UserName.Contains(SModel.Name) : true
                             orderby p.Id
                             select new RoleModel
                             {
                                 Id = p.Id,
-                                Name = p.Name,
-                                Rank = p.Rank,
+                                UserId = p.UserId,
+                                UserName = p.UserName,
                                 CreateTime = p.CreateTime,
-                                ParentId = p.ParentId,
-                                ParentName = p.A_Role2.Name,
-                                Action=p.Action,
-                                Controller=p.Controller,
+                                MenuList = p.MenuList,
                             }).ToList();
                 return List;
             }
-        }
-        public List<SelectListItem> GetParentType(int? pId)
-        {
-            List<SelectListItem> items = new List<SelectListItem>();
-            items.Add(new SelectListItem() { Text = "请选择父类别", Value = "" });
-            using (var db = new XNArticleEntities())
-            {
-                List<A_Role> model = db.A_Role.Where(b => b.DeleteFlag == true && b.ParentId == null).OrderBy(k => k.Rank).ToList();
-                foreach (var item in model)
-                {
-                    items.Add(new SelectListItem() { Text = "╋" + item.Name, Value = item.Id.ToString(), Selected = pId.HasValue && item.Id.Equals(pId) });
-                    List<A_Role> childrenmodel = db.A_Role.Where(b => b.DeleteFlag == true && b.ParentId == item.Id).OrderBy(k => k.Rank).ToList();
-                    if (childrenmodel != null && childrenmodel.Any())
-                    {
-                        foreach (var Citem in childrenmodel)
-                        {
-                            items.Add(new SelectListItem() { Text = "----└" + Citem.Name, Value = Citem.Id.ToString(), Selected = pId.HasValue && Citem.Id.Equals(pId) });
-                        }
-                    }
-                }
-            }
-            return items;
         }
        
         //新增和修改仓库设置
@@ -63,25 +37,18 @@ namespace DalProject
                 if (Models.Id > 0)
                 {
                     var table = db.A_Role.Where(k => k.Id == Models.Id).SingleOrDefault();
-                    table.ParentId = Models.ParentId;
-                    table.Name = Models.Name;
-                    table.Rank = Models.Rank;
-                    table.ParentId = Models.ParentId;
-                    table.Action = Models.Action;
-                    table.Controller = Models.Controller;
-                    table.Remark = Models.Remark;
+                    table.UserId = Models.UserId;
+                    table.UserName = Models.UserName;
+                    table.MenuList = Models.MenuList;
                 }
                 else
                 {
                     A_Role table = new A_Role();
-                    table.Name = Models.Name;
-                    table.Rank = Models.Rank;
-                    table.ParentId = Models.ParentId;
+                    table.UserId = Models.UserId;
+                    table.UserName = Models.UserName;
+                    table.MenuList = Models.MenuList;
                     table.CreateTime = DateTime.Now;
                     table.DeleteFlag = true;
-                    table.Action = Models.Action;
-                    table.Controller = Models.Controller;
-                    table.Remark = Models.Remark;
                     db.A_Role.Add(table);
                 }
                 db.SaveChanges();
@@ -96,13 +63,10 @@ namespace DalProject
                               select new RoleModel
                               {
                                   Id = p.Id,
-                                  Name = p.Name,
-                                  Rank = p.Rank,
+                                  UserId = p.UserId,
+                                  UserName = p.UserName,
                                   CreateTime = p.CreateTime,
-                                  ParentId = p.ParentId,
-                                  Action = p.Action,
-                                  Controller = p.Controller,
-                                  Remark=p.Remark
+                                  MenuList = p.MenuList,
                               }).SingleOrDefault();
                 return tables;
             }
@@ -123,6 +87,14 @@ namespace DalProject
                     }
                 }
                 db.SaveChanges();
+            }
+        }
+        public string GetUserMenuByUserId(int UserId)
+        {
+            using (var db = new XNArticleEntities())
+            {
+                var StrMenu = db.A_Role.Where(k => k.UserId == UserId).FirstOrDefault();
+                return StrMenu.MenuList;
             }
         }
         

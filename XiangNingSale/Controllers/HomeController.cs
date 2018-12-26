@@ -10,6 +10,8 @@ namespace XiangNingSale.Controllers
     public class HomeController : Controller
     {
         private static readonly UserService USer = new UserService();
+        private static readonly RoleService RSer = new RoleService();
+        private static readonly MenuService MSer = new MenuService();
         [Authorize]
 
         public ActionResult Index()
@@ -28,7 +30,10 @@ namespace XiangNingSale.Controllers
         }
         public ActionResult _Menu()
         {
-            return View();
+            var Models = USer.GetCurrentUserName();
+            var StrMenuList = RSer.GetUserMenuByUserId(Models.UserId);
+            var MenuItemList = MSer.GetMenuItemList(StrMenuList);
+            return View(MenuItemList);
         }
         public ActionResult _Footer()
         { 

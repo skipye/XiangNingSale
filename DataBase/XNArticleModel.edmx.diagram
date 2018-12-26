@@ -14,8 +14,9 @@
         <AssociationConnector Association="XNArticleModel.FK_A_News_A_User" />
         <AssociationConnector Association="XNArticleModel.FK_A_News_A_User1" />
         <AssociationConnector Association="XNArticleModel.FK_A_NewsType_A_NewsType" />
-        <EntityTypeShape EntityType="XNArticleModel.A_Role" Width="1.5" PointX="7.875" PointY="0.5" />
-        <AssociationConnector Association="XNArticleModel.A_RoleA_Role" />
+        <EntityTypeShape EntityType="XNArticleModel.A_Menu" Width="1.5" PointX="7.75" PointY="0.625" />
+        <EntityTypeShape EntityType="XNArticleModel.A_Role" Width="1.5" PointX="9.875" PointY="0.75" />
+        <AssociationConnector Association="XNArticleModel.A_MenuA_Menu" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

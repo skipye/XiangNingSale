@@ -9,15 +9,12 @@
 </nav>
 <div class="page-container">
     <div class="text-c">
-        <span class="select-box inline">
-            @Html.DropDownListFor(k => k.TypeId, Model.TypeDroList, new { @class = "select" })
-        </span>
-        @Html.TextBoxFor(k => k.Name, new { @placeholder = "名称", @style = "width:150px", @class = "input-text" })
+        @Html.TextBoxFor(k => k.Name, new { @placeholder = "用户", @style = "width:250px", @class = "input-text" })
         <button id="btnSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
         <a href="javascript:void(0);" onclick="del(this, '0')" class="btn btn-danger radius" data-url="@Url.Action("Delete","Role")"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-        <a href="javascript:void(0);" onclick="add('添加', '/Role/Add', '600', '300')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加</a>
+        <a href="javascript:void(0);" onclick="add('添加权限', '/Role/Add', '600', '300')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加权限</a>
     </div>
     <div class="mt-20 checkmodel">
         @*@Html.Action("PageList","Article")*@
@@ -25,11 +22,8 @@
             <thead>
                 <tr class="text-l">
                     <th width="25"><input type="checkbox" name="" value=""></th>
-                    <th width="140">名称</th>
-                    <th width="80">父类别</th>
-                    <th width="80">排序</th>
-                    <th>Action</th>
-                    <th>Controller</th>
+                    <th width="100">用户</th>
+                    <th>权限</th>
                     <th width="120">创建时间</th>
                     <th width="120">操作</th>
                 </tr>
@@ -49,10 +43,8 @@
     $(function () { search(param); });
     $("#btnSearch").click(function () {
         //搜索条件
-        var TypeId = $("#TypeId").val().trim();
         var Name = $("#Name").val().trim();
         //搜索
-        param["TypeId"] = TypeId;
         param["Name"] = Name;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
@@ -82,7 +74,7 @@
                         return '<input type="checkbox" value="' + row.Id + '" >';
                     }
                 }, {
-                    targets: 7,
+                    targets: 4,
                     render: function (data, type, row) {
                         return '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'编辑\',\'/Role/Add\', \'' + row.Id + '\', \'600\', \'300\')" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'/Role/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
@@ -91,11 +83,8 @@
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "Id" },
-                        { "data": "Name", "className": "text-overflow" },
-                        { "data": "ParentName", "defaultContent": "" },
-                        { "data": "Rank", "defaultContent": "" },
-                        { "data": "Action", "defaultContent": "" },
-                        { "data": "Controller", "defaultContent": "" },
+                        { "data": "UserName", "className": "text-overflow" },
+                        { "data": "MenuList", "defaultContent": "" },
                         {
                             "data": "CreateTime", "render": function (data) {
                                 var NewTime = parseInt(data.replace(/\D/igm, ""));

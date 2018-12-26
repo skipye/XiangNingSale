@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="XNArticleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="A_Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Action" Type="nvarchar" MaxLength="50" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+          <Property Name="DeleteFlag" Type="bit" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Rank" Type="int" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="A_News">
           <Key>
             <PropertyRef Name="Id" />
@@ -56,14 +71,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="ParentId" Type="int" />
-          <Property Name="Action" Type="nvarchar" MaxLength="50" />
-          <Property Name="Controller" Type="nvarchar" MaxLength="50" />
-          <Property Name="Remark" Type="nvarchar" MaxLength="500" />
-          <Property Name="DeleteFlag" Type="bit" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MenuList" Type="nvarchar" MaxLength="500" />
           <Property Name="CreateTime" Type="datetime" />
-          <Property Name="Rank" Type="int" />
+          <Property Name="DeleteFlag" Type="bit" />
         </EntityType>
         <EntityType Name="A_User">
           <Key>
@@ -127,6 +139,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="XNArticleModelStoreContainer">
+          <EntitySet Name="A_Menu" EntityType="Self.A_Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_News" EntityType="Self.A_News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_News_File" EntityType="Self.A_News_File" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_NewsType" EntityType="Self.A_NewsType" Schema="dbo" store:Type="Tables" />
@@ -271,10 +284,11 @@
             <End Role="A_NewsType" EntitySet="A_NewsType" />
             <End Role="A_NewsType1" EntitySet="A_NewsType" />
           </AssociationSet>
+          <EntitySet Name="A_Menu" EntityType="XNArticleModel.A_Menu" />
           <EntitySet Name="A_Role" EntityType="XNArticleModel.A_Role" />
-          <AssociationSet Name="A_RoleA_Role" Association="XNArticleModel.A_RoleA_Role">
-            <End Role="A_Role" EntitySet="A_Role" />
-            <End Role="A_Role1" EntitySet="A_Role" />
+          <AssociationSet Name="A_MenuA_Menu" Association="XNArticleModel.A_MenuA_Menu">
+            <End Role="A_Menu" EntitySet="A_Menu" />
+            <End Role="A_Menu1" EntitySet="A_Menu" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK_A_News_A_User">
@@ -313,7 +327,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="A_Role">
+        <EntityType Name="A_Menu">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -326,17 +340,29 @@
           <Property Name="DeleteFlag" Type="Boolean" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="Rank" Type="Int32" />
-          <NavigationProperty Name="A_Role1" Relationship="XNArticleModel.A_RoleA_Role" FromRole="A_Role" ToRole="A_Role1" />
-          <NavigationProperty Name="A_Role2" Relationship="XNArticleModel.A_RoleA_Role" FromRole="A_Role1" ToRole="A_Role" />
+          <Property Name="Icon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="A_Menu1" Relationship="XNArticleModel.A_MenuA_Menu" FromRole="A_Menu" ToRole="A_Menu1" />
+          <NavigationProperty Name="A_Menu2" Relationship="XNArticleModel.A_MenuA_Menu" FromRole="A_Menu1" ToRole="A_Menu" />
         </EntityType>
-        <Association Name="A_RoleA_Role">
-          <End Type="XNArticleModel.A_Role" Role="A_Role" Multiplicity="0..1" />
-          <End Type="XNArticleModel.A_Role" Role="A_Role1" Multiplicity="*" />
+        <EntityType Name="A_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuList" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteFlag" Type="Boolean" />
+        </EntityType>
+        <Association Name="A_MenuA_Menu">
+          <End Type="XNArticleModel.A_Menu" Role="A_Menu" Multiplicity="0..1" />
+          <End Type="XNArticleModel.A_Menu" Role="A_Menu1" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="A_Role">
+            <Principal Role="A_Menu">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="A_Role1">
+            <Dependent Role="A_Menu1">
               <PropertyRef Name="ParentId" />
             </Dependent>
           </ReferentialConstraint>
@@ -410,9 +436,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="A_Role">
-            <EntityTypeMapping TypeName="XNArticleModel.A_Role">
-              <MappingFragment StoreEntitySet="A_Role">
+          <EntitySetMapping Name="A_Menu">
+            <EntityTypeMapping TypeName="XNArticleModel.A_Menu">
+              <MappingFragment StoreEntitySet="A_Menu">
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
                 <ScalarProperty Name="Rank" ColumnName="Rank" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
@@ -421,6 +448,18 @@
                 <ScalarProperty Name="Action" ColumnName="Action" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="A_Role">
+            <EntityTypeMapping TypeName="XNArticleModel.A_Role">
+              <MappingFragment StoreEntitySet="A_Role">
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="MenuList" ColumnName="MenuList" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

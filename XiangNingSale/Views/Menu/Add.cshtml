@@ -1,0 +1,117 @@
+﻿@model ModelProject.MenuModel
+@{Layout = null;}
+
+@Html.Action("_Meta", "Home")
+
+<script type="text/javascript" src="~/js/jquery.min.js"></script>
+<article class="page-container">
+    <form class="form form-horizontal" id="formadd">
+        @Html.HiddenFor(k => k.Id)
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>父类别：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width:150px;">
+                    @Html.DropDownListFor(k => k.ParentId, Model.TypeDroList, new { @class = "select" })
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextBoxFor(k => k.Name, new { @class = "input-text" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">排序：</label>
+            <div class="formControls col-xs-8 col-sm-5">
+                @Html.TextBoxFor(k => k.Rank, new { @class = "input-text" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>Action：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextBoxFor(k => k.Action, new { @class = "input-text" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>Controller：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextBoxFor(k => k.Controller, new { @class = "input-text" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>Icon：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextBoxFor(k => k.Icon, new { @class = "input-text" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">备注说明：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextAreaFor(k => k.Remark, new { @class = "textarea", @placeholder = "说点什么...您可以把要采购的连接地址和内容这里说明！" })
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/400</p>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button class="btn btn-primary radius" type="submit" style="width:120px;"><i class="Hui-iconfont">&#xe632;</i>保存</button>
+                <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</article>
+<script type="text/javascript" src="~/js/ajaxScript.js"></script>
+<script type="text/javascript" src="~/js/layer/layer.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/jquery.validate.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/messages_zh.js"></script>
+<script type="text/javascript">
+
+$(function(){
+
+	//表单验证
+	$("#formadd").validate({
+		rules:{
+		    Name: {
+				required:true,
+		    },
+		},
+		onkeyup: false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler: function (form) {
+		    //构造上传数据
+		    var param = {};
+		    var paramArray = $(form).serializeArray();
+		    for (var i = 0; i < paramArray.length; ++i) {
+		        var o = paramArray[i];
+		        param[o["name"]] = o["value"];
+		    };
+		    ajaxRequest("post", "/Menu/PostAdd", param, function (d) {
+
+		        if (d == "1") {
+		            if (editModel(window.location.href)) {
+		                layer.msg("编辑成功！", { icon: 1, time: 1000 });
+		            } else {
+		                layer.msg("添加成功！", { icon: 1, time: 1000 });
+		            }
+		        } else {
+		            layer.msg("服务器错误！", { icon: 2, time: 1000 });
+		        }
+		        setTimeout(function () {
+		            parent.window.location.reload();
+		            var index = parent.layer.getFrameIndex(window.name);
+		            parent.layer.close(index);
+		        }, 1000);
+
+		    });
+
+		}
+	});
+
+});
+
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

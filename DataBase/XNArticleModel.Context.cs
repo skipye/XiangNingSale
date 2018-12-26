@@ -29,6 +29,7 @@ namespace DataBase
         public DbSet<A_News_File> A_News_File { get; set; }
         public DbSet<A_NewsType> A_NewsType { get; set; }
         public DbSet<A_User> A_User { get; set; }
+        public DbSet<A_Menu> A_Menu { get; set; }
         public DbSet<A_Role> A_Role { get; set; }
     }
 }
