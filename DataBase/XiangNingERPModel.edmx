@@ -1,0 +1,1250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="XNERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="CRM_contract_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="header_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="wood_type_id" Type="int" Nullable="false" />
+          <Property Name="color_id" Type="int" Nullable="false" />
+          <Property Name="color" Type="nvarchar" MaxLength="50" />
+          <Property Name="custom_flag" Type="bit" />
+          <Property Name="length" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="width" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="height" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="price" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="price_recommend" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="qty" Type="int" Nullable="false" />
+          <Property Name="unit" Type="nvarchar" MaxLength="30" />
+          <Property Name="hardware_part" Type="nvarchar" MaxLength="50" />
+          <Property Name="decoration_part" Type="nvarchar" MaxLength="100" />
+          <Property Name="req_others" Type="text" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="created_time" Type="smalldatetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+          <Property Name="LabelsCount" Type="int" />
+          <Property Name="SemiCount" Type="int" />
+        </EntityType>
+        <EntityType Name="CRM_contract_header">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SN" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="delivery_date" Type="datetime" />
+          <Property Name="delivery_channel" Type="nvarchar" MaxLength="50" />
+          <Property Name="amount" Type="decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="amount_recommend" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="freight_carrier" Type="nvarchar" MaxLength="10" />
+          <Property Name="prepay" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="measure_flag" Type="bit" />
+          <Property Name="delivery_address" Type="nvarchar" MaxLength="50" />
+          <Property Name="signed_user_id" Type="int" />
+          <Property Name="signed_department_id" Type="int" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="check_user_id" Type="int" />
+          <Property Name="check_user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="checked_date" Type="datetime" />
+          <Property Name="department" Type="varchar" MaxLength="30" />
+          <Property Name="SaleName" Type="varchar" MaxLength="30" />
+          <Property Name="HTDate" Type="datetime" />
+          <Property Name="FR_flag" Type="int" Nullable="false" />
+          <Property Name="created_time" Type="datetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+          <Property Name="reserved1" Type="int" />
+          <Property Name="reserved2" Type="int" />
+          <Property Name="reserved3" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="CRM_customers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SN" Type="varchar" MaxLength="10" />
+          <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="name_E" Type="varchar" MaxLength="100" />
+          <Property Name="shortname" Type="nvarchar" MaxLength="50" />
+          <Property Name="shortname_E" Type="varchar" MaxLength="30" />
+          <Property Name="address" Type="nvarchar" MaxLength="200" />
+          <Property Name="address_E" Type="varchar" MaxLength="200" />
+          <Property Name="address_delivery" Type="nvarchar" MaxLength="200" />
+          <Property Name="zipcode" Type="char" MaxLength="6" />
+          <Property Name="corporation" Type="nvarchar" MaxLength="20" />
+          <Property Name="linkman" Type="nvarchar" MaxLength="20" />
+          <Property Name="tel" Type="varchar" MaxLength="30" />
+          <Property Name="fax" Type="varchar" MaxLength="30" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="account" Type="nvarchar" MaxLength="100" />
+          <Property Name="website" Type="varchar" MaxLength="50" />
+          <Property Name="remark" Type="text" />
+          <Property Name="created_time" Type="smalldatetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+          <Property Name="ListUserId" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="INV_inventories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="type" Type="tinyint" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="200" />
+          <Property Name="remark" Type="text" />
+          <Property Name="created_time" Type="datetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INV_labels">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SN" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="product_SN" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="style" Type="varchar" MaxLength="50" />
+          <Property Name="wood_id" Type="int" />
+          <Property Name="color" Type="nvarchar" MaxLength="50" />
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="check_date" Type="datetime" />
+          <Property Name="company" Type="nvarchar" MaxLength="100" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="website" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="inv_id" Type="int" />
+          <Property Name="CRM_contract_detail_id" Type="int" />
+          <Property Name="flag" Type="int" />
+          <Property Name="created_time" Type="datetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+          <Property Name="WorkId" Type="int" />
+          <Property Name="WIP_contract_id" Type="int" />
+        </EntityType>
+        <EntityType Name="INV_semi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="wood_id" Type="int" Nullable="false" />
+          <Property Name="color" Type="varchar" MaxLength="50" />
+          <Property Name="inv_id" Type="int" />
+          <Property Name="input_date" Type="datetime" />
+          <Property Name="input_user_id" Type="int" />
+          <Property Name="input_user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="output_date" Type="datetime" />
+          <Property Name="output_user_id" Type="int" />
+          <Property Name="output_user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="status" Type="int" Nullable="false" />
+          <Property Name="created_time" Type="datetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+          <Property Name="CRM_id" Type="int" />
+          <Property Name="WIP_id" Type="int" />
+          <Property Name="Work_id" Type="int" />
+          <Property Name="length" Type="int" />
+          <Property Name="width" Type="int" />
+          <Property Name="height" Type="int" />
+        </EntityType>
+        <EntityType Name="INV_wood_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="nickname" Type="nvarchar" MaxLength="100" />
+          <Property Name="place" Type="nvarchar" MaxLength="100" />
+          <Property Name="safe_stock_max" Type="int" Nullable="false" />
+          <Property Name="safe_stock_min" Type="int" Nullable="false" />
+          <Property Name="remark" Type="text" />
+          <Property Name="created_time" Type="datetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+          <Property Name="g_ccl" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="g_bz" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="q_ccl" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="q_bz" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="prcie" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="cc_prcie" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Sort" Type="int" />
+          <Property Name="PersonPrice" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="SYS_colors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SN" Type="varchar" MaxLength="10" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RGB" Type="varchar" MaxLength="7" />
+          <Property Name="img" Type="varchar" MaxLength="50" />
+          <Property Name="remark" Type="text" />
+          <Property Name="created_time" Type="datetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SYS_product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="product_SN_id" Type="int" Nullable="false" />
+          <Property Name="product_area_id" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="length" Type="int" />
+          <Property Name="width" Type="int" />
+          <Property Name="height" Type="int" />
+          <Property Name="picture" Type="varchar" MaxLength="50" />
+          <Property Name="paper_path" Type="varchar" MaxLength="50" />
+          <Property Name="BOM_path" Type="varchar" MaxLength="50" />
+          <Property Name="price" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="volume" Type="decimal" Precision="16" Scale="4" />
+          <Property Name="remark" Type="text" />
+          <Property Name="created_time" Type="datetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+          <Property Name="reserved1" Type="int" />
+          <Property Name="reserved2" Type="int" />
+          <Property Name="reserved3" Type="int" />
+          <Property Name="reserved4" Type="varchar" MaxLength="50" />
+          <Property Name="reserved5" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SYS_product_area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SN" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="remark" Type="text" />
+          <Property Name="created_time" Type="datetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SYS_product_SN">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SN" Type="varchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="remark" Type="text" />
+          <Property Name="created_time" Type="datetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WIP_workorder">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="workorder" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CRM_contract_detail_id" Type="int" />
+          <Property Name="WIP_contract_id" Type="int" />
+          <Property Name="qty" Type="int" Nullable="false" />
+          <Property Name="BOM_ready_date" Type="datetime" />
+          <Property Name="paper_path" Type="varchar" MaxLength="50" />
+          <Property Name="BOM_path" Type="varchar" MaxLength="50" />
+          <Property Name="BOM_over_date" Type="datetime" />
+          <Property Name="timetable_ready_date" Type="datetime" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="closed_flag" Type="bit" Nullable="false" />
+          <Property Name="remark" Type="text" />
+          <Property Name="reserved1" Type="int" />
+          <Property Name="reserved2" Type="int" />
+          <Property Name="reserved3" Type="varchar" MaxLength="50" />
+          <Property Name="reserved4" Type="varchar" MaxLength="50" />
+          <Property Name="reserved5" Type="varchar" MaxLength="50" />
+          <Property Name="created_time" Type="datetime" Nullable="false" />
+          <Property Name="delete_flag" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CRM_contract_detail_CRM_contract_header">
+          <End Role="CRM_contract_header" Type="Self.CRM_contract_header" Multiplicity="1" />
+          <End Role="CRM_contract_detail" Type="Self.CRM_contract_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_contract_header">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_detail">
+              <PropertyRef Name="header_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_contract_detail_INV_wood_type">
+          <End Role="INV_wood_type" Type="Self.INV_wood_type" Multiplicity="1" />
+          <End Role="CRM_contract_detail" Type="Self.CRM_contract_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INV_wood_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_detail">
+              <PropertyRef Name="wood_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_contract_detail_SYS_colors">
+          <End Role="SYS_colors" Type="Self.SYS_colors" Multiplicity="1" />
+          <End Role="CRM_contract_detail" Type="Self.CRM_contract_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_colors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_detail">
+              <PropertyRef Name="color_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_contract_detail_SYS_product">
+          <End Role="SYS_product" Type="Self.SYS_product" Multiplicity="1" />
+          <End Role="CRM_contract_detail" Type="Self.CRM_contract_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_detail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_contract_header_CRM_customers">
+          <End Role="CRM_customers" Type="Self.CRM_customers" Multiplicity="1" />
+          <End Role="CRM_contract_header" Type="Self.CRM_contract_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_customers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_header">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_semi_INV_inventories">
+          <End Role="INV_inventories" Type="Self.INV_inventories" Multiplicity="0..1" />
+          <End Role="INV_semi" Type="Self.INV_semi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INV_inventories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INV_semi">
+              <PropertyRef Name="inv_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_semi_INV_wood_type">
+          <End Role="INV_wood_type" Type="Self.INV_wood_type" Multiplicity="1" />
+          <End Role="INV_semi" Type="Self.INV_semi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INV_wood_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INV_semi">
+              <PropertyRef Name="wood_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_semi_SYS_product">
+          <End Role="SYS_product" Type="Self.SYS_product" Multiplicity="1" />
+          <End Role="INV_semi" Type="Self.INV_semi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INV_semi">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_product_SN_SYS_product_SN">
+          <End Role="SYS_product_SN" Type="Self.SYS_product_SN" Multiplicity="1" />
+          <End Role="SYS_product_SN1" Type="Self.SYS_product_SN" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_product_SN">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SYS_product_SN1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_product_SYS_product_area">
+          <End Role="SYS_product_area" Type="Self.SYS_product_area" Multiplicity="0..1" />
+          <End Role="SYS_product" Type="Self.SYS_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_product_area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SYS_product">
+              <PropertyRef Name="product_area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_product_SYS_product_SN">
+          <End Role="SYS_product_SN" Type="Self.SYS_product_SN" Multiplicity="1" />
+          <End Role="SYS_product" Type="Self.SYS_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_product_SN">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SYS_product">
+              <PropertyRef Name="product_SN_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="XNERPModelStoreContainer">
+          <EntitySet Name="CRM_contract_detail" EntityType="Self.CRM_contract_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CRM_contract_header" EntityType="Self.CRM_contract_header" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CRM_customers" EntityType="Self.CRM_customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INV_inventories" EntityType="Self.INV_inventories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INV_labels" EntityType="Self.INV_labels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INV_semi" EntityType="Self.INV_semi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INV_wood_type" EntityType="Self.INV_wood_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_colors" EntityType="Self.SYS_colors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_product" EntityType="Self.SYS_product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_product_area" EntityType="Self.SYS_product_area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_product_SN" EntityType="Self.SYS_product_SN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WIP_workorder" EntityType="Self.WIP_workorder" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CRM_contract_detail_CRM_contract_header" Association="Self.FK_CRM_contract_detail_CRM_contract_header">
+            <End Role="CRM_contract_header" EntitySet="CRM_contract_header" />
+            <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_contract_detail_INV_wood_type" Association="Self.FK_CRM_contract_detail_INV_wood_type">
+            <End Role="INV_wood_type" EntitySet="INV_wood_type" />
+            <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_contract_detail_SYS_colors" Association="Self.FK_CRM_contract_detail_SYS_colors">
+            <End Role="SYS_colors" EntitySet="SYS_colors" />
+            <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_contract_detail_SYS_product" Association="Self.FK_CRM_contract_detail_SYS_product">
+            <End Role="SYS_product" EntitySet="SYS_product" />
+            <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_contract_header_CRM_customers" Association="Self.FK_CRM_contract_header_CRM_customers">
+            <End Role="CRM_customers" EntitySet="CRM_customers" />
+            <End Role="CRM_contract_header" EntitySet="CRM_contract_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_semi_INV_inventories" Association="Self.FK_INV_semi_INV_inventories">
+            <End Role="INV_inventories" EntitySet="INV_inventories" />
+            <End Role="INV_semi" EntitySet="INV_semi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_semi_INV_wood_type" Association="Self.FK_INV_semi_INV_wood_type">
+            <End Role="INV_wood_type" EntitySet="INV_wood_type" />
+            <End Role="INV_semi" EntitySet="INV_semi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_semi_SYS_product" Association="Self.FK_INV_semi_SYS_product">
+            <End Role="SYS_product" EntitySet="SYS_product" />
+            <End Role="INV_semi" EntitySet="INV_semi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_product_SN_SYS_product_SN" Association="Self.FK_SYS_product_SN_SYS_product_SN">
+            <End Role="SYS_product_SN" EntitySet="SYS_product_SN" />
+            <End Role="SYS_product_SN1" EntitySet="SYS_product_SN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_product_SYS_product_area" Association="Self.FK_SYS_product_SYS_product_area">
+            <End Role="SYS_product_area" EntitySet="SYS_product_area" />
+            <End Role="SYS_product" EntitySet="SYS_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_product_SYS_product_SN" Association="Self.FK_SYS_product_SYS_product_SN">
+            <End Role="SYS_product_SN" EntitySet="SYS_product_SN" />
+            <End Role="SYS_product" EntitySet="SYS_product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XNERPModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="CRM_contract_detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="header_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="wood_type_id" Type="Int32" Nullable="false" />
+          <Property Name="color_id" Type="Int32" Nullable="false" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="custom_flag" Type="Boolean" />
+          <Property Name="length" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="width" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="height" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="price" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="price_recommend" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="qty" Type="Int32" Nullable="false" />
+          <Property Name="unit" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="hardware_part" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="decoration_part" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="req_others" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <Property Name="LabelsCount" Type="Int32" />
+          <Property Name="SemiCount" Type="Int32" />
+          <NavigationProperty Name="CRM_contract_header" Relationship="Self.FK_CRM_contract_detail_CRM_contract_header" FromRole="CRM_contract_detail" ToRole="CRM_contract_header" />
+          <NavigationProperty Name="INV_wood_type" Relationship="Self.FK_CRM_contract_detail_INV_wood_type" FromRole="CRM_contract_detail" ToRole="INV_wood_type" />
+          <NavigationProperty Name="SYS_colors" Relationship="Self.FK_CRM_contract_detail_SYS_colors" FromRole="CRM_contract_detail" ToRole="SYS_colors" />
+          <NavigationProperty Name="SYS_product" Relationship="Self.FK_CRM_contract_detail_SYS_product" FromRole="CRM_contract_detail" ToRole="SYS_product" />
+        </EntityType>
+        <EntityType Name="CRM_contract_header">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="delivery_date" Type="DateTime" Precision="3" />
+          <Property Name="delivery_channel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+          <Property Name="amount_recommend" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="freight_carrier" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="prepay" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="measure_flag" Type="Boolean" />
+          <Property Name="delivery_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="signed_user_id" Type="Int32" />
+          <Property Name="signed_department_id" Type="Int32" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <Property Name="check_user_id" Type="Int32" />
+          <Property Name="check_user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="checked_date" Type="DateTime" Precision="3" />
+          <Property Name="department" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SaleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="HTDate" Type="DateTime" Precision="3" />
+          <Property Name="FR_flag" Type="Int32" Nullable="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <Property Name="reserved1" Type="Int32" />
+          <Property Name="reserved2" Type="Int32" />
+          <Property Name="reserved3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CRM_contract_detail" Relationship="Self.FK_CRM_contract_detail_CRM_contract_header" FromRole="CRM_contract_header" ToRole="CRM_contract_detail" />
+          <NavigationProperty Name="CRM_customers" Relationship="Self.FK_CRM_contract_header_CRM_customers" FromRole="CRM_contract_header" ToRole="CRM_customers" />
+        </EntityType>
+        <EntityType Name="CRM_customers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name_E" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="shortname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="shortname_E" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="address_E" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="address_delivery" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="zipcode" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="corporation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="linkman" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="tel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="fax" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="account" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <Property Name="ListUserId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CRM_contract_header" Relationship="Self.FK_CRM_contract_header_CRM_customers" FromRole="CRM_customers" ToRole="CRM_contract_header" />
+        </EntityType>
+        <EntityType Name="INV_labels">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="product_SN" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="style" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="wood_id" Type="Int32" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="check_date" Type="DateTime" Precision="3" />
+          <Property Name="company" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="inv_id" Type="Int32" />
+          <Property Name="CRM_contract_detail_id" Type="Int32" />
+          <Property Name="flag" Type="Int32" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <Property Name="WorkId" Type="Int32" />
+          <Property Name="WIP_contract_id" Type="Int32" />
+          <NavigationProperty Name="SYS_product" Relationship="XNERPModel.SYS_productINV_labels" FromRole="INV_labels" ToRole="SYS_product" />
+          <NavigationProperty Name="INV_wood_type" Relationship="XNERPModel.INV_wood_typeINV_labels" FromRole="INV_labels" ToRole="INV_wood_type" />
+          <NavigationProperty Name="INV_inventories" Relationship="XNERPModel.INV_inventoriesINV_labels" FromRole="INV_labels" ToRole="INV_inventories" />
+        </EntityType>
+        <EntityType Name="INV_semi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="wood_id" Type="Int32" Nullable="false" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="inv_id" Type="Int32" />
+          <Property Name="input_date" Type="DateTime" Precision="3" />
+          <Property Name="input_user_id" Type="Int32" />
+          <Property Name="input_user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="output_date" Type="DateTime" Precision="3" />
+          <Property Name="output_user_id" Type="Int32" />
+          <Property Name="output_user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" Nullable="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <Property Name="CRM_id" Type="Int32" />
+          <Property Name="WIP_id" Type="Int32" />
+          <Property Name="Work_id" Type="Int32" />
+          <Property Name="length" Type="Int32" />
+          <Property Name="width" Type="Int32" />
+          <Property Name="height" Type="Int32" />
+          <NavigationProperty Name="INV_wood_type" Relationship="Self.FK_INV_semi_INV_wood_type" FromRole="INV_semi" ToRole="INV_wood_type" />
+          <NavigationProperty Name="SYS_product" Relationship="Self.FK_INV_semi_SYS_product" FromRole="INV_semi" ToRole="SYS_product" />
+          <NavigationProperty Name="INV_inventories" Relationship="XNERPModel.FK_INV_semi_INV_inventories" FromRole="INV_semi" ToRole="INV_inventories" />
+        </EntityType>
+        <EntityType Name="INV_wood_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nickname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="place" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="safe_stock_max" Type="Int32" Nullable="false" />
+          <Property Name="safe_stock_min" Type="Int32" Nullable="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <Property Name="g_ccl" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="g_bz" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="q_ccl" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="q_bz" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="prcie" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cc_prcie" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Sort" Type="Int32" />
+          <Property Name="PersonPrice" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="CRM_contract_detail" Relationship="Self.FK_CRM_contract_detail_INV_wood_type" FromRole="INV_wood_type" ToRole="CRM_contract_detail" />
+          <NavigationProperty Name="INV_semi" Relationship="Self.FK_INV_semi_INV_wood_type" FromRole="INV_wood_type" ToRole="INV_semi" />
+          <NavigationProperty Name="INV_labels" Relationship="XNERPModel.INV_wood_typeINV_labels" FromRole="INV_wood_type" ToRole="INV_labels" />
+        </EntityType>
+        <EntityType Name="SYS_colors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RGB" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="img" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CRM_contract_detail" Relationship="Self.FK_CRM_contract_detail_SYS_colors" FromRole="SYS_colors" ToRole="CRM_contract_detail" />
+        </EntityType>
+        <EntityType Name="SYS_product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_SN_id" Type="Int32" Nullable="false" />
+          <Property Name="product_area_id" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="length" Type="Int32" />
+          <Property Name="width" Type="Int32" />
+          <Property Name="height" Type="Int32" />
+          <Property Name="picture" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="paper_path" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BOM_path" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="volume" Type="Decimal" Precision="16" Scale="4" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <Property Name="reserved1" Type="Int32" />
+          <Property Name="reserved2" Type="Int32" />
+          <Property Name="reserved3" Type="Int32" />
+          <Property Name="reserved4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reserved5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CRM_contract_detail" Relationship="Self.FK_CRM_contract_detail_SYS_product" FromRole="SYS_product" ToRole="CRM_contract_detail" />
+          <NavigationProperty Name="INV_semi" Relationship="Self.FK_INV_semi_SYS_product" FromRole="SYS_product" ToRole="INV_semi" />
+          <NavigationProperty Name="SYS_product_area" Relationship="Self.FK_SYS_product_SYS_product_area" FromRole="SYS_product" ToRole="SYS_product_area" />
+          <NavigationProperty Name="SYS_product_SN" Relationship="Self.FK_SYS_product_SYS_product_SN" FromRole="SYS_product" ToRole="SYS_product_SN" />
+          <NavigationProperty Name="INV_labels" Relationship="XNERPModel.SYS_productINV_labels" FromRole="SYS_product" ToRole="INV_labels" />
+        </EntityType>
+        <EntityType Name="SYS_product_area">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SYS_product" Relationship="Self.FK_SYS_product_SYS_product_area" FromRole="SYS_product_area" ToRole="SYS_product" />
+        </EntityType>
+        <EntityType Name="SYS_product_SN">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SYS_product" Relationship="Self.FK_SYS_product_SYS_product_SN" FromRole="SYS_product_SN" ToRole="SYS_product" />
+          </EntityType>
+        <EntityType Name="WIP_workorder">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="workorder" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CRM_contract_detail_id" Type="Int32" />
+          <Property Name="WIP_contract_id" Type="Int32" />
+          <Property Name="qty" Type="Int32" Nullable="false" />
+          <Property Name="BOM_ready_date" Type="DateTime" Precision="3" />
+          <Property Name="paper_path" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BOM_path" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BOM_over_date" Type="DateTime" Precision="3" />
+          <Property Name="timetable_ready_date" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <Property Name="closed_flag" Type="Boolean" Nullable="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="reserved1" Type="Int32" />
+          <Property Name="reserved2" Type="Int32" />
+          <Property Name="reserved3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reserved4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reserved5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CRM_contract_detail_CRM_contract_header">
+          <End Role="CRM_contract_header" Type="Self.CRM_contract_header" Multiplicity="1" />
+          <End Role="CRM_contract_detail" Type="Self.CRM_contract_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_contract_header">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_detail">
+              <PropertyRef Name="header_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_contract_detail_INV_wood_type">
+          <End Role="INV_wood_type" Type="Self.INV_wood_type" Multiplicity="1" />
+          <End Role="CRM_contract_detail" Type="Self.CRM_contract_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INV_wood_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_detail">
+              <PropertyRef Name="wood_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_contract_detail_SYS_colors">
+          <End Role="SYS_colors" Type="Self.SYS_colors" Multiplicity="1" />
+          <End Role="CRM_contract_detail" Type="Self.CRM_contract_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_colors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_detail">
+              <PropertyRef Name="color_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_contract_detail_SYS_product">
+          <End Role="SYS_product" Type="Self.SYS_product" Multiplicity="1" />
+          <End Role="CRM_contract_detail" Type="Self.CRM_contract_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_detail">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_contract_header_CRM_customers">
+          <End Role="CRM_customers" Type="Self.CRM_customers" Multiplicity="1" />
+          <End Role="CRM_contract_header" Type="Self.CRM_contract_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_customers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_header">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_semi_INV_wood_type">
+          <End Role="INV_wood_type" Type="Self.INV_wood_type" Multiplicity="1" />
+          <End Role="INV_semi" Type="Self.INV_semi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INV_wood_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INV_semi">
+              <PropertyRef Name="wood_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INV_semi_SYS_product">
+          <End Role="SYS_product" Type="Self.SYS_product" Multiplicity="1" />
+          <End Role="INV_semi" Type="Self.INV_semi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INV_semi">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_product_SYS_product_area">
+          <End Role="SYS_product_area" Type="Self.SYS_product_area" Multiplicity="0..1" />
+          <End Role="SYS_product" Type="Self.SYS_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_product_area">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SYS_product">
+              <PropertyRef Name="product_area_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_product_SYS_product_SN">
+          <End Role="SYS_product_SN" Type="Self.SYS_product_SN" Multiplicity="1" />
+          <End Role="SYS_product" Type="Self.SYS_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_product_SN">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SYS_product">
+              <PropertyRef Name="product_SN_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="XNERPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CRM_contract_detail" EntityType="Self.CRM_contract_detail" />
+          <EntitySet Name="CRM_contract_header" EntityType="Self.CRM_contract_header" />
+          <EntitySet Name="CRM_customers" EntityType="Self.CRM_customers" />
+          <EntitySet Name="INV_labels" EntityType="Self.INV_labels" />
+          <EntitySet Name="INV_semi" EntityType="Self.INV_semi" />
+          <EntitySet Name="INV_wood_type" EntityType="Self.INV_wood_type" />
+          <EntitySet Name="SYS_colors" EntityType="Self.SYS_colors" />
+          <EntitySet Name="SYS_product" EntityType="Self.SYS_product" />
+          <EntitySet Name="SYS_product_area" EntityType="Self.SYS_product_area" />
+          <EntitySet Name="SYS_product_SN" EntityType="Self.SYS_product_SN" />
+          <EntitySet Name="WIP_workorder" EntityType="Self.WIP_workorder" />
+          <AssociationSet Name="FK_CRM_contract_detail_CRM_contract_header" Association="Self.FK_CRM_contract_detail_CRM_contract_header">
+            <End Role="CRM_contract_header" EntitySet="CRM_contract_header" />
+            <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_contract_detail_INV_wood_type" Association="Self.FK_CRM_contract_detail_INV_wood_type">
+            <End Role="INV_wood_type" EntitySet="INV_wood_type" />
+            <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_contract_detail_SYS_colors" Association="Self.FK_CRM_contract_detail_SYS_colors">
+            <End Role="SYS_colors" EntitySet="SYS_colors" />
+            <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_contract_detail_SYS_product" Association="Self.FK_CRM_contract_detail_SYS_product">
+            <End Role="SYS_product" EntitySet="SYS_product" />
+            <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_contract_header_CRM_customers" Association="Self.FK_CRM_contract_header_CRM_customers">
+            <End Role="CRM_customers" EntitySet="CRM_customers" />
+            <End Role="CRM_contract_header" EntitySet="CRM_contract_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_semi_INV_wood_type" Association="Self.FK_INV_semi_INV_wood_type">
+            <End Role="INV_wood_type" EntitySet="INV_wood_type" />
+            <End Role="INV_semi" EntitySet="INV_semi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INV_semi_SYS_product" Association="Self.FK_INV_semi_SYS_product">
+            <End Role="SYS_product" EntitySet="SYS_product" />
+            <End Role="INV_semi" EntitySet="INV_semi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_product_SYS_product_area" Association="Self.FK_SYS_product_SYS_product_area">
+            <End Role="SYS_product_area" EntitySet="SYS_product_area" />
+            <End Role="SYS_product" EntitySet="SYS_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_product_SYS_product_SN" Association="Self.FK_SYS_product_SYS_product_SN">
+            <End Role="SYS_product_SN" EntitySet="SYS_product_SN" />
+            <End Role="SYS_product" EntitySet="SYS_product" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_productINV_labels" Association="XNERPModel.SYS_productINV_labels">
+            <End Role="SYS_product" EntitySet="SYS_product" />
+            <End Role="INV_labels" EntitySet="INV_labels" />
+          </AssociationSet>
+          <AssociationSet Name="INV_wood_typeINV_labels" Association="XNERPModel.INV_wood_typeINV_labels">
+            <End Role="INV_wood_type" EntitySet="INV_wood_type" />
+            <End Role="INV_labels" EntitySet="INV_labels" />
+          </AssociationSet>
+          <EntitySet Name="INV_inventories" EntityType="XNERPModel.INV_inventories" />
+          <AssociationSet Name="FK_INV_semi_INV_inventories" Association="XNERPModel.FK_INV_semi_INV_inventories">
+            <End Role="INV_inventories" EntitySet="INV_inventories" />
+            <End Role="INV_semi" EntitySet="INV_semi" />
+          </AssociationSet>
+          <AssociationSet Name="INV_inventoriesINV_labels" Association="XNERPModel.INV_inventoriesINV_labels">
+            <End Role="INV_inventories" EntitySet="INV_inventories" />
+            <End Role="INV_labels" EntitySet="INV_labels" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="SYS_productINV_labels">
+          <End Type="XNERPModel.SYS_product" Role="SYS_product" Multiplicity="1" />
+          <End Type="XNERPModel.INV_labels" Role="INV_labels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INV_labels">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="INV_wood_typeINV_labels">
+          <End Type="XNERPModel.INV_wood_type" Role="INV_wood_type" Multiplicity="0..1" />
+          <End Type="XNERPModel.INV_labels" Role="INV_labels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INV_wood_type">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INV_labels">
+              <PropertyRef Name="wood_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="INV_inventories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="Byte" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="INV_semi" Relationship="XNERPModel.FK_INV_semi_INV_inventories" FromRole="INV_inventories" ToRole="INV_semi" />
+          <NavigationProperty Name="INV_labels" Relationship="XNERPModel.INV_inventoriesINV_labels" FromRole="INV_inventories" ToRole="INV_labels" />
+        </EntityType>
+        <Association Name="FK_INV_semi_INV_inventories">
+          <End Type="XNERPModel.INV_inventories" Role="INV_inventories" Multiplicity="0..1" />
+          <End Type="XNERPModel.INV_semi" Role="INV_semi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INV_inventories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INV_semi">
+              <PropertyRef Name="inv_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="INV_inventoriesINV_labels">
+          <End Type="XNERPModel.INV_inventories" Role="INV_inventories" Multiplicity="0..1" />
+          <End Type="XNERPModel.INV_labels" Role="INV_labels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INV_inventories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="INV_labels">
+              <PropertyRef Name="inv_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XNERPModelStoreContainer" CdmEntityContainer="XNERPEntities">
+          <EntitySetMapping Name="CRM_contract_detail">
+            <EntityTypeMapping TypeName="XNERPModel.CRM_contract_detail">
+              <MappingFragment StoreEntitySet="CRM_contract_detail">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="header_id" ColumnName="header_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="wood_type_id" ColumnName="wood_type_id" />
+                <ScalarProperty Name="color_id" ColumnName="color_id" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="custom_flag" ColumnName="custom_flag" />
+                <ScalarProperty Name="length" ColumnName="length" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="price_recommend" ColumnName="price_recommend" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="hardware_part" ColumnName="hardware_part" />
+                <ScalarProperty Name="decoration_part" ColumnName="decoration_part" />
+                <ScalarProperty Name="req_others" ColumnName="req_others" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="LabelsCount" ColumnName="LabelsCount" />
+                <ScalarProperty Name="SemiCount" ColumnName="SemiCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CRM_contract_header">
+            <EntityTypeMapping TypeName="XNERPModel.CRM_contract_header">
+              <MappingFragment StoreEntitySet="CRM_contract_header">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
+                <ScalarProperty Name="delivery_channel" ColumnName="delivery_channel" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="amount_recommend" ColumnName="amount_recommend" />
+                <ScalarProperty Name="freight_carrier" ColumnName="freight_carrier" />
+                <ScalarProperty Name="prepay" ColumnName="prepay" />
+                <ScalarProperty Name="measure_flag" ColumnName="measure_flag" />
+                <ScalarProperty Name="delivery_address" ColumnName="delivery_address" />
+                <ScalarProperty Name="signed_user_id" ColumnName="signed_user_id" />
+                <ScalarProperty Name="signed_department_id" ColumnName="signed_department_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="check_user_id" ColumnName="check_user_id" />
+                <ScalarProperty Name="check_user_name" ColumnName="check_user_name" />
+                <ScalarProperty Name="checked_date" ColumnName="checked_date" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="SaleName" ColumnName="SaleName" />
+                <ScalarProperty Name="HTDate" ColumnName="HTDate" />
+                <ScalarProperty Name="FR_flag" ColumnName="FR_flag" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="reserved1" ColumnName="reserved1" />
+                <ScalarProperty Name="reserved2" ColumnName="reserved2" />
+                <ScalarProperty Name="reserved3" ColumnName="reserved3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CRM_customers">
+            <EntityTypeMapping TypeName="XNERPModel.CRM_customers">
+              <MappingFragment StoreEntitySet="CRM_customers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="name_E" ColumnName="name_E" />
+                <ScalarProperty Name="shortname" ColumnName="shortname" />
+                <ScalarProperty Name="shortname_E" ColumnName="shortname_E" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="address_E" ColumnName="address_E" />
+                <ScalarProperty Name="address_delivery" ColumnName="address_delivery" />
+                <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+                <ScalarProperty Name="corporation" ColumnName="corporation" />
+                <ScalarProperty Name="linkman" ColumnName="linkman" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="account" ColumnName="account" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="ListUserId" ColumnName="ListUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INV_labels">
+            <EntityTypeMapping TypeName="XNERPModel.INV_labels">
+              <MappingFragment StoreEntitySet="INV_labels">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="product_SN" ColumnName="product_SN" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="style" ColumnName="style" />
+                <ScalarProperty Name="wood_id" ColumnName="wood_id" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="check_date" ColumnName="check_date" />
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="inv_id" ColumnName="inv_id" />
+                <ScalarProperty Name="CRM_contract_detail_id" ColumnName="CRM_contract_detail_id" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="WorkId" ColumnName="WorkId" />
+                <ScalarProperty Name="WIP_contract_id" ColumnName="WIP_contract_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INV_semi">
+            <EntityTypeMapping TypeName="XNERPModel.INV_semi">
+              <MappingFragment StoreEntitySet="INV_semi">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="wood_id" ColumnName="wood_id" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="inv_id" ColumnName="inv_id" />
+                <ScalarProperty Name="input_date" ColumnName="input_date" />
+                <ScalarProperty Name="input_user_id" ColumnName="input_user_id" />
+                <ScalarProperty Name="input_user_name" ColumnName="input_user_name" />
+                <ScalarProperty Name="output_date" ColumnName="output_date" />
+                <ScalarProperty Name="output_user_id" ColumnName="output_user_id" />
+                <ScalarProperty Name="output_user_name" ColumnName="output_user_name" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="CRM_id" ColumnName="CRM_id" />
+                <ScalarProperty Name="WIP_id" ColumnName="WIP_id" />
+                <ScalarProperty Name="Work_id" ColumnName="Work_id" />
+                <ScalarProperty Name="length" ColumnName="length" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="height" ColumnName="height" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INV_wood_type">
+            <EntityTypeMapping TypeName="XNERPModel.INV_wood_type">
+              <MappingFragment StoreEntitySet="INV_wood_type">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="place" ColumnName="place" />
+                <ScalarProperty Name="safe_stock_max" ColumnName="safe_stock_max" />
+                <ScalarProperty Name="safe_stock_min" ColumnName="safe_stock_min" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="g_ccl" ColumnName="g_ccl" />
+                <ScalarProperty Name="g_bz" ColumnName="g_bz" />
+                <ScalarProperty Name="q_ccl" ColumnName="q_ccl" />
+                <ScalarProperty Name="q_bz" ColumnName="q_bz" />
+                <ScalarProperty Name="prcie" ColumnName="prcie" />
+                <ScalarProperty Name="cc_prcie" ColumnName="cc_prcie" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="PersonPrice" ColumnName="PersonPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_colors">
+            <EntityTypeMapping TypeName="XNERPModel.SYS_colors">
+              <MappingFragment StoreEntitySet="SYS_colors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="RGB" ColumnName="RGB" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_product">
+            <EntityTypeMapping TypeName="XNERPModel.SYS_product">
+              <MappingFragment StoreEntitySet="SYS_product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="product_SN_id" ColumnName="product_SN_id" />
+                <ScalarProperty Name="product_area_id" ColumnName="product_area_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="length" ColumnName="length" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="paper_path" ColumnName="paper_path" />
+                <ScalarProperty Name="BOM_path" ColumnName="BOM_path" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="reserved1" ColumnName="reserved1" />
+                <ScalarProperty Name="reserved2" ColumnName="reserved2" />
+                <ScalarProperty Name="reserved3" ColumnName="reserved3" />
+                <ScalarProperty Name="reserved4" ColumnName="reserved4" />
+                <ScalarProperty Name="reserved5" ColumnName="reserved5" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_product_area">
+            <EntityTypeMapping TypeName="XNERPModel.SYS_product_area">
+              <MappingFragment StoreEntitySet="SYS_product_area">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_product_SN">
+            <EntityTypeMapping TypeName="XNERPModel.SYS_product_SN">
+              <MappingFragment StoreEntitySet="SYS_product_SN">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WIP_workorder">
+            <EntityTypeMapping TypeName="XNERPModel.WIP_workorder">
+              <MappingFragment StoreEntitySet="WIP_workorder">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="workorder" ColumnName="workorder" />
+                <ScalarProperty Name="CRM_contract_detail_id" ColumnName="CRM_contract_detail_id" />
+                <ScalarProperty Name="WIP_contract_id" ColumnName="WIP_contract_id" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="BOM_ready_date" ColumnName="BOM_ready_date" />
+                <ScalarProperty Name="paper_path" ColumnName="paper_path" />
+                <ScalarProperty Name="BOM_path" ColumnName="BOM_path" />
+                <ScalarProperty Name="BOM_over_date" ColumnName="BOM_over_date" />
+                <ScalarProperty Name="timetable_ready_date" ColumnName="timetable_ready_date" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="closed_flag" ColumnName="closed_flag" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="reserved1" ColumnName="reserved1" />
+                <ScalarProperty Name="reserved2" ColumnName="reserved2" />
+                <ScalarProperty Name="reserved3" ColumnName="reserved3" />
+                <ScalarProperty Name="reserved4" ColumnName="reserved4" />
+                <ScalarProperty Name="reserved5" ColumnName="reserved5" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INV_inventories">
+            <EntityTypeMapping TypeName="XNERPModel.INV_inventories">
+              <MappingFragment StoreEntitySet="INV_inventories">
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

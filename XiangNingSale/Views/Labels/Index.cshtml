@@ -1,0 +1,130 @@
+﻿@model ModelProject.SLabelsModel
+@{
+    Layout = null;
+}
+@Html.Action("_Meta", "Home")
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i>首页<span class="c-gray en">&gt;</span>销售管理<span class="c-gray en">&gt;</span>成品库
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<div class="page-container">
+    <div class="text-c">
+        <span class="select-box inline">
+            @Html.DropDownListFor(k => k.product_SN_id, Model.XLDroList, new { @class = "select" })
+        </span>
+        <span class="select-box inline">
+            @Html.DropDownListFor(k => k.product_area_id, Model.AreaDroList, new { @class = "select" })
+        </span>
+        @Html.TextBoxFor(k => k.productName, new { @placeholder = "产品名称", @style = "width:150px", @class = "input-text" })
+        <span class="select-box inline">
+            @Html.DropDownListFor(k => k.inv_id, Model.CKDroList, new { @class = "select" })
+        </span>
+        <span class="select-box inline">
+            @Html.DropDownListFor(k => k.wood_id, Model.MCDroList, new { @class = "select" })
+        </span>
+        入库时间：
+        <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
+        -
+        <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
+        
+        <button id="btnSearch" class="btn btn-success" type="button"><i class="Hui-iconfont">&#xe665;</i>搜素</button>
+    </div>
+    <div class="mt-20 checkmodel">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+                <tr class="text-l">
+                    <th width="25"><input type="checkbox" name="" value=""></th>
+                    <th>标签编码</th>
+                    <th>产品编号</th>
+                    <th>产品系列</th>
+                    <th>产品名称</th>
+                    <th>材质</th>
+                    <th>色号</th>
+                    <th>尺寸</th>
+                    <th>所在仓库</th>
+                    <th width="120">进库日期</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+@Html.Action("_Footer", "Home")
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="~/js/DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="~/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="~/js/ajaxScript.js?v=2"></script>
+<script type="text/javascript">
+
+    var param = {};
+    $(function () { searchArticle(param); });
+    $("#btnSearch").click(function () {
+        //搜索条件
+        var product_SN_id = $("#product_SN_id").val().trim();
+        var product_area_id = $("#product_area_id").val().trim();
+        var productName = $("#productName").val().trim();
+        var inv_id = $("#inv_id").val().trim();
+        var wood_id = $("#wood_id").val().trim();
+        var StartTime = $("#logmin").val().trim();
+        var EndTime = $("#logmax").val().trim();
+        
+        //搜索
+        param["product_SN_id"] = product_SN_id;
+        param["product_area_id"] = product_area_id;
+        param["productName"] = productName;
+        param["inv_id"] = inv_id;
+        param["wood_id"] = wood_id;
+        param["StartTime"] = StartTime;
+        param["EndTime"] = EndTime;
+        //初始化，然后绑定
+        $('.table-sort').DataTable().destroy();
+        searchArticle(param);
+    });
+
+    function searchArticle(param) {
+        $('.table-sort').dataTable({
+            "bStateSave": true,
+            "pading": false,
+            "destroy": true,
+            "searching": true,
+            "autoWidth": true,
+            "ordering": false, //设置所有不排序
+            "ajax": function (data, callback, settings) {
+                ajaxRequest("post", "/Labels/PageList", param, function (result) {
+                    //封装返回数据
+                    var returnData = {};
+                    returnData.data = result;
+                    callback(returnData);
+                });
+            },
+            "columnDefs": [//对table格式的定义（表格的列从0开始）
+                {
+                    targets: 0,
+                    render: function (data, type, row) {
+                        return '<input type="checkbox" value="' + row.Id + '" >';
+                    }
+                }, 
+            ],
+            "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
+                        { "data": "Id" },
+                        { "data": "SN", "className": "textoverflow" },
+                        { "data": "product_SN_Name", "defaultContent": "" },
+                        { "data": "ProductXL", "defaultContent": "" },
+                        { "data": "ProductName", "defaultContent": "", "className": "textoverflow" },
+                        { "data": "woodname", "defaultContent": "" },
+                        { "data": "color", "defaultContent": "" },
+                        { "data": "style", "defaultContent": "" },
+                        { "data": "invname", "defaultContent": "" },
+                        {
+                            "data": "input_date", "render": function (data) {
+                                var NewTime = parseInt(data.replace(/\D/igm, ""));
+                                return formatDateTime(NewTime);
+                            }
+                        },
+            ]
+        });
+    };
+
+
+</script> 

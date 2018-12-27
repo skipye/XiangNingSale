@@ -35,10 +35,10 @@ namespace XiangNingSale.Controllers
             var MenuItemList = new List<ModelProject.MenuItemModel>();
             if (!string.IsNullOrEmpty(StrMenuList))
             { MenuItemList = MSer.GetMenuItemList(StrMenuList); }
-            if (Models.UserId == 1)
-            {
-                MenuItemList = MSer.GetMenuItemList("");
-            }
+            //if (Models.UserId == 1)
+            //{
+            //    MenuItemList = MSer.GetMenuItemList("");
+            //}
             return View(MenuItemList);
         }
         public ActionResult _Footer()

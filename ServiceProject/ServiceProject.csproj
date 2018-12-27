@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="INVService.cs" />
     <Compile Include="RoleService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="CategoryService.cs" />
