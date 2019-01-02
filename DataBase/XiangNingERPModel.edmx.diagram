@@ -6,8 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="24c747e9a9d74f188049d47a48fe58be" Name="Diagram1">
         <EntityTypeShape EntityType="XNERPModel.CRM_contract_detail" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="XNERPModel.CRM_contract_header" Width="1.5" PointX="3.125" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="XNERPModel.CRM_customers" Width="1.5" PointX="0.5" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="XNERPModel.INV_labels" Width="1.5" PointX="13" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="XNERPModel.INV_semi" Width="1.5" PointX="8.125" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="XNERPModel.INV_wood_type" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
@@ -16,11 +14,9 @@
         <EntityTypeShape EntityType="XNERPModel.SYS_product_area" Width="1.5" PointX="3.5" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="XNERPModel.SYS_product_SN" Width="1.5" PointX="3.5" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="XNERPModel.WIP_workorder" Width="1.5" PointX="10.625" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="XNERPModel.FK_CRM_contract_detail_CRM_contract_header" ManuallyRouted="false" />
         <AssociationConnector Association="XNERPModel.FK_CRM_contract_detail_INV_wood_type" ManuallyRouted="false" />
         <AssociationConnector Association="XNERPModel.FK_CRM_contract_detail_SYS_colors" ManuallyRouted="false" />
         <AssociationConnector Association="XNERPModel.FK_CRM_contract_detail_SYS_product" ManuallyRouted="false" />
-        <AssociationConnector Association="XNERPModel.FK_CRM_contract_header_CRM_customers" ManuallyRouted="false" />
         <AssociationConnector Association="XNERPModel.FK_INV_semi_INV_wood_type" ManuallyRouted="false" />
         <AssociationConnector Association="XNERPModel.FK_INV_semi_SYS_product" ManuallyRouted="false" />
         <AssociationConnector Association="XNERPModel.FK_SYS_product_SYS_product_area" ManuallyRouted="false" />
@@ -30,6 +26,11 @@
         <EntityTypeShape EntityType="XNERPModel.INV_inventories" Width="1.5" PointX="10.5" PointY="1.75" />
         <AssociationConnector Association="XNERPModel.FK_INV_semi_INV_inventories" />
         <AssociationConnector Association="XNERPModel.INV_inventoriesINV_labels" />
+        <EntityTypeShape EntityType="XNERPModel.CRM_contract_header" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="XNERPModel.CRM_customers" Width="1.5" PointX="0.75" PointY="8.75" />
+        <AssociationConnector Association="XNERPModel.FK_CRM_contract_detail_CRM_contract_header" />
+        <AssociationConnector Association="XNERPModel.FK_CRM_contract_header_CRM_customers" />
+        <AssociationConnector Association="XNERPModel.FK_SYS_product_SN_SYS_product_SN" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

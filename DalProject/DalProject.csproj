@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="INVDal.cs" />
     <Compile Include="MenuDal.cs" />
+    <Compile Include="CustomerDal.cs" />
     <Compile Include="RoleDal.cs" />
     <Compile Include="CategoryDal.cs" />
     <Compile Include="NewsDal.cs" />

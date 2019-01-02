@@ -60,7 +60,8 @@ namespace DalProject
                     table.Name = Models.Name;
                     table.Remark = Models.Remark;
                     table.Price = Models.Price;
-
+                    table.CheckedStatus = 0;
+                    table.ApplyDateTime = DateTime.Now;
                 }
                 else
                 {

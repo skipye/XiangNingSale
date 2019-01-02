@@ -12,6 +12,16 @@ namespace XiangNingSale.Controllers
     public class UsersController : Controller
     {
         private static readonly UserService USer = new UserService();
+        public void AddWorkLogs(WorkLogsModel tables)
+        {
+            tables.UserId = USer.GetCurrentUserName().UserId;
+            tables.UserName = USer.GetCurrentUserName().UserName;
+            try { USer.AddWorkLogs(tables); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public ActionResult Index()
         {
             SUsersModel SModels = new SUsersModel();

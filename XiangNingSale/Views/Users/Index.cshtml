@@ -12,10 +12,10 @@
         @Html.TextBoxFor(k => k.Name, new { @placeholder = "用户名", @style = "width:250px", @class = "input-text" })
         <button id="btnSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
     </div>
-    <div class="cl pd-5 bg-1 bk-gray mt-20">
+    @*<div class="cl pd-5 bg-1 bk-gray mt-20">
         <a href="javascript:void(0);" onclick="del(this, '0')" class="btn btn-danger radius" data-url="@Url.Action("Delete","Users")"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
         <a href="javascript:void(0);" onclick="add('添加用户', '/Users/Add', '600', '400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加用户</a>
-    </div>
+    </div>*@
     <div class="mt-20 checkmodel">
         <table class="table table-border table-bordered table-bg table-hover table-sort">
             <thead>
@@ -23,9 +23,9 @@
                     <th width="25"><input type="checkbox" name="" value=""></th>
                     <th width="140">用户名</th>
                     <th width="80">手机号码</th>
-                    <th width="80">登录次数</th>
-                    <th width="80">最后登录时间</th>
-                    <th width="80">创建时间</th>
+                    <th width="80">部门</th>
+                    <th width="80">入职时间</th>
+                    <th width="80">转正时间</th>
                     <th width="120">操作</th>
                 </tr>
             </thead>
@@ -77,8 +77,8 @@
                 }, {
                     targets: 6,//把第九列的样式改为超链接
                     render: function (data, type, row) {
-                        return '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'编辑\',\'/Users/Add\', \'' + row.Id + '\', \'800\', \'500\')" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
-                               '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'/Users/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
+                        return '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'编辑\',\'/Users/Add\', \'' + row.Id + '\', \'800\', \'500\')" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a>';
+                             
                     }
                 }
             ],
@@ -86,17 +86,17 @@
                         { "data": "Id" },
                         { "data": "Name", "className": "text-overflow" },
                         { "data": "Telphone", "defaultContent": "" },
-                        { "data": "LoginTimes", "defaultContent": "" },
+                        { "data": "departmentname", "defaultContent": "" },
                         {
-                            "data": "LastTimes", "render": function (data) {
+                            "data": "jobtime", "render": function (data) {
                                 var NewTime = parseInt(data.replace(/\D/igm, ""));
-                                return formatDateTime(NewTime);
+                                return formatDate(NewTime);
                             }
                         },
                         {
-                            "data": "CreateTime", "render": function (data) {
+                            "data": "officialtime", "render": function (data) {
                                 var NewTime = parseInt(data.replace(/\D/igm, ""));
-                                return formatDateTime(NewTime);
+                                return formatDate(NewTime);
                             }
                         },
                         

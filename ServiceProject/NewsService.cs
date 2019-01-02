@@ -27,14 +27,6 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
-        public List<NewsModel> GetList(int TypeId, int PageIndex, int PageSize)
-        {
-            try { return IDal.GetList(TypeId, PageIndex, PageSize); }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
         public bool AddOrUpdate(NewsModel Models)
         {
             try {IDal.AddOrUpdate(Models); return true; }

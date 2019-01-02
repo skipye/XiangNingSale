@@ -12,22 +12,14 @@ namespace DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class SYS_product_SN
+    public partial class ehr_department
     {
-        public SYS_product_SN()
-        {
-            this.SYS_product = new HashSet<SYS_product>();
-        }
-    
         public int id { get; set; }
-        public string SN { get; set; }
         public string name { get; set; }
-        public string remark { get; set; }
-        public System.DateTime created_time { get; set; }
-        public bool delete_flag { get; set; }
-    
-        public virtual ICollection<SYS_product> SYS_product { get; set; }
-        public virtual SYS_product_SN SYS_product_SN1 { get; set; }
-        public virtual SYS_product_SN SYS_product_SN2 { get; set; }
+        public int parent { get; set; }
+        public int son { get; set; }
+        public string maps { get; set; }
+        public string number { get; set; }
+        public string charparent { get; set; }
     }
 }

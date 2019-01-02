@@ -13,10 +13,10 @@ namespace DataBase
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class XiangNingSaleEntities : DbContext
+    public partial class SaleHREntities : DbContext
     {
-        public XiangNingSaleEntities()
-            : base("name=XiangNingSaleEntities")
+        public SaleHREntities()
+            : base("name=SaleHREntities")
         {
         }
     
@@ -25,8 +25,7 @@ namespace DataBase
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Purchase_Order> Purchase_Order { get; set; }
-        public DbSet<Sale_Customers> Sale_Customers { get; set; }
-        public DbSet<WorkLogs> WorkLogs { get; set; }
+        public DbSet<ehr_employee> ehr_employee { get; set; }
+        public DbSet<ehr_department> ehr_department { get; set; }
     }
 }

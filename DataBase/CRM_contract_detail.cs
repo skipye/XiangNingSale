@@ -37,9 +37,9 @@ namespace DataBase
         public Nullable<int> LabelsCount { get; set; }
         public Nullable<int> SemiCount { get; set; }
     
-        public virtual CRM_contract_header CRM_contract_header { get; set; }
         public virtual INV_wood_type INV_wood_type { get; set; }
         public virtual SYS_colors SYS_colors { get; set; }
         public virtual SYS_product SYS_product { get; set; }
+        public virtual CRM_contract_header CRM_contract_header { get; set; }
     }
 }

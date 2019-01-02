@@ -31,9 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="EntityFramework, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -76,6 +76,12 @@
     <Compile Include="CRM_customers.cs">
       <DependentUpon>XiangNingERPModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ehr_department.cs">
+      <DependentUpon>SaleHRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ehr_employee.cs">
+      <DependentUpon>SaleHRModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="INV_inventories.cs">
       <DependentUpon>XiangNingERPModel.tt</DependentUpon>
     </Compile>
@@ -92,6 +98,24 @@
     <Compile Include="Purchase_Order.cs">
       <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SaleHRModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SaleHRModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleHRModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SaleHRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleHRModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SaleHRModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Sale_Customers.cs">
+      <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SYS_colors.cs">
       <DependentUpon>XiangNingERPModel.tt</DependentUpon>
     </Compile>
@@ -106,6 +130,9 @@
     </Compile>
     <Compile Include="WIP_workorder.cs">
       <DependentUpon>XiangNingERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkLogs.cs">
+      <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="XiangNingERPModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -161,17 +188,25 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="XiangNingSaleModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>XiangNingSaleModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
     <EntityDeploy Include="XiangNingERPModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>XiangNingERPModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="SaleHRModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SaleHRModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="packages.config" />
+    <None Include="SaleHRModel.edmx.diagram">
+      <DependentUpon>SaleHRModel.edmx</DependentUpon>
+    </None>
     <None Include="XiangNingERPModel.edmx.diagram">
       <DependentUpon>XiangNingERPModel.edmx</DependentUpon>
     </None>
+    <EntityDeploy Include="XiangNingSaleModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>XiangNingSaleModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="XiangNingSaleModel.edmx.diagram">
       <DependentUpon>XiangNingSaleModel.edmx</DependentUpon>
     </None>
@@ -180,6 +215,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SaleHRModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SaleHRModel.edmx</DependentUpon>
+      <LastGenOutput>SaleHRModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="SaleHRModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SaleHRModel.edmx</DependentUpon>
+      <LastGenOutput>SaleHRModel.cs</LastGenOutput>
+    </Content>
     <Content Include="XiangNingERPModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>XiangNingERPModel.edmx</DependentUpon>

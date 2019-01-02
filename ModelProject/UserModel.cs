@@ -14,6 +14,8 @@ namespace ModelProject
         public string Telephone { get; set; }//手机号码
         public int UserId { get; set; }
         public bool IsLogin { get; set; }
+        public int departmentId { get; set; }
+        public string department { get; set; }
     }
     public class UsersModel
     {
@@ -22,9 +24,10 @@ namespace ModelProject
         public string Password { get; set; }//用户密码
         public string Password2 { get; set; }
         public string Telphone { get; set; }
-        public DateTime? LastTimes { get; set; }//手机号码
-        public int? LoginTimes { get; set; }
-        public DateTime? CreateTime { get; set; }
+        public DateTime? jobtime { get; set; }//手机号码
+        public string departmentname { get; set; }
+        public DateTime? officialtime { get; set; }
+
     }
     public class SUsersModel
     {
@@ -35,5 +38,7 @@ namespace ModelProject
         public int UserId { get; set; }
         public string UserCode { get; set; }
         public string UserName { get; set; }
+        public int departmentId { get; set; }
+        public string department { get; set; }
     }
 }

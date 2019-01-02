@@ -11,6 +11,14 @@ namespace ServiceProject
     public class UserService
     {
         private static readonly UserDal UDal = new UserDal();
+        public void AddWorkLogs(WorkLogsModel tables)
+        {
+            try { UDal.AddWorkLogs(tables); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public List<UsersModel> GetPageList(SUsersModel SModel)
         {
             try { return UDal.GetPageList(SModel); }
@@ -63,6 +71,14 @@ namespace ServiceProject
         public List<SelectListItem> GetUserDrolist(int? pId)
         {
             try { return UDal.GetUserDrolist(pId); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public List<SelectListItem> GetDepartmentDrolist(int? pId)
+        {
+            try { return UDal.GetDepartmentDrolist(pId); }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);

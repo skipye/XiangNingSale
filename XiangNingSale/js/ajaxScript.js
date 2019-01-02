@@ -11,7 +11,12 @@
 //        console.log("XmlHttpRequest:" + xmlRequest + ", errorInfo:" + errorInfo + ", exception:" + exception);
 //    }
 //});
-
+//操作日志，MSGSTatus状态：登录：1，增加：2，删：3，改：4，审核：5，驳回：6，客户：7
+function AddWorkLogs(MSG, MSGSTatus)
+{
+    var PostUrl = '/Users/AddWorkLogs';
+    $.post(PostUrl, { MSG: MSG, MSGSTatus: MSGSTatus }, function (d) { });
+}
 
 //删除
 function del(obj,id) {
@@ -30,6 +35,8 @@ function del(obj,id) {
     if (ListId != "" && ListId != undefined) {
         $.post(PostUrl, { ListId: ListId }, function (d) {
             if (d == "True") {
+                var MSG = "删除操作，删除ID：" + ListId + "，删除网址：" + PostUrl;
+                AddWorkLogs(MSG,3);
                 layer.msg('已删除!', { icon: 1, time: 1000 });
                 ResetWindow();
             }
@@ -64,6 +71,8 @@ function checked(obj, id) {
 	    $.post(PostUrl, { ListId: ListId, CheckedId: 1 }, function (d) {
 	        if (d == "True")
 	        {
+	            var MSG = "审核操作，审核ID：" + ListId + "，审核网址：" + PostUrl;
+	            AddWorkLogs(MSG, 5);
 	            layer.msg('已审核', { icon: 6, time: 1000 });
 	            if (id > 0) {
 	                $(obj).parents("tr").find(".checkedstatus").html('<span class="label label-success radius">通过</span>');
@@ -75,6 +84,8 @@ function checked(obj, id) {
 	function () {
 	    $.post(PostUrl, { ListId: ListId, CheckedId: 2 }, function (d) {
 	        if (d == "True") {
+	            var MSG = "驳回操作，驳回ID：" + ListId + "，驳回网址：" + PostUrl;
+	            AddWorkLogs(MSG, 6);
 	            layer.msg('未通过', { icon: 5, time: 1000 });
 	            if (id > 0) {
 	                $(obj).parents("tr").find(".checkedstatus").html('<span class="label label-danger radius">被驳回</span>');
@@ -84,7 +95,24 @@ function checked(obj, id) {
 	    });
 	});
 }
+function belong(title, url, id, w, h) {
+    var MSG = title + "，客户所属操作，操作ID：" + id + "，编辑网址：" + url;
+    AddWorkLogs(MSG, 7);
+    var index = layer.open({
+        type: 2,
+        title: title,
+        content: url + "?Id=" + id
+    });
+    layer.full(index);
+}
+function belongwindow(title, url, id, w, h) {
+    var MSG = title + "，客户所属操作，操作ID：" + id + "，编辑网址：" + url;
+    AddWorkLogs(MSG, 7);
+    layer_show(title, url + "?Id=" + id, w, h);
+}
 function edit(title, url, id, w, h) {
+    var MSG = title + "编辑操作，编辑ID：" + id + "，编辑网址：" + url;
+    AddWorkLogs(MSG, 4);
     var index = layer.open({
         type: 2,
         title: title,
@@ -93,6 +121,8 @@ function edit(title, url, id, w, h) {
     layer.full(index);
 }
 function add(title, url, w, h) {
+    var MSG = title + "增加操作，增加网址：" + url;
+    AddWorkLogs(MSG, 2);
     var index = layer.open({
         type: 2,
         title: title,
@@ -101,9 +131,13 @@ function add(title, url, w, h) {
     layer.full(index);
 }
 function editwindow(title, url, id, w, h) {
+    var MSG = title + "编辑操作，编辑ID：" + id + "，编辑网址：" + url;
+    AddWorkLogs(MSG, 4);
     layer_show(title, url + "?Id=" + id, w, h);
 }
 function addwindow(title, url, w, h) {
+    var MSG = title + "增加操作，增加网址：" + url;
+    AddWorkLogs(MSG, 2);
     layer_show(title, url, w, h);
 }
 function ajaxRequest(requestType, url, params, backFuc) {

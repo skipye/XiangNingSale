@@ -26,8 +26,6 @@ namespace DataBase
         }
     
         public DbSet<CRM_contract_detail> CRM_contract_detail { get; set; }
-        public DbSet<CRM_contract_header> CRM_contract_header { get; set; }
-        public DbSet<CRM_customers> CRM_customers { get; set; }
         public DbSet<INV_labels> INV_labels { get; set; }
         public DbSet<INV_semi> INV_semi { get; set; }
         public DbSet<INV_wood_type> INV_wood_type { get; set; }
@@ -37,5 +35,7 @@ namespace DataBase
         public DbSet<SYS_product_SN> SYS_product_SN { get; set; }
         public DbSet<WIP_workorder> WIP_workorder { get; set; }
         public DbSet<INV_inventories> INV_inventories { get; set; }
+        public DbSet<CRM_contract_header> CRM_contract_header { get; set; }
+        public DbSet<CRM_customers> CRM_customers { get; set; }
     }
 }

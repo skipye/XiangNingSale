@@ -478,70 +478,10 @@
           <Property Name="delete_flag" Type="Boolean" Nullable="false" />
           <Property Name="LabelsCount" Type="Int32" />
           <Property Name="SemiCount" Type="Int32" />
-          <NavigationProperty Name="CRM_contract_header" Relationship="Self.FK_CRM_contract_detail_CRM_contract_header" FromRole="CRM_contract_detail" ToRole="CRM_contract_header" />
           <NavigationProperty Name="INV_wood_type" Relationship="Self.FK_CRM_contract_detail_INV_wood_type" FromRole="CRM_contract_detail" ToRole="INV_wood_type" />
           <NavigationProperty Name="SYS_colors" Relationship="Self.FK_CRM_contract_detail_SYS_colors" FromRole="CRM_contract_detail" ToRole="SYS_colors" />
           <NavigationProperty Name="SYS_product" Relationship="Self.FK_CRM_contract_detail_SYS_product" FromRole="CRM_contract_detail" ToRole="SYS_product" />
-        </EntityType>
-        <EntityType Name="CRM_contract_header">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="customer_id" Type="Int32" Nullable="false" />
-          <Property Name="delivery_date" Type="DateTime" Precision="3" />
-          <Property Name="delivery_channel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="amount" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
-          <Property Name="amount_recommend" Type="Decimal" Precision="16" Scale="2" />
-          <Property Name="freight_carrier" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="prepay" Type="Decimal" Precision="16" Scale="2" />
-          <Property Name="measure_flag" Type="Boolean" />
-          <Property Name="delivery_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="signed_user_id" Type="Int32" />
-          <Property Name="signed_department_id" Type="Int32" />
-          <Property Name="status" Type="Byte" Nullable="false" />
-          <Property Name="check_user_id" Type="Int32" />
-          <Property Name="check_user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="checked_date" Type="DateTime" Precision="3" />
-          <Property Name="department" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="SaleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="HTDate" Type="DateTime" Precision="3" />
-          <Property Name="FR_flag" Type="Int32" Nullable="false" />
-          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
-          <Property Name="reserved1" Type="Int32" />
-          <Property Name="reserved2" Type="Int32" />
-          <Property Name="reserved3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CRM_contract_detail" Relationship="Self.FK_CRM_contract_detail_CRM_contract_header" FromRole="CRM_contract_header" ToRole="CRM_contract_detail" />
-          <NavigationProperty Name="CRM_customers" Relationship="Self.FK_CRM_contract_header_CRM_customers" FromRole="CRM_contract_header" ToRole="CRM_customers" />
-        </EntityType>
-        <EntityType Name="CRM_customers">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="name_E" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="shortname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="shortname_E" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="address_E" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="address_delivery" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="zipcode" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
-          <Property Name="corporation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="linkman" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="tel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="fax" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="account" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
-          <Property Name="ListUserId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CRM_contract_header" Relationship="Self.FK_CRM_contract_header_CRM_customers" FromRole="CRM_customers" ToRole="CRM_contract_header" />
+          <NavigationProperty Name="CRM_contract_header" Relationship="XNERPModel.FK_CRM_contract_detail_CRM_contract_header" FromRole="CRM_contract_detail" ToRole="CRM_contract_header" />
         </EntityType>
         <EntityType Name="INV_labels">
           <Key>
@@ -691,6 +631,8 @@
           <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="delete_flag" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="SYS_product" Relationship="Self.FK_SYS_product_SYS_product_SN" FromRole="SYS_product_SN" ToRole="SYS_product" />
+          <NavigationProperty Name="SYS_product_SN1" Relationship="XNERPModel.FK_SYS_product_SN_SYS_product_SN" FromRole="SYS_product_SN" ToRole="SYS_product_SN1" />
+          <NavigationProperty Name="SYS_product_SN2" Relationship="XNERPModel.FK_SYS_product_SN_SYS_product_SN" FromRole="SYS_product_SN1" ToRole="SYS_product_SN" />
           </EntityType>
         <EntityType Name="WIP_workorder">
           <Key>
@@ -717,18 +659,6 @@
           <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="delete_flag" Type="Boolean" Nullable="false" />
         </EntityType>
-        <Association Name="FK_CRM_contract_detail_CRM_contract_header">
-          <End Role="CRM_contract_header" Type="Self.CRM_contract_header" Multiplicity="1" />
-          <End Role="CRM_contract_detail" Type="Self.CRM_contract_detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CRM_contract_header">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CRM_contract_detail">
-              <PropertyRef Name="header_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CRM_contract_detail_INV_wood_type">
           <End Role="INV_wood_type" Type="Self.INV_wood_type" Multiplicity="1" />
           <End Role="CRM_contract_detail" Type="Self.CRM_contract_detail" Multiplicity="*" />
@@ -762,18 +692,6 @@
             </Principal>
             <Dependent Role="CRM_contract_detail">
               <PropertyRef Name="product_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CRM_contract_header_CRM_customers">
-          <End Role="CRM_customers" Type="Self.CRM_customers" Multiplicity="1" />
-          <End Role="CRM_contract_header" Type="Self.CRM_contract_header" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CRM_customers">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CRM_contract_header">
-              <PropertyRef Name="customer_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -827,8 +745,6 @@
         </Association>
         <EntityContainer Name="XNERPEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CRM_contract_detail" EntityType="Self.CRM_contract_detail" />
-          <EntitySet Name="CRM_contract_header" EntityType="Self.CRM_contract_header" />
-          <EntitySet Name="CRM_customers" EntityType="Self.CRM_customers" />
           <EntitySet Name="INV_labels" EntityType="Self.INV_labels" />
           <EntitySet Name="INV_semi" EntityType="Self.INV_semi" />
           <EntitySet Name="INV_wood_type" EntityType="Self.INV_wood_type" />
@@ -837,10 +753,6 @@
           <EntitySet Name="SYS_product_area" EntityType="Self.SYS_product_area" />
           <EntitySet Name="SYS_product_SN" EntityType="Self.SYS_product_SN" />
           <EntitySet Name="WIP_workorder" EntityType="Self.WIP_workorder" />
-          <AssociationSet Name="FK_CRM_contract_detail_CRM_contract_header" Association="Self.FK_CRM_contract_detail_CRM_contract_header">
-            <End Role="CRM_contract_header" EntitySet="CRM_contract_header" />
-            <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
-          </AssociationSet>
           <AssociationSet Name="FK_CRM_contract_detail_INV_wood_type" Association="Self.FK_CRM_contract_detail_INV_wood_type">
             <End Role="INV_wood_type" EntitySet="INV_wood_type" />
             <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
@@ -852,10 +764,6 @@
           <AssociationSet Name="FK_CRM_contract_detail_SYS_product" Association="Self.FK_CRM_contract_detail_SYS_product">
             <End Role="SYS_product" EntitySet="SYS_product" />
             <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CRM_contract_header_CRM_customers" Association="Self.FK_CRM_contract_header_CRM_customers">
-            <End Role="CRM_customers" EntitySet="CRM_customers" />
-            <End Role="CRM_contract_header" EntitySet="CRM_contract_header" />
           </AssociationSet>
           <AssociationSet Name="FK_INV_semi_INV_wood_type" Association="Self.FK_INV_semi_INV_wood_type">
             <End Role="INV_wood_type" EntitySet="INV_wood_type" />
@@ -889,6 +797,20 @@
           <AssociationSet Name="INV_inventoriesINV_labels" Association="XNERPModel.INV_inventoriesINV_labels">
             <End Role="INV_inventories" EntitySet="INV_inventories" />
             <End Role="INV_labels" EntitySet="INV_labels" />
+          </AssociationSet>
+          <EntitySet Name="CRM_contract_header" EntityType="XNERPModel.CRM_contract_header" />
+          <EntitySet Name="CRM_customers" EntityType="XNERPModel.CRM_customers" />
+          <AssociationSet Name="FK_CRM_contract_detail_CRM_contract_header" Association="XNERPModel.FK_CRM_contract_detail_CRM_contract_header">
+            <End Role="CRM_contract_header" EntitySet="CRM_contract_header" />
+            <End Role="CRM_contract_detail" EntitySet="CRM_contract_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CRM_contract_header_CRM_customers" Association="XNERPModel.FK_CRM_contract_header_CRM_customers">
+            <End Role="CRM_customers" EntitySet="CRM_customers" />
+            <End Role="CRM_contract_header" EntitySet="CRM_contract_header" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_product_SN_SYS_product_SN" Association="XNERPModel.FK_SYS_product_SN_SYS_product_SN">
+            <End Role="SYS_product_SN" EntitySet="SYS_product_SN" />
+            <End Role="SYS_product_SN1" EntitySet="SYS_product_SN" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="SYS_productINV_labels">
@@ -953,6 +875,102 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CRM_contract_header">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="delivery_date" Type="DateTime" Precision="3" />
+          <Property Name="delivery_channel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Decimal" Nullable="false" Precision="16" Scale="2" />
+          <Property Name="amount_recommend" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="freight_carrier" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="prepay" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="measure_flag" Type="Boolean" />
+          <Property Name="delivery_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="signed_user_id" Type="Int32" />
+          <Property Name="signed_department_id" Type="Int32" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <Property Name="check_user_id" Type="Int32" />
+          <Property Name="check_user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="checked_date" Type="DateTime" Precision="3" />
+          <Property Name="department" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SaleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="HTDate" Type="DateTime" Precision="3" />
+          <Property Name="FR_flag" Type="Int32" Nullable="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <Property Name="reserved1" Type="Int32" />
+          <Property Name="reserved2" Type="Int32" />
+          <Property Name="reserved3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CRM_contract_detail" Relationship="XNERPModel.FK_CRM_contract_detail_CRM_contract_header" FromRole="CRM_contract_header" ToRole="CRM_contract_detail" />
+          <NavigationProperty Name="CRM_customers" Relationship="XNERPModel.FK_CRM_contract_header_CRM_customers" FromRole="CRM_contract_header" ToRole="CRM_customers" />
+        </EntityType>
+        <EntityType Name="CRM_customers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="name_E" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="shortname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="shortname_E" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="address_E" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="address_delivery" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="zipcode" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="corporation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="linkman" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="tel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="fax" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="account" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="created_time" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="delete_flag" Type="Boolean" Nullable="false" />
+          <Property Name="ListUserId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CRM_contract_header" Relationship="XNERPModel.FK_CRM_contract_header_CRM_customers" FromRole="CRM_customers" ToRole="CRM_contract_header" />
+        </EntityType>
+        <Association Name="FK_CRM_contract_detail_CRM_contract_header">
+          <End Type="XNERPModel.CRM_contract_header" Role="CRM_contract_header" Multiplicity="1" />
+          <End Type="XNERPModel.CRM_contract_detail" Role="CRM_contract_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_contract_header">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_detail">
+              <PropertyRef Name="header_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CRM_contract_header_CRM_customers">
+          <End Type="XNERPModel.CRM_customers" Role="CRM_customers" Multiplicity="1" />
+          <End Type="XNERPModel.CRM_contract_header" Role="CRM_contract_header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CRM_customers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CRM_contract_header">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_product_SN_SYS_product_SN">
+          <End Type="XNERPModel.SYS_product_SN" Role="SYS_product_SN" Multiplicity="1" />
+          <End Type="XNERPModel.SYS_product_SN" Role="SYS_product_SN1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_product_SN">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SYS_product_SN1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -984,65 +1002,6 @@
                 <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
                 <ScalarProperty Name="LabelsCount" ColumnName="LabelsCount" />
                 <ScalarProperty Name="SemiCount" ColumnName="SemiCount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CRM_contract_header">
-            <EntityTypeMapping TypeName="XNERPModel.CRM_contract_header">
-              <MappingFragment StoreEntitySet="CRM_contract_header">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
-                <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
-                <ScalarProperty Name="delivery_channel" ColumnName="delivery_channel" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="amount_recommend" ColumnName="amount_recommend" />
-                <ScalarProperty Name="freight_carrier" ColumnName="freight_carrier" />
-                <ScalarProperty Name="prepay" ColumnName="prepay" />
-                <ScalarProperty Name="measure_flag" ColumnName="measure_flag" />
-                <ScalarProperty Name="delivery_address" ColumnName="delivery_address" />
-                <ScalarProperty Name="signed_user_id" ColumnName="signed_user_id" />
-                <ScalarProperty Name="signed_department_id" ColumnName="signed_department_id" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="check_user_id" ColumnName="check_user_id" />
-                <ScalarProperty Name="check_user_name" ColumnName="check_user_name" />
-                <ScalarProperty Name="checked_date" ColumnName="checked_date" />
-                <ScalarProperty Name="department" ColumnName="department" />
-                <ScalarProperty Name="SaleName" ColumnName="SaleName" />
-                <ScalarProperty Name="HTDate" ColumnName="HTDate" />
-                <ScalarProperty Name="FR_flag" ColumnName="FR_flag" />
-                <ScalarProperty Name="created_time" ColumnName="created_time" />
-                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
-                <ScalarProperty Name="reserved1" ColumnName="reserved1" />
-                <ScalarProperty Name="reserved2" ColumnName="reserved2" />
-                <ScalarProperty Name="reserved3" ColumnName="reserved3" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CRM_customers">
-            <EntityTypeMapping TypeName="XNERPModel.CRM_customers">
-              <MappingFragment StoreEntitySet="CRM_customers">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="name_E" ColumnName="name_E" />
-                <ScalarProperty Name="shortname" ColumnName="shortname" />
-                <ScalarProperty Name="shortname_E" ColumnName="shortname_E" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="address_E" ColumnName="address_E" />
-                <ScalarProperty Name="address_delivery" ColumnName="address_delivery" />
-                <ScalarProperty Name="zipcode" ColumnName="zipcode" />
-                <ScalarProperty Name="corporation" ColumnName="corporation" />
-                <ScalarProperty Name="linkman" ColumnName="linkman" />
-                <ScalarProperty Name="tel" ColumnName="tel" />
-                <ScalarProperty Name="fax" ColumnName="fax" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="account" ColumnName="account" />
-                <ScalarProperty Name="website" ColumnName="website" />
-                <ScalarProperty Name="remark" ColumnName="remark" />
-                <ScalarProperty Name="created_time" ColumnName="created_time" />
-                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
-                <ScalarProperty Name="ListUserId" ColumnName="ListUserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1220,6 +1179,65 @@
                 <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CRM_contract_header">
+            <EntityTypeMapping TypeName="XNERPModel.CRM_contract_header">
+              <MappingFragment StoreEntitySet="CRM_contract_header">
+                <ScalarProperty Name="reserved3" ColumnName="reserved3" />
+                <ScalarProperty Name="reserved2" ColumnName="reserved2" />
+                <ScalarProperty Name="reserved1" ColumnName="reserved1" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="FR_flag" ColumnName="FR_flag" />
+                <ScalarProperty Name="HTDate" ColumnName="HTDate" />
+                <ScalarProperty Name="SaleName" ColumnName="SaleName" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="checked_date" ColumnName="checked_date" />
+                <ScalarProperty Name="check_user_name" ColumnName="check_user_name" />
+                <ScalarProperty Name="check_user_id" ColumnName="check_user_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="signed_department_id" ColumnName="signed_department_id" />
+                <ScalarProperty Name="signed_user_id" ColumnName="signed_user_id" />
+                <ScalarProperty Name="delivery_address" ColumnName="delivery_address" />
+                <ScalarProperty Name="measure_flag" ColumnName="measure_flag" />
+                <ScalarProperty Name="prepay" ColumnName="prepay" />
+                <ScalarProperty Name="freight_carrier" ColumnName="freight_carrier" />
+                <ScalarProperty Name="amount_recommend" ColumnName="amount_recommend" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="delivery_channel" ColumnName="delivery_channel" />
+                <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CRM_customers">
+            <EntityTypeMapping TypeName="XNERPModel.CRM_customers">
+              <MappingFragment StoreEntitySet="CRM_customers">
+                <ScalarProperty Name="ListUserId" ColumnName="ListUserId" />
+                <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+                <ScalarProperty Name="created_time" ColumnName="created_time" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="account" ColumnName="account" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="linkman" ColumnName="linkman" />
+                <ScalarProperty Name="corporation" ColumnName="corporation" />
+                <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+                <ScalarProperty Name="address_delivery" ColumnName="address_delivery" />
+                <ScalarProperty Name="address_E" ColumnName="address_E" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="shortname_E" ColumnName="shortname_E" />
+                <ScalarProperty Name="shortname" ColumnName="shortname" />
+                <ScalarProperty Name="name_E" ColumnName="name_E" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

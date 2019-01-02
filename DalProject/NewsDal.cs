@@ -48,27 +48,7 @@ namespace DalProject
                 return List;
             }
         }
-        public List<NewsModel> GetList(int TypeId, int PageIndex, int PageSize)
-        {
-            using (var db = new XNArticleEntities())
-            {
-                var List = (from p in db.A_News.Where(k => k.State == true)
-                            where TypeId != null && TypeId > 0 ? p.TypeId == TypeId : true
-                            orderby p.CreateTime descending
-                            select new NewsModel
-                            {
-                                Id = p.Id,
-                                Name = p.Name,
-                                TypeId = p.TypeId,
-                                TypeName = p.A_NewsType.Name,
-                                Remarks = p.Remarks,
-                                ConvertImg=p.ConvertPic,
-                                CreateTime = p.CreateTime,
-                                KeyWord=p.KeyWord
-                            }).Skip(PageIndex * PageSize).Take(PageSize).ToList();
-                return List;
-            }
-        }
+       
         public NewsItmeModel GetNewsType(int TypeId)
         {
             using (var db = new XNArticleEntities())
@@ -102,6 +82,8 @@ namespace DalProject
                     table.StrContent = Models.StrContent;
                     table.ConvertPic = Models.ConvertImg;
                     table.EidtAuthorId = Models.EidtAuthorId;
+                    table.CheckedStatus = 0;
+                    table.UpTime = DateTime.Now;
                     db.SaveChanges();
                 }
                 else
@@ -119,7 +101,7 @@ namespace DalProject
                     table.CreateTime = DateTime.Now;
                     table.HitTimes = 10;
                     table.State = true;
-                    table.CheckedStatus = 1;
+                    table.CheckedStatus = 0;
                     table.UploadAuthorId = Models.UploadAuthorId;
                     table.EidtAuthorId = Models.EidtAuthorId;
                     db.A_News.Add(table);

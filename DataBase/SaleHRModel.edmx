@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SaleHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="ehr_department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="parent" Type="int" Nullable="false" />
+          <Property Name="son" Type="int" Nullable="false" />
+          <Property Name="maps" Type="varchar" MaxLength="256" />
+          <Property Name="number" Type="varchar" MaxLength="128" />
+          <Property Name="charparent" Type="varchar" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="ehr_employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="number" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" />
+          <Property Name="user" Type="nvarchar" MaxLength="64" />
+          <Property Name="password" Type="nvarchar" MaxLength="64" />
+          <Property Name="lock" Type="smallint" />
+          <Property Name="department" Type="int" Nullable="false" />
+          <Property Name="departmentname" Type="nvarchar" MaxLength="64" />
+          <Property Name="gender" Type="varchar" MaxLength="12" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="namecard" Type="nvarchar" MaxLength="64" />
+          <Property Name="nation" Type="nvarchar" MaxLength="16" />
+          <Property Name="birthplace" Type="nvarchar" MaxLength="16" />
+          <Property Name="education" Type="nvarchar" MaxLength="16" />
+          <Property Name="bankaccount" Type="nvarchar" MaxLength="32" />
+          <Property Name="tel" Type="varchar" MaxLength="32" />
+          <Property Name="accountlocation" Type="nvarchar" MaxLength="256" />
+          <Property Name="hometel" Type="nvarchar" MaxLength="32" />
+          <Property Name="homeaddress" Type="nvarchar" MaxLength="256" />
+          <Property Name="status" Type="smallint" Nullable="false" />
+          <Property Name="jobs" Type="nvarchar" MaxLength="50" />
+          <Property Name="jobtime" Type="datetime" />
+          <Property Name="socialsecurity" Type="nvarchar" MaxLength="16" />
+          <Property Name="photo" Type="varchar" MaxLength="128" />
+          <Property Name="mark" Type="nvarchar" MaxLength="1000" />
+          <Property Name="marriage" Type="nvarchar" MaxLength="8" />
+          <Property Name="title" Type="nvarchar" MaxLength="64" />
+          <Property Name="other" Type="nvarchar" MaxLength="512" />
+          <Property Name="groupname" Type="nvarchar" MaxLength="32" />
+          <Property Name="group" Type="int" />
+          <Property Name="branchname" Type="varchar" MaxLength="8000" />
+          <Property Name="branch" Type="varchar" MaxLength="8000" />
+          <Property Name="officialtime" Type="datetime" />
+          <Property Name="quitdate" Type="datetime" />
+          <Property Name="shifts" Type="varchar" MaxLength="128" />
+          <Property Name="lawdate" Type="datetime" />
+          <Property Name="level" Type="int" />
+          <Property Name="leveltext" Type="varchar" MaxLength="256" />
+          <Property Name="roledepartment" Type="varchar" MaxLength="4000" />
+          <Property Name="roledepartmentname" Type="varchar" MaxLength="4000" />
+          <Property Name="amount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="salary_type" Type="tinyint" />
+          <Property Name="society_insure" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="SaleHRModelStoreContainer">
+          <EntitySet Name="ehr_department" EntityType="Self.ehr_department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ehr_employee" EntityType="Self.ehr_employee" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SaleHRModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="ehr_employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="number" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="user" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="lock" Type="Int16" />
+          <Property Name="department" Type="Int32" Nullable="false" />
+          <Property Name="departmentname" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="birthday" Type="DateTime" Precision="3" />
+          <Property Name="namecard" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="nation" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="birthplace" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="education" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="bankaccount" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="tel" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="accountlocation" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="hometel" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="homeaddress" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int16" Nullable="false" />
+          <Property Name="jobs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="jobtime" Type="DateTime" Precision="3" />
+          <Property Name="socialsecurity" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="photo" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="mark" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="marriage" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="other" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="groupname" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="group" Type="Int32" />
+          <Property Name="branchname" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="branch" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="officialtime" Type="DateTime" Precision="3" />
+          <Property Name="quitdate" Type="DateTime" Precision="3" />
+          <Property Name="shifts" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="lawdate" Type="DateTime" Precision="3" />
+          <Property Name="level" Type="Int32" />
+          <Property Name="leveltext" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="roledepartment" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="roledepartmentname" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="amount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="salary_type" Type="Byte" />
+          <Property Name="society_insure" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityContainer Name="SaleHREntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ehr_employee" EntityType="Self.ehr_employee" />
+          <EntitySet Name="ehr_department" EntityType="SaleHRModel.ehr_department" />
+        </EntityContainer>
+        <EntityType Name="ehr_department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="parent" Type="Int32" Nullable="false" />
+          <Property Name="son" Type="Int32" Nullable="false" />
+          <Property Name="maps" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="number" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="charparent" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SaleHRModelStoreContainer" CdmEntityContainer="SaleHREntities">
+          <EntitySetMapping Name="ehr_employee">
+            <EntityTypeMapping TypeName="SaleHRModel.ehr_employee">
+              <MappingFragment StoreEntitySet="ehr_employee">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="lock" ColumnName="lock" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="departmentname" ColumnName="departmentname" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="namecard" ColumnName="namecard" />
+                <ScalarProperty Name="nation" ColumnName="nation" />
+                <ScalarProperty Name="birthplace" ColumnName="birthplace" />
+                <ScalarProperty Name="education" ColumnName="education" />
+                <ScalarProperty Name="bankaccount" ColumnName="bankaccount" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+                <ScalarProperty Name="accountlocation" ColumnName="accountlocation" />
+                <ScalarProperty Name="hometel" ColumnName="hometel" />
+                <ScalarProperty Name="homeaddress" ColumnName="homeaddress" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="jobs" ColumnName="jobs" />
+                <ScalarProperty Name="jobtime" ColumnName="jobtime" />
+                <ScalarProperty Name="socialsecurity" ColumnName="socialsecurity" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="mark" ColumnName="mark" />
+                <ScalarProperty Name="marriage" ColumnName="marriage" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="other" ColumnName="other" />
+                <ScalarProperty Name="groupname" ColumnName="groupname" />
+                <ScalarProperty Name="group" ColumnName="group" />
+                <ScalarProperty Name="branchname" ColumnName="branchname" />
+                <ScalarProperty Name="branch" ColumnName="branch" />
+                <ScalarProperty Name="officialtime" ColumnName="officialtime" />
+                <ScalarProperty Name="quitdate" ColumnName="quitdate" />
+                <ScalarProperty Name="shifts" ColumnName="shifts" />
+                <ScalarProperty Name="lawdate" ColumnName="lawdate" />
+                <ScalarProperty Name="level" ColumnName="level" />
+                <ScalarProperty Name="leveltext" ColumnName="leveltext" />
+                <ScalarProperty Name="roledepartment" ColumnName="roledepartment" />
+                <ScalarProperty Name="roledepartmentname" ColumnName="roledepartmentname" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="salary_type" ColumnName="salary_type" />
+                <ScalarProperty Name="society_insure" ColumnName="society_insure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ehr_department">
+            <EntityTypeMapping TypeName="SaleHRModel.ehr_department">
+              <MappingFragment StoreEntitySet="ehr_department">
+                <ScalarProperty Name="charparent" ColumnName="charparent" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="maps" ColumnName="maps" />
+                <ScalarProperty Name="son" ColumnName="son" />
+                <ScalarProperty Name="parent" ColumnName="parent" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

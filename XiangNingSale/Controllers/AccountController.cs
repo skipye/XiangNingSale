@@ -34,7 +34,7 @@ namespace XiangNingSale.Controllers
             var ReturnModel = USer.IsLogin(model);
             if (ReturnModel.IsLogin == true)
             {
-                string UserAuthority = ReturnModel.UserName + "|" + ReturnModel.UserId;
+                string UserAuthority = ReturnModel.UserName + "|" + ReturnModel.UserId + "|" + ReturnModel.departmentId + "|" + ReturnModel.department;
                 FormsAuthentication.SetAuthCookie(UserAuthority, false);
 
                 message = "登录成功！";
