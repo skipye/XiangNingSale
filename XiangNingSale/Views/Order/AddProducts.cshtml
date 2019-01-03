@@ -1,0 +1,231 @@
+﻿@model ModelProject.ContractProductsModel
+@{
+    Layout = null;
+    List<SelectListItem> ArrWJ = new List<SelectListItem>();
+    ArrWJ.Add(new SelectListItem { Text = "常规", Value = "常规" });
+    ArrWJ.Add(new SelectListItem { Text = "定制", Value = "定制" });
+    ArrWJ.Add(new SelectListItem { Text = "木拉手", Value = "木拉手" });
+    ArrWJ.Add(new SelectListItem { Text = "挖拉手", Value = "挖拉手" });
+    ArrWJ.Add(new SelectListItem { Text = "其他", Value = "其他" });
+    List<SelectListItem> ArrProName = new List<SelectListItem>();
+    ArrProName.Add(new SelectListItem { Text = "请选择产品名称", Value = "" });
+    List<SelectListItem> ArrCL = new List<SelectListItem>();
+    ArrCL.Add(new SelectListItem { Text = "是否定制", Value = "" });
+    ArrCL.Add(new SelectListItem { Text = "是", Value = "true" });
+    ArrCL.Add(new SelectListItem { Text = "否", Value = "false",Selected=true });
+}
+
+@Html.Action("_Meta", "Home")
+
+
+<article class="page-container">
+    <form class="form form-horizontal" id="formadd">
+        @Html.HiddenFor(k => k.SaleContractHeadId)
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>产品名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box inline">
+                    @Html.DropDownListFor(k => k.ProductSNId, Model.ProXLDroList, new { @class = "select", @style = "width:150px;" })
+                    @Html.DropDownListFor(k => k.productAreaId, Model.AreaDroList, new { @class = "select", @style = "width:150px;" })
+                    @Html.DropDownListFor(k => k.ProductName, ArrProName, new { @class = "select", @style = "width:180px;" })
+                    @Html.HiddenFor(k => k.ProductId)
+                    @Html.HiddenFor(k=>k.ProductArea)
+                    @Html.HiddenFor(k => k.ProductSN)
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>材质+色号：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <span class="select-box inline">
+                    @Html.DropDownListFor(k => k.WoodId, Model.WoodDroList, new { @class = "select", @style = "width:150px;" })
+                    
+                    @Html.DropDownListFor(k => k.ColorId, Model.colorDroList, new { @class = "select", @style = "width:130px;" })
+                    @Html.TextBoxFor(k => k.Color, new { @class = "input-text", @style = "width:150px;" })
+                    @Html.HiddenFor(k => k.WoodName)
+                </span>
+           </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">是否定制：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <span class="select-box inline">
+                    @Html.DropDownListFor(k => k.CustomFlag, ArrCL, new { @class = "select" })
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>长+宽+高：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextBoxFor(k => k.length, new { @class = "input-text number", @style = "width:120px;"})<span>mm</span>
+                @Html.TextBoxFor(k => k.width, new { @class = "input-text number", @style = "width:120px;" })<span>mm</span>
+                @Html.TextBoxFor(k => k.height, new { @class = "input-text number", @style = "width:120px;" })<span>mm</span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>单价+数量：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box inline">
+                    @Html.TextBoxFor(k => k.price, new { @class = "input-text number", @style = "width:120px;" }) <span>元</span>
+                    -  @Html.TextBoxFor(k => k.qty, new { @class = "input-text number", @style = "width:100px;" }) <span>件</span>
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>五金配件：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                <span class="select-box inline">
+                    @Html.DropDownListFor(k => k.hardware_part, ArrWJ, new { @class = "select" })
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>配饰：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                   @Html.TextBoxFor(k => k.decoration_part, new { @class = "input-text" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">其他要求：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                    @Html.TextAreaFor(k => k.req_others, new { @class = "textarea" })
+            </div>
+        </div>
+       
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button class="btn btn-primary radius" type="submit" style="width:120px;"><i class="Hui-iconfont">&#xe632;</i>保存</button>
+                <button onClick="removeIframe();" class="btn btn-default radius ml-30" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</article>
+
+@Html.Action("_Footer", "Home")
+<script type="text/javascript" src="~/js/ajaxScript.js"></script>
+
+<script type="text/javascript" src="~/js/DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/jquery.validate.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/validate-methods.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/messages_zh.js"></script>
+<script type="text/javascript">
+
+$(function(){
+
+	//表单验证
+	$("#formadd").validate({
+		rules:{
+		    ProductSNId: {
+				required:true,
+			},
+		    productAreaId: {
+				required:true,
+		    },
+		    ProductName: { required: true },
+		    WoodId: { required: true },
+		    Color: { required: true },
+		    price: { required: true },
+		    qty: { required: true, isIntGteZero: true },
+		},
+		onkeyup: false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler: function (form) {
+		    //构造上传数据
+		    var param = {};
+		    var paramArray = $(form).serializeArray();
+		    for (var i = 0; i < paramArray.length; ++i) {
+		        var o = paramArray[i];
+		        param[o["name"]] = o["value"];
+		    };
+		    ajaxRequest("post", "/Order/PostAddProducts", param, function (d) {
+
+		        if (d == "1") {
+		            if (editModel(window.location.href)) {
+		                layer.msg("编辑成功！", { icon: 1, time: 1000 });
+		            } else {
+		                layer.msg("添加成功！", { icon: 1, time: 1000 });
+		            }
+		        } else {
+		            layer.msg("服务器错误！", { icon: 2, time: 1000 });
+		        }
+		        setTimeout(function () {
+		            parent.window.location.reload();
+		            var index = parent.layer.getFrameIndex(window.name);
+		            parent.layer.close(index);
+		        }, 1000);
+
+		    });
+
+		}
+	});
+
+});
+
+    $("#ColorId").change(function () {
+        var StrVal = $(this).find("option:selected").text().replace("╋", "");
+        if (StrVal == "请选择色号")
+        { StrVal = "";}
+        $("#Color").val(StrVal);
+    });
+    $("#WoodId").change(function () {
+        var StrVal = $(this).find("option:selected").text().replace("╋", "");
+        if (StrVal == "请选择材质")
+        { StrVal = ""; }
+        $("#WoodName").val(StrVal);
+    });
+    $("#ProductSNId").change(function () {
+        var ProductSNId = $("#ProductSNId").val();
+        var Strtext = $("#ProductSNId").find("option:selected").text().replace("╋", "");
+        $("#ProductSN").val(Strtext);
+        var productAreaId = $("#productAreaId").val();
+        var ProUrl = "@Url.Action("GetProNameDrolistBySNAndArea","Order")";
+        $.post(ProUrl, { ProSN: ProductSNId, ProProArea: productAreaId }, function (data) {
+            $('#ProductName').empty();
+            $('#ProductName').append($('<option></option>').val("").text("请选择产品名称").attr("selected", true));
+            $('#ProductName').append(data);
+        });
+    });
+    $("#productAreaId").change(function () {
+        var Strtext = $("#productAreaId").find("option:selected").text().replace("╋", "");
+        $("#ProductArea").val(Strtext);
+        var ProductSNId = $("#ProductSNId").val();
+        var productAreaId = $("#productAreaId").val();
+        var ProUrl = "@Url.Action("GetProNameDrolistBySNAndArea", "Order")";
+            $.post(ProUrl, { ProSN: ProductSNId, ProProArea: productAreaId }, function (data) {
+                $('#ProductName').empty();
+                $('#ProductName').append($('<option></option>').val("").text("请选择产品名称").attr("selected", true));
+                $('#ProductName').append(data);
+        });
+    });
+
+      
+    $("#ProductName").change(function () {
+    var _this = $(this);
+    var Id = _this.val();
+    var StrText = $(this).find("option:selected").text();
+    var length = StrText.split('_')[1];
+    var width = StrText.split('_')[2];
+    var height = StrText.split('_')[3];
+    $("#ProductId").val(Id);
+    $("#length").val(length);
+    $("#width").val(width);
+    $("#height").val(height);
+});
+
+    //$("#CustomFlag").click(function () {
+    //    var StrVal = $(this).val();
+    //    if (StrVal == "true")
+    //    { $("#length").removeAttr("readonly"); $("#width").removeAttr("readonly"); $("#height").removeAttr("readonly"); }
+    //    else { $("#length").attr("readonly", "readonly"); $("#width").attr("readonly", "readonly"); $("#height").attr("readonly", "readonly"); }
+    //});
+//限制只能输入数字
+$(".number").keyup(function () {  //keyup事件处理
+    $(this).val($(this).val().replace(/\D|^0/g, ''));
+}).bind("paste", function () {  //CTR+V事件处理
+    $(this).val($(this).val().replace(/\D|^0/g, ''));
+}).css("number", "disabled");  //CSS设置输入法不可用
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

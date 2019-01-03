@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DataBase;
 using ModelProject;
+using System.Web.Mvc;
 
 namespace DalProject
 {
@@ -151,6 +152,27 @@ namespace DalProject
                     db.SaveChanges();
                 }
             }
+        }
+        public List<SelectListItem> GetCustomerDrolist(int? pId, int? UserId, int? DepartmentId)
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem() { Text = "请选择客户", Value = "" });
+            using (var db = new XiangNingSaleEntities())
+            {
+                List<CRMItem> model = (from p in db.Sale_Customers.Where(b => b.DeleteFlag == false)
+                                       where UserId > 0 ? p.BelongUserId == UserId.Value : true
+                                       where DepartmentId > 0 ? p.DepartmentId == DepartmentId.Value : true
+                                       select new CRMItem
+                                            {
+                                                Id=p.Id,
+                                                Name=p.Name
+                                            }).ToList();
+                foreach (var item in model)
+                {
+                    items.Add(new SelectListItem() { Text = "╋" + item.Name, Value = item.Id.ToString(), Selected = pId.HasValue && item.Id.Equals(pId) });
+                }
+            }
+            return items;
         }
     }
 }

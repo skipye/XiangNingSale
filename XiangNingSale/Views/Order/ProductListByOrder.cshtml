@@ -1,0 +1,75 @@
+﻿@model List<ModelProject.ContractProductsModel>
+@{
+    Layout = null;
+    int i = 1;
+}
+@Html.Action("_Meta", "Home")
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>产品名称</th>
+                    <th>木材</th>
+                    <th>色号</th>
+                    <th>是否定制</th>
+                    <th>长</th>
+                    <th>宽</th>
+                    <th>高</th>
+                    <th>单价（元）</th>
+                    <th>数量</th>
+                    <th>五金配件</th>
+                    <th>配饰</th>
+                    <th>雕花要求</th>
+                    <th>其他要求</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="height:35px;">
+                        <td>@(i)</td>
+                        <td>@item.ProductSN _ @item.ProductName </td>
+                        <td>@item.WoodName </td>
+                        <td>@item.Color</td>
+                        <td>@(item.CustomFlag != null && item.CustomFlag == true ? "是" : "否")</td>
+                        <td>@item.length </td>
+                        <td>@item.width </td>
+                        <td>@item.height </td>
+                        <td>@item.price</td>
+                        <td>@item.qty</td>
+                        <td>@item.hardware_part</td>
+                        <td><div class="tw" title="@item.decoration_part">@item.decoration_part</div></td>
+                        <td><div class="tw" title="@item.req_carve">@item.req_carve</div></td>
+                        <td><div class="tw" title="@item.req_others">@item.req_others</div></td>
+                        <td>
+                            @if (item.status == 0)
+                            {
+                                <a href="javascript:void(0)" class="delone" ref="@item.Id" url="@Url.Action("DeleteProduct", "Order")">删除</a>
+                            }
+                        </td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+</table>
+
+    }
+    else
+    {<p>暂无内容！</p>}
+<script type="text/javascript" src="~/js/jquery.min.js"></script>
+<script type="text/javascript">
+    $(".delone").click(function () {
+        var _This = $(this);
+        var Id = _This.attr("ref");
+        var Url = _This.attr("url");
+        $.post(Url, { Id: Id }, function (d) {
+            if (d == "1")
+            {
+                _This.parent().parent().remove();
+            }
+        })
+    })
+</script>

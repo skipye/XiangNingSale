@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="XingNingSaleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="XingNingSaleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="Purchase_Order">
           <Key>
             <PropertyRef Name="Id" />
@@ -24,6 +24,65 @@
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="DeleteFlag" Type="bit" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Sale_Contract_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SaleContractHeadId" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="ProductArea" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductSN" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="WoodName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomFlag" Type="bit" />
+          <Property Name="length" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="width" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="height" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="Price" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="price_recommend" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="Qty" Type="int" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="30" />
+          <Property Name="hardware_part" Type="nvarchar" MaxLength="50" />
+          <Property Name="decoration_part" Type="nvarchar" MaxLength="100" />
+          <Property Name="req_others" Type="nvarchar(max)" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="DeleteFlag" Type="bit" />
+        </EntityType>
+        <EntityType Name="Sale_Contract_Header">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SN" Type="varchar" MaxLength="10" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="delivery_date" Type="datetime" />
+          <Property Name="delivery_channel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="AmountRecommend" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="FreightCarrier" Type="nvarchar" MaxLength="10" />
+          <Property Name="Prepay" Type="decimal" Precision="16" Scale="2" />
+          <Property Name="MeasureFlag" Type="bit" />
+          <Property Name="DeliveryAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="SaleUserId" Type="int" />
+          <Property Name="SaleUserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SaleDepartmentId" Type="int" />
+          <Property Name="SaleDepartment" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
+          <Property Name="CheckedUserId" Type="int" />
+          <Property Name="CheckedUserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CheckedTime" Type="datetime" />
+          <Property Name="HTDate" Type="datetime" />
+          <Property Name="FRFlag" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="DeleteFlag" Type="bit" />
+          <Property Name="CWCheckStatus" Type="bit" />
+          <Property Name="CWCheckName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CWCheckId" Type="int" />
+          <Property Name="CWCheckTime" Type="datetime" />
         </EntityType>
         <EntityType Name="Sale_Customers">
           <Key>
@@ -55,13 +114,46 @@
           <Property Name="MSGStatus" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
         </EntityType>
+        <Association Name="FK_Sale_Contract_Detail_Sale_Contract_Header">
+          <End Role="Sale_Contract_Header" Type="Self.Sale_Contract_Header" Multiplicity="1" />
+          <End Role="Sale_Contract_Detail" Type="Self.Sale_Contract_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale_Contract_Header">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale_Contract_Detail">
+              <PropertyRef Name="SaleContractHeadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Contract_Header_Sale_Customers">
+          <End Role="Sale_Customers" Type="Self.Sale_Customers" Multiplicity="0..1" />
+          <End Role="Sale_Contract_Header" Type="Self.Sale_Contract_Header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale_Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale_Contract_Header">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="XingNingSaleModelStoreContainer">
           <EntitySet Name="Purchase_Order" EntityType="Self.Purchase_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale_Contract_Detail" EntityType="Self.Sale_Contract_Detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale_Contract_Header" EntityType="Self.Sale_Contract_Header" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sale_Customers" EntityType="Self.Sale_Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkLogs" EntityType="Self.WorkLogs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Sale_Contract_Detail_Sale_Contract_Header" Association="Self.FK_Sale_Contract_Detail_Sale_Contract_Header">
+            <End Role="Sale_Contract_Header" EntitySet="Sale_Contract_Header" />
+            <End Role="Sale_Contract_Detail" EntitySet="Sale_Contract_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Contract_Header_Sale_Customers" Association="Self.FK_Sale_Contract_Header_Sale_Customers">
+            <End Role="Sale_Customers" EntitySet="Sale_Customers" />
+            <End Role="Sale_Contract_Header" EntitySet="Sale_Contract_Header" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="XingNingSaleModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -103,6 +195,7 @@
           <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="DeleteFlag" Type="Boolean" />
+          <NavigationProperty Name="Sale_Contract_Header" Relationship="XingNingSaleModel.FK_Sale_Contract_Header_Sale_Customers" FromRole="Sale_Customers" ToRole="Sale_Contract_Header" />
         </EntityType>
         <EntityType Name="WorkLogs">
           <Key>
@@ -119,7 +212,103 @@
           <EntitySet Name="Purchase_Order" EntityType="Self.Purchase_Order" />
           <EntitySet Name="Sale_Customers" EntityType="Self.Sale_Customers" />
           <EntitySet Name="WorkLogs" EntityType="Self.WorkLogs" />
+          <EntitySet Name="Sale_Contract_Detail" EntityType="XingNingSaleModel.Sale_Contract_Detail" />
+          <EntitySet Name="Sale_Contract_Header" EntityType="XingNingSaleModel.Sale_Contract_Header" />
+          <AssociationSet Name="FK_Sale_Contract_Detail_Sale_Contract_Header" Association="XingNingSaleModel.FK_Sale_Contract_Detail_Sale_Contract_Header">
+            <End Role="Sale_Contract_Header" EntitySet="Sale_Contract_Header" />
+            <End Role="Sale_Contract_Detail" EntitySet="Sale_Contract_Detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sale_Contract_Header_Sale_Customers" Association="XingNingSaleModel.FK_Sale_Contract_Header_Sale_Customers">
+            <End Role="Sale_Customers" EntitySet="Sale_Customers" />
+            <End Role="Sale_Contract_Header" EntitySet="Sale_Contract_Header" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Sale_Contract_Detail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SaleContractHeadId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="ProductArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WoodName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomFlag" Type="Boolean" />
+          <Property Name="length" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="width" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="height" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="Price" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="price_recommend" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="Unit" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="hardware_part" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="decoration_part" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="req_others" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteFlag" Type="Boolean" />
+          <NavigationProperty Name="Sale_Contract_Header" Relationship="XingNingSaleModel.FK_Sale_Contract_Detail_Sale_Contract_Header" FromRole="Sale_Contract_Detail" ToRole="Sale_Contract_Header" />
+        </EntityType>
+        <EntityType Name="Sale_Contract_Header">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="delivery_date" Type="DateTime" Precision="3" />
+          <Property Name="delivery_channel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="AmountRecommend" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="FreightCarrier" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Prepay" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="MeasureFlag" Type="Boolean" />
+          <Property Name="DeliveryAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SaleUserId" Type="Int32" />
+          <Property Name="SaleUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SaleDepartmentId" Type="Int32" />
+          <Property Name="SaleDepartment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="CheckedUserId" Type="Int32" />
+          <Property Name="CheckedUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedTime" Type="DateTime" Precision="3" />
+          <Property Name="HTDate" Type="DateTime" Precision="3" />
+          <Property Name="FRFlag" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteFlag" Type="Boolean" />
+          <NavigationProperty Name="Sale_Contract_Detail" Relationship="XingNingSaleModel.FK_Sale_Contract_Detail_Sale_Contract_Header" FromRole="Sale_Contract_Header" ToRole="Sale_Contract_Detail" />
+          <NavigationProperty Name="Sale_Customers" Relationship="XingNingSaleModel.FK_Sale_Contract_Header_Sale_Customers" FromRole="Sale_Contract_Header" ToRole="Sale_Customers" />
+          <Property Name="CWCheckStatus" Type="Boolean" />
+          <Property Name="CWCheckName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CWCheckId" Type="Int32" />
+          <Property Name="CWCheckTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Sale_Contract_Detail_Sale_Contract_Header">
+          <End Type="XingNingSaleModel.Sale_Contract_Header" Role="Sale_Contract_Header" Multiplicity="1" />
+          <End Type="XingNingSaleModel.Sale_Contract_Detail" Role="Sale_Contract_Detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale_Contract_Header">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale_Contract_Detail">
+              <PropertyRef Name="SaleContractHeadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sale_Contract_Header_Sale_Customers">
+          <End Type="XingNingSaleModel.Sale_Customers" Role="Sale_Customers" Multiplicity="0..1" />
+          <End Type="XingNingSaleModel.Sale_Contract_Header" Role="Sale_Contract_Header" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale_Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale_Contract_Header">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -176,6 +365,67 @@
                 <ScalarProperty Name="MSG" ColumnName="MSG" />
                 <ScalarProperty Name="MSGStatus" ColumnName="MSGStatus" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sale_Contract_Detail">
+            <EntityTypeMapping TypeName="XingNingSaleModel.Sale_Contract_Detail">
+              <MappingFragment StoreEntitySet="Sale_Contract_Detail">
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="req_others" ColumnName="req_others" />
+                <ScalarProperty Name="decoration_part" ColumnName="decoration_part" />
+                <ScalarProperty Name="hardware_part" ColumnName="hardware_part" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="price_recommend" ColumnName="price_recommend" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="length" ColumnName="length" />
+                <ScalarProperty Name="CustomFlag" ColumnName="CustomFlag" />
+                <ScalarProperty Name="WoodName" ColumnName="WoodName" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductSN" ColumnName="ProductSN" />
+                <ScalarProperty Name="ProductArea" ColumnName="ProductArea" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="SaleContractHeadId" ColumnName="SaleContractHeadId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sale_Contract_Header">
+            <EntityTypeMapping TypeName="XingNingSaleModel.Sale_Contract_Header">
+              <MappingFragment StoreEntitySet="Sale_Contract_Header">
+                <ScalarProperty Name="CWCheckTime" ColumnName="CWCheckTime" />
+                <ScalarProperty Name="CWCheckId" ColumnName="CWCheckId" />
+                <ScalarProperty Name="CWCheckName" ColumnName="CWCheckName" />
+                <ScalarProperty Name="CWCheckStatus" ColumnName="CWCheckStatus" />
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="FRFlag" ColumnName="FRFlag" />
+                <ScalarProperty Name="HTDate" ColumnName="HTDate" />
+                <ScalarProperty Name="CheckedTime" ColumnName="CheckedTime" />
+                <ScalarProperty Name="CheckedUserName" ColumnName="CheckedUserName" />
+                <ScalarProperty Name="CheckedUserId" ColumnName="CheckedUserId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SaleDepartment" ColumnName="SaleDepartment" />
+                <ScalarProperty Name="SaleDepartmentId" ColumnName="SaleDepartmentId" />
+                <ScalarProperty Name="SaleUserName" ColumnName="SaleUserName" />
+                <ScalarProperty Name="SaleUserId" ColumnName="SaleUserId" />
+                <ScalarProperty Name="DeliveryAddress" ColumnName="DeliveryAddress" />
+                <ScalarProperty Name="MeasureFlag" ColumnName="MeasureFlag" />
+                <ScalarProperty Name="Prepay" ColumnName="Prepay" />
+                <ScalarProperty Name="FreightCarrier" ColumnName="FreightCarrier" />
+                <ScalarProperty Name="AmountRecommend" ColumnName="AmountRecommend" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="delivery_channel" ColumnName="delivery_channel" />
+                <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

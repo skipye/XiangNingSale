@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>后台登录</title>
+    <title>唐锐--后台登录</title>
     <link href="~/css/common.css" rel="stylesheet" type="text/css" />
     <link href="~/css/login.css" rel="stylesheet" type="text/css" />
     <link href="~/css/iconfont/iconfont.css" rel="stylesheet" type="text/css" />
@@ -31,7 +31,7 @@
                 </div>
                 <div class="row cl">
                     <div class="formControls col-xs-8 col-xs-offset-3">
-                        <input id="valiCode" class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码'}" onclick="if(this.value=='验证码'){this.value='';}" value="验证码" style="width:150px;">
+                        <input id="valiCode" class="input-text size-L" type="text" placeholder="验证码" style="width:150px;"><!--onblur="if(this.value==''){this.value='验证码'}" onclick="if(this.value=='验证码'){this.value='';}" value="验证码" -->
                         <img src="@Url.Action("GetValidatorGraphics","Account")" alt="验证码" id="vcodurl"><a id="kanbuq" href="javascript:void(0);">看不清，换一张</a>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
             </form>
         </div>
     </div>
-    <div class="footer">Copyright 上海香凝工艺家具有限公司</div>
+    <div class="footer">Copyright 上海唐锐家居有限公司</div>
     @Html.Action("_Footer","Home")
     <script type="text/javascript">
     var moblieReg = /^((\(\d{3}\))|(\d{3}\-))?1(3|4|5|7|8)\d{9}$/;

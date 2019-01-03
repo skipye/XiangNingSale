@@ -1,0 +1,162 @@
+﻿@model ModelProject.ContractHeaderModel
+@{
+    Layout = null;
+    List<SelectListItem> ArrBY = new List<SelectListItem>();
+    ArrBY.Add(new SelectListItem { Text = "请选择送货通道", Value = "" });
+    ArrBY.Add(new SelectListItem { Text = "电梯", Value = "电梯" });
+    ArrBY.Add(new SelectListItem { Text = "楼梯", Value = "楼梯" });
+    List<SelectListItem> ArrYF = new List<SelectListItem>();
+    ArrYF.Add(new SelectListItem { Text = "请选择运费承担方", Value = "" });
+    ArrYF.Add(new SelectListItem { Text = "甲方", Value = "甲方" });
+    ArrYF.Add(new SelectListItem { Text = "乙方", Value = "乙方" });
+    List<SelectListItem> ArrCL = new List<SelectListItem>();
+    ArrCL.Add(new SelectListItem { Text = "是否上门测量", Value = "" });
+    ArrCL.Add(new SelectListItem { Text = "是", Value = "true" });
+    ArrCL.Add(new SelectListItem { Text = "否", Value = "false" });
+  }
+
+@Html.Action("_Meta", "Home")
+
+
+<article class="page-container">
+    <form class="form form-horizontal" id="formadd">
+        @Html.HiddenFor(k => k.Id)
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>客户名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box inline">
+                    @Html.DropDownListFor(k => k.CustomerId, Model.CustomerDroList, new { @class = "select" })
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>合同编号：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                @Html.TextBoxFor(k => k.SN, new { @class = "input-text", @readonly= "readonly" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">合同日期：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                @*<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">*@
+                @Html.TextBoxFor(k => k.HTDate, new { @class = "input-text Wdate", @onfocus= "WdatePicker()", @style="width:120px;", @id = "logmin" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>送货地址：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextBoxFor(k => k.DeliveryAddress, new { @class = "input-text" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>送货通道：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box inline">
+                    @Html.DropDownListFor(k => k.delivery_channel, ArrBY, new { @class = "select" })
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>送货日期：</label>
+            <div class="formControls col-xs-8 col-sm-4">
+                @*<input type="text" onfocus="WdatePicker()" id="logmax" class="input-text Wdate" style="width:120px;">*@
+                @Html.TextBoxFor(k => k.delivery_date, new { @class = "input-text Wdate", @onfocus = "WdatePicker()", @style = "width:120px;" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>是否上门测量：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box inline">
+                    @Html.DropDownListFor(k => k.MeasureFlag, ArrCL, new { @class = "select" })
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>运费承担方：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box inline">
+                    @Html.DropDownListFor(k => k.FreightCarrier, ArrYF, new { @class = "select" })
+                </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>预付款金额：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextBoxFor(k => k.Prepay, new { @class = "input-text" })
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button class="btn btn-primary radius" type="submit" style="width:120px;"><i class="Hui-iconfont">&#xe632;</i>保存</button>
+                <button onClick="removeIframe();" class="btn btn-default radius ml-30" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</article>
+
+@Html.Action("_Footer", "Home")
+<script type="text/javascript" src="~/js/ajaxScript.js"></script>
+
+<script type="text/javascript" src="~/js/DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/jquery.validate.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/validate-methods.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/messages_zh.js"></script>
+<script type="text/javascript">
+
+$(function(){
+
+	//表单验证
+	$("#formadd").validate({
+		rules:{
+		    CustomerId: {
+				required:true,
+			},
+		    DeliveryAddress: {
+				required:true,
+		    },
+		    delivery_channel: { required: true },
+		    delivery_date: { required: true },
+		    MeasureFlag: { required: true },
+		    FreightCarrier: { required: true },
+		    Prepay: { required: true, isIntGteZero:true },
+		},
+		onkeyup: false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler: function (form) {
+		    //构造上传数据
+		    var param = {};
+		    var paramArray = $(form).serializeArray();
+		    for (var i = 0; i < paramArray.length; ++i) {
+		        var o = paramArray[i];
+		        param[o["name"]] = o["value"];
+		    };
+		    ajaxRequest("post", "/Order/PostAdd", param, function (d) {
+
+		        if (d == "1") {
+		            if (editModel(window.location.href)) {
+		                layer.msg("编辑成功！", { icon: 1, time: 1000 });
+		            } else {
+		                layer.msg("添加成功！", { icon: 1, time: 1000 });
+		            }
+		        } else {
+		            layer.msg("服务器错误！", { icon: 2, time: 1000 });
+		        }
+		        setTimeout(function () {
+		            parent.window.location.reload();
+		            var index = parent.layer.getFrameIndex(window.name);
+		            parent.layer.close(index);
+		        }, 1000);
+
+		    });
+
+		}
+	});
+
+});
+
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

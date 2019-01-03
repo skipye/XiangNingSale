@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ModelProject;
 using DalProject;
+using System.Web.Mvc;
 
 namespace ServiceProject
 {
@@ -48,5 +49,14 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
+        public List<SelectListItem> GetCustomerDrolist(int? pId, int? UserId, int? DepartmentId)
+        {
+            try { return IDal.GetCustomerDrolist(pId, UserId, DepartmentId); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        
     }
 }

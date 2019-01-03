@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContractHeaderService.cs" />
     <Compile Include="INVService.cs" />
     <Compile Include="CustomerService.cs" />
     <Compile Include="RoleService.cs" />

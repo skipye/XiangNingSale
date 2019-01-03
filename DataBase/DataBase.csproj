@@ -113,6 +113,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SaleHRModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Sale_Contract_Detail.cs">
+      <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sale_Contract_Header.cs">
+      <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Sale_Customers.cs">
       <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
     </Compile>
