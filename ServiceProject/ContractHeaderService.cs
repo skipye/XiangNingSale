@@ -11,7 +11,7 @@ namespace ServiceProject
     public class ContractHeaderService
     {
         private static readonly ContractHeaderDal CHDal = new ContractHeaderDal();
-        public List<ContractHeaderModel> GetPageList(SContractHeaderModel SModel)
+        public ContractModel GetPageList(SContractHeaderModel SModel)
         {
             try { return CHDal.GetPageList(SModel); }
             catch (Exception ex)

@@ -10,7 +10,7 @@ namespace DalProject
 {
     public class ContractHeaderDal
     {
-        public List<ContractHeaderModel> GetPageList(SContractHeaderModel SModel)
+        public ContractModel GetPageList(SContractHeaderModel SModel)
         {
             DateTime StartTime = Convert.ToDateTime("1999-12-31");
             DateTime EndTime = Convert.ToDateTime("2999-12-31");
@@ -28,6 +28,7 @@ namespace DalProject
                             where !string.IsNullOrEmpty(SModel.SN) ? p.SN.Contains(SModel.SN) : true
                             where SModel.CheckState == 1 ? p.Status == SModel.CheckState : true
                             where SModel.DepartmentId>0 ? p.SaleDepartmentId == SModel.DepartmentId : true
+                            where SModel.SaleUserId > 0 ? p.SaleUserId == SModel.SaleUserId : true
                             where !string.IsNullOrEmpty(SModel.UserName) ? p.Sale_Customers.Name.Contains(SModel.UserName) : true
                             where SModel.FR_flag >= 0 ? p.FRFlag == SModel.FR_flag : true
                             where p.CreateTime > StartTime
@@ -59,8 +60,10 @@ namespace DalProject
                                 CreateTime = p.CreateTime,
                                 CWCheckStatus=p.CWCheckStatus
                             }).ToList();
-                
-                return List;
+                ContractModel Models = new ContractModel();
+                Models.data = List;
+                Models.HTTotail = List.Sum(k => k.Amount);
+                return Models;
             }
         }
         

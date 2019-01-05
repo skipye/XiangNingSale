@@ -161,6 +161,7 @@ namespace DalProject
                             //LSonModel = NItem.SonItemList;
                             //PModels.SonItemList = new List<MenuSonItemModel>();
                         }
+                        else { continue ; }
                         List<MenuSonItemModel> LLSonModel = new List<MenuSonItemModel>();
                         if(PModels.SonItemList!=null && PModels.SonItemList.Any())
                         { 

@@ -60,7 +60,11 @@
 <script type="text/javascript">
 
     var param = {};
-    $(function () { searchArticle(param); });
+    $(function () {
+        var UploadAuthorId = "@Model.UploadAuthorId";
+        param["UploadAuthorId"] = UploadAuthorId;
+        searchArticle(param);
+    });
     $("#btnSearch").click(function () {
         var UploadAuthorId = "@UploadAuthorId";
         //搜索条件

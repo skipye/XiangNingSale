@@ -51,7 +51,12 @@ namespace ModelProject
     {
         public string name { get; set; }
     }
-
+    //带销售总额的model
+    public class ContractModel
+    {
+        public List<ContractHeaderModel> data { get; set; }
+        public decimal? HTTotail { get; set; }
+    }
     //销售合同表
     public class ContractHeaderModel
     {

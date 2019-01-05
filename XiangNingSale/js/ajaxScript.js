@@ -62,7 +62,7 @@ function checked(obj, id) {
         layer.alert("请先去选中！");
         return false;
     }
-    layer.confirm('审核文章？', {
+    layer.confirm('您正在进行审核操作，请认真核对信息！', {
         btn: ['通过', '不通过', '取消'],
         shade: false,
         closeBtn: 0
@@ -140,6 +140,11 @@ function addwindow(title, url, w, h) {
     AddWorkLogs(MSG, 2);
     layer_show(title, url, w, h);
 }
+//查看
+function show(title, url, id, w, h) {
+    layer_show(title, url + "?Id=" + id, w, h);
+}
+
 function ajaxRequest(requestType, url, params, backFuc) {
     $.ajax({
         method : requestType,
@@ -315,3 +320,9 @@ function removeIframe() {
     var index = parent.layer.getFrameIndex(window.name);
     parent.layer.close(index);
 }
+//限制只能输入数字
+$(".number").keyup(function () {  //keyup事件处理
+    $(this).val($(this).val().replace(/\D|^0/g, ''));
+}).bind("paste", function () {  //CTR+V事件处理
+    $(this).val($(this).val().replace(/\D|^0/g, ''));
+}).css("number", "disabled");  //CSS设置输入法不可用

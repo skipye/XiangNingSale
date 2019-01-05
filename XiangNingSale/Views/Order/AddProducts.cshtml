@@ -36,7 +36,7 @@
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>材质+色号：</label>
-            <div class="formControls col-xs-8 col-sm-4">
+            <div class="formControls col-xs-8 col-sm-8">
                 <span class="select-box inline">
                     @Html.DropDownListFor(k => k.WoodId, Model.WoodDroList, new { @class = "select", @style = "width:150px;" })
                     
@@ -219,12 +219,7 @@ $(function(){
     //    { $("#length").removeAttr("readonly"); $("#width").removeAttr("readonly"); $("#height").removeAttr("readonly"); }
     //    else { $("#length").attr("readonly", "readonly"); $("#width").attr("readonly", "readonly"); $("#height").attr("readonly", "readonly"); }
     //});
-//限制只能输入数字
-$(".number").keyup(function () {  //keyup事件处理
-    $(this).val($(this).val().replace(/\D|^0/g, ''));
-}).bind("paste", function () {  //CTR+V事件处理
-    $(this).val($(this).val().replace(/\D|^0/g, ''));
-}).css("number", "disabled");  //CSS设置输入法不可用
+
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>

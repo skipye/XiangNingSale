@@ -1,0 +1,22 @@
+﻿@model ModelProject.ContractHeaderModel
+@{
+    Layout = null;
+    List<SelectListItem> ArrBY = new List<SelectListItem>();
+    ArrBY.Add(new SelectListItem { Text = "请选择送货通道", Value = "" });
+    ArrBY.Add(new SelectListItem { Text = "电梯", Value = "电梯" });
+    ArrBY.Add(new SelectListItem { Text = "楼梯", Value = "楼梯" });
+    int i = 1;
+}
+@Html.Action("_Meta", "Home")
+<div class="page-container">
+ 
+    <p class="ditem">合同编号：@Model.SN</p>
+    <p class="ditem">客户姓名：@Model.Customer</p>
+    <p class="ditem">业务员：@Model.SaleUserName</p>
+    <p class="ditem">送货日期：@Convert.ToDateTime(Model.delivery_date).ToString("yyyy-MM-dd")</p>
+    <p class="ditem">是否上门测量：@(Model.MeasureFlag != null && Model.MeasureFlag == true ? "是" : "否")</p>
+    <p class="ditem">合同总金额：@Model.Amount</p>
+    <p class="ditem">送货地址：@Model.DeliveryAddress</p>
+    <div style="clear:both"></div>
+     @Html.Action("ProductListByOrder", "Order",new { Id=Model.Id})
+</div>

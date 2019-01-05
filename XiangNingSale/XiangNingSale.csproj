@@ -577,6 +577,7 @@
     <Content Include="Views\Order\DepartmentIndex.cshtml" />
     <Content Include="Views\Order\AddProducts.cshtml" />
     <Content Include="Views\Order\ProductListByOrder.cshtml" />
+    <Content Include="Views\Order\Show.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

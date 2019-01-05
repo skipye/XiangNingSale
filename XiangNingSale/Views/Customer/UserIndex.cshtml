@@ -50,18 +50,18 @@
 <script type="text/javascript">
 
     var param = {};
-    $(function () { search(param); });
+    $(function () { var UserId = '@Model.BelongUserId'; param["BelongUserId"] = BelongUserId; search(param); });
     $("#btnSearch").click(function () {
         //搜索条件
-        var DepartmentId = $("#DepartmentId").val().trim();
+        var BelongUserId = '@Model.BelongUserId';
         var Name = $("#Name").val().trim();
         var StartTime = $("#logmin").val().trim();
         var EndTime = $("#logmax").val().trim();
         //搜索
-        param["DepartmentId"] = DepartmentId;
         param["Name"] = Name;
         param["StartTime"] = StartTime;
         param["EndTime"] = EndTime;
+        param["BelongUserId"] = BelongUserId;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
         search(param);
@@ -83,7 +83,7 @@
                     callback(returnData);
                 });
             },
-            
+
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "Id" },
                         { "data": "Name", "className": "textoverflow" },

@@ -29,10 +29,10 @@ namespace XiangNingSale.Controllers
         }
         public ActionResult PageList(SContractHeaderModel SRmodels)
         {
-            var PageList = NSer.GetPageList(SRmodels);
+            var models = NSer.GetPageList(SRmodels);
             return new ContentResult
             {
-                Content = new JavaScriptSerializer { MaxJsonLength = Int32.MaxValue }.Serialize(PageList),
+                Content = new JavaScriptSerializer { MaxJsonLength = Int32.MaxValue }.Serialize(models),
                 ContentType = "application/json"
             };
         }
@@ -147,6 +147,11 @@ namespace XiangNingSale.Controllers
                 return Content("1");
             }
             else { return Content("0"); }
+        }
+        public ActionResult Show(int Id)
+        {
+            var Models = NSer.GetDetailById(Id);
+            return View(Models);
         }
     }
 }

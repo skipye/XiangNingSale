@@ -57,7 +57,7 @@
 <script type="text/javascript">
 
     var param = {};
-    $(function () { search(param); });
+    $(function () { var ApplyUserId = "@Model.ApplyUserId"; param["ApplyUserId"] = ApplyUserId; search(param); });
     $("#btnSearch").click(function () {
         var ApplyUserId = "@Model.ApplyUserId";
         //搜索条件

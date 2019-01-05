@@ -20,8 +20,11 @@
         <button id="btnSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜素</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
-        <a href="javascript:void(0);" onclick="del(this, '0')" class="btn btn-danger radius" data-url="@Url.Action("Delete","Order")"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-        <a href="javascript:void(0);" onclick="checked(this,'0')" class="btn btn-primary radius" data-url="@Url.Action("Checked","Order")"><i class="Hui-iconfont">&#xe615;</i>批量审核</a>
+        <span class="f-l">
+            <a href="javascript:void(0);" onclick="del(this, '0')" class="btn btn-danger radius" data-url="@Url.Action("Delete","Order")"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
+            <a href="javascript:void(0);" onclick="checked(this,'0')" class="btn btn-primary radius" data-url="@Url.Action("Checked","Order")"><i class="Hui-iconfont">&#xe615;</i>批量审核</a>
+        </span>
+        <span class="f-r pr-10 c-green" style="line-height:40px;">合同总金额：<b id="HTTotail"></b>元</span>
     </div>
     <div class="mt-20 checkmodel">
         @*@Html.Action("PageList","Article")*@
@@ -33,6 +36,7 @@
                     <th>合同编号</th>
                     <th>送货日期</th>
                     <th>合同总金额</th>
+                    <th>预付款</th>
                     <th>送货通道</th>
                     <th>运费承担方</th>
                     <th width="50px">是否需要上门测量	</th>
@@ -53,7 +57,7 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="~/js/DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="~/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="~/js/ajaxScript.js?v=3"></script>
+<script type="text/javascript" src="~/js/ajaxScript.js?v=4"></script>
 <script type="text/javascript">
 
     var param = {};
@@ -86,7 +90,9 @@
                 ajaxRequest("post", "/Order/PageList", param, function (result) {
                     //封装返回数据
                     var returnData = {};
-                    returnData.data = result;
+                    returnData.data = result.data;
+                    var HTTotail = result.HTTotail;
+                    $("#HTTotail").html(HTTotail);
                     callback(returnData);
                 });
             },
@@ -99,12 +105,12 @@
                         }
                     }
                 }, {
-                    targets: 13,//把第九列的样式改为超链接
+                    targets: 14,//把第九列的样式改为超链接
                     render: function (data, type, row) {
                         var StrCheck = "";
                         if (row.Status == 0)
                         {
-                            StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="checked(this, \'' + row.Id + '\')" data-url=\'Order/Checked\' title="审核"><i class="Hui-iconfont f-14">&#xe615;</i></a>';
+                            StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="checked(this, \'' + row.Id + '\')" data-url=\'/Order/Checked\' title="审核"><i class="Hui-iconfont f-14">&#xe615;</i></a>';
                         }
                         if (row.CWCheckStatus == 0) {
                             StrCheck += 
@@ -119,7 +125,10 @@
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "Id" },
                         { "data": "Customer", "className": "textoverflow" },
-                        { "data": "SN", "defaultContent": "" },
+                        {
+                            "data": "SN", "defaultContent": "", "render": function (data, type, row) {
+                                return "<u style=\"cursor:pointer\" class=\"text-primary\" onclick=\"show('" + data + "','/Order/Show','" + row.Id + "','1200','600')\">" + data + "</u>";
+                        } },
                         {
                             "data": "delivery_date", "render": function (data) {
                                 var NewTime = parseInt(data.replace(/\D/igm, ""));
@@ -127,6 +136,7 @@
                             }
                         },
                         { "data": "Amount", "defaultContent": "", "className": "textoverflow" },
+                        { "data": "Prepay", "defaultContent": "", "className": "textoverflow" },
                         { "data": "delivery_channel", "defaultContent": "" },
                         { "data": "FreightCarrier", "defaultContent": "" },
                         {

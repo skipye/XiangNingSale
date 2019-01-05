@@ -17,20 +17,23 @@
         <button id="btnSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜素</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
-        <a href="javascript:void(0);" onclick="add('添加订单', '/Order/Add', '600', '400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加订单</a>
+        <span class="f-l">
+            <a href="javascript:void(0);" onclick="add('添加订单', '/Order/Add', '600', '400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加订单</a>
+        </span>
+        <span class="f-r pr-10 c-green" style="line-height:40px;">合同总金额：<b id="HTTotail"></b>元</span>
     </div>
     <div class="mt-20 checkmodel">
         <table class="table table-border table-bordered table-bg table-hover table-sort">
             <thead>
                 <tr class="text-l">
-                    <th width="25"><input type="checkbox" name="" value=""></th>
                     <th>客户名称</th>
                     <th>合同编号</th>
-                    <th>送货日期</th>
                     <th>合同总金额</th>
+                    <th>预付款</th>
+                    <th>送货日期</th>
                     <th>送货通道</th>
                     <th>运费承担方</th>
-                    <th width="50px">是否需要上门测量	</th>
+                    <th width="50px">是否需要上门测量</th>
                     <th width="50px">是否审核</th>
                     <th>送货地址</th>
                     <th>销售人员</th>
@@ -51,15 +54,19 @@
 <script type="text/javascript">
 
     var param = {};
-    $(function () { search(param); });
+    $(function () {
+        var SaleUserId = "@Model.SaleUserId";
+        param["SaleUserId"] = SaleUserId;
+        search(param);
+    });
     $("#btnSearch").click(function () {
         //搜索条件
-        var DepartmentId = $("#DepartmentId").val().trim();
+        var SaleUserId = "@Model.SaleUserId";
         var UserName = $("#UserName").val().trim();
         var StartTime = $("#logmin").val().trim();
         var EndTime = $("#logmax").val().trim();
         //搜索
-        param["DepartmentId"] = DepartmentId;
+        param["SaleUserId"] = SaleUserId;
         param["UserName"] = UserName;
         param["StartTime"] = StartTime;
         param["EndTime"] = EndTime;
@@ -75,23 +82,20 @@
             "destroy": true,
             "searching": true,
             "autoWidth": true,
-            "ordering": false, //设置所有不排序
+           
             "ajax": function (data, callback, settings) {
                 ajaxRequest("post", "/Order/PageList", param, function (result) {
                     //封装返回数据
                     var returnData = {};
-                    returnData.data = result;
+                    returnData.data = result.data;
+                    var HTTotail = result.HTTotail;
+                    $("#HTTotail").html(HTTotail);
                     callback(returnData);
                 });
             },
-            "columnDefs": [//对table格式的定义（表格的列从0开始）
-                {
-                    targets: 0,
-                    render: function (data, type, row) {
-                        return '<input type="checkbox" value="' + row.Id + '" >';
-                    }
-                }, {
-                    targets: 12,//把第九列的样式改为超链接
+            "columnDefs": [
+                 {
+                    targets: 12,
                     render: function (data, type, row) {
                         var StrCheck = "";
                         if (row.Status == 0) {
@@ -99,37 +103,42 @@
                                 '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'添加产品\',\'/Order/AddProducts\', \'' + row.Id + '\', \'800\', \'500\')" title="添加产品"><i class="Hui-iconfont f-14">&#xe670;</i></a>' +
                                        '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'订单编辑\',\'/Order/Add\', \'' + row.Id + '\', \'800\', \'500\')" title="订单编辑"><i class="Hui-iconfont f-14">&#xe6df;</i></a>' +
                                        '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'/Order/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
-                        } else { StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="print(\'打印订单\',\'/Order/Print\', \'' + row.Id + '\', \'800\', \'500\')" title="打印订单"><i class="Hui-iconfont f-14">&#xe632;</i></a>'; }
+                        } else { StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="printpage(\'打印订单\',\'/Order/Print\', \'' + row.Id + '\', \'800\', \'500\')" title="打印订单"><i class="Hui-iconfont f-14">&#xe632;</i></a>'; }
                         return StrCheck ;
                     }
                 }
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
-                        { "data": "Id" },
+                      
                         { "data": "Customer", "className": "textoverflow" },
-                        { "data": "SN", "defaultContent": "" },
+                        {
+                            "data": "SN", "defaultContent": "", "render": function (data, type, row) {
+                                return "<u style=\"cursor:pointer\" class=\"text-primary\" onclick=\"show('" + data + "','/Order/Show','" + row.Id + "','1200','600')\">" + data + "</u>";
+                            }
+                        },
+                        { "data": "Amount", "defaultContent": "", "className": "textoverflow" },
+                        { "data": "Prepay", "defaultContent": "", "className": "textoverflow" },
                         {
                             "data": "delivery_date", "render": function (data) {
                                 var NewTime = parseInt(data.replace(/\D/igm, ""));
                                 return formatDate(NewTime);
                             }
                         },
-                        { "data": "Amount", "defaultContent": "", "className": "textoverflow" },
                         { "data": "delivery_channel", "defaultContent": "" },
                         { "data": "FreightCarrier", "defaultContent": "" },
                         {
                             "data": "MeasureFlag", "render": function (data) {
-                                var StrStatus = "否";
+                                var StrStatus = "<b class='c-warning'>否</b>";
                                 if (data == true)
-                                { StrStatus = "是";}
+                                { StrStatus = "<b class='c-green'>是</b>"; }
                                 return StrStatus;
                             }
                         },
                         {
                             "data": "Status", "render": function (data) {
-                                var StrStatus = "否";
+                                var StrStatus = "<b class='c-warning'>否</b>";
                                 if (data == true)
-                                { StrStatus = "是"; }
+                                { StrStatus = "<b class='c-green'>是</b>"; }
                                 return StrStatus;
                             }
                         },
