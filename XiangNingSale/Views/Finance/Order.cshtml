@@ -4,11 +4,14 @@
 }
 @Html.Action("_Meta", "Home")
 <nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i>首页<span class="c-gray en">&gt;</span>销售管理<span class="c-gray en">&gt;</span>部门订单
+    <i class="Hui-iconfont">&#xe67f;</i>首页<span class="c-gray en">&gt;</span>财务管理<span class="c-gray en">&gt;</span>订单列表
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
 <div class="page-container">
     <div class="text-c">
+        <span class="select-box inline">
+            @Html.DropDownListFor(k => k.DepartmentId, Model.DepartmentDroList, new { @class = "select" })
+        </span>
         日期范围：
         <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
         -
@@ -18,12 +21,12 @@
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
         <span class="f-l">
-            <a href="javascript:void(0);" onclick="del(this, '0')" class="btn btn-danger radius" data-url="@Url.Action("Delete","Order")"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-            <a href="javascript:void(0);" onclick="add('添加订单', '/Order/Add', '600', '400')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i>添加订单</a>
+            <a href="javascript:void(0);" onclick="checked(this,'0')" class="btn btn-primary radius" data-url="@Url.Action("CWChecked","Order")"><i class="Hui-iconfont">&#xe615;</i>批量审核</a>
         </span>
         <span class="f-r pr-10 c-green" style="line-height:40px;">合同总金额：<b id="HTTotail"></b>元</span>
     </div>
     <div class="mt-20 checkmodel">
+        @*@Html.Action("PageList","Article")*@
         <table class="table table-border table-bordered table-bg table-hover table-sort">
             <thead>
                 <tr class="text-l">
@@ -34,12 +37,10 @@
                     <th>合同总金额</th>
                     <th>预付款</th>
                     <th>付款状态</th>
-                    <th>送货通道</th>
                     <th>运费承担方</th>
-                    <th width="50px">是否需要上门测量	</th>
-                    <th width="50px">是否审核</th>
-                    <th>送货地址</th>
+                    <th width="50px">是否需要上门测量</th>
                     <th>销售人员</th>
+                    <th width="50px">是否审核</th>
                     <th width="100">上传时间</th>
                     <th width="120">操作</th>
                 </tr>
@@ -57,11 +58,7 @@
 <script type="text/javascript">
 
     var param = {};
-    $(function () {
-        var DepartmentId = "@Model.DepartmentId";
-        param["DepartmentId"] = DepartmentId;
-        search(param);
-    });
+    $(function () { param["CheckState"] = 1; search(param); });
     $("#btnSearch").click(function () {
         //搜索条件
         var DepartmentId = $("#DepartmentId").val().trim();
@@ -100,20 +97,20 @@
                 {
                     targets: 0,
                     render: function (data, type, row) {
-                        if (row.Status == 0) {
+                        if (row.CWCheckStatus == 0) {
                             return '<input type="checkbox" value="' + row.Id + '" >';
                         } else { return "";}
                     }
                 }, {
-                    targets: 14,//把第九列的样式改为超链接
+                    targets: 12,//把第九列的样式改为超链接
                     render: function (data, type, row) {
                         var StrCheck = "";
-                        if (row.Status == 0) {
-                            StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="checked(this, \'' + row.Id + '\')" data-url=\'/Order/Checked\' title="审核"><i class="Hui-iconfont f-14">&#xe615;</i></a>' +
-                                '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'订单编辑\',\'/Order/Add\', \'' + row.Id + '\', \'800\', \'500\')" title="订单编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
-                               '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'/Order/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
-                        } else { StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="printpage(\'打印订单\',\'/Order/Print\', \'' + row.Id + '\', \'800\', \'500\')" title="打印订单"><i class="Hui-iconfont f-14">&#xe632;</i></a>'; }
+                        if (row.CWCheckStatus == 0)
+                        {
+                            StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="checked(this, \'' + row.Id + '\')" data-url=\'/Order/CWChecked\' title="审核"><i class="Hui-iconfont f-14">&#xe615;</i></a>';
+                        }
                         return StrCheck;
+
                     }
                 }
             ],
@@ -122,9 +119,8 @@
                         { "data": "Customer", "className": "textoverflow" },
                         {
                             "data": "SN", "defaultContent": "", "render": function (data, type, row) {
-                                return "<u style=\"cursor:pointer\" class=\"text-primary\" onclick=\"show('" + data + "','/Order/Show','" + row.Id + "','1200','600')\">" + data + "</u>";
-                            }
-                        },
+                                return "<u style=\"cursor:pointer\" class=\"text-primary\" onclick=\"show('" + data + "','/Order/Show','" + row.Id + "','900','600')\">" + data + "</u>";
+                        } },
                         {
                             "data": "delivery_date", "render": function (data) {
                                 var NewTime = parseInt(data.replace(/\D/igm, ""));
@@ -140,9 +136,8 @@
                                 { StatusName = "<span class=\"label label-success radius\">已付预付款</span>"; }
                                 if (data == 2) { StatusName = "<span class=\"label label-danger radius\">已付全款</span>"; }
                                 return StatusName;
-                            }, "className": "checkedstatus",
+                            }
                         },
-                        { "data": "delivery_channel", "defaultContent": "" },
                         { "data": "FreightCarrier", "defaultContent": "" },
                         {
                             "data": "MeasureFlag", "render": function (data) {
@@ -152,16 +147,15 @@
                                 return StrStatus;
                             }
                         },
+                        { "data": "SaleUserName", "defaultContent": "" },
                         {
-                            "data": "Status", "render": function (data) {
+                            "data": "CWCheckStatus", "render": function (data) {
                                 var StrStatus = "<b class='c-warning'>否</b>";
                                 if (data == true)
                                 { StrStatus = "<b class='c-green'>是</b>"; }
                                 return StrStatus;
-                            }
+                            }, "className": "checkedstatus",
                         },
-                        { "data": "DeliveryAddress", "defaultContent": "" },
-                        { "data": "SaleUserName", "defaultContent": "" },
                         {
                             "data": "CreateTime", "render": function (data) {
                                 var NewTime = parseInt(data.replace(/\D/igm, ""));

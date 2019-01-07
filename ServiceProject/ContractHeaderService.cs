@@ -51,6 +51,14 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
+        public bool CWChecked(string ListId)
+        {
+            try { CHDal.CWChecked(ListId); return true; }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public int GetCRMHTCount(DateTime CreateTime)
         {
             try { return CHDal.GetCRMHTCount(CreateTime); }

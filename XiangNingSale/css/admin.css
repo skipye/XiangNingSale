@@ -139,7 +139,10 @@ a{color:#333}a:hover,a:focus,.maincolor,.maincolor a{color:#06c}
 
 .table-sort tbody td {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .picreload{height:100px;width:auto;display:block;border:1px solid #ddd;min-width:50px;}
+.textoverflow{max-width:350px !important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+@media (max-width:900px) {
+    .textoverflow { max-width: 150px !important;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+}
 
-.textoverflow{max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
 .ditem {float: left;width: 48%; margin-left: 1%;}

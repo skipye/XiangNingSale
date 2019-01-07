@@ -26,23 +26,24 @@ function del(obj,id) {
     if (id > 0) {
         ListId = id + "$";
     } else {
-        debugger;
-        var NewObj = $(obj).parent().siblings("div.checkmodel").find("table.table");
+        var NewObj = $(obj).parent().parent().siblings("div.checkmodel").find("table.table");
         NewObj.find("input[type='checkbox']:checked").each(function () {
             ListId += $(this).val() + "$";
         });
     }
     if (ListId != "" && ListId != undefined) {
-        $.post(PostUrl, { ListId: ListId }, function (d) {
-            if (d == "True") {
-                var MSG = "删除操作，删除ID：" + ListId + "，删除网址：" + PostUrl;
-                AddWorkLogs(MSG,3);
-                layer.msg('已删除!', { icon: 1, time: 1000 });
-                ResetWindow();
-            }
-            else { layer.msg('服务器错误!', { icon: 2, time: 1000 }); }
+        layer.confirm('您确定要这么操作吗？', function (index) {
+            $.post(PostUrl, { ListId: ListId }, function (d) {
+                if (d == "True") {
+                    var MSG = "删除操作，删除ID：" + ListId + "，删除网址：" + PostUrl;
+                    AddWorkLogs(MSG, 3);
+                    layer.msg('操作成功!', { icon: 1, time: 1000 });
+                    ResetWindow();
+                }
+                else { layer.msg('服务器错误!', { icon: 2, time: 1000 }); }
+            });
         });
-    }
+        }
     else { layer.alert("请先去选中！"); }
 }
 /*审核*/
@@ -53,7 +54,7 @@ function checked(obj, id) {
         ListId = id + "$";
     } else {
         
-        var NewObj = $(obj).parent().siblings("div.checkmodel").find("table.table");
+        var NewObj = $(obj).parent().parent().siblings("div.checkmodel").find("table.table");
         NewObj.find("input[type='checkbox']:checked").each(function () {
             ListId += $(this).val() + "$";
         });
@@ -144,7 +145,30 @@ function addwindow(title, url, w, h) {
 function show(title, url, id, w, h) {
     layer_show(title, url + "?Id=" + id, w, h);
 }
-
+//打开窗口
+function opneview(obj, id)
+{
+    alert(1);
+    var ListId = "";
+    var PostUrl = $(obj).attr("data-url");
+    var title = $(obj).attr("title");;
+    var ListId = "";
+    if (id > 0) {
+        ListId = id + "$";
+    } else {
+        var NewObj = $(obj).parent().parent().siblings("div.checkmodel").find("table.table");
+        NewObj.find("input[type='checkbox']:checked").each(function () {
+            ListId += $(this).val() + "$";
+        });
+    }
+    if (ListId != "" && ListId != undefined) {
+        var MSG = title+"审核操作，审核ID：" + ListId + "，审核网址：" + PostUrl;
+        AddWorkLogs(MSG, 5);
+        layer_show(title, PostUrl + "?ListId=" + ListId, 600, 300);
+    }
+    else { layer.alert("请先去选中！"); }
+    
+}
 function ajaxRequest(requestType, url, params, backFuc) {
     $.ajax({
         method : requestType,

@@ -110,6 +110,21 @@ namespace XiangNingSale.Controllers
                 else return Content("False");
             }
         }
+        public ActionResult CWChecked(string ListId)
+        {
+            if (string.IsNullOrEmpty(ListId) == true)
+            {
+                return Content("False");
+            }
+            else
+            {
+                if (NSer.CWChecked(ListId) == true)
+                {
+                    return Content("True");
+                }
+                else return Content("False");
+            }
+        }
         //添加产品
         public ActionResult AddProducts(int Id)
         {

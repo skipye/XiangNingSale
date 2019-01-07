@@ -1,9 +1,6 @@
 ﻿using ModelProject;
 using ServiceProject;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -42,6 +39,8 @@ namespace XiangNingSale.Controllers
         {
             Models.ApplyUserId = USer.GetCurrentUserName().UserId;
             Models.ApplyUserName = USer.GetCurrentUserName().UserName;
+            Models.ApplyDepartmnet = USer.GetCurrentUserName().department;
+            Models.ApplyDepartmnetId = USer.GetCurrentUserName().departmentId;
             if (NSer.AddOrUpdate(Models) == true)
             {
                 return Content("1");
@@ -87,6 +86,35 @@ namespace XiangNingSale.Controllers
                 else return Content("False");
             }
         }
-
+       
+        public ActionResult CWChecked(string ListId)
+        {
+            SPurchaseOrderModel SModels = new SPurchaseOrderModel();
+            SModels.ListId = ListId;
+            return View(SModels);
+        }
+        public ActionResult CWCheckedPost(string ListId, int CheckedStatus, string Remarks)
+        {
+            if (string.IsNullOrEmpty(ListId) == true)
+            {
+                return Content("False");
+            }
+            else
+            {
+                if (NSer.CWCheckedMore(ListId, CheckedStatus, Remarks) == true)
+                {
+                    return Content("True");
+                }
+                else return Content("False");
+            }
+        }
+        public ActionResult Accounts(string ListId)
+        {
+            if (NSer.CWAccounts(ListId) == true)
+            {
+                return Content("True");
+            }
+            else { return Content("False"); }
+        }
     }
 }

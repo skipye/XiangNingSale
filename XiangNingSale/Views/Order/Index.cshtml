@@ -37,9 +37,10 @@
                     <th>送货日期</th>
                     <th>合同总金额</th>
                     <th>预付款</th>
+                    <th>付款状态</th>
                     <th>送货通道</th>
                     <th>运费承担方</th>
-                    <th width="50px">是否需要上门测量	</th>
+                    <th width="50px">是否需要上门测量</th>
                     <th width="50px">是否审核</th>
                     <th>送货地址</th>
                     <th>销售人员</th>
@@ -105,7 +106,7 @@
                         }
                     }
                 }, {
-                    targets: 14,//把第九列的样式改为超链接
+                    targets: 15,//把第九列的样式改为超链接
                     render: function (data, type, row) {
                         var StrCheck = "";
                         if (row.Status == 0)
@@ -137,6 +138,15 @@
                         },
                         { "data": "Amount", "defaultContent": "", "className": "textoverflow" },
                         { "data": "Prepay", "defaultContent": "", "className": "textoverflow" },
+                        {
+                            "data": "FRFlag", "render": function (data, type, row) {
+                                var StatusName = "<span class=\"label label-warning radius\">未付款</span>";
+                                if (data == 1)
+                                { StatusName = "<span class=\"label label-success radius\">已付预付款</span>"; }
+                                if (data == 2) { StatusName = "<span class=\"label label-danger radius\">已付全款</span>"; }
+                                return StatusName;
+                            }, "className": "checkedstatus",
+                        },
                         { "data": "delivery_channel", "defaultContent": "" },
                         { "data": "FreightCarrier", "defaultContent": "" },
                         {

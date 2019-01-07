@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="3c4e8aa25578402985dcbbc01d3b12c8" Name="Diagram1">
-        <EntityTypeShape EntityType="XingNingSaleModel.Purchase_Order" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="XingNingSaleModel.Sale_Customers" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="XingNingSaleModel.WorkLogs" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="XingNingSaleModel.Sale_Contract_Detail" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="XingNingSaleModel.Sale_Contract_Header" Width="1.5" PointX="7.125" PointY="0.625" />
         <AssociationConnector Association="XingNingSaleModel.FK_Sale_Contract_Detail_Sale_Contract_Header" />
         <AssociationConnector Association="XingNingSaleModel.FK_Sale_Contract_Header_Sale_Customers" />
+        <EntityTypeShape EntityType="XingNingSaleModel.Purchase_Order" Width="1.5" PointX="0.5" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

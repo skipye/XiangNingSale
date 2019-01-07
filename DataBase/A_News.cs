@@ -36,10 +36,10 @@ namespace DataBase
         public Nullable<int> UploadAuthorId { get; set; }
         public Nullable<int> EidtAuthorId { get; set; }
         public Nullable<int> CheckedUserId { get; set; }
+        public string UploadName { get; set; }
+        public string EidtName { get; set; }
     
         public virtual A_NewsType A_NewsType { get; set; }
         public virtual ICollection<A_News_File> A_News_File { get; set; }
-        public virtual A_User A_User { get; set; }
-        public virtual A_User A_User1 { get; set; }
     }
 }

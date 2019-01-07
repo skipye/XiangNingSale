@@ -24,6 +24,12 @@
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="DeleteFlag" Type="bit" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="CWCheckedStatus" Type="int" />
+          <Property Name="CWRemarks" Type="nvarchar" MaxLength="500" />
+          <Property Name="CWCheckedTime" Type="datetime" />
+          <Property Name="ApplyDepartmnet" Type="nvarchar" MaxLength="50" />
+          <Property Name="ApplyDepartmnetId" Type="int" />
+          <Property Name="IsAccounts" Type="bit" />
         </EntityType>
         <EntityType Name="Sale_Contract_Detail">
           <Key>
@@ -157,26 +163,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="XingNingSaleModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityType Name="Purchase_Order">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ApplyUserId" Type="Int32" />
-          <Property Name="ApplyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ApplyDateTime" Type="DateTime" Precision="3" />
-          <Property Name="Qty" Type="Int32" />
-          <Property Name="CheckedStatus" Type="Int32" />
-          <Property Name="CheckedUserId" Type="Int32" />
-          <Property Name="CheckedName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CheckedDateTime" Type="DateTime" Precision="3" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="DeleteFlag" Type="Boolean" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Sale_Customers">
           <Key>
             <PropertyRef Name="Id" />
@@ -209,7 +195,6 @@
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityContainer Name="XiangNingSaleEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Purchase_Order" EntityType="Self.Purchase_Order" />
           <EntitySet Name="Sale_Customers" EntityType="Self.Sale_Customers" />
           <EntitySet Name="WorkLogs" EntityType="Self.WorkLogs" />
           <EntitySet Name="Sale_Contract_Detail" EntityType="XingNingSaleModel.Sale_Contract_Detail" />
@@ -222,6 +207,7 @@
             <End Role="Sale_Customers" EntitySet="Sale_Customers" />
             <End Role="Sale_Contract_Header" EntitySet="Sale_Contract_Header" />
           </AssociationSet>
+          <EntitySet Name="Purchase_Order" EntityType="XingNingSaleModel.Purchase_Order" />
         </EntityContainer>
         <EntityType Name="Sale_Contract_Detail">
           <Key>
@@ -309,33 +295,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Purchase_Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApplyUserId" Type="Int32" />
+          <Property Name="ApplyUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApplyDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Qty" Type="Int32" />
+          <Property Name="CheckedStatus" Type="Int32" />
+          <Property Name="CheckedUserId" Type="Int32" />
+          <Property Name="CheckedName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeleteFlag" Type="Boolean" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CWCheckedStatus" Type="Int32" />
+          <Property Name="CWRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CWCheckedTime" Type="DateTime" Precision="3" />
+          <Property Name="ApplyDepartmnet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApplyDepartmnetId" Type="Int32" />
+          <Property Name="IsAccounts" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="XingNingSaleModelStoreContainer" CdmEntityContainer="XiangNingSaleEntities">
-          <EntitySetMapping Name="Purchase_Order">
-            <EntityTypeMapping TypeName="XingNingSaleModel.Purchase_Order">
-              <MappingFragment StoreEntitySet="Purchase_Order">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="SN" ColumnName="SN" />
-                <ScalarProperty Name="ApplyUserId" ColumnName="ApplyUserId" />
-                <ScalarProperty Name="ApplyUserName" ColumnName="ApplyUserName" />
-                <ScalarProperty Name="ApplyDateTime" ColumnName="ApplyDateTime" />
-                <ScalarProperty Name="Qty" ColumnName="Qty" />
-                <ScalarProperty Name="CheckedStatus" ColumnName="CheckedStatus" />
-                <ScalarProperty Name="CheckedUserId" ColumnName="CheckedUserId" />
-                <ScalarProperty Name="CheckedName" ColumnName="CheckedName" />
-                <ScalarProperty Name="CheckedDateTime" ColumnName="CheckedDateTime" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Sale_Customers">
             <EntityTypeMapping TypeName="XingNingSaleModel.Sale_Customers">
               <MappingFragment StoreEntitySet="Sale_Customers">
@@ -424,6 +415,33 @@
                 <ScalarProperty Name="delivery_channel" ColumnName="delivery_channel" />
                 <ScalarProperty Name="delivery_date" ColumnName="delivery_date" />
                 <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchase_Order">
+            <EntityTypeMapping TypeName="XingNingSaleModel.Purchase_Order">
+              <MappingFragment StoreEntitySet="Purchase_Order">
+                <ScalarProperty Name="IsAccounts" ColumnName="IsAccounts" />
+                <ScalarProperty Name="ApplyDepartmnetId" ColumnName="ApplyDepartmnetId" />
+                <ScalarProperty Name="ApplyDepartmnet" ColumnName="ApplyDepartmnet" />
+                <ScalarProperty Name="CWCheckedTime" ColumnName="CWCheckedTime" />
+                <ScalarProperty Name="CWRemarks" ColumnName="CWRemarks" />
+                <ScalarProperty Name="CWCheckedStatus" ColumnName="CWCheckedStatus" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DeleteFlag" ColumnName="DeleteFlag" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="CheckedDateTime" ColumnName="CheckedDateTime" />
+                <ScalarProperty Name="CheckedName" ColumnName="CheckedName" />
+                <ScalarProperty Name="CheckedUserId" ColumnName="CheckedUserId" />
+                <ScalarProperty Name="CheckedStatus" ColumnName="CheckedStatus" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ApplyDateTime" ColumnName="ApplyDateTime" />
+                <ScalarProperty Name="ApplyUserName" ColumnName="ApplyUserName" />
+                <ScalarProperty Name="ApplyUserId" ColumnName="ApplyUserId" />
                 <ScalarProperty Name="SN" ColumnName="SN" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

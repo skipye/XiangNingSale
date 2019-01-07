@@ -1,0 +1,96 @@
+﻿@model ModelProject.SPurchaseOrderModel
+@{
+    Layout = null;
+   
+    List<SelectListItem> ArrCL = new List<SelectListItem>();
+    ArrCL.Add(new SelectListItem { Text = "是否通过", Value = "" });
+    ArrCL.Add(new SelectListItem { Text = "通过", Value = "1", Selected = true });
+    ArrCL.Add(new SelectListItem { Text = "不通过", Value = "2" });
+}
+
+@Html.Action("_Meta", "Home")
+
+
+<article class="page-container">
+    <form class="form form-horizontal" id="formadd">
+        @Html.HiddenFor(k => k.ListId)
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>是否通过：</label>
+            <div class="formControls col-xs-8 col-sm-7">
+                <span class="select-box inline">
+                    @Html.DropDownListFor(k => k.CheckedStatus, ArrCL, new { @class = "select", @style = "width:150px;" })
+                   
+                </span>
+            </div>
+        </div>
+        
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">驳回理由：</label>
+            <div class="formControls col-xs-8 col-sm-7">
+                @Html.TextAreaFor(k => k.Remarks, new { @class = "textarea" })
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button class="btn btn-primary radius" type="submit" style="width:120px;"><i class="Hui-iconfont">&#xe632;</i>保存</button>
+                <button onClick="removeIframe();" class="btn btn-default radius ml-30" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</article>
+
+@Html.Action("_Footer", "Home")
+<script type="text/javascript" src="~/js/ajaxScript.js"></script>
+
+<script type="text/javascript" src="~/js/DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/jquery.validate.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/validate-methods.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/messages_zh.js"></script>
+<script type="text/javascript">
+
+$(function(){
+
+	//表单验证
+	$("#formadd").validate({
+		rules:{
+		    CheckedStatus: {
+				required:true,
+			},
+		},
+		onkeyup: false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler: function (form) {
+		    //构造上传数据
+		    var param = {};
+		    var paramArray = $(form).serializeArray();
+		    for (var i = 0; i < paramArray.length; ++i) {
+		        var o = paramArray[i];
+		        param[o["name"]] = o["value"];
+		    };
+		    ajaxRequest("post", "/Purchase/CWCheckedPost", param, function (d) {
+		        if (d == "True") {
+		            layer.msg("操作成功！", { icon: 1, time: 1000 });
+		          
+		        } else {
+		            layer.msg("服务器错误！", { icon: 2, time: 1000 });
+		        }
+		        setTimeout(function () {
+		            parent.window.location.reload();
+		            var index = parent.layer.getFrameIndex(window.name);
+		            parent.layer.close(index);
+		        }, 1000);
+
+		    });
+
+		}
+	});
+
+});
+
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

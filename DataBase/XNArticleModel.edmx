@@ -41,6 +41,8 @@
           <Property Name="UploadAuthorId" Type="int" />
           <Property Name="EidtAuthorId" Type="int" />
           <Property Name="CheckedUserId" Type="int" />
+          <Property Name="UploadName" Type="nvarchar" MaxLength="100" />
+          <Property Name="EidtName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="A_News_File">
           <Key>
@@ -102,30 +104,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_A_News_A_User">
-          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
-          <End Role="A_News" Type="Self.A_News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="A_User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="A_News">
-              <PropertyRef Name="UploadAuthorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_A_News_A_User1">
-          <End Role="A_User" Type="Self.A_User" Multiplicity="0..1" />
-          <End Role="A_News" Type="Self.A_News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="A_User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="A_News">
-              <PropertyRef Name="EidtAuthorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_A_News_File_A_News">
           <End Role="A_News" Type="Self.A_News" Multiplicity="0..1" />
           <End Role="A_News_File" Type="Self.A_News_File" Multiplicity="*" />
@@ -147,14 +125,6 @@
           <EntitySet Name="A_User" EntityType="Self.A_User" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_A_News_A_NewsType" Association="Self.FK_A_News_A_NewsType">
             <End Role="A_NewsType" EntitySet="A_NewsType" />
-            <End Role="A_News" EntitySet="A_News" />
-          </AssociationSet>
-          <AssociationSet Name="FK_A_News_A_User" Association="Self.FK_A_News_A_User">
-            <End Role="A_User" EntitySet="A_User" />
-            <End Role="A_News" EntitySet="A_News" />
-          </AssociationSet>
-          <AssociationSet Name="FK_A_News_A_User1" Association="Self.FK_A_News_A_User1">
-            <End Role="A_User" EntitySet="A_User" />
             <End Role="A_News" EntitySet="A_News" />
           </AssociationSet>
           <AssociationSet Name="FK_A_News_File_A_News" Association="Self.FK_A_News_File_A_News">
@@ -188,9 +158,9 @@
           <Property Name="CheckedStatus" Type="Int32" />
           <Property Name="UploadAuthorId" Type="Int32" />
           <Property Name="EidtAuthorId" Type="Int32" />
-          <NavigationProperty Name="A_User" Relationship="XNArticleModel.FK_A_News_A_User" FromRole="A_News" ToRole="A_User" />
-          <NavigationProperty Name="A_User1" Relationship="XNArticleModel.FK_A_News_A_User1" FromRole="A_News" ToRole="A_User" />
           <Property Name="CheckedUserId" Type="Int32" />
+          <Property Name="UploadName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EidtName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="A_News_File">
           <Key>
@@ -230,8 +200,6 @@
           <Property Name="Telphone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="State" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="A_News" Relationship="XNArticleModel.FK_A_News_A_User" FromRole="A_User" ToRole="A_News" />
-          <NavigationProperty Name="A_News1" Relationship="XNArticleModel.FK_A_News_A_User1" FromRole="A_User" ToRole="A_News" />
           <Property Name="LoginTimes" Type="Int32" />
           <Property Name="LastTimes" Type="DateTime" Precision="3" />
         </EntityType>
@@ -272,14 +240,6 @@
             <End Role="A_News" EntitySet="A_News" />
             <End Role="A_News_File" EntitySet="A_News_File" />
           </AssociationSet>
-          <AssociationSet Name="FK_A_News_A_User" Association="XNArticleModel.FK_A_News_A_User">
-            <End Role="A_User" EntitySet="A_User" />
-            <End Role="A_News" EntitySet="A_News" />
-          </AssociationSet>
-          <AssociationSet Name="FK_A_News_A_User1" Association="XNArticleModel.FK_A_News_A_User1">
-            <End Role="A_User" EntitySet="A_User" />
-            <End Role="A_News" EntitySet="A_News" />
-          </AssociationSet>
           <AssociationSet Name="FK_A_NewsType_A_NewsType" Association="XNArticleModel.FK_A_NewsType_A_NewsType">
             <End Role="A_NewsType" EntitySet="A_NewsType" />
             <End Role="A_NewsType1" EntitySet="A_NewsType" />
@@ -291,30 +251,6 @@
             <End Role="A_Menu1" EntitySet="A_Menu" />
           </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_A_News_A_User">
-          <End Type="XNArticleModel.A_User" Role="A_User" Multiplicity="0..1" />
-          <End Type="XNArticleModel.A_News" Role="A_News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="A_User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="A_News">
-              <PropertyRef Name="UploadAuthorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_A_News_A_User1">
-          <End Type="XNArticleModel.A_User" Role="A_User" Multiplicity="0..1" />
-          <End Type="XNArticleModel.A_News" Role="A_News" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="A_User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="A_News">
-              <PropertyRef Name="EidtAuthorId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_A_NewsType_A_NewsType">
           <End Type="XNArticleModel.A_NewsType" Role="A_NewsType" Multiplicity="0..1" />
           <End Type="XNArticleModel.A_NewsType" Role="A_NewsType1" Multiplicity="*" />
@@ -376,6 +312,8 @@
           <EntitySetMapping Name="A_News">
             <EntityTypeMapping TypeName="XNArticleModel.A_News">
               <MappingFragment StoreEntitySet="A_News">
+                <ScalarProperty Name="EidtName" ColumnName="EidtName" />
+                <ScalarProperty Name="UploadName" ColumnName="UploadName" />
                 <ScalarProperty Name="CheckedUserId" ColumnName="CheckedUserId" />
                 <ScalarProperty Name="EidtAuthorId" ColumnName="EidtAuthorId" />
                 <ScalarProperty Name="UploadAuthorId" ColumnName="UploadAuthorId" />

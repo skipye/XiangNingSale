@@ -41,8 +41,8 @@ namespace DalProject
                                 Remarks = p.Remarks,
                                 CreateTime = p.CreateTime,
                                 HitTimes=p.HitTimes,
-                                UploadName=p.A_User.Name,
-                                EidtAuthorName=p.A_User.Name,
+                                UploadName=p.UploadName,
+                                EidtAuthorName=p.EidtName,
                                 CheckedStatus = p.CheckedStatus,
                             }).ToList();
                 return List;
@@ -82,6 +82,7 @@ namespace DalProject
                     table.StrContent = Models.StrContent;
                     table.ConvertPic = Models.ConvertImg;
                     table.EidtAuthorId = Models.EidtAuthorId;
+                    table.EidtName = Models.EidtAuthorName;
                     table.CheckedStatus = 0;
                     table.UpTime = DateTime.Now;
                     db.SaveChanges();
@@ -104,6 +105,8 @@ namespace DalProject
                     table.CheckedStatus = 0;
                     table.UploadAuthorId = Models.UploadAuthorId;
                     table.EidtAuthorId = Models.EidtAuthorId;
+                    table.UploadName = Models.UploadName;
+                    table.EidtName = Models.EidtAuthorName;
                     db.A_News.Add(table);
                     db.SaveChanges();
                     Models.Id = table.Id;

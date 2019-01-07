@@ -29,5 +29,11 @@ namespace DataBase
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<bool> DeleteFlag { get; set; }
         public string Name { get; set; }
+        public Nullable<int> CWCheckedStatus { get; set; }
+        public string CWRemarks { get; set; }
+        public Nullable<System.DateTime> CWCheckedTime { get; set; }
+        public string ApplyDepartmnet { get; set; }
+        public Nullable<int> ApplyDepartmnetId { get; set; }
+        public Nullable<bool> IsAccounts { get; set; }
     }
 }

@@ -189,7 +189,28 @@ namespace DalProject
                 db.SaveChanges();
             }
         }
-        
+        public void CWChecked(string ListId)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                string[] ArrId = ListId.Split('$');
+                foreach (var item in ArrId)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        int Id = Convert.ToInt32(item);
+                        var tables = db.Sale_Contract_Header.Where(k => k.Id == Id).SingleOrDefault();
+                        tables.CWCheckStatus = true;
+                        tables.CWCheckId = new UserDal().GetCurrentUserName().UserId;
+                        tables.CWCheckName = new UserDal().GetCurrentUserName().UserName;
+                        tables.CWCheckTime = DateTime.Now;
+                    }
+                }
+
+                db.SaveChanges();
+            }
+        }
+
         //根据日期获取合同总个数
         public int GetCRMHTCount(DateTime CreateTime)
         {

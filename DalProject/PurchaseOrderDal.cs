@@ -27,6 +27,7 @@ namespace DalProject
                 var List = (from p in db.Purchase_Order.Where(k => k.DeleteFlag == false)
                             where !string.IsNullOrEmpty(SModel.Name) ? p.Name.Contains(SModel.Name) : true
                             where SModel.CheckedStatus >= 0 ? p.CheckedStatus == SModel.CheckedStatus : true
+                            where SModel.CWCheckedStatus >= 0 ? p.CWCheckedStatus == SModel.CWCheckedStatus : true
                             where SModel.ApplyUserId > 0 ? p.ApplyUserId == SModel.ApplyUserId : true
                             where p.CreateTime >= StartTime
                             where p.CreateTime < EndTime
@@ -44,6 +45,11 @@ namespace DalProject
                                 CheckedName = p.CheckedName,
                                 CheckedDateTime = p.CheckedDateTime,
                                 Price = p.Price,
+                                CWCheckedStatus=p.CWCheckedStatus,
+                                CWRemarks=p.CWRemarks,
+                                CWCheckedTime=p.CWCheckedTime,
+                                ApplyDepartmnet=p.ApplyDepartmnet,
+                                IsAccounts=p.IsAccounts,
                             }).ToList();
                 return List;
             }
@@ -61,6 +67,7 @@ namespace DalProject
                     table.Remark = Models.Remark;
                     table.Price = Models.Price;
                     table.CheckedStatus = 0;
+                    table.CWCheckedStatus = 0;
                     table.ApplyDateTime = DateTime.Now;
                 }
                 else
@@ -77,6 +84,10 @@ namespace DalProject
                     table.CheckedStatus = 0;
                     table.CreateTime = DateTime.Now;
                     table.DeleteFlag = false;
+                    table.ApplyDepartmnet = Models.ApplyDepartmnet;
+                    table.ApplyDepartmnetId = Models.ApplyDepartmnetId;
+                    table.CWCheckedStatus = 0;
+                    table.IsAccounts = false;
                     db.Purchase_Order.Add(table);
                 }
                 db.SaveChanges();
@@ -140,7 +151,47 @@ namespace DalProject
                             tables.CheckedStatus = CheckedId;
                             tables.CheckedUserId = UserId;
                             tables.CheckedName = UserName;
+                            tables.CheckedDateTime = DateTime.Now;
                         }
+                    }
+                }
+                db.SaveChanges();
+            }
+        }
+        public void CWCheckedMore(string ListId, int status, string Remarks)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                string[] ArrId = ListId.Split('$');
+                foreach (var item in ArrId)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        int Id = Convert.ToInt32(item);
+                        var tables = db.Purchase_Order.Where(k => k.Id == Id).SingleOrDefault();
+                        if (tables.CWCheckedStatus == 0)
+                        {
+                            tables.CWCheckedStatus = status;
+                            tables.CWCheckedTime = DateTime.Now;
+                            tables.CWRemarks = Remarks;
+                        }
+                    }
+                }
+                db.SaveChanges();
+            }
+        }
+        public void CWAccounts(string ListId)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                string[] ArrId = ListId.Split('$');
+                foreach (var item in ArrId)
+                {
+                    if (!string.IsNullOrEmpty(item))
+                    {
+                        int Id = Convert.ToInt32(item);
+                        var tables = db.Purchase_Order.Where(k => k.Id == Id).SingleOrDefault();
+                            tables.IsAccounts = true;
                     }
                 }
                 db.SaveChanges();

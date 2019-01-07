@@ -35,7 +35,7 @@ namespace XiangNingSale.Controllers
             if (Id != null && Id > 0)
             {
                 Models = NSer.GetDetailById(Id.Value);
-                Models.EidtAuthorId = GetUserId();
+                Models.EidtAuthorId = USer.GetCurrentUserName().UserId;
             }
             Models.TypeDroList = NSer.GetNewTypeDrolist(Models.TypeId);
             return View(Models);
@@ -43,8 +43,10 @@ namespace XiangNingSale.Controllers
         [ValidateInput(false)]
         public ActionResult PostAdd(NewsModel Models)
         {
-            Models.UploadAuthorId= GetUserId();
-            Models.EidtAuthorId = GetUserId();
+            Models.UploadAuthorId= USer.GetCurrentUserName().UserId;
+            Models.EidtAuthorId = USer.GetCurrentUserName().UserId;
+            Models.UploadName = USer.GetCurrentUserName().UserName;
+            Models.EidtAuthorName = USer.GetCurrentUserName().UserName;
             if (NSer.AddOrUpdate(Models) == true)
             {
                 return Content("1");
@@ -55,7 +57,7 @@ namespace XiangNingSale.Controllers
         public ActionResult UserIndex()
         {
             SNewsModel SModels = new SNewsModel();
-            SModels.UploadAuthorId= GetUserId();
+            SModels.UploadAuthorId= USer.GetCurrentUserName().UserId;
             SModels.TypeDroList = NSer.GetNewTypeDrolist(SModels.TypeId);
             return View(SModels);
         }
@@ -84,7 +86,7 @@ namespace XiangNingSale.Controllers
             }
             else
             {
-                if (NSer.Checked(ListId, CheckedId, GetUserId()) == true)
+                if (NSer.Checked(ListId, CheckedId, USer.GetCurrentUserName().UserId) == true)
                 {
                     return Content("True");
                 }
@@ -97,13 +99,6 @@ namespace XiangNingSale.Controllers
             var list = NSer.GetFileInfoList(Id);
             return View(list);
         }
-        //获取当前用户，如果为空，设置默认1
-        public int GetUserId()
-        {
-            var UserId = USer.GetCurrentUserName().UserId;
-            if (UserId <= 0)
-            { UserId = 1; }
-            return UserId;
-        }
+        
     }
 }

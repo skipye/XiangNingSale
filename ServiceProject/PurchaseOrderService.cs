@@ -47,5 +47,21 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
+        public bool CWCheckedMore(string ListId, int status, string Remarks)
+        {
+            try { PODal.CWCheckedMore(ListId, status, Remarks); return true; }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public bool CWAccounts(string ListId)
+        {
+            try { PODal.CWAccounts(ListId); return true; }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

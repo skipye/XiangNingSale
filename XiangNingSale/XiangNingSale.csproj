@@ -126,6 +126,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\FileManageController.cs" />
+    <Compile Include="Controllers\FinanceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LabelsController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -578,6 +579,10 @@
     <Content Include="Views\Order\AddProducts.cshtml" />
     <Content Include="Views\Order\ProductListByOrder.cshtml" />
     <Content Include="Views\Order\Show.cshtml" />
+    <Content Include="Views\Purchase\CWIndex.cshtml" />
+    <Content Include="Views\Finance\Purchase.cshtml" />
+    <Content Include="Views\Purchase\CWChecked.cshtml" />
+    <Content Include="Views\Finance\Order.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
