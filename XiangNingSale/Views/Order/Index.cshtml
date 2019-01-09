@@ -103,7 +103,7 @@
                     render: function (data, type, row) {
                         if (row.CWCheckStatus == 0) {
                             return '<input type="checkbox" value="' + row.Id + '" >';
-                        }
+                        } else { return "";}
                     }
                 }, {
                     targets: 15,//把第九列的样式改为超链接

@@ -44,9 +44,9 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="LitJSON">
-      <HintPath>..\packages\LitJSON.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="LitJSON, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\LitJSON.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -209,14 +209,6 @@
     <Content Include="js\JqueryUploadify\swfobject.js" />
     <Content Include="js\JqueryUploadify\uploadify.css" />
     <Content Include="js\JqueryUploadify\uploadify.swf" />
-    <Content Include="js\kindeditor\asp.net\bin\LitJSON.dll" />
-    <Content Include="js\kindeditor\asp.net\demo.aspx" />
-    <Content Include="js\kindeditor\asp.net\README.txt" />
-    <Content Include="js\kindeditor\attached\image\20141027\20141027152716_4034.jpg" />
-    <Content Include="js\kindeditor\attached\image\20141027\20141027152934_1923.jpg" />
-    <Content Include="js\kindeditor\attached\image\20141027\20141027152934_4773.jpg" />
-    <Content Include="js\kindeditor\attached\image\20141027\20141027152934_5733.jpg" />
-    <Content Include="js\kindeditor\attached\image\20141027\20141027153028_0264.jpg" />
     <Content Include="js\kindeditor\kindeditor-all-min.js" />
     <Content Include="js\kindeditor\kindeditor-all.js" />
     <Content Include="js\kindeditor\kindeditor-min.js" />
@@ -521,10 +513,6 @@
     <Content Include="Views\FileManage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="js\kindeditor\asp.net\file_manager_json.ashx" />
-    <Content Include="js\kindeditor\asp.net\upload_json.ashx" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Article\UserIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -584,6 +572,7 @@
     <Content Include="Views\Finance\Purchase.cshtml" />
     <Content Include="Views\Purchase\CWChecked.cshtml" />
     <Content Include="Views\Finance\Order.cshtml" />
+    <Content Include="Views\Purchase\Show.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

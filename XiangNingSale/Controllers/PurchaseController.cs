@@ -116,5 +116,10 @@ namespace XiangNingSale.Controllers
             }
             else { return Content("False"); }
         }
+        public ActionResult Show(int Id)
+        {
+            var Models = NSer.GetDetailById(Id);
+            return View(Models);
+        }
     }
 }
