@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="LitJSON">
       <HintPath>..\packages\LitJSON.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
