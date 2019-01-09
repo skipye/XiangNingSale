@@ -107,6 +107,7 @@ namespace DalProject
                                   Price = p.Price,
                                   ApplyUserId=p.ApplyUserId,
                                   ApplyUserName = p.ApplyUserName,
+                                  ApplyDateTime=p.ApplyDateTime,
                               }).SingleOrDefault();
                 return tables;
             }

@@ -8,9 +8,9 @@
 
     <p class="ditem">采购内容：@Model.Name</p>
     <p class="ditem">采购数量：@Model.Qty</p>
-    <p class="ditem">采购价格：@Model.Price</p>
+    <p class="ditem">采购价格：@Model.Price 元</p>
     <p class="ditem">采购人：@Model.ApplyUserName</p>
-    <p class="ditem">采购人：@Convert.ToDateTime(Model.ApplyDateTime).ToString("yyyy-MM-dd HH:mm")</p>
+    <p class="ditem">申请时间：@Convert.ToDateTime(Model.ApplyDateTime).ToString("yyyy-MM-dd HH:mm")</p>
     <p class="ditem">公司审核状态：@(Model.CheckedStatus != null && Model.CheckedStatus == 1 ? "通过" : Model.CheckedStatus==2? "被驳回": "未审核")</p>
     <p class="ditem">财务审核状态：@(Model.CWCheckedStatus != null && Model.CWCheckedStatus == 1 ? "通过" : Model.CWCheckedStatus == 2 ? "被驳回" : "未审核")</p>
     <div style="clear:both"></div>

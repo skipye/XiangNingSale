@@ -52,7 +52,7 @@ namespace DalProject
             using (var db = new SaleHREntities())
             {
                 var Tables = (from p in db.ehr_employee.Where(k => k.password == models.PassWord && k.status == 1)
-                              where !string.IsNullOrEmpty(models.UserName) ? p.name == models.UserName : true
+                              where !string.IsNullOrEmpty(models.UserName) ? p.number == models.UserName : true
                               where !string.IsNullOrEmpty(models.Telephone) ? p.tel == models.Telephone : true
                               select p
                              ).FirstOrDefault();
