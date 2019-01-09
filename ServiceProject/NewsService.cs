@@ -67,6 +67,14 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
+        public List<SelectListItem> GetNewAreaDrolist(int? pId)
+        {
+            try { return IDal.GetNewAreaDrolist(pId); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public string GetNewsImgs(int Id)
         {
             try { return IDal.GetNewsImgs(Id); }

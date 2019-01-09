@@ -25,6 +25,9 @@ namespace ModelProject
         public int? UploadAuthorId { get; set; }
         public string EidtAuthorName { get; set; }
         public int? EidtAuthorId { get; set; }
+        public int? AreaId { get; set; }
+        public string AreaName { get; set; }
+        public List<SelectListItem> AreaDroList { get; set; }
     }
     public class SNewsModel
     {

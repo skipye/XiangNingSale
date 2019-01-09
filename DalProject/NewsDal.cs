@@ -85,6 +85,7 @@ namespace DalProject
                     table.EidtName = Models.EidtAuthorName;
                     table.CheckedStatus = 0;
                     table.UpTime = DateTime.Now;
+                    table.AreaId = Models.AreaId;
                     db.SaveChanges();
                 }
                 else
@@ -107,6 +108,7 @@ namespace DalProject
                     table.EidtAuthorId = Models.EidtAuthorId;
                     table.UploadName = Models.UploadName;
                     table.EidtName = Models.EidtAuthorName;
+                    table.AreaId = Models.AreaId;
                     db.A_News.Add(table);
                     db.SaveChanges();
                     Models.Id = table.Id;
@@ -150,7 +152,8 @@ namespace DalProject
                                   ConvertImg = p.ConvertPic,
                                   CreateTime = p.CreateTime,
                                   KeyWord = p.KeyWord,
-                                  StrContent=p.StrContent
+                                  StrContent=p.StrContent,
+                                  AreaId=p.AreaId,
                               }).SingleOrDefault();
                 tables.GalleryItems = GetNewsImgs(Id);
                 return tables;
@@ -212,6 +215,21 @@ namespace DalProject
                             items.Add(new SelectListItem() { Text = "----└" + Citem.Name, Value = Citem.Id.ToString(), Selected = pId.HasValue && Citem.Id.Equals(pId) });
                         }
                     }
+                }
+            }
+            return items;
+        }
+        public List<SelectListItem> GetNewAreaDrolist(int? pId)
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            items.Add(new SelectListItem() { Text = "请选择区域", Value = "" });
+            using (var db = new XNArticleEntities())
+            {
+                List<AreaType> model = db.AreaType.Where(b => b.state == true).OrderBy(k => k.Sort).ToList();
+                foreach (var item in model)
+                {
+                    items.Add(new SelectListItem() { Text = "╋" + item.Name, Value = item.Id.ToString(), Selected = pId.HasValue && item.Id.Equals(pId) });
+                    
                 }
             }
             return items;

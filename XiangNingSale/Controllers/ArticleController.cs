@@ -38,6 +38,7 @@ namespace XiangNingSale.Controllers
                 Models.EidtAuthorId = USer.GetCurrentUserName().UserId;
             }
             Models.TypeDroList = NSer.GetNewTypeDrolist(Models.TypeId);
+            Models.AreaDroList = NSer.GetNewAreaDrolist(Models.AreaId);
             return View(Models);
         }
         [ValidateInput(false)]

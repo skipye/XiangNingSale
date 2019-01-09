@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreaType.cs">
+      <DependentUpon>XNArticleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="A_Menu.cs">
       <DependentUpon>XNArticleModel.tt</DependentUpon>
     </Compile>

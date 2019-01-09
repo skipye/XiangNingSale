@@ -31,5 +31,6 @@ namespace DataBase
         public DbSet<A_User> A_User { get; set; }
         public DbSet<A_Menu> A_Menu { get; set; }
         public DbSet<A_Role> A_Role { get; set; }
+        public DbSet<AreaType> AreaType { get; set; }
     }
 }

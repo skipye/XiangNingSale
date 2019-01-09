@@ -43,6 +43,7 @@
           <Property Name="CheckedUserId" Type="int" />
           <Property Name="UploadName" Type="nvarchar" MaxLength="100" />
           <Property Name="EidtName" Type="nvarchar" MaxLength="100" />
+          <Property Name="AreaId" Type="int" />
         </EntityType>
         <EntityType Name="A_News_File">
           <Key>
@@ -92,6 +93,16 @@
           <Property Name="LoginTimes" Type="int" />
           <Property Name="LastTimes" Type="datetime" />
         </EntityType>
+        <EntityType Name="AreaType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sort" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="state" Type="bit" />
+        </EntityType>
         <Association Name="FK_A_News_A_NewsType">
           <End Role="A_NewsType" Type="Self.A_NewsType" Multiplicity="0..1" />
           <End Role="A_News" Type="Self.A_News" Multiplicity="*" />
@@ -101,6 +112,18 @@
             </Principal>
             <Dependent Role="A_News">
               <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_A_News_AreaType">
+          <End Role="AreaType" Type="Self.AreaType" Multiplicity="0..1" />
+          <End Role="A_News" Type="Self.A_News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_News">
+              <PropertyRef Name="AreaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -116,6 +139,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AreaType_AreaType">
+          <End Role="AreaType" Type="Self.AreaType" Multiplicity="1" />
+          <End Role="AreaType1" Type="Self.AreaType" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AreaType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AreaType1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="XNArticleModelStoreContainer">
           <EntitySet Name="A_Menu" EntityType="Self.A_Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_News" EntityType="Self.A_News" Schema="dbo" store:Type="Tables" />
@@ -123,13 +158,22 @@
           <EntitySet Name="A_NewsType" EntityType="Self.A_NewsType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_Role" EntityType="Self.A_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="A_User" EntityType="Self.A_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AreaType" EntityType="Self.AreaType" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_A_News_A_NewsType" Association="Self.FK_A_News_A_NewsType">
             <End Role="A_NewsType" EntitySet="A_NewsType" />
+            <End Role="A_News" EntitySet="A_News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_A_News_AreaType" Association="Self.FK_A_News_AreaType">
+            <End Role="AreaType" EntitySet="AreaType" />
             <End Role="A_News" EntitySet="A_News" />
           </AssociationSet>
           <AssociationSet Name="FK_A_News_File_A_News" Association="Self.FK_A_News_File_A_News">
             <End Role="A_News" EntitySet="A_News" />
             <End Role="A_News_File" EntitySet="A_News_File" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AreaType_AreaType" Association="Self.FK_AreaType_AreaType">
+            <End Role="AreaType" EntitySet="AreaType" />
+            <End Role="AreaType1" EntitySet="AreaType" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -161,6 +205,8 @@
           <Property Name="CheckedUserId" Type="Int32" />
           <Property Name="UploadName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="EidtName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AreaId" Type="Int32" />
+          <NavigationProperty Name="AreaType" Relationship="XNArticleModel.FK_A_News_AreaType" FromRole="A_News" ToRole="AreaType" />
         </EntityType>
         <EntityType Name="A_News_File">
           <Key>
@@ -250,6 +296,11 @@
             <End Role="A_Menu" EntitySet="A_Menu" />
             <End Role="A_Menu1" EntitySet="A_Menu" />
           </AssociationSet>
+          <EntitySet Name="AreaType" EntityType="XNArticleModel.AreaType" />
+          <AssociationSet Name="FK_A_News_AreaType" Association="XNArticleModel.FK_A_News_AreaType">
+            <End Role="AreaType" EntitySet="AreaType" />
+            <End Role="A_News" EntitySet="A_News" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_A_NewsType_A_NewsType">
           <End Type="XNArticleModel.A_NewsType" Role="A_NewsType" Multiplicity="0..1" />
@@ -303,6 +354,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AreaType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sort" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="state" Type="Boolean" />
+          <NavigationProperty Name="A_News" Relationship="XNArticleModel.FK_A_News_AreaType" FromRole="AreaType" ToRole="A_News" />
+          </EntityType>
+        <Association Name="FK_A_News_AreaType">
+          <End Type="XNArticleModel.AreaType" Role="AreaType" Multiplicity="0..1" />
+          <End Type="XNArticleModel.A_News" Role="A_News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AreaType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="A_News">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -312,6 +386,7 @@
           <EntitySetMapping Name="A_News">
             <EntityTypeMapping TypeName="XNArticleModel.A_News">
               <MappingFragment StoreEntitySet="A_News">
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
                 <ScalarProperty Name="EidtName" ColumnName="EidtName" />
                 <ScalarProperty Name="UploadName" ColumnName="UploadName" />
                 <ScalarProperty Name="CheckedUserId" ColumnName="CheckedUserId" />
@@ -398,6 +473,17 @@
                 <ScalarProperty Name="MenuList" ColumnName="MenuList" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AreaType">
+            <EntityTypeMapping TypeName="XNArticleModel.AreaType">
+              <MappingFragment StoreEntitySet="AreaType">
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Sort" ColumnName="Sort" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
