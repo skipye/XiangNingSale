@@ -26,6 +26,7 @@ namespace DataBase
         public Nullable<int> ParentId { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<bool> State { get; set; }
+        public Nullable<int> Type { get; set; }
     
         public virtual ICollection<A_News> A_News { get; set; }
         public virtual ICollection<A_NewsType> A_NewsType1 { get; set; }

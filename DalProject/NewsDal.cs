@@ -1,15 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DataBase;
 using ModelProject;
 using System.Web.Mvc;
+using MvcPager.WebControls.Mvc;
 
 namespace DalProject
 {
     public class NewsDal
     {
+        public PagedList<NewsModel> GetWebPageList(SNewsModel SModel,int Type)
+        {
+            using (var db = new XNArticleEntities())
+            {
+                var List = (from p in db.A_News.Where(k => k.State == true && k.CheckedStatus==1 && k.A_NewsType.Type==Type)
+                            where !string.IsNullOrEmpty(SModel.Name) ? p.Name.Contains(SModel.Name) : true
+                            where SModel.TypeId > 0 ? p.TypeId == SModel.TypeId : true
+                            where SModel.AreaId > 0 ? p.AreaId == SModel.AreaId : true
+                            orderby p.CreateTime descending
+                            select new NewsModel
+                            {
+                                Id = p.Id,
+                                Name = p.Name,
+                                TypeId = p.TypeId,
+                                TypeName = p.A_NewsType.Name,
+                                Remarks = p.Remarks,
+                                CreateTime = p.CreateTime,
+                                HitTimes = p.HitTimes,
+                                ConvertImg = p.ConvertPic,
+                                EidtAuthorName = p.EidtName,
+                                CheckedStatus = p.CheckedStatus,
+                            }).ToList();
+                return List.ToPagedList(SModel.PageIndex,SModel.PageSize);
+            }
+        }
         public List<NewsModel> GetPageList(SNewsModel SModel)
         {
             DateTime StartTime = Convert.ToDateTime("1900-01-01");
@@ -152,14 +177,27 @@ namespace DalProject
                                   ConvertImg = p.ConvertPic,
                                   CreateTime = p.CreateTime,
                                   KeyWord = p.KeyWord,
-                                  StrContent=p.StrContent,
-                                  AreaId=p.AreaId,
+                                  StrContent = p.StrContent,
+                                  AreaId = p.AreaId,
+                                  AreaName = p.AreaType.Name,
+                                  HitTimes = p.HitTimes,
                               }).SingleOrDefault();
                 tables.GalleryItems = GetNewsImgs(Id);
+
+                UpdateNewsHittimes(Id);
                 return tables;
             }
         }
-       
+        public void UpdateNewsHittimes(int Id)
+        {
+            using (var db = new XNArticleEntities())
+            {
+                var tables = db.A_News.Where(k => k.Id == Id).SingleOrDefault();
+
+                tables.HitTimes = tables.HitTimes + 1;
+                db.SaveChanges();
+            }
+        }
         public void DeleteMore(string ListId)
         {
             using (var db = new XNArticleEntities())
@@ -197,6 +235,20 @@ namespace DalProject
                 db.SaveChanges();
             }
         }
+        public List<CRMItem> GetWebTypeList(int TypeId)
+        {
+            using (var db = new XNArticleEntities())
+            {
+                var List = (from p in db.A_NewsType.Where(k => k.Type == TypeId && k.State == true && k.ParentId>0)
+                            orderby p.Rank
+                            select new CRMItem
+                            {
+                                Id = p.Id,
+                                Name = p.Name
+                            }).ToList();
+                return List;
+            }
+        }
         public List<SelectListItem> GetNewTypeDrolist(int? pId)
         {
             List<SelectListItem> items = new List<SelectListItem>();
@@ -218,6 +270,20 @@ namespace DalProject
                 }
             }
             return items;
+        }
+        public List<CRMItem> GetWebArealist()
+        {
+            using (var db = new XNArticleEntities())
+            {
+                var List = (from p in db.AreaType.Where(k => k.state == true)
+                            orderby p.Sort
+                            select new CRMItem
+                            {
+                                Id = p.Id,
+                                Name = p.Name
+                            }).ToList();
+                return List;
+            }
         }
         public List<SelectListItem> GetNewAreaDrolist(int? pId)
         {

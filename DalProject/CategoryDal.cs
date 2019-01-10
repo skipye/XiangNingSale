@@ -72,7 +72,7 @@ namespace DalProject
                     A_NewsType table = new A_NewsType();
                     table.Name = Models.Name;
                     table.Rank = Models.Rank;
-                    table.ParentId = Models.ParentId;
+                    table.ParentId = Models.ParentId??0;
                     table.CreateTime = DateTime.Now;
                     table.State = true;
                     db.A_NewsType.Add(table);

@@ -18,11 +18,12 @@
 .pronavlist li{padding-left:70px;}
 .pronavlist li a{color:#666;padding:0px 20px;}
 .pronavlist li a:hover{color:#F37B1D;font-weight:bold;}
+.pronavlist li a.checked{padding:3px 10px;border-radius:4px;background:#ff242d;color:#fff;}
 
-.products .product_show{border:1px solid #dfdfdf;height:400px;}
-.products .product_show .product_picshow{width:700px;border-right:1px solid #dfdfdf;height:400px; }
+.products .product_show{border:1px solid #dfdfdf;height:350px;}
+.products .product_show .product_picshow{width:700px;border-right:1px solid #dfdfdf;height:350px; }
 .products .product_show .product_picshow .prodct_bigpicshow{height:500px;width:700px;text-align:center;}
-.products .product_show .product_picshow .prodct_bigpicshow img{width:500px;height:auto;overflow:hidden;margin:0px auto;}
+.products .product_show .product_picshow .prodct_bigpicshow img{width:500px;height:300px;overflow:hidden;margin:20px auto;vertical-align:middle;}
 .products .product_show .product_picshow .product_smallpicshow{height:100px;width:600px;border-top:1px solid #dfdfdf;position:relative;overflow:hidden;}
 .products .product_show .product_titlist{width:420px;overflow:hidden;}
 .products .product_show .product_titlist h2{font-size:30px;margin-top:60px;margin-bottom:30px;}

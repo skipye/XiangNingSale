@@ -60,6 +60,10 @@
     <Compile Include="UserDal.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{d163b597-195d-439e-90b8-561ecd78f705}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DataBase\DataBase.csproj">
       <Project>{3675373a-388c-43c3-8229-4cd2605859d5}</Project>
       <Name>DataBase</Name>

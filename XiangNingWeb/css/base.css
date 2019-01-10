@@ -291,4 +291,16 @@ a.red { color: #DD514C; }
 .ourtit .tit2{font-size:30px;font-weight:bold;line-height:50px;}
 .ourtit .tit3{font-size:14px;line-height:30px;color:#555;margin:0px auto;}
 
+/* pages */
+.pagelist{width:100%;background:url(../bg/Tab_bg.jpg) repeat-x;height:48px;margin:40px auto;}
+.pages{clear:both;padding:10px 0;padding-right:10px;height:30px;overflow:hidden;position:relative;}
+.pages:after{content:"\20";display:block;height:0;clear:both;}
+.pages .total{float:left;padding-left:10px;font-size:12px;color:#666;line-height:26px;}
+.pages .goto{float:right;position:absolute;right:30px;top:10px;}
+.pages ul{padding-left:10px;position:absolute;right:10px;top:10px;}
+.pages ul li{float:left;}
+.pages ul li a{display:block;padding:0px 10px;margin-left:-1px;height:25px;line-height:25px;border:1px #ccc solid;background:#F2F2F2;color:#666;text-decoration:none;z-index:2;cursor:pointer;}
+.pages ul li a:hover,.pages ul li a.selected{color:#fff;border-color:#f69200;background:#ff242d;position:relative;}
+.pages .static{position:absolute;right:10px;top:10px;z-index:2;background:#fff;min-width:100px;max-width:250px;height:26px;overflow:hidden;text-align:right;}
+.pages .static a{color:#2981e1;margin-top:5px;float:right;margin-right:10px;}
 

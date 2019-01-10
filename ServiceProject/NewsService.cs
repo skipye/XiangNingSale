@@ -5,12 +5,37 @@ using System.Text;
 using ModelProject;
 using DalProject;
 using System.Web.Mvc;
+using MvcPager.WebControls.Mvc;
 
 namespace ServiceProject
 {
     public class NewsService
     {
         private static readonly NewsDal IDal = new NewsDal();
+        public PagedList<NewsModel> GetWebPageList(SNewsModel SModel, int Type)
+        {
+            try { return IDal.GetWebPageList(SModel, Type); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public List<CRMItem> GetWebTypeList(int TypeId)
+        {
+            try { return IDal.GetWebTypeList(TypeId); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public List<CRMItem> GetWebArealist()
+        {
+            try { return IDal.GetWebArealist(); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public List<NewsModel> GetPageList(SNewsModel SModel)
         {
             try { return IDal.GetPageList(SModel); }

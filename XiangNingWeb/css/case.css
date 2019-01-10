@@ -7,9 +7,11 @@
 .case .casetit{font-size: 36px; color: rgb(53, 53, 53); text-align:center;}
 .case .casetit1{color:#b2b2b2;font-size:14px;text-align:center;}
 
-.caseproduct{width:1200px;background:#fff;}
-.caselist li{width:400px;height:490px;float:left;overflow:hidden;margin-top:20px;text-align:center;}
-.caselist li img{width:380px;height:380px;}
+.caseproduct{width:1200px;background:#fff;margin-bottom:30px;}
+.caselist li{width:398px;min-height:400px;float:left;overflow:hidden;margin-top:20px;text-align:center;border:1px solid #fff;}
+.caselist li .convertimg{width:396px;height:300px;overflow:hidden;border:1px solid #dedede;}
+.caselist li img{width:380px;height:auto;}
+.caselist li:hover{border:1px solid #ff0000;}
 .caselist li p{line-height:35px;color:#333;text-align:left;}
 .saleprice{color:#02B2B5;padding:10px;}
 .salebtn{height:33px;line-height:33px !important;background:#02B2B5;width:100%;font-size:16px;display:inline-block;border-radius:10px;color:#fff !important;text-align: center;}

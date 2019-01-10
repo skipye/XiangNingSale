@@ -68,6 +68,7 @@
           <Property Name="ParentId" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="State" Type="bit" />
+          <Property Name="Type" Type="int" />
         </EntityType>
         <EntityType Name="A_Role">
           <Key>
@@ -235,6 +236,7 @@
           <NavigationProperty Name="A_News" Relationship="Self.FK_A_News_A_NewsType" FromRole="A_NewsType" ToRole="A_News" />
           <NavigationProperty Name="A_NewsType1" Relationship="XNArticleModel.FK_A_NewsType_A_NewsType" FromRole="A_NewsType" ToRole="A_NewsType1" />
           <NavigationProperty Name="A_NewsType2" Relationship="XNArticleModel.FK_A_NewsType_A_NewsType" FromRole="A_NewsType1" ToRole="A_NewsType" />
+          <Property Name="Type" Type="Int32" />
         </EntityType>
         <EntityType Name="A_User">
           <Key>
@@ -426,6 +428,7 @@
           <EntitySetMapping Name="A_NewsType">
             <EntityTypeMapping TypeName="XNArticleModel.A_NewsType">
               <MappingFragment StoreEntitySet="A_NewsType">
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Rank" ColumnName="Rank" />

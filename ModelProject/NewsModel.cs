@@ -28,6 +28,7 @@ namespace ModelProject
         public int? AreaId { get; set; }
         public string AreaName { get; set; }
         public List<SelectListItem> AreaDroList { get; set; }
+        
     }
     public class SNewsModel
     {
@@ -38,6 +39,11 @@ namespace ModelProject
         public List<SelectListItem> TypeDroList { get; set; }
         public int? CheckedStatus { get; set; }
         public int? UploadAuthorId { get; set; }
+        public int? AreaId { get; set; }
+        public int PageSize { get; set; }
+        public int PageIndex { get; set; }
+        public List<CRMItem> AreaList { get; set; }
+        public List<CRMItem> TypeList { get; set; }
     }
     public class NewsItmeModel
     {

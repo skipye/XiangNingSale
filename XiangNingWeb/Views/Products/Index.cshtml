@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ModelProject.SNewsModel
+@{
     ViewBag.Title = "我们的产品";
 }
 <link href="~/css/product.css" rel="stylesheet" />
@@ -9,43 +10,63 @@
     <div class="pronav">
         <div class="pronav_tit mt30"><span class="pl20 f18 orange">我们的产品</span></div>
         <ul class="pronavlist mt10 pb20">
-            <li><span class="f16">功能：</span><a href="#">卧房家具</a><a href="#">卧房家具</a><a href="#">卧房家具</a><a href="#">卧房家具</a><a href="#">卧房家具</a></li>
-            <li><span class="f16">区域：</span><a href="#">卧房家具</a><a href="#">卧房家具</a><a href="#">卧房家具</a><a href="#">卧房家具</a><a href="#">卧房家具</a></li>
+            <li id="AreaId"><span class="f16">区域：</span>
+            @if (Model.AreaList != null && Model.AreaList.Any())
+            {
+                <a href="javascript:void(0)" data-ajax="0" class="checked">全部</a>
+                foreach (var item in Model.AreaList)
+                {
+                    <a href="javascript:void(0)" data-ajax="@item.Id">@item.Name</a>
+                }
+            }
+            </li>
+            <li id="TypeId"><span class="f16">系列：</span>
+            @if (Model.TypeList != null && Model.TypeList.Any())
+            {
+                <a href="javascript:void(0)" data-ajax="0" class="checked">全部</a>
+                foreach (var item in Model.TypeList)
+                {
+                    <a href="javascript:void(0)" data-ajax="@item.Id">@item.Name</a>
+                }
+            }</li>
         </ul>
     </div>
     </div>
-    <div class="caseproduct box">
-        <ul class="caselist clearfix">
-             <li><a href="@Url.Action("Detail","Products")">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <span class="saleprice fl">￥<span class="f20">1299</span>.00</span>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-             <li><a href="@Url.Action("Detail","Products")">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-             <li><a href="@Url.Action("Detail","Products")">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-             <li><a href="@Url.Action("Detail","Products")">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-            <li><a href="@Url.Action("Detail","Products")">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-             <li><a href="@Url.Action("Detail","Products")">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-        </ul>
+    <div class="caseproduct box clearfix">
+        
     </div>
+
+<script type="text/javascript">
+    var param = {};
+    $(function () { search(param); });
+    $("#AreaId a").click(function () {
+        var _this = $(this);
+        $("#AreaId a").removeClass("checked");
+        _this.addClass("checked");
+        //搜索条件
+        var AreaId = _this.attr("data-ajax").trim();
+        var TypeId = $("#TypeId a[class='checked']").attr("data-ajax").trim();
+        //搜索
+        param["AreaId"] = AreaId;
+        param["TypeId"] = TypeId;
+        search(param);
+    });
+    $("#TypeId a").click(function () {
+        var _this = $(this);
+        $("#TypeId a").removeClass("checked");
+        _this.addClass("checked");
+        //搜索条件
+        var TypeId = _this.attr("data-ajax").trim();
+        var AreaId = $("#AreaId a[class='checked']").attr("data-ajax").trim();
+        //搜索
+        param["AreaId"] = AreaId;
+        param["TypeId"] = TypeId;
+        search(param);
+    });
+    function search(param) {
+        var PostUrl = "@Url.Action("PageList","Products")";
+        $.post(PostUrl, param, function (d) {
+            $(".caseproduct").html(d);
+        });
+    }
+</script>

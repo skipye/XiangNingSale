@@ -214,6 +214,14 @@
       <Project>{d163b597-195d-439e-90b8-561ecd78f705}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ModelProject\ModelProject.csproj">
+      <Project>{5f5676a1-fe37-4457-b494-efbe99e6b70c}</Project>
+      <Name>ModelProject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceProject\ServiceProject.csproj">
+      <Project>{56b14c6f-be92-4b6f-af08-0664d0db4b80}</Project>
+      <Name>ServiceProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
@@ -241,6 +249,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\OurAdvantages\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\News\PageList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Products\PageList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\XiangNingWeb.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

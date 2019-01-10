@@ -1,28 +1,30 @@
-﻿@{
+﻿@model ModelProject.NewsModel
+@{
     ViewBag.Title = "产品详情";
+    var PicPath = "http://sale.xiangninghm.com" + Model.ConvertImg;
 }
 <link type="text/css" href="~/css/product.css" rel="stylesheet" />
 
 <div class="curr box">
     <span>首页</span>&gt;
     <span>我们的产品</span>&gt;
-    <span>雅婷椭圆酒橱</span>
+    <span>@Model.Name</span>
 </div>
 <div class="products clearfix">
 
     <div class="product_show clearfix">
         <div class="product_picshow fl">
             <div class="prodct_bigpicshow">
-                 <img src="/img/10.jpg" class="main_img">
+                 <img src="@PicPath" class="main_img" alt="@Model.Name">
             </div>
         </div><!--左边展示-->
 
         <div class="product_titlist fr">
-            <h2>雅婷椭圆酒橱</h2>
+            <h2>@Model.Name</h2>
             <p><span>品牌：</span>上海香凝工艺家具有限公司</p>
-            <p><span>空间：</span>餐厅家具</p>
-            <p><span>类别：</span>橱柜类</p>
-            <p><span>浏览次数：</span>1419</p>
+            <p><span>区域：</span>@Model.AreaName</p>
+            <p><span>系列：</span>@Model.TypeName</p>
+            <p><span>浏览次数：</span>@Model.HitTimes</p>
             
             <a href="javascript:void(0)" class="btnsub mt30" title="立即购买" style="width:100px;"><span>立即购买</span></a>
         </div><!--右边标题列表-->
@@ -56,26 +58,27 @@
         <div class="product_cright fr">
             <div class="productright_tit">
                 <ul>
-                    <li class="">商品详情</li>
+                    <li>商品详情</li>
                     <li class="current">联系我们</li>
                 </ul>
             </div>
             <div class="productright_content">
-                椭圆酒橱
+                @Html.Raw(Model.StrContent)
             </div>
             <div class="productright_content" style="display: block;">
-                <img src="/img/logo_1.jpg" alt="雅婷椭圆酒橱" style="float:left;width:200px;margin-left:70px;">
-                <div class="companyname fr mt30">
-                    <h2>上海香凝工艺家具有限公司</h2>
-                    
-                    <p>联系电话：021-56131287</p>
-                    <p>公司网址：http://www.xiangninghm.com</p>
-                    <p>公司地址：上海市青浦区朱枫公路1355号（近沈砖路）</p>
-                    <p>关注度：27782</p>
+                <img src="/img/logo_1.jpg" alt="上海香凝工艺家具有限公司" style="float:left;width:200px;margin-left:70px;">
+                <div class="companyname fr mt10">
+                    <h2>生产基地：</h2>
+                    <p>上海市青浦区朱枫公路1355号（近沈砖路）</p>
+                    <h2>旗舰店：</h2>
+                    <p>1、上海市真北路1108号红星美凯龙南馆6楼H8009</p>
+                    <p>2、上海市沪南路2178号红星美凯龙6楼F8088</p>
+                    <p>3、上海市澳门路168号月星家居4楼D059木紫香凝</p>
+                    <p>4、上海市徐汇区文定路200号盛源大地4楼香凝红木</p>
                 </div>
                 <div class="clear"></div>
 
-                <div class="companycontent" style="height:480px;">
+                <div class="companycontent" style="min-height:385px;">
                     <div style="height:30px;"></div>
                     <p>优雅与精致，是一种立世姿态与生活态度，不论时代如何更替，唯经典长存。遵循百年海派的精神内核，“海上传奇”坚持在形式架构上追求创新,
                         以当代审美观念和价值取向作为设计支点,致力打造属于这个时代的新海派经典，为沉寂许久的家具行业带来与众不同的中西合璧式美学。
