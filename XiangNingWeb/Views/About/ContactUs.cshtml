@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "联系我们";
+}
+<link href="~/css/about.css" rel="stylesheet" />
+
+<img src="~/img/about.jpg"  alt="联系香凝" style="width:100%;height:auto;"/>
+
+<div class="ourtit mt50">
+    <p class="tit1">Contact Us</p>
+    <p class="tit2  f30">—— 联系<span class="orange f30">我们</span> ——</p>
+    <p class="tit3 pt10">“香凝”是由“暗香疏影”、“凝瞩不转 ”两个成语各取一个字组成而来，
+        建厂初期主要以红木工艺品为主，注重产品制作之工艺，故而取品牌名为“香凝工艺”。
+“香凝工艺”产品很多以故宫博物院、上海博物馆等知名馆藏产品复刻为主，许多产品都可以在博物馆里找到原型。香凝工艺成熟的技师队伍，每一刀一刨，确保每一件产品都是家居艺术精品。</p>
+</div>
+
+<div class="contact">
+    <div class="mt30  fr">
+        <h4>公司地址：</h4>
+        <p>上海市青浦区朱枫公路1355号（近沈砖路）</p>
+        <h4>旗舰店：</h4>
+        <p>1、上海市真北路1108号红星美凯龙南馆6楼H8009</p>
+        <p>2、上海市沪南路2178号红星美凯龙6楼F8088</p>
+        <p>3、上海市澳门路168号月星家居4楼D059木紫香凝</p> 
+        <p>4、上海市徐汇区文定路200号盛源大地4楼香凝红木</p> 
+        <h4>鉴赏热线：</h4>
+        <p>高经理：13311601955</p>
+        <h4>网　　址：</h4>
+        <p>www.xiangninghm.com</p>
+        <h4>邮　　箱：</h4>
+        <p>13311601955@163.com</p>
+        
+    </div>
+
+     <div id="map" class="fl mt30" style="width:820px;height:450px;border:1px solid #efefef;"></div>
+  
+    <div class="clear"></div>
+</div>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ow29ANFSyXM6nf6cYl14GdDI"></script>
+        <script type="text/javascript">
+            // 百度地图API功能
+            var map = new BMap.Map("map");
+            var point = new BMap.Point(121.058537, 31.082668);
+            var marker = new BMap.Marker(point);  // 创建标注
+            map.addOverlay(marker);              // 将标注添加到地图中
+            marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+            map.centerAndZoom(point, 15);
+            map.enableScrollWheelZoom(true);
+            var opts = {
+                width: 250,     // 信息窗口宽度
+                height: 80,     // 信息窗口高度
+                title: "<span style='font-size:16px;color:#0a79d8;font-weight: bold'>香凝红木-生产基地</span>", // 信息窗口标题
+                enableMessage: true,//设置允许信息窗发送短息
+                message: "上海市青浦区朱枫公路1355号<br />（近沈砖路） +鉴赏热线：13311601955"
+            }
+            var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;line-height:140%'>上海市青浦区朱枫公路1355号<br />（近沈砖路） <br />++鉴赏热线：13311601955</p>", opts);  // 创建信息窗口对象
+            map.openInfoWindow(infoWindow, point); //开启信息窗口
+            marker.addEventListener("click", function () {
+                map.openInfoWindow(infoWindow, point); //开启信息窗口
+            });
+        </script>
+ 

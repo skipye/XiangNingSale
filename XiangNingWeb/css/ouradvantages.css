@@ -1,0 +1,10 @@
+﻿
+.ouradvantages{width:1030px;margin:0px auto;}
+.our { height:400px;}
+.odtext{width:450px;}
+.odtit{position:relative;}
+.odtit .sn{width:70px;height:70px;line-height:70px;text-align:center;background:url(../bg/fangkuai_bg.png) no-repeat;font-size:30px;color:#fff;position:absolute;left:0px;top:0px;}
+
+.odtit .od{width:350px;position:absolute;left:90px;top:0px;}
+.odtit .od p{line-height:30px;}
+

@@ -1,0 +1,24 @@
+﻿
+.about{width:100%;background:#fff;}
+
+.about .abouttit{width:570px;position:absolute;left:0px;top:100px;left:0px;}
+.about .abouttit p{line-height:30px;font-size:14px;color:#666;margin-top:30px;}
+
+.about .aboutenname{position:absolute;left:490px;top:270px;
+    color:#efefef;
+	font-size:70px; 
+	transform:rotate(90deg);
+	-ms-transform:rotate(90deg); 	/* IE 9 */
+	-moz-transform:rotate(90deg); 	/* Firefox */
+	-webkit-transform:rotate(90deg); /* Safari 和 Chrome */
+	-o-transform:rotate(90deg); 	/* Opera */
+
+}
+.aboutname{position:absolute;right:0px;top:100px;width:450px;overflow:hidden;}
+.aboutname h1{color: rgb(255, 192, 1);font-size: 48px;}
+.aboutname h2{font-size: 30px;color: rgb(153, 153, 153);}
+
+
+.contact{width:1200px;margin:0px auto;}
+.contact p{line-height:35px;}
+.contact h4{margin-top:20px;}

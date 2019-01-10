@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HtmlHelperExtension.cs" />
     <Compile Include="ImageResult.cs" />
     <Compile Include="ImgProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

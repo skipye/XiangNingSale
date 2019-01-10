@@ -1,0 +1,51 @@
+﻿
+.products { width:1200px;margin:0px auto;background:#fff;}
+.products .tit { position: relative;height: 22px;  line-height: 22px; margin: 18px 0px; font-size:18px; color: #ff242d; }
+.products .tit:before { content: ""; position: relative; float: left; top: 2px; width: 4px; height:22px; background: #ff242d; background: linear-gradient(to bottom, #ff7436, #ff0000); margin-right: 7px; }
+.products .prolist { }
+.products .prolist li { width: 290px; height: 320px; float: left; margin-right: 10px; border: 1px solid #fff; }
+.products .prolist li:nth-child(4n) { margin: 0px; }
+.products .prolist li img { width: 288px; height:auto; border: 1px #e5e5e5 solid; }
+.products .prolist li p { padding-top: 15px; }
+.products .prolist li p.proname { font-size: 16px; color: #666; }
+.products .prolist li p.provalue { color: #858585; }
+.mprice { color: #999; font-family: arial; text-decoration: line-through; }
+.products .prolist li:hover { border: 1px solid #e4393c; }
+
+.products .pronav{margin:10px;}
+.pronav_tit{height:40px;background:#f5f5f5;border-top:4px solid #dfdfdf;line-height:40px;}
+.pronavlist{line-height:40px;}
+.pronavlist li{padding-left:70px;}
+.pronavlist li a{color:#666;padding:0px 20px;}
+.pronavlist li a:hover{color:#F37B1D;font-weight:bold;}
+
+.products .product_show{border:1px solid #dfdfdf;height:400px;}
+.products .product_show .product_picshow{width:700px;border-right:1px solid #dfdfdf;height:400px; }
+.products .product_show .product_picshow .prodct_bigpicshow{height:500px;width:700px;text-align:center;}
+.products .product_show .product_picshow .prodct_bigpicshow img{width:500px;height:auto;overflow:hidden;margin:0px auto;}
+.products .product_show .product_picshow .product_smallpicshow{height:100px;width:600px;border-top:1px solid #dfdfdf;position:relative;overflow:hidden;}
+.products .product_show .product_titlist{width:420px;overflow:hidden;}
+.products .product_show .product_titlist h2{font-size:30px;margin-top:60px;margin-bottom:30px;}
+.products .product_show .product_titlist p {font-size:14px;line-height:30px;}
+.products .product_show .product_titlist p span{color:#60524f;}
+
+.products .product_content{margin-top:30px;}
+.products .product_content .product_cleft{width:300px;}
+.products .product_content .product_cleft .productleft_tit{width:300px;height:40px;border:1px solid #dfdfdf;background:#f5f5f5;}
+.products .product_content .product_cleft .productleft_tit h2{color:#a52025;font-size:18px;font-weight:normal;line-height:40px;padding-left:20px;}
+.products .product_content .product_cleft .productleft_prolist{margin-top:10px;}
+.products .product_content .product_cleft .productleft_prolist li{width:300px;height:240px;border:1px solid #dfdfdf;}
+.products .product_content .product_cleft .productleft_prolist li img{width:300px;height:200px;margin:0px auto;}
+.products .product_content .product_cleft .productleft_prolist li p{width:300px;height:38px;border:1px solid #dfdfdf;border-left:0px;border-right:0px;text-align:center;line-height:38px;color:#666;}
+
+.products .product_content .product_cright{width:890px;}
+.products .product_content .product_cright .productright_tit{width:890px;height:40px;border:1px solid #dfdfdf;background:#f5f5f5;}
+.products .product_content .product_cright .productright_tit li{float:left;width:100px;line-height:40px;text-align:center;font-size:16px;cursor:pointer;}
+.products .product_content .product_cright .productright_tit li.current{background:#a41f24;color:#fff;}
+.products .product_content .product_cright .productright_content{min-height:500px;border:1px solid #dfdfdf;margin-top:10px;display:none;width:890px;}
+.products .product_content .product_cright .productright_content img{width:350px;height:auto;margin-top:20px;}
+.products .product_content .product_cright .productright_content .companyname{width:520px;overflow:hidden;}
+.products .product_content .product_cright .productright_content .companyname h2{height:60px;line-height:60px;font-size:26px;}
+.products .product_content .product_cright .productright_content .companyname p{line-height:30px;font-size:14px;color:#333;}
+.products .product_content .product_cright .productright_content .companycontent{margin:30px 10px;border-top:1px dashed #dfdfdf;}
+.products .product_content .product_cright .productright_content .companycontent p{text-indent:2em;line-height:1.8;font-size:14px;}

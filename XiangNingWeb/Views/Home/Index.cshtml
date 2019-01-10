@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "首页";
+}
+<link type="text/css" href="~/css/home.css" rel="stylesheet" />
+<link href="~/css/jquery.slider.css" rel="stylesheet" />
+<script type="text/javascript" src="~/js/jquery.slider.js"></script>
+
+<div class="slider">
+    <div><a href="Javascript:void(0)"><img src="/img/b1.jpg" alt="" style="height:auto;width:100%;"></a></div>
+    <div><a href="Javascript:void(0)"><img src="/img/b2.jpg" alt="" style="height:auto;width:100%;"></a></div>
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".slider").slideshow({
+            transition: ['bar', 'Rain', 'square', 'squareRandom', 'explode']
+        });
+    });
+</script>
+
+<div id="main">
+    <img src="~/img/bt1.png" style="width:100%;margin-top:30px;" />
+
+    <div class="homeproducts">
+        <p class="p_tit1">MAKE GREEN "HEART" FURNITURE</p>
+        <p class="p_tit2">—— 打造绿色<span class="orange f30">“心”</span>家具 ——</p>
+        <p class="p_tit3 pt10">精选各种精品红木资源，经过重重打磨，切断成形，终成为家居的“骨架”。木材均经过特别干燥技术处理，含水率符合国家标准要求，具有手感好、防菌防霉、抗腐、良好的适用性等特点。</p>
+
+        <ul class="homeprolist">
+            <li>
+                <a href="#">
+                    <img src="~/img/11_b.jpg" />
+                    <div class="probg wfbg">
+                        <p class="protit">卧房家具</p>
+                        <p class="protit_en">Bedroom furniture</p>
+                    </div>
+                    <img src="~/bg/prohover_bg.jpg" style="z-index:3;position:absolute;left:0px;top:0px;" class="convertimg" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="~/img/22_b.jpg" />
+                    <div class="probg sfbg">
+                        <p class="protit">书房家具</p>
+                        <p class="protit_en">Study furniture</p>
+                    </div>
+                    <img src="~/bg/prohover_bg.jpg" style="z-index:3;position:absolute;left:0px;top:0px;" class="convertimg" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="~/img/33_b.jpg" />
+                    <div class="probg ktbg">
+                        <p class="protit">客厅家具</p>
+                        <p class="protit_en">Living room furniture</p>
+                    </div>
+                    <img src="~/bg/prohover_bg.jpg" style="z-index:3;position:absolute;left:0px;top:0px;" class="convertimg" />
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="~/img/44_b.jpg" />
+                    <div class="probg ctbg">
+                        <p class="protit">餐厅家具</p>
+                        <p class="protit_en">Dining room furniture</p>
+                    </div>
+                    <img src="~/bg/prohover_bg.jpg" style="z-index:3;position:absolute;left:0px;top:0px;" class="convertimg" />
+                </a>
+            </li>
+        </ul>
+
+
+
+        <script type="text/javascript">
+            $(".homeprolist li").unbind("hover").hover(function () {
+                var _this = $(this);
+                _this.children().children("img[class='convertimg']").show();
+            }, function () {
+                var _this = $(this);
+                _this.children().children("img[class='convertimg']").hide();
+            });
+
+        </script>
+    </div>
+
+</div>
+
+<!--私人定制-->
+
+<div class="srdz">
+    <p class="s_tit1">OUR ADVANTAGES</p>
+    <p class="s_tit2">—— 我们的<span class="orange f30">”优势“</span> ——</p>
+
+    <div class="box tddian">
+        <img src="~/bg/tedian.jpg" />
+
+        <div class="tdtext">
+            <dl class="">
+                <dt>01</dt>
+                <dd class="pt20 f14 g3">全新品牌 快速成长</dd>
+                <dd>进军全国互联网市场，被评为“受网友喜爱装修品牌”</dd>
+            </dl>
+            <dl class="mt25">
+                <dt>02</dt>
+                <dd class="pt20 f14 g3">多渠道拓展 颠覆传统</dd>
+                <dd>开拓线上电商渠道，线下实体店推广等多渠道模式</dd>
+            </dl>
+            <dl class="mt25">
+                <dt>03</dt>
+                <dd class="pt20 f14 g3">精雕细琢 成就梦想</dd>
+                <dd>以专业打造生活品质，创新走向美好未来为使命</dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="box" style="margin-top:80px;">
+    @Html.Action("_RecommendPro", "Products")
+</div>
+
+
+
+
+
+<div class="box">
+    <div class="gongyi clearfix">
+        <p class="g_tit1"></p>
+        <p class="g_tit2">我们一直在努力，只为您提供<span class="orange f30">更好的家居生活！</span></p>
+
+        <dl class="fl">
+            <dt>匠心之作</dt>
+            <dd class="pt30 g6">每一件家具精心选材</dd>
+            <dd class="pt20 g6">杜绝白坯存在</dd>
+            <dd class="pt20 g6">让您过上更健康绿色的生活</dd>
+            <dd> <img src="~/img/20.jpg" style="width:240px;height:auto;margin-top:60px;" /></dd>
+        </dl>
+
+        <dl class="fl" style="margin-left:60px;">
+            <dt>工艺传承</dt>
+            <dd class="pt30 g6">精心打造匠心之作</dd>
+            <dd class="pt20 g6">传承中国古典工艺，良心打造</dd>
+            <dd class="pt20 g6">让您过上更健康绿色的生活</dd>
+            <dd> <img src="~/img/29.jpg" style="width:240px;height:auto;margin-top:60px;" /></dd>
+        </dl>
+        <dl class="fr">
+            <dt>整屋定制</dt>
+            <dd class="pt30 g6">高端原木整装定制</dd>
+            <dd class="pt20 g6">高端家具私人定制</dd>
+            <dd class="pt20 g6">让您过上更健康绿色的生活</dd>
+            <dd> <img src="~/img/28.jpg" style="width:240px;height:auto;margin-top:60px;" /></dd>
+        </dl>
+    </div>
+</div>
+

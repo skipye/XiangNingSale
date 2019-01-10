@@ -1,0 +1,74 @@
+﻿@using Common;
+@{
+    var Area = Html.CurrentArea();
+    var Conl = Html.CurrentController();
+    var Action = Html.CurrentAction();
+ }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title -- 上海香凝工艺家具官网</title>
+
+    <link type="text/css" href="~/css/base.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/js/jquery-1.7.1.min.js"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="box clearfix">
+            <a href="@Url.Action("Index","Home")"><img src="~/bg/logo.png" alt="香凝工艺" class="mt10" /></a>
+            <ul class="headernav">
+                <li @(Conl=="Home"?"class=selected":"")><a href="@Url.Action("Index","Home")">首页</a></li>
+                <li @(Conl=="OurAdvantages"?"class=selected":"")><a href="@Url.Action("Index","OurAdvantages")">我们的优势</a></li>
+                <li @(Conl=="Products"?"class=selected":"")><a href="@Url.Action("Index","Products")">我们的产品</a></li>
+                <li @(Conl=="OurActivities"?"class=selected":"")><a href="@Url.Action("Index","OurActivities")">我们的活动</a></li>
+                <li @(Conl=="CustomCase"?"class=selected":"")><a href="@Url.Action("Index","CustomCase")">私人定制•案例</a></li>
+                <li @(Conl=="About"?"class=selected":"")><a href="@Url.Action("ContactUs","About")">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <div id="footer">
+        
+        <div class="foot1">
+            <ul class="box">
+                <li class="f_address"><p>公司地址：</p><p>上海市青浦区朱枫公路1355号（近沈砖路）</p></li>
+                <li class="f_tel"><p>公司电话：</p><p>021-56121287</p></li>
+                <li class="f_email"><p>公司邮箱：</p><p>2410792329@qq.com</p></li>
+            </ul>
+        </div>
+        <div class="box">
+            <div class="foot2">
+                 <div class="clearfix">
+                     <dl class="f_aboutUs ml20">
+                        <dt><a href="@Url.Action("Index","About")">关于我们</a></dt>
+                        <dd><a href="@Url.Action("ContactUs","About")">联系我们</a></dd>
+                        <dd><a href="@Url.Action("Idea","About")">企业理念</a></dd>
+                     </dl>
+                     <dl class="f_product">
+                        <dt>关于产品</dt>
+                        <dd>技术工艺</dd>
+                        <dd>售后服务</dd>
+                        <dd>产品保养</dd>
+                     </dl>
+                     <dl class="f_other">
+                        <dt>关于其他</dt>
+                        <dd>招商加盟</dd>
+                        <dd>线下门店</dd>
+                     </dl>
+                     <dl class="f_contact">
+                        <dt>官方微信</dt>
+                        <dd><img src="~/bg/qrCode.png" /></dd>
+                     </dl>
+                 </div>
+                   
+                <p class="mt50">©2018 - 上海香凝工艺家具有限公司版权所有</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
