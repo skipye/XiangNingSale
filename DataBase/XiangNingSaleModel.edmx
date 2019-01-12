@@ -108,6 +108,20 @@
           <Property Name="Department" Type="varchar" MaxLength="50" />
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="DeleteFlag" Type="bit" />
+          <Property Name="Remarks" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Web_Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="LinkTel" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remaks" Type="nvarchar" MaxLength="500" />
+          <Property Name="AreaId" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="State" Type="bit" />
         </EntityType>
         <EntityType Name="WorkLogs">
           <Key>
@@ -149,6 +163,7 @@
           <EntitySet Name="Sale_Contract_Detail" EntityType="Self.Sale_Contract_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sale_Contract_Header" EntityType="Self.Sale_Contract_Header" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sale_Customers" EntityType="Self.Sale_Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Web_Customers" EntityType="Self.Web_Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkLogs" EntityType="Self.WorkLogs" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Sale_Contract_Detail_Sale_Contract_Header" Association="Self.FK_Sale_Contract_Detail_Sale_Contract_Header">
             <End Role="Sale_Contract_Header" EntitySet="Sale_Contract_Header" />
@@ -182,6 +197,7 @@
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="DeleteFlag" Type="Boolean" />
           <NavigationProperty Name="Sale_Contract_Header" Relationship="XingNingSaleModel.FK_Sale_Contract_Header_Sale_Customers" FromRole="Sale_Customers" ToRole="Sale_Contract_Header" />
+          <Property Name="Remarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="WorkLogs">
           <Key>
@@ -208,6 +224,7 @@
             <End Role="Sale_Contract_Header" EntitySet="Sale_Contract_Header" />
           </AssociationSet>
           <EntitySet Name="Purchase_Order" EntityType="XingNingSaleModel.Purchase_Order" />
+          <EntitySet Name="Web_Customers" EntityType="XingNingSaleModel.Web_Customers" />
         </EntityContainer>
         <EntityType Name="Sale_Contract_Detail">
           <Key>
@@ -321,6 +338,19 @@
           <Property Name="ApplyDepartmnetId" Type="Int32" />
           <Property Name="IsAccounts" Type="Boolean" />
         </EntityType>
+        <EntityType Name="Web_Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LinkTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remaks" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="AreaId" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="State" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -330,6 +360,7 @@
           <EntitySetMapping Name="Sale_Customers">
             <EntityTypeMapping TypeName="XingNingSaleModel.Sale_Customers">
               <MappingFragment StoreEntitySet="Sale_Customers">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ShortName" ColumnName="ShortName" />
@@ -443,6 +474,20 @@
                 <ScalarProperty Name="ApplyUserName" ColumnName="ApplyUserName" />
                 <ScalarProperty Name="ApplyUserId" ColumnName="ApplyUserId" />
                 <ScalarProperty Name="SN" ColumnName="SN" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Web_Customers">
+            <EntityTypeMapping TypeName="XingNingSaleModel.Web_Customers">
+              <MappingFragment StoreEntitySet="Web_Customers">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="Remaks" ColumnName="Remaks" />
+                <ScalarProperty Name="LinkTel" ColumnName="LinkTel" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

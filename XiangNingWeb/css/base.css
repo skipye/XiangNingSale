@@ -220,7 +220,7 @@ a.red { color: #DD514C; }
 
 .box { width: 1200px; margin: 0px auto; }
 
-#header { width:100%;height:120px;background:#ad342f;}
+#header { width:100%;height:120px;background:#ad342f;min-width:1200px;}
 #header .logo { float:left;}
 #header .contacttel { background: url(../bg/bg_tel.png) no-repeat left center; height: 34px; color: #e4393c; line-height: 34px; font-size: 22px; margin-top:30px; }
 #header .contacttel span { padding-left: 50px; }
@@ -244,7 +244,7 @@ a.red { color: #DD514C; }
 .slider{width:950px;overflow:hidden;}
 
 
-#footer{width:100%;height:510px;background:#333;overflow:hidden;margin-top:80px; }
+#footer{width:100%;height:510px;background:#333;overflow:hidden;margin-top:80px; min-width:1200px;}
 .foot1{height:120px;border-bottom:1px solid #545454;overflow:hidden;}
 .foot1 li{float:left;height:120px;line-height:120px;color:#fff;}
 .foot1 li p{padding-top:40px;line-height:0px;padding-left:70px;}
@@ -292,7 +292,7 @@ a.red { color: #DD514C; }
 .ourtit .tit3{font-size:14px;line-height:30px;color:#555;margin:0px auto;}
 
 /* pages */
-.pagelist{width:100%;background:url(../bg/Tab_bg.jpg) repeat-x;height:48px;margin:40px auto;}
+.pagelist{width:100%;height:48px;margin:40px auto;}
 .pages{clear:both;padding:10px 0;padding-right:10px;height:30px;overflow:hidden;position:relative;}
 .pages:after{content:"\20";display:block;height:0;clear:both;}
 .pages .total{float:left;padding-left:10px;font-size:12px;color:#666;line-height:26px;}
@@ -304,3 +304,11 @@ a.red { color: #DD514C; }
 .pages .static{position:absolute;right:10px;top:10px;z-index:2;background:#fff;min-width:100px;max-width:250px;height:26px;overflow:hidden;text-align:right;}
 .pages .static a{color:#2981e1;margin-top:5px;float:right;margin-right:10px;}
 
+.page-container {padding: 20px;}
+.form .row {
+    margin-top: 15px;
+}.form-label {
+    margin-top: 3px;
+    cursor: text;
+    text-align: right;
+}

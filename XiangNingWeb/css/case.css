@@ -9,8 +9,8 @@
 
 .caseproduct{width:1200px;background:#fff;margin-bottom:30px;}
 .caselist li{width:398px;min-height:400px;float:left;overflow:hidden;margin-top:20px;text-align:center;border:1px solid #fff;}
-.caselist li .convertimg{width:396px;height:300px;overflow:hidden;border:1px solid #dedede;}
-.caselist li img{width:380px;height:auto;}
+.caselist li .convertimg{width:396px;height:270px;overflow:hidden;border:1px solid #dedede;}
+.caselist li .convertimg img{width:380px;height:auto;margin-left:8px;margin-top:15px;}
 .caselist li:hover{border:1px solid #ff0000;}
 .caselist li p{line-height:35px;color:#333;text-align:left;}
 .saleprice{color:#02B2B5;padding:10px;}

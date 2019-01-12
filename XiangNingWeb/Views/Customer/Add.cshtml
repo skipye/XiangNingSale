@@ -1,0 +1,103 @@
+﻿@model ModelProject.CustomerModel
+@{
+    Layout = null;
+    List<SelectListItem> ArrDP = new List<SelectListItem>();
+    ArrDP.Add(new SelectListItem { Text = "请选择预约的旗舰店", Value = "" });
+    ArrDP.Add(new SelectListItem { Text = "上海市真北路1108号红星美凯龙南馆6楼H8009", Value = "1" });
+    ArrDP.Add(new SelectListItem { Text = "上海市沪南路2178号红星美凯龙6楼F8088", Value = "2" });
+    ArrDP.Add(new SelectListItem { Text = "上海市澳门路168号月星家居4楼D059木紫香凝", Value = "3" });
+    ArrDP.Add(new SelectListItem { Text = "上海市徐汇区文定路200号盛源大地4楼香凝红木", Value = "4" });
+}
+<link type="text/css" href="~/css/common.css?v=1" rel="stylesheet" />
+<article style="margin:20px;">
+    <form class="form form-horizontal" id="formadd">
+        @Html.HiddenFor(k => k.Id)
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>旗舰店：</label>
+            <div class="formControls col-xs-8 col-sm-7">
+                @Html.DropDownListFor(k => k.DepartmentId, ArrDP, new { @class = "input-text" })
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>您的称呼：</label>
+            <div class="formControls col-xs-8 col-sm-7">
+                @Html.TextBoxFor(k => k.Name, new { @class = "input-text" })
+            </div>
+        </div>
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>手机号码：</label>
+            <div class="formControls col-xs-8 col-sm-7">
+                @Html.TextBoxFor(k => k.LinkTel, new { @class = "input-text" })
+            </div>
+        </div>
+       
+        <div class="row clearfix">
+            <label class="form-label col-xs-4 col-sm-2">您想了解：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                @Html.TextAreaFor(k => k.Remarks, new { @class = "textarea" })
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2">&nbsp;</label>
+            <div class="formControls col-xs-8 col-sm-7">
+                <button class="btn btn-primary radius" type="submit" style="width:120px;">提交</button>
+                <button onClick="layer_close();" class="btn btn-default radius ml-30" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</article>
+<script type="text/javascript" src="~/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="~/js/layer/layer.js"></script>
+<script type="text/javascript" src="~/js/common.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/jquery.validate.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/validate-methods.js"></script>
+<script type="text/javascript" src="~/js/jquery.validation/messages_zh.js"></script>
+<script type="text/javascript">
+
+$(function(){
+
+	//表单验证
+	$("#formadd").validate({
+		rules:{
+		    DepartmentId: {
+				required:true,
+			},
+		    Name: {
+				required:true,
+		    },
+		    LinkTel: { required: true, isMobile: true, }
+		},
+		onkeyup: false,
+		focusCleanup:true,
+		success:"valid",
+		submitHandler: function (form) {
+		    //构造上传数据
+		    var param = {};
+		    var paramArray = $(form).serializeArray();
+		    for (var i = 0; i < paramArray.length; ++i) {
+		        var o = paramArray[i];
+		        param[o["name"]] = o["value"];
+		    };
+		    $.post("/Customer/PostAdd", param, function (d) {
+
+		        if (d == "1") {
+		            layer.msg("添加成功！我们会及时跟您联系！", { icon: 1, time: 1000 });
+		        } else {
+		            layer.msg("网络错误！", { icon: 2, time: 1000 });
+		        }
+		        setTimeout(function () {
+		            parent.window.location.reload();
+		            var index = parent.layer.getFrameIndex(window.name);
+		            parent.layer.close(index);
+		        }, 1000);
+
+		    });
+
+		}
+	});
+
+});
+
+
+</script>

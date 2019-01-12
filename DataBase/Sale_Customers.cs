@@ -33,6 +33,7 @@ namespace DataBase
         public string Department { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<bool> DeleteFlag { get; set; }
+        public string Remarks { get; set; }
     
         public virtual ICollection<Sale_Contract_Header> Sale_Contract_Header { get; set; }
     }

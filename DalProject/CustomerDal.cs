@@ -45,12 +45,11 @@ namespace DalProject
                                 BelongUserName = p.BelongUserName,
                                 DepartmentId = p.DepartmentId,
                                 Department = p.Department,
+                                Remarks=p.Remarks,
                             }).ToList();
                 return List;
             }
         }
-
-
         //新增和修改仓库设置
         public void AddOrUpdate(CustomerModel Models)
         {
@@ -70,6 +69,7 @@ namespace DalProject
                     table.BelongUserName = Models.BelongUserName;
                     table.DepartmentId = Models.DepartmentId;
                     table.Department = Models.Department;
+                    table.Remarks = Models.Remarks;
                     db.SaveChanges();
                 }
                 else
@@ -88,9 +88,27 @@ namespace DalProject
                     table.Department = Models.Department;
                     table.CreateTime = DateTime.Now;
                     table.DeleteFlag = false;
+                    table.Remarks = Models.Remarks;
                     db.Sale_Customers.Add(table);
 
                 }
+                db.SaveChanges();
+            }
+        }
+        //新增和修改仓库设置
+        public void AddWebCustomer(CustomerModel Models)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                Web_Customers table = new Web_Customers();
+                table.Name = Models.Name;
+                table.ProductId = Models.Id;
+                table.AreaId = Models.DepartmentId;
+                table.LinkTel = Models.LinkTel;
+                table.CreateTime = DateTime.Now;
+                table.State = true;
+                table.Remaks = Models.Remarks;
+                db.Web_Customers.Add(table);
                 db.SaveChanges();
             }
         }
@@ -115,6 +133,7 @@ namespace DalProject
                                   BelongUserName = p.BelongUserName,
                                   DepartmentId = p.DepartmentId,
                                   Department = p.Department,
+                                  Remarks=p.Remarks,
                               }).SingleOrDefault();
                 return tables;
             }

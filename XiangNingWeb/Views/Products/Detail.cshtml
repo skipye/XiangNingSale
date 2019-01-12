@@ -26,7 +26,7 @@
             <p><span>系列：</span>@Model.TypeName</p>
             <p><span>浏览次数：</span>@Model.HitTimes</p>
             
-            <a href="javascript:void(0)" class="btnsub mt30" title="立即购买" style="width:100px;"><span>立即购买</span></a>
+            <a href="javascript:void(0)" class="btnsub mt30" title="立即预约" style="width:100px;"  onclick="addwindow('立即预约', '/Customer/Add', '@Model.Id', '700', '400')"><span>立即预约</span></a>
         </div><!--右边标题列表-->
 
     </div>
@@ -62,7 +62,7 @@
                     <li class="current">联系我们</li>
                 </ul>
             </div>
-            <div class="productright_content">
+            <div class="productright_content" id="picpathreset">
                 @Html.Raw(Model.StrContent)
             </div>
             <div class="productright_content" style="display: block;">
@@ -111,6 +111,16 @@
                     $ul.css("display", "none");
                     $ul.eq($t).css("display", "block");
                 }); return false;
+
+                $('#picpathreset img').each(function () {
+                    var value = $(this).attr("src");
+                    //if (value.indexOf("http://sale.xiangninghm.com/") >= 0)
+                    //{
+                    //    return false;
+                    //}else{value = "http://sale.xiangninghm.com/" + value;}
+                    value = "http://sale.xiangninghm.com" + value;
+                    $(this).attr("src", value);
+                });
             });
 
         </script>

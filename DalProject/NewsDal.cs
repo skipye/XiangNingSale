@@ -10,7 +10,7 @@ namespace DalProject
 {
     public class NewsDal
     {
-        public PagedList<NewsModel> GetWebPageList(SNewsModel SModel,int Type)
+        public PagedList<NewsModel> GetWebPageList(SNewsModel SModel,int Type, int PageIndex, int PageSize)
         {
             using (var db = new XNArticleEntities())
             {
@@ -32,7 +32,7 @@ namespace DalProject
                                 EidtAuthorName = p.EidtName,
                                 CheckedStatus = p.CheckedStatus,
                             }).ToList();
-                return List.ToPagedList(SModel.PageIndex,SModel.PageSize);
+                return List.ToPagedList(PageIndex,PageSize);
             }
         }
         public List<NewsModel> GetPageList(SNewsModel SModel)

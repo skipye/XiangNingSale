@@ -25,8 +25,7 @@ namespace XiangNingWeb.Controllers
         public ActionResult PageList(SNewsModel SModel)
         {
             ViewBag.SModel = SModel;
-            SModel.PageSize = 9;
-            var models = NSer.GetWebPageList(SModel, 2);
+            var models = NSer.GetWebPageList(SModel, 2, SModel.PageIndex??1, SModel.PageSize??9);
             return View(models);
         }
     }

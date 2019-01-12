@@ -108,6 +108,8 @@ namespace DalProject
                                   ApplyUserId=p.ApplyUserId,
                                   ApplyUserName = p.ApplyUserName,
                                   ApplyDateTime=p.ApplyDateTime,
+                                  CWCheckedStatus=p.CWCheckedStatus,
+                                  CheckedStatus=p.CheckedStatus
                               }).SingleOrDefault();
                 return tables;
             }

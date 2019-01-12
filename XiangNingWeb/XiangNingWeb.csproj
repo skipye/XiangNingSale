@@ -107,6 +107,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\CustomCaseController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\OurActivitiesController.cs" />
@@ -138,6 +139,7 @@
     <Content Include="css\about.css" />
     <Content Include="css\base.css" />
     <Content Include="css\case.css" />
+    <Content Include="css\common.css" />
     <Content Include="css\home.css" />
     <Content Include="css\jquery.slider.css" />
     <Content Include="css\ouract.css" />
@@ -188,8 +190,21 @@
     <Content Include="img\p8.jpg" />
     <Content Include="img\pro_1.jpg" />
     <Content Include="img\red_fk.jpg" />
+    <Content Include="js\common.js" />
     <Content Include="js\jquery-1.7.1.min.js" />
     <Content Include="js\jquery.slider.js" />
+    <Content Include="js\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="js\jquery.validation\additional-methods.js" />
+    <Content Include="js\jquery.validation\jquery.validate.js" />
+    <Content Include="js\jquery.validation\messages_zh.js" />
+    <Content Include="js\jquery.validation\validate-methods.js" />
+    <Content Include="js\layer\layer.js" />
+    <Content Include="js\layer\skin\default\icon-ext.png" />
+    <Content Include="js\layer\skin\default\icon.png" />
+    <Content Include="js\layer\skin\default\loading-0.gif" />
+    <Content Include="js\layer\skin\default\loading-1.gif" />
+    <Content Include="js\layer\skin\default\loading-2.gif" />
+    <Content Include="js\layer\skin\layer.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -258,6 +273,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\XiangNingWeb.pubxml" />
+    <Content Include="Views\Customer\Add.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

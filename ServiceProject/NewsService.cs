@@ -12,9 +12,9 @@ namespace ServiceProject
     public class NewsService
     {
         private static readonly NewsDal IDal = new NewsDal();
-        public PagedList<NewsModel> GetWebPageList(SNewsModel SModel, int Type)
+        public PagedList<NewsModel> GetWebPageList(SNewsModel SModel, int Type,int PageIndex,int PageSize)
         {
-            try { return IDal.GetWebPageList(SModel, Type); }
+            try { return IDal.GetWebPageList(SModel, Type, PageIndex, PageSize); }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);

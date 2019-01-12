@@ -25,6 +25,14 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
+        public bool AddWebCustomer(CustomerModel Models)
+        {
+            try { IDal.AddWebCustomer(Models); return true; }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public CustomerModel GetDetailById(int Id)
         {
             try { return IDal.GetDetailById(Id); }

@@ -137,6 +137,9 @@
     <Compile Include="SYS_product_SN.cs">
       <DependentUpon>XiangNingERPModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Web_Customers.cs">
+      <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="WIP_workorder.cs">
       <DependentUpon>XiangNingERPModel.tt</DependentUpon>
     </Compile>

@@ -163,7 +163,7 @@ function delThisImage(obj) {
 }
     
 function insThisImage(obj) {
-    var PicUrl = $(obj).attr("data-url");
+    var PicUrl = $(obj).attr("data-url").replace("Thumbnails", "Original");
         $("#ConvertImg").val(PicUrl);
         $(".ConvertImg").attr("src",PicUrl);
     }

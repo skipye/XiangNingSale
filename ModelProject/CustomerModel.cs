@@ -22,6 +22,7 @@ namespace ModelProject
         public string Department { get; set; }
         public DateTime? CreateTime { get; set; }
         public List<SelectListItem> DepartmentDroList { get; set; }
+        public string Remarks { get; set; }
     }
     public class SCustomerModel
     {

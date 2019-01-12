@@ -40,8 +40,8 @@ namespace ModelProject
         public int? CheckedStatus { get; set; }
         public int? UploadAuthorId { get; set; }
         public int? AreaId { get; set; }
-        public int PageSize { get; set; }
-        public int PageIndex { get; set; }
+        public int? PageSize { get; set; }
+        public int? PageIndex { get; set; }
         public List<CRMItem> AreaList { get; set; }
         public List<CRMItem> TypeList { get; set; }
     }
