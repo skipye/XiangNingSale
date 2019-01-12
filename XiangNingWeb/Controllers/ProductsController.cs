@@ -18,14 +18,21 @@ namespace XiangNingWeb.Controllers
             var Models = NSer.GetDetailById(Id);
             return View(Models);
         }
-        public ActionResult _RecommendPro()
+        public ActionResult _RecommendPro(int? TypeId,int? PageSize)
         {
+            //var models = NSer.GetRandomNewsList(TypeId??2, PageSize??3);
             return View();
+        }
+        public ActionResult _RightRandomProList(int? TypeId, int? PageSize)
+        {
+            var models = NSer.GetRandomNewsList(TypeId ?? 2, PageSize ?? 3);
+            return View(models);
         }
         public ActionResult PageList(SNewsModel SModel)
         {
             ViewBag.SModel = SModel;
-            var models = NSer.GetWebPageList(SModel, 2, SModel.PageIndex??1, SModel.PageSize??9);
+            SModel.PageSize =9;
+            var models = NSer.GetWebPageList(SModel, 2);
             return View(models);
         }
     }

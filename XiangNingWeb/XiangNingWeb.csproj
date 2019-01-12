@@ -189,6 +189,7 @@
     <Content Include="img\p7.jpg" />
     <Content Include="img\p8.jpg" />
     <Content Include="img\pro_1.jpg" />
+    <Content Include="img\pro_2.jpg" />
     <Content Include="img\red_fk.jpg" />
     <Content Include="js\common.js" />
     <Content Include="js\jquery-1.7.1.min.js" />
@@ -274,6 +275,11 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\XiangNingWeb.pubxml" />
     <Content Include="Views\Customer\Add.cshtml" />
+    <Content Include="Views\Products\_RightRandomProList.cshtml" />
+    <Content Include="Views\CustomCase\Detail.cshtml" />
+    <Content Include="Views\CustomCase\PageList.cshtml" />
+    <Content Include="Views\News\List.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

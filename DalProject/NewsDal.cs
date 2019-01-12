@@ -10,7 +10,20 @@ namespace DalProject
 {
     public class NewsDal
     {
-        public PagedList<NewsModel> GetWebPageList(SNewsModel SModel,int Type, int PageIndex, int PageSize)
+        //获取随机的几条新闻
+        public List<NewsModel> GetRandomNewsList(int GenresId, int PageCount)
+        {
+            using (var db = new XNArticleEntities())
+            {
+                string StrSql = string.Format(@"select top({0}) n.Id,n.Name,n.ConvertPic as ConvertImg,n.CreateTime,Remarks,HitTimes,m.Name as TypeName 
+                                              from A_News n left join A_NewsType m on n.TypeId=m.Id where  m.ParentId='{1}' order by newid()", PageCount, GenresId);
+
+                var list = db.Database.SqlQuery<NewsModel>(StrSql).ToList();
+                
+                return list;
+            }
+        }
+        public PagedList<NewsModel> GetWebPageList(SNewsModel SModel,int Type)
         {
             using (var db = new XNArticleEntities())
             {
@@ -31,8 +44,9 @@ namespace DalProject
                                 ConvertImg = p.ConvertPic,
                                 EidtAuthorName = p.EidtName,
                                 CheckedStatus = p.CheckedStatus,
+                                UpTime=p.UpTime
                             }).ToList();
-                return List.ToPagedList(PageIndex,PageSize);
+                return List.ToPagedList(SModel.PageIndex, SModel.PageSize);
             }
         }
         public List<NewsModel> GetPageList(SNewsModel SModel)
@@ -181,6 +195,7 @@ namespace DalProject
                                   AreaId = p.AreaId,
                                   AreaName = p.AreaType.Name,
                                   HitTimes = p.HitTimes,
+                                  UpTime=p.UpTime,
                               }).SingleOrDefault();
                 tables.GalleryItems = GetNewsImgs(Id);
 

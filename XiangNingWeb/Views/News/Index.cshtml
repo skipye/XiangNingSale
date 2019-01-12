@@ -1,0 +1,11 @@
+﻿@model ModelProject.SNewsModel
+@{
+    ViewBag.Title = "香凝资讯";
+}
+<link type="text/css" href="~/css/product.css" rel="stylesheet" />
+<link type="text/css" href="~/css/case.css" rel="stylesheet" />
+<img src="~/img/pro_2.jpg" alt="香凝红木" style="width:100%;" />
+
+<div class="caseproduct box clearfix" id="ResultList">
+    @Html.Action("PageList", "News",new { SModel =Model})
+</div>

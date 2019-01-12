@@ -22,3 +22,24 @@
 .contact{width:1200px;margin:0px auto;}
 .contact p{line-height:35px;}
 .contact h4{margin-top:20px;}
+
+
+li,ul{list-style-type:none;}
+#mainbox {width:100%;max-width:1090px;margin: 0 auto;min-height: 500px; }
+/*当前位置*/
+.position { height:40px; line-height:40px; font-size:14px; color:#999;background-color: #f5f5f5;padding-left:10px;overflow:hidden;}
+.position em { font-style:normal;display:inline-block;width:30px;text-align:center; }
+.position a {color:#999; }
+.position a:hover { color:#009bff; }
+.position span { color:#E0002A;text-align:center; }
+
+.right_box { width:820px; background-color:#fff; height:auto; }
+.contactus { width:100%;max-width:1090px;height:auto !important; min-height:500px; background:#fff; color:#333;font-size:14px; line-height:28px;overflow:hidden;margin-bottom:30px;}
+.contactus .tit{color: #E0002A; font-weight: 700; font-size: 16px;}
+.contactus .titborder{border:1px solid red;width:100px;text-align:center;}
+.contactus p { line-height:30px;}
+.rtit { height: 40px; font-weight: normal; font-size: 18px; line-height: 30px; border-bottom: 1px solid #dcdcdc; margin-bottom:20px; }
+.ntit{margin-bottom:10px;  }
+
+.newscontent{height:auto !important; min-height:500px; background:#fff; color:#333;font-size:14px; line-height:28px; margin-bottom:30px;padding:30px 30px; }
+.newscontent .bigimg{margin-top:10px;}

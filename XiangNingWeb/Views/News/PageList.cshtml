@@ -14,11 +14,11 @@
             if (!string.IsNullOrEmpty(item.ConvertImg))
             { Picpath = "http://sale.xiangninghm.com" + item.ConvertImg; }
         <li>
-            <a href="@Url.Action("Detail", "Products")">
-                <img src="@Picpath" alt="@item.Name" />
+            <a href="@Url.Action("Detail", "News",new { Id=item.Id})">
+                <p class="convertimg"><img src="@Picpath" alt="@item.Name" /></p>
                 <p class="pl10 mt10">@item.Name</p>
-                <span class="saleprice fl">￥<span class="f20">1299</span>.00</span>
-                <a href="javascript:void(0)" class="salebtn fr mr10" style="width:140px;">立即预约</a>
+                <span class="saleprice fl">阅读次数<span class="f20">@item.HitTimes</span></span>
+                <a href="javascript:void(0)" class="salebtn fr mr10" style="width:140px;">我要预约看店</a>
             </a>
         </li>
         }
@@ -41,5 +41,5 @@
 else
 {
         <p>暂无内容！</p>
-    }
-}
+  }
+

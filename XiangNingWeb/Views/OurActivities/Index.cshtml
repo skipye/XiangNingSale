@@ -3,11 +3,11 @@
 }
 <link href="~/css/ouract.css" rel="stylesheet" />
 
-<img src="~/img/our_3.jpg" style="width:100%;" />
+<img src="~/img/pro_2.jpg" style="width:100%;" />
 
 <div class="ouract clearfix">
     <div class="ouractleft fl">
-        <h3>客户分享</h3>
+        <h3>客户分享<a href="@Url.Action("Index","CustomCase")" class="green fr">More&gt;</a></h3>
         <div class="ouractpic clearfix">
             <img src="~/img/our_4.jpg" class="pic1" />
             <img src="~/img/our_6.jpg" class="pic2" />
@@ -21,14 +21,8 @@
                 真皮沙发透气性优良、舒适且结实耐用</p>
     </div>
     <div class="ouractright fr">
-        <h3>新闻活动</h3>
+        <h3>新闻活动<a href="@Url.Action("Index","News")" class="green fr">More&gt;</a></h3>
         <img src="~/img/our_8.jpg" class="mt30" />
-
-        <ul class="newslist">
-            <li><a href="@Url.Action("Detail","News")">实木衣柜优点	<span>2018-06-12</span></a></li>
-            <li><a href="@Url.Action("Detail","News")">衣柜一般用什么板材好	<span>2018-06-12</span></a></li>
-            <li><a href="@Url.Action("Detail","News")">水对整体橱柜的伤害及防范	<span>2018-06-12</span></a></li>
-            <li><a href="@Url.Action("Detail","News")">定制衣柜的优势	<span>2018-06-14</span></a></li>
-        </ul>
+        @Html.Action("List","News")
     </div>
 </div>

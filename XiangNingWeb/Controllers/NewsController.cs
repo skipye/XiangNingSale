@@ -13,16 +13,28 @@ namespace XiangNingWeb.Controllers
         private static readonly NewsService NSer = new NewsService();
         public ActionResult Index()
         {
-            return View();
+            SNewsModel SModel = new SNewsModel();
+            
+            return View(SModel);
         }
-        public ActionResult Detail()
+        public ActionResult Detail(int Id)
         {
-            return View();
+            var Models = NSer.GetDetailById(Id);
+            return View(Models);
         }
         public ActionResult PageList(SNewsModel SModel)
         {
             ViewBag.SModel = SModel;
-            return View();
+            SModel.PageSize = 9;
+            var models = NSer.GetWebPageList(SModel, 1);
+            return View(models);
+        }
+        public ActionResult List(int? TypeId, int? PageSize)
+        {
+            SNewsModel SModel = new SNewsModel();
+            SModel.PageSize = 4;
+            var models = NSer.GetWebPageList(SModel, 1);
+            return View(models);
         }
     }
 }

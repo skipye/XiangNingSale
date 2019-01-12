@@ -1,0 +1,24 @@
+﻿@model List<ModelProject.NewsModel>
+@{
+    Layout = null;
+}
+
+@if (Model != null && Model.Any())
+{
+    <ul class="productleft_prolist">
+        @foreach (var item in Model)
+        {
+            var Picpath = "/img/none.jpg";
+            if (!string.IsNullOrEmpty(item.ConvertImg))
+            { Picpath = "http://sale.xiangninghm.com" + item.ConvertImg; }
+            <li>
+                <a  href="@Url.Action("Detail", "Products",new { Id=item.Id})" target="_blank">
+                    <img src="@Picpath" alt="@item.Name">
+                    <p class="ell">@item.Name</p>
+                </a>
+            </li>
+        }
+    </ul>
+}
+
+        

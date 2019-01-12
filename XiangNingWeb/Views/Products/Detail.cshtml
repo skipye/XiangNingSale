@@ -34,26 +34,7 @@
     <div class="product_content">
         <div class="product_cleft fl">
             <div class="productleft_tit"><h2>相关产品</h2></div>
-            <ul class="productleft_prolist">
-                <li>
-                    <a href="/Furniture/ProductDetail/713.html">
-                        <img src="http://shanghuimedia.com//UpLoads/635708448382990453.jpg" alt="上海香凝工艺家具有限公司 - 雅婷椭圆酒橱">
-                        <p>雅婷椭圆酒橱</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/Furniture/ProductDetail/713.html">
-                        <img src="http://shanghuimedia.com//UpLoads/635708448382990453.jpg" alt="上海香凝工艺家具有限公司 - 雅婷椭圆酒橱">
-                        <p>雅婷椭圆酒橱</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/Furniture/ProductDetail/713.html">
-                        <img src="http://shanghuimedia.com//UpLoads/635708448382990453.jpg" alt="上海香凝工艺家具有限公司 - 雅婷椭圆酒橱">
-                        <p>雅婷椭圆酒橱</p>
-                    </a>
-                </li>
-            </ul>
+            @Html.Action("_RightRandomProList", "Products")
         </div><!--产品左侧列表-->
         <div class="product_cright fr">
             <div class="productright_tit">
@@ -112,17 +93,18 @@
                     $ul.eq($t).css("display", "block");
                 }); return false;
 
-                $('#picpathreset img').each(function () {
-                    var value = $(this).attr("src");
-                    //if (value.indexOf("http://sale.xiangninghm.com/") >= 0)
-                    //{
-                    //    return false;
-                    //}else{value = "http://sale.xiangninghm.com/" + value;}
-                    value = "http://sale.xiangninghm.com" + value;
-                    $(this).attr("src", value);
-                });
-            });
+                
 
+            });
+            $('#picpathreset img').each(function () {
+                var value = $(this).attr("src");
+                //if (value.indexOf("http://sale.xiangninghm.com/") >= 0)
+                //{
+                //    return false;
+                //}else{value = "http://sale.xiangninghm.com/" + value;}
+                value = "http://sale.xiangninghm.com" + value;
+                $(this).attr("src", value);
+            });
         </script>
 
     </div>

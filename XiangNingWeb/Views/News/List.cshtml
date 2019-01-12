@@ -1,0 +1,13 @@
+﻿@model List<ModelProject.NewsModel>
+@{
+    Layout = null;
+}
+<ul class="newslist">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <li><a href="@Url.Action("Detail","News",new { Id=item.Id})" class="ell">@item.Name<span>@Convert.ToDateTime(item.CreateTime).ToString("yyyy-MM-dd HH:mm")</span></a></li>
+        }
+    }
+</ul>

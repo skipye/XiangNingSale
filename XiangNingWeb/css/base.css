@@ -304,11 +304,5 @@ a.red { color: #DD514C; }
 .pages .static{position:absolute;right:10px;top:10px;z-index:2;background:#fff;min-width:100px;max-width:250px;height:26px;overflow:hidden;text-align:right;}
 .pages .static a{color:#2981e1;margin-top:5px;float:right;margin-right:10px;}
 
-.page-container {padding: 20px;}
-.form .row {
-    margin-top: 15px;
-}.form-label {
-    margin-top: 3px;
-    cursor: text;
-    text-align: right;
-}
+.custom{width:100%;background:url(../img/cubg.jpg) no-repeat;}
+

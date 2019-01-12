@@ -1,0 +1,45 @@
+﻿@using MvcPager.WebControls.Mvc;
+@model PagedList<ModelProject.NewsModel>
+@{
+    Layout = null;
+    var SModel = ViewBag.SModel;
+}
+
+@if (Model != null && Model.Any())
+{
+    <ul class="caselist clearfix">
+        @foreach (var item in Model)
+        {
+            var Picpath = "/img/none.jpg";
+            if (!string.IsNullOrEmpty(item.ConvertImg))
+            { Picpath = "http://sale.xiangninghm.com" + item.ConvertImg; }
+            <li>
+                <a href="@Url.Action("Detail", "News",new { Id=item.Id})">
+                    <p class="convertimg"><img src="@Picpath" alt="@item.Name" /></p>
+                    <p class="pl10 mt10">@item.Name</p>
+                    <span class="saleprice fl">浏览次数：<span class="f20">@item.HitTimes</span></span>
+                    <a href="javascript:void(0)" class="salebtn fr mr10" style="width:140px;" onclick="addwindow('立即预约', '/Customer/Add', '@item.Id', '700', '400')">立即预约</a>
+                </a>
+            </li>
+        }
+    </ul>
+    <div class="pagelist">
+        <div class="pages">
+            @Html.AjaxPager(Model, new { TypeId = SModel.TypeId, AreaId = SModel.AreaId }, "PageList", "CustomCase", new PagerOptions
+       {
+           PageIndexParameterName = "PageIndex",
+           CurrentPagerItemWrapperFormatString = "<li><a href=\"javascript:void(0);\" class=\"selected\">{0}</a></li>",
+           NumericPagerItemWrapperFormatString = "<li>{0}</li>",
+           MorePagerItemWrapperFormatString = "<li>{0}</li>",
+           NavigationPagerItemWrapperFormatString = "<li>{0}</li>",
+           ShowFirstLast = true,
+       }, new AjaxOptions { UpdateTargetId = "ResultList" })
+            <div class="total ZL">共@(Model.TotalItemCount) 条记录，每页@(Model.PageSize)，当前@(Model.CurrentPageIndex) / @(Model.TotalPageCount)</div>
+        </div>
+    </div>
+}
+else
+{
+    <p>暂无内容！</p>
+}
+

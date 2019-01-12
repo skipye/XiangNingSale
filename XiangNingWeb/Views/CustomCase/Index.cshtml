@@ -2,10 +2,17 @@
     ViewBag.Title = "私人定制•案例";
 }
 <link href="~/css/case.css" rel="stylesheet" />
-<img src="~/img/dz_1.jpg"  alt="联系香凝" style="width:100%;height:auto;"/>
 
-
-
+<div class="custom" style="min-height:400px;">
+    <div class="ourtit mt50">
+        <p class="tit1">Custom  Case</p>
+        <p class="tit2 f30 wh">———  为您量身打造<span class="orange f30">梦想家居生活</span>  ———</p>
+        <p class="tit3 pt10 f20 wh">
+            我们的家居一直秉承绿色的核心理念，以“绿色文化、鱼水文化”为企业核心文化价值。品牌的基础色调和核心基因，
+            更是所有人的价值信仰和精神高地；绿色不仅是对产品全流程绿色的精心打造，更是对员工、事业伙伴、用户、社会的责任和担当。
+        </p>
+    </div>
+</div>
 <div class="ourtit mt50">
     <p class="tit1">Custom  Case</p>
     <p class="tit2  f30">—— 专享<span class="orange f30">私人定制•案例</span> ——</p>
@@ -18,47 +25,7 @@
     <p class="casetit1 mt10">CUSTOM HOME DESIGNING</p>*@
 
     <div class="caseproduct mt30">
-        <ul class="caselist clearfix">
-             <li><a href="#">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-             <li><a href="#">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-             <li><a href="#">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-             <li><a href="#">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-            <li><a href="#">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-             <li><a href="#">
-                 <img src="/img/case_2.jpg" alt="" />
-                 <p class="pl10 mt10">装饰上门全包装修设计高端原木整屋定制</p>
-                 <a href="#" class="salebtn fr mr10" style="width:140px;">立即预约</a>
-                 </a></li>
-        </ul>
+        @Html.Action("PageList", "CustomCase")
     </div>
 </div>
 
-
-<div class="custom">
-     <div class="ourtit mt50">
-        <p class="tit1">Custom  Case</p>
-     <p class="tit2  f30">———  为您量身打造<span class="orange f30">梦想家居生活</span>  ——— ——</p>
-    <p class="tit3 pt10 f20">我们的家居一直秉承绿色的核心理念，以“绿色文化、鱼水文化”为企业核心文化价值。品牌的基础色调和核心基因，
-        更是所有人的价值信仰和精神高地；绿色不仅是对产品全流程绿色的精心打造，更是对员工、事业伙伴、用户、社会的责任和担当。</p>
-    </div>
-</div>

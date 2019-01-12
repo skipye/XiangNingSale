@@ -1,5 +1,32 @@
-﻿@{
-    ViewBag.Title = "新闻详情";
+﻿@model ModelProject.NewsModel
+@{
+    ViewBag.Title = Model.Name;
 }
 
-<img src="~/img/our_3.jpg" style="width:100%;" />
+<link href="~/css/about.css" rel="stylesheet" type="text/css" />
+
+<img src="~/img/pro_2.jpg" alt="香凝红木" style="width:100%;" />
+
+<div id="mainbox">
+    <div class="position">
+        您现在的位置：<a href="/">首页</a><em>&gt;</em><a href="javascript:void(0)">新闻中心</a><em>&gt;</em>
+        <span>@Model.TypeName</span>
+    </div>
+    <div class="newscontent">
+        <h2>@Model.Name</h2>
+        @Html.Raw(Model.StrContent)
+
+        <script type="text/javascript">
+            $('.newscontent img').each(function () {
+                var value = $(this).attr("src");
+                //if (value.indexOf("http://sale.xiangninghm.com/") >= 0)
+                //{
+                //    return false;
+                //}else{value = "http://sale.xiangninghm.com/" + value;}
+                value = "http://sale.xiangninghm.com" + value;
+                $(this).attr("src", value);
+            });
+        </script>
+
+    </div>
+</div>
