@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "会员中心";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content("~/js/qrcode.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/js/prodetail.js")"></script>
+<article class="personal pl15 pr15">
+    <div class="persimg">
+        <span id="personImg" style="background-image:url(/images/member/memberlogo.jpg)"></span>
+    </div>
+    <div class="perscent wh">
+        <h4 class="pb5 f16" id="persent_mender">@*@Model.Name*@ @*(@Model.MemberNumber)*@</h4>
+        <p class="f14"><span class="mr20">金币：@*@Model.Gold*@</span><span>积分：@*@(Model.ZStock)*@</span></p>
+    </div>
+    @*<div class="btnbox f10 tc">
+        <span class="erwm fr gbs ovh db" id="saoerwm">扫一扫</span>
+    </div>*@
+    <i class="arowli pslarow db"></i>
+</article>
+<article class="disbox pwlbox g3">
+    <p class="bfx01 pt5 pb10" id="yaoqingma">
+        <i class="pwl pwc02"><span class="erwm f10" id="sod_dfh_count"></span></i>
+        <em class="pwltxt f12">邀请码</em>
+    </p>
+    <p class="bfx01 pt5 pb10" onclick="goUrl('/Member/PayOrder')">
+        <i class="pwl pwc01"><span class="pwem f10" id="sod_dfk_count"></span></i>
+        <em class="pwltxt f12">待付款<span id="notice"><i style="display:none;" id="OrderNum">2</i></span></em>
+    </p>
+
+    @*<p class="bfx01 pt5 pb10" onclick="goUrl('my-order-domestic.html?sodStat=3&tmn=tmn')">
+            <i class="pwl pwc03"><span class="pwem f10" id="sod_yfh_count"></span></i>
+            <em class="pwltxt f12">国内配送</em>
+        </p>*@
+    <p class="bfx01 pt5 pb10" onclick="goUrl('@Url.Action("MyOrderReturn", "Member", new { RMessageCout = 2 })')">
+        <i class="pwl pwc04"><span class="pwem f10" id="sod_return_count"></span></i>
+        <em class="pwltxt f12">退款/售后<span id="notice"><i style="display:none;" id="SodNum">3</i></span></em>
+    </p>
+</article>
+<p class="membg ger"></p>
+<article class="pwlist">
+    <ul>
+        <li class="arowli">
+            <a onclick="goUrl('@Url.Action("MyOrder","Member")')">
+                <em class="dingd poa" style="background-color:#FC215E;"></em>
+                <p class="f14">
+                    <!--  <span class="fr f14 g9">共<i id="allQuantity" class="red">0</i>个订单处理</span> -->全部订单
+                </p>
+            </a>
+        </li>
+        <li id="home_pwlist_li3" class="arowli no">
+            <a onclick="goUrl('@Url.Action("Address","Member")')">
+                <em class="diz poa" style="background-color:#4FC6EE;"></em>
+                <p class="f14">地址管理</p>
+            </a>
+        </li>
+        <li id="home_pwlist_li2" class="arowli no">
+            <a onclick="goUrl('@Url.Action("MyPM", "Member", new { UserPMCount = 1 })')">
+                <em class="guanz poa" style="background-color:#FFA64C;"></em>
+                <p class="f14">我的竞拍<span id="notice"><i style="display:none;" id="PMNum">4</i></span></p>
+            </a>
+        </li>
+        <li class="arowli no">
+            <a onclick="goUrl('@Url.Action("Receive", "Member")')">
+                <em class="give poa" style="background-color:#9132ca;"></em>
+                <p class="f14">我的赠送</p>
+            </a>
+        </li>
+        <li class="arowli no">
+            <a onclick="goUrl('@Url.Action("Give", "Member")')">
+                <em class="receive poa" style="background-color:#9132ca;"></em>
+                <p class="f14">我的礼品</p>
+            </a>
+        </li>
+        <li id="home_pwlist_li" class="arowli no">
+            <a onclick="goUrl('@Url.Action("Pointlogs", "Member")')">
+                <em class="dianpu poa" style="background-color:#FC215E;"></em>
+                <p class="f14 red">积分明细</p>
+            </a>
+        </li>
+        <li class="arowli no">
+            <a onclick="goUrl('@Url.Action("ChangePassword","Member")')">
+                <em class="shez poa" style="background-color:#3EC4A9;"></em>
+                <p class="f14">修改密码</p>
+            </a>
+        </li>
+        <li class="arowli no">
+            <a onclick="goUrl('@Url.Action("Notices", "Member", new { MessageCount =2 })')">
+                <em class="xxzx poa" style="background-color:#7f5d80;"></em><!-- class="redDot" -->
+                <p class="f14">信息中心<span id="notice"><i id="cartNum">6</i></span></p>
+            </a>
+        </li>
+        <li class="arowli no">
+            <a onclick="goUrl('@Url.Action("UserNots", "Member")')">
+                <em class="help poa" style="background-color:#f1594b;"></em>
+                <p class="f14">会员须知</p>
+            </a>
+        </li>
+    </ul>
+</article>
+<div class="erwmbox csscentbox" id="erwmbox"><div class="erwmcon" id="erwmcon"></div></div>
+<footer class="p15"><span class="perexitBtn db g6 f14" onclick="goUrl('@Url.Action("LoginOut", "Account")')">退出账户</span></footer>
+
+<script type="text/javascript">
+    @*var MessageCount = parseInt('@Model.MessageCount');
+    var UserPMCount = parseInt('@Model.UserPMCount');
+    var UserOrderCount = parseInt('@Model.UserOrderCount');
+    var UserSodCount = parseInt('@Model.UserSodCount');
+    if (MessageCount > 0)
+    { $("#cartNum").show(); }
+    if (UserPMCount > 0)
+    { $("#PMNum").show(); }
+    if (UserOrderCount > 0)
+    { $("#OrderNum").show(); }
+    if (UserSodCount > 0)
+    { $("#SodNum").show(); }*@
+    $(function () {
+        //var gid = '';
+        var ParHref = "http://ycwap.yiju360.com/Account/Register?MemberNumber=" + gid;
+        var qrCodeid = $('#erwmbox');
+        $("#yaoqingma").on(isTap(), function () {
+            qrCodeid.css({ display: '-webkit-box' });
+        })
+        qrCodeid.on(isTap(), function () {
+            $(this).hide();
+        })
+        var qrcode = new QRCode(qrCodeid.find(".erwmcon")[0], {
+            text: ParHref,
+            width: 160,
+            height: 160
+        });
+
+    });
+</script>
+

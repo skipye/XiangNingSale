@@ -1,0 +1,27 @@
+﻿@model List<ModelProject.NewsModel>
+@{
+    Layout = null;
+}
+@if (Model != null && Model.Any())
+{
+    <ul id="lookSee">
+        @foreach (var item in Model)
+        {
+            var Picpath = "/img/none.jpg";
+            if (!string.IsNullOrEmpty(item.ConvertImg))
+            { Picpath = "http://sale.xiangninghm.com" + item.ConvertImg; }
+            <li>
+                <div class="gcont">
+                    <a href="@Url.Action("Detail", "Products", new { Id = item.Id })" class="db">
+                        <p class="gcopic">
+                            <span style="background-image:url(@Picpath)"></span>
+                        </p>
+                        <p class="f14 mtit">@item.Name</p>
+                        <p class="f14 mpro">浏览：<span class="red">@item.HitTimes</span></p>
+                    </a>
+                </div>
+            </li>
+        }
+    
+    </ul>
+}

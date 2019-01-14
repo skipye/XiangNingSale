@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/member.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/js/mdialog.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/cartorder.css")" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/mDialog.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/goTops.js")"></script>
+</head>
+
+<body class="gorbg" data-marpad="padding" data-fixtop="44" data-fixbot="50">
+
+    <!--header Start-->
+    <header id="header" class="header ycpurple">
+        @*<div class="aubgs icon-back" id="goback"> </div>*@
+        <h1 class="bfx02 wh">@ViewBag.Title</h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+    <div class="navmorelist" id="navmorelist">
+        <ul class="f14">
+            <li><a onclick="goUrl('@Url.Action("Index","Home")')">首页</a></li>
+            <li id="good_cart"><a onclick="goUrl('@Url.Action("Index","Cart")')">购 物 车</a></li>
+            @*<li id="home_store_li" style="display:none;"><a href="javascript:;" onclick="goUrl('shop-store.html?tmn=tmn');">店主中心</a></li>
+                <li id="home_agent_li" style="display:none;"><a href="javascript:;" onclick="goUrl('shop-agent.html?tmn=tmn');">商家中心</a></li>*@
+
+            <li><a href="javascript:void(0);" onclick="location.reload()">刷新本页</a></li>
+        </ul>
+    </div>
+    <!--header end-->
+    @RenderBody()
+
+</body>
+</html>

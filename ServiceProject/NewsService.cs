@@ -12,6 +12,14 @@ namespace ServiceProject
     public class NewsService
     {
         private static readonly NewsDal IDal = new NewsDal();
+        public List<NewsModel> GetNewsTypeList(SNewsModel SModel, int Type)
+        {
+            try { return IDal.GetNewsTypeList(SModel, Type); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         //获取随机的几条新闻
         public List<NewsModel> GetRandomNewsList(int GenresId, int PageCount)
         {

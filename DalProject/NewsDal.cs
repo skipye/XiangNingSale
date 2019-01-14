@@ -10,6 +10,32 @@ namespace DalProject
 {
     public class NewsDal
     {
+        public List<NewsModel> GetNewsTypeList(SNewsModel SModel, int Type)
+        {
+            using (var db = new XNArticleEntities())
+            {
+                var list = (from p in db.A_News.Where(k => k.State == true && k.CheckedStatus == 1 && k.A_NewsType.Type == Type)
+                            where SModel.TypeId > 0 ? p.TypeId == SModel.TypeId : true
+                            where SModel.AreaId > 0 ? p.AreaId == SModel.AreaId : true
+                            orderby p.CreateTime descending
+                            select new NewsModel
+                            {
+                                Id = p.Id,
+                                Name = p.Name,
+                                TypeId = p.TypeId,
+                                TypeName = p.A_NewsType.Name,
+                                Remarks = p.Remarks,
+                                CreateTime = p.CreateTime,
+                                HitTimes = p.HitTimes,
+                                ConvertImg = p.ConvertPic,
+                                EidtAuthorName = p.EidtName,
+                                CheckedStatus = p.CheckedStatus,
+                                UpTime = p.UpTime
+                            }).Skip(SModel.PageSize * SModel.PageIndex).Take(SModel.PageSize).ToList();
+                return list;
+            }
+        }
+
         //获取随机的几条新闻
         public List<NewsModel> GetRandomNewsList(int GenresId, int PageCount)
         {

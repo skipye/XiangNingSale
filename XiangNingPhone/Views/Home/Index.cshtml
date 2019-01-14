@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "首页";
+}
+
+@*<header id="header" class="header ycpurple">
+    <div class="disbox aubgs"></div>
+    <h1 class="bfx02 wh">香凝工艺</h1>
+    <div class="aubgs icon-search" id="headsosbox"></div>
+</header>*@
+<article class="godsconslider" id="godsconslider" style="margin-top:-44px;">
+    <div class="bd">
+        <ul id="sliderPic">
+            <li><img src="/images/640-1.jpg" /></li>
+            <li><img src="/images/640-2.jpg" /></li>
+            <li><img src="/images/640-3.jpg" /></li>
+        </ul>
+    </div>
+    <div class="hd"><ul></ul></div>
+</article>
+<script type="text/javascript">
+    TouchSlide({
+        slideCell: "#godsconslider",
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "leftLoop",
+        autoPage: true,//自动分页
+        autoPlay: $('#godsconslider .bd li').length > 1 ? true : false  //自动播放
+    });
+</script>
+<div class="formalsosbox sosbg por">
+    <input name="productSearch" type="text" class="intext f14" id="IndexformalSearchTxt" placeholder="请输入搜索关键字">
+    <span class="formalbtn f16 poa" id="formalbtn">搜索</span><i class="corss" id="corss"></i>
+</div>
+
+<script type="text/javascript">
+    // 搜所按钮点击事件
+    $('#formalbtn').click(function () {
+        var serString = $("#IndexformalSearchTxt").val();
+        //var tmn = returnTmnNo();
+        if (serString == '') {
+            UsTips("请输入搜索关键字", 15500);
+            return false;
+        }
+        var sosurl = '/Home/ProdcutsSearch?keyWord=' + serString;
+
+        goUrl(sosurl);
+    });
+</script>
+<p class="godbg godge"></p>
+<div class="indexnavlist listactive ovh">
+    <ul>
+        <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><p class="icem ic01"></p><p class="texp f14">卧房</p></a></li>
+        <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic02"></em><span class="texp f14">书房</span></a></li>
+        <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic03"></em><span class="texp f14">客厅</span></a></li>
+        <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic04"></em><span class="texp f14">餐厅</span></a></li>
+        <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic05"></em><span class="texp f14">其它</span></a></li>
+        <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic06"></em><span class="texp f14">特惠</span></a></li>
+    </ul>
+</div>
+
+<p class="godbg godge"></p>
+<article class="godstab">
+    <div class="indextabnav">
+        <ul>
+            <li class="on">每日推荐@*<a href="/Home/TJProducts" class="more">更多&gt;</a>*@</li>
+        </ul>
+    </div>
+    <div class="godstabcent">
+        <div class="parameter3 ovh">
+            @Html.Action("_RecommendPro", "Products")
+        </div>
+    </div>
+</article>
+<p class="godbg godge"></p>
+<a href="javascript:void(0);" class="bg-wh">
+    <img src="~/images/bt1.png" style="width:100%;" />
+</a>
+<p class="godbg godge"></p>
+<article class="godstab">
+    <div class="indextabnav f15">
+        <ul>
+            <li class="on">新品推荐@*<a href="/Home/ProductsType?TypeId=123" class="more">更多&gt;</a>*@</li>
+        </ul>
+    </div>
+    <div class="godstabcent">
+        <div class="parameter ovh" style="display:block;">
+            @Html.Action("PageList","Products",new { PageSize=20})
+        </div>
+    </div>
+</article>
+
+   
+    

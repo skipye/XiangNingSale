@@ -1,0 +1,41 @@
+﻿@model List<ModelProject.NewsModel>
+@{
+    Layout = null;
+}
+
+
+@if (Model != null && Model.Any())
+{<section class="f14 ovh godslistbox">
+        <ul class="goodsList">
+            @foreach (var item in Model)
+            {
+            var PicPath = "http://sale.xiangninghm.com/" + item.ConvertImg;
+            <li>
+                <a href="@Url.Action("Detail", "Products", new { Id=item.Id})" class="db ovh">
+                    <div class="gcopic mb5">
+                        <span class="lazy" dataimg="@PicPath" style="background-image:url(@PicPath)"></span>
+                    </div>
+                    <h3 class="f15 mtit">@item.Name</h3>
+                </a>
+                <div class="infodiv pb5">
+
+                    <p class="mprice ">
+                        <span class="f12">备注：</span><span class="f12">@item.HitTimes</span>
+                    </p>
+                    @*<p class="mprice">
+                            <span class="f12">价值：</span><span class="f16 copurple">&yen;@Convert.ToDouble(item.SalePrice).ToString("0.00")</span>
+                            <span class="f16 red pl10">免运费：@(item.IsPost != null && item.IsPost == true ? "是" : "否")</span>
+                        </p>*@
+                    @*<div class="btnbox">
+                            <span class="graysc fl mr15 gbs ovh db" onclick="addAtten(3563,1879)"></span>
+
+                            <span class="btncart fr gbs ovh db" ref="@item.Id" rel="@item.Stock"></span>
+                        </div>*@
+                </div>
+            </li>
+            }
+
+        </ul>
+    </section>
+}
+

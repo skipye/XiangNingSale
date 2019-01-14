@@ -1,0 +1,150 @@
+﻿@model ModelProject.SNewsModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品分类</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/proDetail.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/js/mdialog.css")" rel="stylesheet" type="text/css">
+    <link href="~/css/protype.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/js/goTops.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/mDialog.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/dropload.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/ZKProducts.js")"></script>
+</head>
+<body data-marpad="padding" data-fixtop="44" data-fixbot="50">
+    <header id="header" class="header ycpurple">
+        <div class="aubgs icon-back" id="goback"></div>
+        <h1 class="bfx02 wh">产品分类</h1>
+        <div class="aubgs icon-search" id="headsosbox"></div>
+    </header>
+    <nav class="naverbar sidexanim" data-slide="anim">
+        <div class="navbox" style="display: none;">
+                <ul class="navlist f14 listchildmenu mschildrens">
+                    <li class="current"><a href="javascript:void(0)" class="btnprolist" rel="0" title="全部">全部</a></li>
+                    @if (Model.AreaList != null && Model.AreaList.Any())
+                    {
+                        foreach (var item in Model.AreaList)
+                        {
+                            <li><a href="javascript:void(0)" class="btnprolist" rel="@item.Id" title="@item.Name">@item.Name</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        <div class="navtitle" style="display:none;">全部类别</div>
+        <div class="navarrow" id="naverscroll"></div>
+    </nav>
+    <nav class="naverbarlist sidexanim" data-slide="anim">
+        <ul class="listchildmenu f14">
+            @if (Model.AreaList != null && Model.AreaList.Any())
+            {
+                foreach (var item in Model.AreaList)
+                {
+                    <li><a href="javascript:void(0)" class="btnprolist" rel="@item.Id" title="@item.Name">@item.Name</a></li>
+                }
+            }
+        </ul>
+    </nav>
+    <div id="tiandiv" style="min-height:40px;"></div>
+    <section class="myorde por">
+        <div id="ResultList" rel="0" loadFlg="true"></div>
+
+        <section class="myorde_nocart mt30" style="display: none;" id="nodata">
+            <p class="f14 db tc"><span class="pt10 pb5 g9 db">╯▂╰ 到底了,没有更多产品了！</span></p>
+        </section>
+        <div class="loadingbox" id="loadaimbox" style="display: -webkit-box;margin:0px auto;width:100%;">
+            <i class="loadingrdu"><img src="/images/loading.gif" /></i>
+            <em class="ml5 f15">正在努力加载</em>
+        </div>
+    </section>
+
+
+    <script type="text/javascript">
+        $(function () {
+            var CHeight = $(".sidexanim ul").height();
+
+            $("#tiandiv").height(CHeight);
+        });
+        $("#naverscroll").on("click", function () {
+            var navtitle = $(".navtitle"), navlist = $(".navlist"), naverbarlist = $(".naverbarlist");
+            if (naverbarlist.css("display") == "none") {
+                navlist.css({ display: "none" });
+                //$("#tiandiv").css({ display: "block" });
+                navtitle.css({ display: "block" });
+                naverbarlist.css({ display: "block" });
+            } else {
+                navlist.css({ display: "" });
+                navtitle.css({ display: "none" });
+                naverbarlist.css({ display: "none" });
+                //$("#tiandiv").css({ display: "none" });
+            }
+        })
+    </script>
+   
+    <div id="gotop" class="gotop"></div>
+    <script type="text/javascript">
+        var loadFlg = true;
+        $(function () {
+           
+            search(0);  //返回顶部插件引用
+            $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+        });
+        $(".btnprolist").click(function () {
+            var _this = $(this);
+            var AreaId = $(this).attr("rel");
+            $('#ResultList').attr("rel", 0);
+            $(".sidexanim li").each(function () {
+                $(this).removeClass("current");
+            });
+            _this.parent("li").addClass("current");
+
+            search(AreaId);
+        });
+        function search(AreaId) {
+            
+            if (loadFlg == false) { return; }
+            else {// 取消之前绑定的滚动事件，载入数据时重新绑定
+                $(window).off("scroll");
+                $(window).dropload({ afterDatafun: lowadData });
+            }
+            function lowadData() {
+               
+                var PageIndex = parseInt($('#ResultList').attr("rel"));
+                var CrrPageIndex = parseInt(PageIndex) + 1;
+                $('#ResultList').attr("rel", CrrPageIndex);
+                
+                $.ajax({
+                    type: "post",
+                    data: { AreaId: AreaId, PageIndex: PageIndex },
+                    url: "@Url.Action("List","Products")",
+                    success: function (data) {
+                        if ($.trim(data) == "") {
+                            $("#nodata").css({ display: "block" });
+                            $("#loadaimbox").hide();
+                            $('#ResultList').attr("loadFlg", "false");
+                            loadFlg = false;
+                        } else {
+                            if (AreaId> 0)
+                            { $('#ResultList').html(data); } else { $('#ResultList').append(data); }
+                            
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

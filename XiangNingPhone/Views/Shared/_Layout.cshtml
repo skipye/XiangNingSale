@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - 香凝工艺</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/proDetail.css")" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/goTops.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/TouchSlide-1.1.min.js")"></script>
+</head>
+<body class="membg" data-marpad="padding" data-fixtop="44" data-fixbot="50">
+    <div id="preloader">
+        <div id="status">
+            <p style="width:100%;line-height:30px;font-size:14px;">
+                Loading the content...
+                <em style="min-width:640px;">Loading depends on your connection speed!</em>
+            </p>
+        </div>
+    </div>
+    <div class="all-elements">
+        @RenderBody()
+        <footer id="footer" class="footer tc bg-white f12">
+            <p class="bfx01 pt5" onclick="goUrlByTmn('/')"><i class="ftbari fthome"></i><em class="ftbarem">首页</em></p>
+            <p class="bfx01 pt5" onclick="goUrl('/Products')"><i class="ftbari menu"><ins class="ftnum f10" id="cartNum" style="display: none;"></ins></i><em class="ftbarem">家具中心</em></p>
+            <p class="bfx01 pt5" onclick="goUrl('/Home/Contact')"><i class="ftbari fttel"></i><em class="ftbarem">联系我们</em></p>
+            <p class="bfx01 pt5" onclick="goUrl('/Member')"><i class="ftbari ftuser"><ins id="notice" class="ftnum" style="display:none;">22</ins></i><em class="ftbarem">会员中心</em></p>
+        </footer>
+     </div>
+     <div id="gotop" class="gotop"></div>
+
+    <script type="text/javascript">
+        $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+    </script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#preloader").delay(400).fadeOut("medium");
+        });
+
+    </script>
+
+</body>
+</html>
