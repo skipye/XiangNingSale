@@ -16,7 +16,7 @@ namespace DalProject
             using (var db = new XNArticleEntities())
             {
                 string StrSql = string.Format(@"select top({0}) n.Id,n.Name,n.ConvertPic as ConvertImg,n.CreateTime,Remarks,HitTimes,m.Name as TypeName 
-                                              from A_News n left join A_NewsType m on n.TypeId=m.Id where  m.ParentId='{1}' order by newid()", PageCount, GenresId);
+                                              from A_News n left join A_NewsType m on n.TypeId=m.Id where  m.ParentId='{1}' and n.State='1' order by newid()", PageCount, GenresId);
 
                 var list = db.Database.SqlQuery<NewsModel>(StrSql).ToList();
                 

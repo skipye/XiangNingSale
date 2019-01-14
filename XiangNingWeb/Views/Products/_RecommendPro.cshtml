@@ -1,20 +1,30 @@
-﻿
+﻿@model List<ModelProject.NewsModel>
 @{
     Layout = null;
 }
 <link type="text/css" href="~/css/product.css" rel="stylesheet" />
 <div class="products clearfix">
-    <h3 class="tit">特价单品</h3>
+    <h3 class="tit">推荐产品</h3>
     <ul class="prolist clearfix">
-        <li>
-            <a href="@Url.Action("Detail", "Products", new { Id=1})">
-                <img src="/img/p1.jpg" />
-                <p class="proname">香凝工艺 大果紫檀 硕果累累大花架</p>
-                <p class="provalue">匠心之作，低价处理</p>
-                <p><span class="red">￥<span class="b f18">90.00</span><span class="mprice">￥350</span></span><span class="fr g9 pt5">月销8362笔</span></p>
-            </a>
-        </li>
-        <li>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                var Picpath = "/img/none.jpg";
+                if (!string.IsNullOrEmpty(item.ConvertImg))
+                { Picpath = "http://sale.xiangninghm.com" + item.ConvertImg; }
+                <li>
+                    <a href="@Url.Action("Detail", "Products", new { Id=item.Id})">
+                        <img src="@Picpath" alt="@item.Name" />
+                        <p class="proname">@item.Name</p>
+                        <p class="provalue">匠心之作，工艺传承，传承中国古典工艺，良心打造，让您过上更健康绿色的生活。</p>
+                        <p><span class="red">点击次数<span class="b f18">@item.HitTimes</span></span>@*<span class="fr g9 pt5">月销8362笔</span>*@</p>
+                    </a>
+                </li>
+            }
+        }
+        
+        @*<li>
             <a href="@Url.Action("Detail", "Products", new { Id=2})">
                 <img src="/img/p2.jpg" />
                 <p class="proname">香凝工艺 大果紫檀 硕果累累大花架</p>
@@ -69,6 +79,6 @@
                 <p class="provalue">匠心之作，低价处理</p>
                 <p><span class="red">￥<span class="b f18">90.00</span><span class="mprice">￥350</span></span><span class="fr g9 pt5">月销8362笔</span></p>
             </a>
-        </li>
+        </li>*@
     </ul>
 </div>

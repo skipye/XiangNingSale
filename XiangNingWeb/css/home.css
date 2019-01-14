@@ -26,7 +26,7 @@
 .srdz .tdtext{position:absolute;right:0px;top:100px;}
 .srdz .tdtext dl{width:600px;height:100px;overflow:hidden;position:relative;background:#fff;}
 .srdz .tdtext dt{width:100px;height:100px;position:absolute;left:0px;top:0px;background:#d8a50c;color:#fff;line-height:100px;text-align:center;font-size:30px;font-weight:bold;}
-.srdz .tdtext dd{color:#666;text-align:left;padding-left:130px;line-height: 30px;}
+.srdz .tdtext dd{text-align:left;padding-left:130px;line-height: 30px;}
 
 .mt25{margin-top:25px;}
 

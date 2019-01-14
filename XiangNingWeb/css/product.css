@@ -8,7 +8,7 @@
 .products .prolist li img { width: 288px; height:auto; border: 1px #e5e5e5 solid; }
 .products .prolist li p { padding-top: 15px; }
 .products .prolist li p.proname { font-size: 16px; color: #666; }
-.products .prolist li p.provalue { color: #858585; }
+.products .prolist li p.provalue { color: #858585;font-size:12px;line-height:140%; }
 .mprice { color: #999; font-family: arial; text-decoration: line-through; }
 .products .prolist li:hover { border: 1px solid #e4393c; }
 

@@ -20,8 +20,8 @@ namespace XiangNingWeb.Controllers
         }
         public ActionResult _RecommendPro(int? TypeId,int? PageSize)
         {
-            //var models = NSer.GetRandomNewsList(TypeId??2, PageSize??3);
-            return View();
+            var models = NSer.GetRandomNewsList(TypeId??2, PageSize??8);
+            return View(models);
         }
         public ActionResult _RightRandomProList(int? TypeId, int? PageSize)
         {
