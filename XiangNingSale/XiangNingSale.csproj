@@ -149,6 +149,7 @@
     <Content Include="css\iconfont\iconfont.css" />
     <Content Include="css\iconfont\iconfont.min.css" />
     <Content Include="css\iconfont\iconfont.svg" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="images\acrossTab-2.png" />
     <Content Include="images\acrossTab-close.png" />
@@ -573,6 +574,7 @@
     <Content Include="Views\Purchase\CWChecked.cshtml" />
     <Content Include="Views\Finance\Order.cshtml" />
     <Content Include="Views\Purchase\Show.cshtml" />
+    <Content Include="Views\Finance\FR.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

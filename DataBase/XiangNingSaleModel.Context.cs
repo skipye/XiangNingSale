@@ -31,5 +31,7 @@ namespace DataBase
         public DbSet<Sale_Contract_Header> Sale_Contract_Header { get; set; }
         public DbSet<Purchase_Order> Purchase_Order { get; set; }
         public DbSet<Web_Customers> Web_Customers { get; set; }
+        public DbSet<Sale_Finance_FR> Sale_Finance_FR { get; set; }
+        public DbSet<Sale_Finance_FR_Logs> Sale_Finance_FR_Logs { get; set; }
     }
 }

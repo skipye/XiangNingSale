@@ -12,11 +12,11 @@
         <span class="select-box inline">
             @Html.DropDownListFor(k => k.DepartmentId, Model.DepartmentDroList, new { @class = "select" })
         </span>
-        日期范围：
+        @*日期范围：*@
         <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
         -
         <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
-        @Html.TextBoxFor(k => k.UserName, new { @placeholder = "客户名称", @style = "width:150px", @class = "input-text" })
+        @*@Html.TextBoxFor(k => k.UserName, new { @placeholder = "客户名称", @style = "width:150px", @class = "input-text" })*@
         <button id="btnSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜素</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
@@ -109,6 +109,7 @@
                         {
                             StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="checked(this, \'' + row.Id + '\')" data-url=\'/Order/CWChecked\' title="审核"><i class="Hui-iconfont f-14">&#xe615;</i></a>';
                         }
+                        StrCheck += '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="FR(this, \'' + row.Id + '\')" data-url=\'/Finance/FR\' title="收款"><i class="Hui-iconfont f-14">&#xe637;</i></a>';
                         return StrCheck;
 
                     }

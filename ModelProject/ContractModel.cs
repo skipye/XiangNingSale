@@ -115,9 +115,9 @@ namespace ModelProject
         public int ProductSNId { get; set; }
         public string ProductSN { get; set; }
         public string ProductName { get; set; }
-        public int ColorId { get; set; }
+        public int? ColorId { get; set; }
         public string Color { get; set; }
-        public int WoodId { get; set; }
+        public int? WoodId { get; set; }
         public string WoodName { get; set; }
         public bool? CustomFlag { get; set; }//是否定制
         public decimal? length { get; set; }//送货通道：楼梯/电梯

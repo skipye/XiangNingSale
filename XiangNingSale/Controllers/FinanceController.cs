@@ -10,6 +10,7 @@ namespace XiangNingSale.Controllers
         //
         // GET: /Finance/
         private static readonly UserService USer = new UserService();
+        private static readonly FinanceService FSer = new FinanceService();
         public ActionResult Purchase()
         {
             SPurchaseOrderModel Models = new SPurchaseOrderModel();
@@ -29,6 +30,22 @@ namespace XiangNingSale.Controllers
             }
             Models.DepartmentDroList = USer.GetDepartmentDrolist(Models.DepartmentId);
             return View(Models);
+        }
+        public ActionResult FR(int Id)
+        {
+            FinanceModel Models = new FinanceModel();
+            Models.Id = Id;
+            return View(Models);
+        }
+        public ActionResult FostFR(FinanceModel Models)
+        {
+            Models.operator_id = USer.GetCurrentUserName().UserId;
+            Models.operator_name = USer.GetCurrentUserName().UserName;
+            if (FSer.AddOrUpdate(Models) == true)
+            {
+                return Content("1");
+            }
+            else { return View(Models); }
         }
     }
 }

@@ -317,7 +317,9 @@ namespace DalProject
                 table.ProductArea = Models.ProductArea;
                 table.ProductSN = Models.ProductSN;
                 table.ProductName = Models.ProductName;
+                table.ColorId = Models.ColorId;
                 table.Color = Models.Color;
+                table.WoodId = Models.WoodId;
                 table.WoodName = Models.WoodName;
                 table.CustomFlag = Models.CustomFlag;
                 table.length = Models.length;

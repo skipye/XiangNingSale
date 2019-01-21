@@ -45,6 +45,8 @@ namespace DataBase
         public Nullable<int> reserved1 { get; set; }
         public Nullable<int> reserved2 { get; set; }
         public string reserved3 { get; set; }
+        public string Linkman { get; set; }
+        public string Linktel { get; set; }
     
         public virtual ICollection<CRM_contract_detail> CRM_contract_detail { get; set; }
         public virtual CRM_customers CRM_customers { get; set; }
