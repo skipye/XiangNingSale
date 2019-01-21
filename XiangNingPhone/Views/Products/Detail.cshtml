@@ -1,0 +1,138 @@
+﻿@model ModelProject.NewsModel
+@{
+    Layout = null;
+    string PicPath = "http://sale.xiangninghm.com/" + Model.ConvertImg;
+    
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品详情</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/js/mdialog.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/proDetail.css")" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/TouchSlide-1.1.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/goTops.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/tabs.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/qrcode.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/mDialog.min.js")"></script>
+</head>
+<body data-marpad="padding" data-fixtop="44" data-fixbot="50">
+    <!--header Start-->
+    <header id="header" class="header ycpurple">
+        <div class="aubgs icon-back" id="goback"></div>
+        <h1 class="bfx02 wh">产品详情</h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+    <div class="navmorelist" id="navmorelist">
+        <ul class="f14">
+            <li><a onclick="goUrl('@Url.Action("Index","Home")')">首页</a></li>
+            <li><a onclick="goUrl('@Url.Action("Index","Products")')">家具中心</a></li>
+            <li><a onclick="goUrl('@Url.Action("Index","News")')">新闻中心</a></li>
+            <li><a href="javascript:;" onclick="location.reload();">刷新本页</a></li>
+        </ul>
+    </div>
+    <!--header end-->
+    <article class="godsconslider mb5" id="godsconslider">
+        <div class="bd">
+            <ul id="sliderPic">
+                <li><img src="@PicPath" /></li>
+                @if (!string.IsNullOrEmpty(Model.GalleryItems))
+                {
+                    var StrArr = Model.GalleryItems.Split(';');
+                    foreach (var item in StrArr)
+                    {
+                        if (!string.IsNullOrEmpty(item)) { 
+                        var BigPic = "http://sale.xiangninghm.com/" + item.Replace("Thumbnails", "Published");
+                        <li><a href="javascript:void(0)"><img src="@BigPic" alt="香凝红木" /></a></li>}
+                    }
+                }
+            </ul>
+        </div>
+        <div class="hd"><ul></ul></div>
+    </article>
+    <script type="text/javascript">
+        TouchSlide({
+            slideCell: "#godsconslider",
+            titCell: ".hd ul",
+            mainCell: ".bd ul",
+            effect: "leftLoop",
+            autoPage: true,//自动分页
+            autoPlay: $('#godsconslider .bd li').length > 1 ? true : false  //自动播放
+        });
+    </script>
+    <h3 class="godsh3 f15 g3" id="godsAdv">@Model.Name</h3>
+    <h3 class="godsh3 f15 g9" id="godsTit">@Model.KeyWord</h3>
+    <article class="pricesales listinfo ovh g6 f14">
+        <p class="ps">
+            <span class="pl10">点击：</span>
+            
+           <span class="f18 copurple" id="freePrice">@Model.HitTimes</span>
+        </p>
+       
+
+    </article>
+    <article class="p10 g6 f14">
+            <p class="listinfo f16 g3">备注<span></span>：</p>
+            <p class="godcbtxt g9 f14" id="godcbTxt">@Model.Remarks</p>
+        </article>
+
+    <p class="godbg godge"></p>
+    <article class="godstab" id="goodstab">
+        <div class="godstabnav f15">
+            <ul>
+                <li class="on">商品介绍</li>
+                <li>相关产品推荐</li>
+            </ul>
+        </div>
+        <div class="godstabcent">
+            <div class="detailed ovh" id="godsConTxt">@Html.Raw(Model.StrContent)</div>
+            <div class="parameter ovh">
+                @Html.Action("_RecommendPro", "Products",new { PageSize=4})
+            </div>
+        </div>
+    </article>
+    <div class="erwmbox csscentbox" id="erwmbox"><div class="erwmcon" id="erwmcon"></div></div>
+
+
+    <footer id="footer" class="footer tc bg-white">
+       
+        <p class="bfx01"><span class="btnliji wh db f15" style="background: rgb(85, 85, 85);" onclick="goUrl('@Url.Action("KanDian","Home")')">预约看店</span></p>
+        
+        <p class="bfx01 pl5">
+            <a href="tel:13311601955">
+                <span class="btnliji wh db f15" ref="@Model.Id">直接电话</span>
+            </a>
+        </p>
+    </footer>
+
+    <div id="gotop" class="gotop"></div>
+    <script type="text/javascript">
+        $(function () {
+
+            $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+        });
+        $("#goodstab").tabs({
+            navCell: ".godstabnav li",
+            conCell: ".godstabcent",
+            currCell: "on"
+        });
+        $('#godsConTxt img').each(function () {
+            var value = $(this).attr("src");
+            value = "http://sale.xiangninghm.com" + value;
+            $(this).attr("src", value);
+        });
+    </script>
+
+</body>
+</html>

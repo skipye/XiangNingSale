@@ -4,10 +4,10 @@
 }
 
 @*<header id="header" class="header ycpurple">
-    <div class="disbox aubgs"></div>
-    <h1 class="bfx02 wh">香凝工艺</h1>
-    <div class="aubgs icon-search" id="headsosbox"></div>
-</header>*@
+        <div class="disbox aubgs"></div>
+        <h1 class="bfx02 wh">香凝工艺</h1>
+        <div class="aubgs icon-search" id="headsosbox"></div>
+    </header>*@
 <article class="godsconslider" id="godsconslider" style="margin-top:-44px;">
     <div class="bd">
         <ul id="sliderPic">
@@ -42,12 +42,11 @@
             UsTips("请输入搜索关键字", 15500);
             return false;
         }
-        var sosurl = '/Home/ProdcutsSearch?keyWord=' + serString;
+        var sosurl = '/Products/Search?keyWord=' + serString;
 
         goUrl(sosurl);
     });
 </script>
-<p class="godbg godge"></p>
 <div class="indexnavlist listactive ovh">
     <ul>
         <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><p class="icem ic01"></p><p class="texp f14">卧房</p></a></li>
@@ -73,7 +72,7 @@
     </div>
 </article>
 <p class="godbg godge"></p>
-<a href="javascript:void(0);" class="bg-wh">
+<a href="javascript:void(0);" class="bg-wh" onclick="goUrl('@Url.Action("KanDian","Home")')">
     <img src="~/images/bt1.png" style="width:100%;" />
 </a>
 <p class="godbg godge"></p>
@@ -85,10 +84,20 @@
     </div>
     <div class="godstabcent">
         <div class="parameter ovh" style="display:block;">
-            @Html.Action("PageList","Products",new { PageSize=20})
+            @Html.Action("PageList", "Products", new { PageSize = 12 })
         </div>
     </div>
 </article>
-
-   
-    
+<p class="godbg godge"></p>
+<article class="godstab">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/member.css")" rel="stylesheet" type="text/css" />
+    <div class="indextabnav f15">
+        <ul>
+            <li class="on">我们的资讯<a href="@Url.Action("Index","News")" class="more">更多&gt;</a></li>
+        </ul>
+    </div>
+    <div class="godstabcent">
+            @Html.Action("List", "News",new { PageSize=10})
+    </div>
+</article>

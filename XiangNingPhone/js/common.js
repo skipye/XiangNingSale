@@ -194,7 +194,7 @@ $(function () {
             //    UsTips("缺少终端机号码");
             //    return false;
             //}
-            var sosurl = '/Home/ProdcutsSearch?keyWord=' + serString;
+            var sosurl = '/Products/Search?keyWord=' + serString;
 
             goUrl(sosurl);
         });

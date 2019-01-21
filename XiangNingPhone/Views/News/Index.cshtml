@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>新闻资讯</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/member.css")" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/js/goTops.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/dropload.js")"></script>
+</head>
+<body data-marpad="padding" data-fixtop="44" data-fixbot="50">
+    <!--header Start-->
+    <header id="header" class="header ycpurple">
+        <div class="aubgs icon-back" onclick="goUrl('@Url.Action("Index","Home")')"></div>
+        <h1 class="bfx02 wh">新闻资讯</h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+    <div class="navmorelist" id="navmorelist">
+        <ul class="f14">
+            <li><a onclick="goUrl('@Url.Action("Index","Home")')">首页</a></li>
+            <li><a onclick="goUrl('@Url.Action("Index","Products")')">产品中心</a></li>
+            <li><a onclick="goUrl('@Url.Action("Index","News")')">新闻中心</a></li>
+            <li><a href="javascript:;" onclick="location.reload();">刷新本页</a></li>
+        </ul>
+    </div>
+    <!--header end-->
+    <section class="myorde por">
+        <div id="ResultList" rel="0" loadFlg="true"></div>
+
+        <section class="myorde_nocart mt30" style="display: none;" id="nodata">
+            <p class="f14 db tc"><span class="pt10 pb5 g9 db">╯▂╰ 到底了,没有更多产品了！</span></p>
+        </section>
+        <div class="loadingbox" id="loadaimbox" style="display: -webkit-box;margin:0px auto;width:100%;">
+            <i class="loadingrdu"><img src="/images/loading.gif" /></i>
+            <em class="ml5 f15">正在努力加载</em>
+        </div>
+    </section>
+    <div id="gotop" class="gotop"></div>
+    <script type="text/javascript">
+        $(function () {
+            search();
+        //返回顶部插件引用
+        $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+    });
+    function search() {
+        loadFlg = $('#ResultList').attr("loadFlg");
+        if (loadFlg == false) { return; }
+        else {// 取消之前绑定的滚动事件，载入数据时重新绑定
+            $(window).off("scroll");
+            $(window).dropload({ afterDatafun: lowadData });
+        }
+        function lowadData() {
+               
+            var PageIndex = parseInt($('#ResultList').attr("rel"));
+            var CrrPageIndex = parseInt(PageIndex) + 1;
+            $('#ResultList').attr("rel", CrrPageIndex);
+                
+            $.ajax({
+                type: "post",
+                data: { PageIndex: PageIndex },
+                url: "@Url.Action("List","News")",
+                success: function (data) {
+                    if ($.trim(data) == "") {
+                        
+                        $('#ResultList').attr("loadFlg", "false");
+                        loadFlg = false;
+                    } else {
+                        $('#ResultList').append(data); 
+                    }
+                    $("#nodata").css({ display: "block" });
+                    $("#loadaimbox").hide();
+                }
+        });
+    }
+    }
+    </script>
+</body>
+</html>

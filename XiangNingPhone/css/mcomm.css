@@ -38,7 +38,8 @@
 .ftmore{background-image:url(../images/icon-more.png)!important;}
 .ftzazhi{background-image:url(../images/icon-zazhi.png)!important;}
 .fweixiu{background-image:url(../icons/weixiu_icon.png)!important;}
-.menu{background-image:url(../icons/icon-menu.png)!important;}
+.fmenu{background-image:url(../icons/icon-menu.png)!important;}
+.fnews{background-image:url(../icons/icon-news.png)!important;}
 /* 头部搜索 */
 .headsosbox{height:36px; line-height:36px; display:block; text-align:left;-webkit-border-radius:4px;border-radius:4px;margin-top:4px;padding:0 5px 0 30px;-webkit-background-size:20px 20px;background-size:20px 20px;z-index:50; background-position:4px center; background-repeat:no-repeat;background-color:#fff;position:relative;-webkit-box-flex:1;box-flex:1;}
 .sosbg{background-image: url(/images/search.png);}

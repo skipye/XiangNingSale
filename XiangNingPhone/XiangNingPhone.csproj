@@ -108,6 +108,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -118,17 +119,23 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="bg\YuYueFootbg.png" />
+    <Content Include="bg\YuYueTopBg.png" />
     <Content Include="css\icon.css" />
     <Content Include="css\mcomm.css" />
     <Content Include="css\member.css" />
+    <Content Include="css\News.css" />
     <Content Include="css\proDetail.css" />
     <Content Include="css\protype.css" />
     <Content Include="css\public-mob.css" />
+    <Content Include="css\yuyue.css" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="icons\ct_icon.png" />
     <Content Include="icons\gyp_icon.png" />
     <Content Include="icons\home_icon.png" />
     <Content Include="icons\icon-menu.png" />
+    <Content Include="icons\icon-news.png" />
     <Content Include="icons\kt_icon.png" />
     <Content Include="icons\qt_icon.png" />
     <Content Include="icons\sf_icon.png" />
@@ -268,6 +275,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Products\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Products\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\KanDian.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\News\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\News\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\News\Detail.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Products\Search.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\XiangNingPhone.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

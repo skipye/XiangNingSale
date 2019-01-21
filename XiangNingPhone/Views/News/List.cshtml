@@ -1,0 +1,17 @@
+﻿
+@model List<ModelProject.NewsModel>
+@{Layout = null;}
+
+<article class="help_list f14 p15">
+    <ul>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <li>
+                    <h5><a href="@Url.Action("Detail", "News", new { Id=item.Id})" title="@item.Name">@item.Name</a></h5>
+                </li>
+            }
+        }
+    </ul>
+</article>

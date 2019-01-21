@@ -1,0 +1,23 @@
+﻿
+.yuyue{width:100%;background:#fff;}
+
+.yuyuetop{width:100%;background:#fff;}
+.yuyuetop img{width:100%;display:block;}
+
+.yuyuecenter{}
+.otinp{ width:96%;margin:8px auto;background:#fff;border:1px #E2226A solid;padding:0 5px;overflow:hidden;}
+.otinp input{width:100%;height:22px; line-height:22px; background:#fff;margin:8px 0; padding:0; border:none; vertical-align:top;}
+.otinp textarea{width:100%;min-height:60px; background:#fff;margin:8px 0; padding:0; border:none; vertical-align:top;}
+.otinp select{width:100%;line-height:22px; background:#fff;margin:8px 0; padding:0; border:none; vertical-align:top;}
+.yuyuecenter p{color:#E2226A;font-weight:bold;margin-top:15px;}
+
+.yuyuebtn{width:96%;background:#E2226A;border-radius:5px;height:35px;line-height:35px;margin:0px auto;text-align:center;}
+.yuyuebtn span{width:100%;color:#fff;text-align:center;}
+
+.yuyuefoot{}
+.yuyuefoot img{width:100%;display:block;}
+
+/* 验证或提示 */
+.ustip{ width:90%;height:40px; line-height:40px; background:rgba(0,0,0,0.9); color:#fff; position:fixed!important; top:15%; left:5%;right:5%;-webkit-border-radius:5px;border-radius:5px;}
+.ustip p{padding:0 40px 0 10px; font-size:1.5rem;text-align:center;}
+.tipclose{width:40px;height:40px;line-height:40px;text-align:center;color:#ccc;font-size:2rem;display:block;position:absolute;right:0;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);}

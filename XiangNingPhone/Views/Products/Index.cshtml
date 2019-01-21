@@ -23,7 +23,6 @@
     <script type="text/javascript" src="@Url.Content("/js/goTops.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/js/mDialog.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/js/dropload.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/js/ZKProducts.js")"></script>
 </head>
 <body data-marpad="padding" data-fixtop="44" data-fixbot="50">
     <header id="header" class="header ycpurple">
@@ -107,14 +106,14 @@
             var AreaId = $(this).attr("rel");
             $('#ResultList').attr("rel", 0);
             $(".sidexanim li").each(function () {
-                $(this).removeClass("current");
+                $(this).removeClass("on");
             });
-            _this.parent("li").addClass("current");
+            _this.parent("li").addClass("on");
 
             search(AreaId);
         });
         function search(AreaId) {
-            
+            loadFlg = $('#ResultList').attr("loadFlg");
             if (loadFlg == false) { return; }
             else {// 取消之前绑定的滚动事件，载入数据时重新绑定
                 $(window).off("scroll");
@@ -139,7 +138,6 @@
                         } else {
                             if (AreaId> 0)
                             { $('#ResultList').html(data); } else { $('#ResultList').append(data); }
-                            
                         }
                     }
                 });

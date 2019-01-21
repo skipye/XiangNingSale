@@ -1,0 +1,95 @@
+﻿
+@model ModelProject.CustomerModel
+@{
+    Layout = null;
+    List<SelectListItem> ArrDP = new List<SelectListItem>();
+    ArrDP.Add(new SelectListItem { Text = "请选择预约的旗舰店", Value = "" });
+    ArrDP.Add(new SelectListItem { Text = "上海市真北路1108号红星美凯龙南馆6楼H8009", Value = "1" });
+    ArrDP.Add(new SelectListItem { Text = "上海市沪南路2178号红星美凯龙6楼F8088", Value = "2" });
+    ArrDP.Add(new SelectListItem { Text = "上海市澳门路168号月星家居4楼D059木紫香凝", Value = "3" });
+    ArrDP.Add(new SelectListItem { Text = "上海市徐汇区文定路200号盛源大地4楼香凝红木", Value = "4" });
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>预约看店</title>
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="~/css/yuyue.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/js/common.js"></script>
+</head>
+<body>
+    <div class="yuyue" style="width:80%;margin:0px auto">
+        <div class="yuyuetop">
+            <img src="~/bg/YuYueTopBg.png" />
+        </div>
+        <div class="yuyuecenter" style="width: 80%; margin: 0px auto">
+            <article class="resetpass f14">
+                @Html.HiddenFor(k => k.Id)
+                <ul>
+                    <p class="ml5 f16">旗舰店</p>
+                    <li class="otinp mb10 rdu5">
+                        @Html.DropDownListFor(k => k.DepartmentId, ArrDP, new { @style="width=100%;border:0px;" })
+                    </li>
+                    <p class="ml5 f16">联系人</p>
+                    <li class="otinp mb10 rdu5">
+                        @Html.TextBoxFor(k => k.Name)
+                    </li>
+                    <p class="ml5 f16">联系电话</p>
+                    <li class="otinp mb10 rdu5">
+                        @Html.TextBoxFor(k => k.LinkTel)
+                    </li>
+                    <p class="ml5 f16">预约内容</p>
+                    <li class="otinp mb10 rdu5">
+                        @Html.TextAreaFor(k => k.Remarks)
+                    </li>
+                </ul>
+                <p class="yuyuebtn" id="kandian"><span>提交</span></p>
+            </article>
+        </div>
+        <div class="yuyuefoot">
+            <img src="~/bg/YuYueFootbg.png" />
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $("#kandian").click(function () {
+            var LinkTel = $("#LinkTel").val();
+            var Name = $("#Name").val();
+            var Remarks = $("#Remarks").val();
+            var DepartmentId = $("#DepartmentId").val();
+            
+            if (Name == null || Name == '') {
+                UsTips("请您填写联系人.");
+                return;
+            }
+            if (Remarks == null || Remarks == '') {
+                UsTips("请您填写预约内容.");
+                return;
+            }
+            if (LinkTel == null || LinkTel == '') {
+                UsTips("请您填写手机号码.");
+                return;
+            }
+            if (!moblieReg.test(LinkTel)) {
+                UsTips("请输入正确的手机号码.");
+                return;
+            }
+            var timer = null;
+            var RUrl = '@Url.Action("AddKanDian", "Home")';
+
+            clearTimeout(timer);
+            timer = setTimeout(function () {
+                $.post(RUrl, { "LinkTel": LinkTel, "Name": Name, "Remarks": Remarks, "DepartmentId": DepartmentId }, function (d) {
+                    if (d == "1")
+                    { alert("亲，你已预约成功！小依马上约你哦！"); window.location.href = "/Home"; } else { UsTips("数据错误！重新提交."); }
+                });
+            }, 500);
+        });
+
+    </script>
+</body>
+</html>

@@ -10,6 +10,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title -- 上海香凝工艺家具官网</title>
+    <meta name="Keywords" content="香凝工艺、香凝红木、红木家具、红木家居、上海红木家具、上海红木、红木、上海红木家具维修、上海红木家具保养、红木家具维修保养、上海红木家居定制" />
+    <meta name="Description" content="上海红木家具维修保养，24h服务。上海香凝工艺家居，主营红木家具定制、红木家具整屋定制、红木家具保养、红木家具维修等业务。集生产设计为一体，在上海红木家具定制和设计都独具先天优势和地位。上海开设4家展厅分店和1个大型加工配送中心。" />
 
     <link type="text/css" href="~/css/base.css" rel="stylesheet" />
     <script type="text/javascript" src="~/js/jquery-1.7.1.min.js"></script>
@@ -72,5 +74,30 @@
         </div>
     </div>
     <script type="text/javascript" src="~/js/common.js"></script>
+    <script type="text/javascript">
+        var browser = {
+            versions: function () {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {//移动终端浏览器版本信息   
+                    trident: u.indexOf('Trident') > -1, //IE内核  
+                    presto: u.indexOf('Presto') > -1, //opera内核  
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核  
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核  
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端  
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端  
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器  
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器  
+                    iPad: u.indexOf('iPad') > -1, //是否iPad    
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部  
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+
+        if (browser.versions.mobile || browser.versions.ios || browser.versions.android ||
+                browser.versions.iPhone || browser.versions.iPad) {
+            window.location.href = "http://m.xiangninghm.com";
+        }
+    </script>
 </body>
 </html>

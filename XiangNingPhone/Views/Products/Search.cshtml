@@ -1,0 +1,73 @@
+﻿@model List<ModelProject.NewsModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品搜索</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/proDetail.css")" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/js/goTops.js")"></script>
+</head>
+<body data-marpad="padding" data-fixtop="44" data-fixbot="50">
+    <header id="header" class="header ycpurple">
+        <div class="aubgs icon-back" id="goback"></div>
+        <h1 class="bfx02 wh" id="sostitle"><div class="headsosbox sosbg f18 g9" id="headsosbox">请输入搜索关键字</div></h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+
+    <p class="godbg godge"></p>
+    <article class="godstab" id="goodstab">
+        <div class="godstabcent">
+            <div class="parameter ovh" style="display:block;">
+                @if (Model != null && Model.Any())
+                {
+                    <ul class="lookSee">
+                        @foreach (var item in Model)
+                        {
+                            var PicPath = "http://sale.xiangninghm.com/" + item.ConvertImg;
+                            <li>
+                                <a href="@Url.Action("Detail", "Products", new { Id=item.Id})" class="db ovh">
+                                    <div class="gcopic mb5">
+                                        <span class="lazy" dataimg="@PicPath" style="background-image:url(@PicPath)"></span>
+                                    </div>
+                                    <h3 class="f15 mtit">@item.Name</h3>
+                                </a>
+                                <div class="infodiv pb5">
+
+                                    <p class="mprice ">
+                                        <span class="f12">点击：</span><span class="f12">@item.HitTimes</span>
+                                    </p>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                }
+            </div>
+        </div>
+    </article>
+
+
+    <div id="gotop" class="gotop"></div>
+    <script type="text/javascript">
+       
+        $(function () {
+
+            $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+        });
+        
+    </script>
+</body>
+</html>

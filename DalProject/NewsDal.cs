@@ -15,6 +15,7 @@ namespace DalProject
             using (var db = new XNArticleEntities())
             {
                 var list = (from p in db.A_News.Where(k => k.State == true && k.CheckedStatus == 1 && k.A_NewsType.Type == Type)
+                            where !string.IsNullOrEmpty(SModel.Name) ? p.Name.Contains(SModel.Name) : true
                             where SModel.TypeId > 0 ? p.TypeId == SModel.TypeId : true
                             where SModel.AreaId > 0 ? p.AreaId == SModel.AreaId : true
                             orderby p.CreateTime descending

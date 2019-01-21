@@ -4,6 +4,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <title>@ViewBag.Title - 香凝工艺</title>
+    <meta name="Keywords" content="香凝工艺、香凝红木、红木家具、红木家居、上海红木家具、上海红木、红木、上海红木家具维修、上海红木家具保养、红木家具维修保养、上海红木家居定制" />
+    <meta name="Description" content="上海红木家具维修保养，24h服务。上海香凝工艺家居，主营红木家具定制、红木家具整屋定制、红木家具保养、红木家具维修等业务。集生产设计为一体，在上海红木家具定制和设计都独具先天优势和地位。上海开设4家展厅分店和1个大型加工配送中心。" />
+
     <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
     <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
     <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
@@ -26,9 +29,10 @@
         @RenderBody()
         <footer id="footer" class="footer tc bg-white f12">
             <p class="bfx01 pt5" onclick="goUrlByTmn('/')"><i class="ftbari fthome"></i><em class="ftbarem">首页</em></p>
-            <p class="bfx01 pt5" onclick="goUrl('/Products')"><i class="ftbari menu"><ins class="ftnum f10" id="cartNum" style="display: none;"></ins></i><em class="ftbarem">家具中心</em></p>
+            <p class="bfx01 pt5" onclick="goUrl('/Products')"><i class="ftbari fmenu"><ins class="ftnum f10" id="cartNum" style="display: none;"></ins></i><em class="ftbarem">家具中心</em></p>
+            <p class="bfx01 pt5" onclick="goUrl('/News/')"><i class="ftbari fnews"></i><em class="ftbarem">新闻中心</em></p>
             <p class="bfx01 pt5" onclick="goUrl('/Home/Contact')"><i class="ftbari fttel"></i><em class="ftbarem">联系我们</em></p>
-            <p class="bfx01 pt5" onclick="goUrl('/Member')"><i class="ftbari ftuser"><ins id="notice" class="ftnum" style="display:none;">22</ins></i><em class="ftbarem">会员中心</em></p>
+            @*<p class="bfx01 pt5" onclick="goUrl('/Member')"><i class="ftbari ftuser"><ins id="notice" class="ftnum" style="display:none;">22</ins></i><em class="ftbarem">会员中心</em></p>*@
         </footer>
      </div>
      <div id="gotop" class="gotop"></div>

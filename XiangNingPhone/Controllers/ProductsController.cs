@@ -10,7 +10,7 @@ namespace XiangNingPhone.Controllers
         public ActionResult Index(SNewsModel SModel)
         {
             SModel.AreaList = NSer.GetWebArealist();
-            SModel.TypeList = NSer.GetWebTypeList(2);
+            //SModel.TypeList = NSer.GetWebTypeList(2);
             return View(SModel);
         }
         public ActionResult _RecommendPro(int? TypeId, int? PageSize)
@@ -29,6 +29,21 @@ namespace XiangNingPhone.Controllers
             SModel.PageSize = PageSize ?? 10;
             SModel.PageIndex = PageIndex ?? 0;
             var Models = NSer.GetNewsTypeList(SModel,2);
+            return View(Models);
+        }
+        public ActionResult Detail(int Id)
+        {
+            var Models = NSer.GetDetailById(Id);
+            return View(Models);
+        }
+        public ActionResult Search(string keyWord)
+        { 
+
+            SNewsModel SModels = new SNewsModel();
+            SModels.Name = keyWord;
+            SModels.PageIndex = 0;
+            SModels.PageSize = 100;
+            var Models = NSer.GetNewsTypeList(SModels, 2);
             return View(Models);
         }
     }
