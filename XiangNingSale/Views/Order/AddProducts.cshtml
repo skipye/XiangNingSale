@@ -27,8 +27,8 @@
                 <span class="select-box inline">
                     @Html.DropDownListFor(k => k.ProductSNId, Model.ProXLDroList, new { @class = "select", @style = "width:150px;" })
                     @Html.DropDownListFor(k => k.productAreaId, Model.AreaDroList, new { @class = "select", @style = "width:150px;" })
-                    @Html.DropDownListFor(k => k.ProductName, ArrProName, new { @class = "select", @style = "width:180px;" })
-                    @Html.HiddenFor(k => k.ProductId)
+                    @Html.DropDownListFor(k => k.ProductId, ArrProName, new { @class = "select", @style = "width:180px;" })
+                    @Html.HiddenFor(k => k.ProductName)
                     @Html.HiddenFor(k=>k.ProductArea)
                     @Html.HiddenFor(k => k.ProductSN)
                 </span>
@@ -181,9 +181,9 @@ $(function(){
         var productAreaId = $("#productAreaId").val();
         var ProUrl = "@Url.Action("GetProNameDrolistBySNAndArea","Order")";
         $.post(ProUrl, { ProSN: ProductSNId, ProProArea: productAreaId }, function (data) {
-            $('#ProductName').empty();
-            $('#ProductName').append($('<option></option>').val("").text("请选择产品名称").attr("selected", true));
-            $('#ProductName').append(data);
+            $('#ProductId').empty();
+            $('#ProductId').append($('<option></option>').val("").text("请选择产品名称").attr("selected", true));
+            $('#ProductId').append(data);
         });
     });
     $("#productAreaId").change(function () {
@@ -193,21 +193,22 @@ $(function(){
         var productAreaId = $("#productAreaId").val();
         var ProUrl = "@Url.Action("GetProNameDrolistBySNAndArea", "Order")";
             $.post(ProUrl, { ProSN: ProductSNId, ProProArea: productAreaId }, function (data) {
-                $('#ProductName').empty();
-                $('#ProductName').append($('<option></option>').val("").text("请选择产品名称").attr("selected", true));
-                $('#ProductName').append(data);
+                $('#ProductId').empty();
+                $('#ProductId').append($('<option></option>').val("").text("请选择产品名称").attr("selected", true));
+                $('#ProductId').append(data);
         });
     });
 
       
-    $("#ProductName").change(function () {
+    $("#ProductId").change(function () {
     var _this = $(this);
     var Id = _this.val();
     var StrText = $(this).find("option:selected").text();
+    var name = StrText.split('_')[0];
     var length = StrText.split('_')[1];
     var width = StrText.split('_')[2];
     var height = StrText.split('_')[3];
-    $("#ProductId").val(Id);
+    $("#ProductName").val(name);
     $("#length").val(length);
     $("#width").val(width);
     $("#height").val(height);

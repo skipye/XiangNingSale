@@ -55,7 +55,7 @@ namespace DalProject
                 if (Models.Amount > 0 && Pay >= Prepay && Pay < Total)//更新合同的付款状态
                 {
                     OrderTable.FRFlag = 1;
-                    AddOrder(Models.Id);//增加合同
+                    
                 }
                 if (Pay >= Total)
                 { OrderTable.FRFlag = 2; }
@@ -74,7 +74,8 @@ namespace DalProject
                               select new ContractHeaderModel
                               {
                                   SN = p.SN,
-                                  delivery_date=p.delivery_date,
+                                  OrderTime = p.HTDate,
+                                  delivery_date =p.delivery_date,
                                   delivery_channel=p.delivery_channel,
                                   FreightCarrier=p.FreightCarrier,
                                   MeasureFlag=p.MeasureFlag,
@@ -109,7 +110,7 @@ namespace DalProject
             {
                 CRM_contract_header table = new CRM_contract_header();
                 table.SN = CHModels.SN;
-                table.HTDate = Convert.ToDateTime(CHModels.HTDate);
+                table.HTDate = Convert.ToDateTime(CHModels.OrderTime);
                 table.customer_id = 213;
                 table.delivery_date = CHModels.delivery_date;
                 table.amount = 0;

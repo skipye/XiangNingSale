@@ -109,7 +109,7 @@
                         {
                             StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="checked(this, \'' + row.Id + '\')" data-url=\'/Order/CWChecked\' title="审核"><i class="Hui-iconfont f-14">&#xe615;</i></a>';
                         }
-                        StrCheck += '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="FR(this, \'' + row.Id + '\')" data-url=\'/Finance/FR\' title="收款"><i class="Hui-iconfont f-14">&#xe637;</i></a>';
+                        StrCheck += '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="FR(\'收款\',\'/Finance/FR\', \'' + row.Id + '\', \'600\', \'300\')" data-url=\'/Finance/FR\' title="收款"><i class="Hui-iconfont f-14">&#xe637;</i></a>';
                         return StrCheck;
 
                     }

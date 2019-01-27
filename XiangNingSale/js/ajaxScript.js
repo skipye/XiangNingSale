@@ -11,7 +11,7 @@
 //        console.log("XmlHttpRequest:" + xmlRequest + ", errorInfo:" + errorInfo + ", exception:" + exception);
 //    }
 //});
-//操作日志，MSGSTatus状态：登录：1，增加：2，删：3，改：4，审核：5，驳回：6，客户：7
+//操作日志，MSGSTatus状态：登录：1，增加：2，删：3，改：4，审核：5，驳回：6，客户：7,付款：8
 function AddWorkLogs(MSG, MSGSTatus)
 {
     var PostUrl = '/Users/AddWorkLogs';
@@ -70,16 +70,15 @@ function checked(obj, id) {
     },
 	function () {
 	    $.post(PostUrl, { ListId: ListId, CheckedId: 1 }, function (d) {
-	        if (d == "True")
-	        {
+	        if (d == "True") {
 	            var MSG = "审核操作，审核ID：" + ListId + "，审核网址：" + PostUrl;
 	            AddWorkLogs(MSG, 5);
 	            layer.msg('已审核', { icon: 6, time: 1000 });
 	            if (id > 0) {
 	                $(obj).parents("tr").find(".checkedstatus").html('<span class="label label-success radius">通过</span>');
 	                $(obj).remove();
-	            } else { ResetWindow();}
-	        }
+	            } else { ResetWindow(); }
+	        } else { layer.msg('操作失败！', { icon: 2, time: 1000 }); ResetWindow(); }
 	    });
 	},
 	function () {
@@ -92,7 +91,7 @@ function checked(obj, id) {
 	                $(obj).parents("tr").find(".checkedstatus").html('<span class="label label-danger radius">被驳回</span>');
 	                $(obj).remove();
 	            } else { ResetWindow(); }
-	        }
+	        } else { layer.msg('操作失败！', { icon: 2, time: 1000 }); ResetWindow(); }
 	    });
 	});
 }
@@ -120,6 +119,11 @@ function edit(title, url, id, w, h) {
         content: url + "?Id=" + id
     });
     layer.full(index);
+}
+function FR(title, url, id, w, h) {
+    var MSG = title + "操作，付款ID：" + id + "，付款网址：" + url;
+    AddWorkLogs(MSG, 8);
+    layer_show(title, url + "?Id=" + id, w, h);
 }
 function add(title, url, w, h) {
     var MSG = title + "增加操作，增加网址：" + url;

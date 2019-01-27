@@ -10,6 +10,7 @@ namespace DalProject
 {
     public class ContractHeaderDal
     {
+        FinanceDal FDal = new FinanceDal();
         public ContractModel GetPageList(SContractHeaderModel SModel)
         {
             DateTime StartTime = Convert.ToDateTime("1999-12-31");
@@ -204,6 +205,8 @@ namespace DalProject
                         tables.CWCheckId = new UserDal().GetCurrentUserName().UserId;
                         tables.CWCheckName = new UserDal().GetCurrentUserName().UserName;
                         tables.CWCheckTime = DateTime.Now;
+
+                        FDal.AddOrder(Id);//增加合同
                     }
                 }
 
