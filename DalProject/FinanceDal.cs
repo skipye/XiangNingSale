@@ -145,7 +145,7 @@ namespace DalProject
                         Detailtable.length = item.length;
                         Detailtable.width = item.width;
                         Detailtable.height = item.height;
-                        Detailtable.price = item.price;
+                        Detailtable.price = 0;
                         Detailtable.qty = item.qty??0;
                         Detailtable.hardware_part = item.hardware_part;
                         Detailtable.decoration_part = item.decoration_part;
