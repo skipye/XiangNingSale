@@ -105,6 +105,8 @@
                         if (row.CheckedStatus == 0 || row.CheckedStatus == 2) {
                             StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'采购编辑\',\'/Purchase/Add\', \'' + row.Id + '\', \'800\', \'500\')" title="采购编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                        '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del(this,\'' + row.Id + '\')" data-url=\'/Purchase/Delete\' title="删除"><i class="Hui-iconfont f-14">&#xe6e2;</i></a>';
+                        } else {
+                            StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="edit(\'采购补充\',\'/Purchase/AddContent\', \'' + row.Id + '\', \'800\', \'500\')" title="内容补充"><i class="Hui-iconfont">&#xe6df;</i></a>';
                         }
                         return StrCheck;
                     }

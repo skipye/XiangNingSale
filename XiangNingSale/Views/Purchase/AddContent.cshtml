@@ -1,50 +1,50 @@
 ﻿@model ModelProject.PurchaseOrderModel
 @{Layout = null;}
 
-@Html.Action("_Meta","Home")
+@Html.Action("_Meta", "Home")
 
 
 <article class="page-container">
-	<form class="form form-horizontal" id="formadd">
-        @Html.HiddenFor(k=>k.Id)
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>采购名称：</label>
-			<div class="formControls col-xs-7 col-sm-7">
-                @Html.TextBoxFor(k => k.Name, new { @class="input-text"})
-			</div>
-		</div>
-		
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>数量：</label>
-			<div class="formControls col-xs-7 col-sm-7">
-				@Html.TextBoxFor(k => k.Qty, new { @class = "input-text" })
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>价格：</label>
-			<div class="formControls col-xs-7 col-sm-7">
-				@Html.TextBoxFor(k => k.Price, new { @class = "input-text" })
-			</div>
-		</div>
-		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>采购说明：</label>
-			<div class="formControls col-xs-8 col-sm-9">
+    <form class="form form-horizontal" id="formadd">
+        @Html.HiddenFor(k => k.Id)
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>采购名称：</label>
+            <div class="formControls col-xs-7 col-sm-7">
+                @Html.TextBoxFor(k => k.Name, new { @class = "input-text",@disabled = "true" })
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>数量：</label>
+            <div class="formControls col-xs-7 col-sm-7">
+                @Html.TextBoxFor(k => k.Qty, new { @class = "input-text", @disabled = "true" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>价格：</label>
+            <div class="formControls col-xs-7 col-sm-7">
+                @Html.TextBoxFor(k => k.Price, new { @class = "input-text", @disabled = "true" })
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>采购说明：</label>
+            <div class="formControls col-xs-8 col-sm-9">
                 @Html.TextAreaFor(k => k.Remark, new { @style = "width:100%;height:400px;" })
                 @*@Html.TextAreaFor(k => k.Remark, new { @class="textarea" ,@placeholder="说点什么...您可以把要采购的连接地址和内容这里说明！"})
-				<p class="textarea-numberbar"><em class="textarea-length">0</em>/400</p>*@
-			</div>
-		</div>
-		
-		<div class="row cl">
-			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button type="submit" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i>保存</button>
-				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
-			</div>
-		</div>
-	</form>
+                    <p class="textarea-numberbar"><em class="textarea-length">0</em>/400</p>*@
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                <button type="submit" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i>保存</button>
+                <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
 </article>
 
-@Html.Action("_Footer","Home")
+@Html.Action("_Footer", "Home")
 
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="~/js/jquery.validation/jquery.validate.js"></script>
@@ -88,7 +88,7 @@ $(function(){
             Price: {
                 required: true,
             },
-            Remark: { required: true, minlength: 10 },
+            Remark: { required: true,  minlength: 10 },
         },
         onkeyup: false,
         focusCleanup: true,

@@ -34,6 +34,15 @@ namespace XiangNingSale.Controllers
             }
             return View(Models);
         }
+        public ActionResult AddContent(int? Id)
+        {
+            PurchaseOrderModel Models = new PurchaseOrderModel();
+            if (Id != null && Id > 0)
+            {
+                Models = NSer.GetDetailById(Id.Value);
+            }
+            return View(Models);
+        }
         [ValidateInput(false)]
         public ActionResult PostAdd(PurchaseOrderModel Models)
         {
