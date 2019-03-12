@@ -18,7 +18,7 @@
                 <p class="convertimg"><img src="@Picpath" alt="@item.Name" /></p>
                 <p class="pl10 mt10">@item.Name</p>
                 <span class="saleprice fl">阅读次数<span class="f20">@item.HitTimes</span></span>
-                <a href="javascript:void(0)" class="salebtn fr mr10" style="width:140px;">我要预约看店</a>
+                <a href="javascript:void(0)" onclick="addwindow('立即预约', '/Customer/Add', '0', '700', '400')" class="salebtn fr mr10" style="width:140px;">我要预约看店</a>
             </a>
         </li>
         }
