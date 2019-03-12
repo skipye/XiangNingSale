@@ -134,6 +134,7 @@
     <Content Include="bg\jquery-slider-theme.png" />
     <Content Include="bg\logo.png" />
     <Content Include="bg\prohover_bg.jpg" />
+    <Content Include="bg\qrCode.jpg" />
     <Content Include="bg\qrCode.png" />
     <Content Include="bg\tedian.jpg" />
     <Content Include="css\about.css" />
