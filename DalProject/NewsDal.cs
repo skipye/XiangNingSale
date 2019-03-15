@@ -18,7 +18,7 @@ namespace DalProject
                             where !string.IsNullOrEmpty(SModel.Name) ? p.Name.Contains(SModel.Name) : true
                             where SModel.TypeId > 0 ? p.TypeId == SModel.TypeId : true
                             where SModel.AreaId > 0 ? p.AreaId == SModel.AreaId : true
-                            where SModel.ParentId == 0 ? p.A_NewsType.ParentId != 0 : true
+                            where SModel.ParentId ==null ? p.A_NewsType.ParentId != 0:true 
                             orderby p.CreateTime descending
                             select new NewsModel
                             {
