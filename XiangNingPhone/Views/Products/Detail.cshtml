@@ -34,14 +34,7 @@
         <h1 class="bfx02 wh">产品详情</h1>
         <div class="aubgs icon-menu" id="navmore"></div>
     </header>
-    <div class="navmorelist" id="navmorelist">
-        <ul class="f14">
-            <li><a onclick="goUrl('@Url.Action("Index","Home")')">首页</a></li>
-            <li><a onclick="goUrl('@Url.Action("Index","Products")')">家具中心</a></li>
-            <li><a onclick="goUrl('@Url.Action("Index","News")')">新闻中心</a></li>
-            <li><a href="javascript:;" onclick="location.reload();">刷新本页</a></li>
-        </ul>
-    </div>
+    @Html.Action("_RNav", "XNProducts")
     <!--header end-->
     <article class="godsconslider mb5" id="godsconslider">
         <div class="bd">
@@ -111,7 +104,7 @@
         
         <p class="bfx01 pl5">
             <a href="tel:13311601955">
-                <span class="btnliji wh db f15" ref="@Model.Id">直接电话</span>
+                <span class="btnliji wh db f15" ref="@Model.Id">电话我们</span>
             </a>
         </p>
     </footer>

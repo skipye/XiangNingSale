@@ -23,20 +23,11 @@
     <!--header Start-->
     <header id="header" class="header ycpurple">
         <div class="aubgs icon-back" id="goback"></div>
-        <h1 class="bfx02 wh">新闻资讯</h1>
+        <h1 class="bfx02 wh">新闻详情</h1>
         <div class="aubgs icon-menu" id="navmore"></div>
     </header>
-    <div class="navmorelist" id="navmorelist">
-        <ul class="f14">
-            <li><a onclick="goUrl('@Url.Action("Index","Home")')">首页</a></li>
-            <li><a onclick="goUrl('@Url.Action("Index","Products")')">产品中心</a></li>
-            <li><a onclick="goUrl('@Url.Action("Index","News")')">新闻中心</a></li>
-            <li><a href="javascript:;" onclick="location.reload();">刷新本页</a></li>
-        </ul>
-    </div>
+    @Html.Action("_RNav", "XNServe")
     <!--header end-->
-
-    <p class="godbg godge"></p>
     <div class="content">
         <h2>@Model.Name</h2>
         <h6>@Convert.ToDateTime(Model.UpTime).ToString("yyyy-dd-MM")</h6>

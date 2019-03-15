@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>企业理念</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/News.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/proDetail.css")" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/js/goTops.js")"></script>
+</head>
+<body data-marpad="padding" data-fixtop="44" data-fixbot="50">
+    <!--header Start-->
+    <header id="header" class="header ycpurple">
+        @*<div class="aubgs icon-back" onclick="goUrl('@Url.Action("Index","Home")')"></div>*@
+        <h1 class="bfx02 wh">关于香凝</h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+    @Html.Action("_RNav", "XNAbout")
+    <!--header end-->
+    <div class="content">
+        <h2>企业理念</h2>
+        <h6>我们一直在努力，只为您提供更好的家居生活！</h6>
+        <div class="article mt10">
+            <h2>暗香疏影，凝瞩不转</h2>
+            <img src="~/images/about_1.jpg" alt="香凝红木" />
+            <p>[香凝工艺]，古典家具与艺术品品牌，由传统红木家具与艺术品行业资深团队合力创设。其致力于传承中国千年手工治木艺术，通过升华革新，使之重登高尚生活领域并再次焕发蓬勃生命力。</p>
+            <p>发展至今，[香凝工艺]涵盖了古典红木家具、香具、茶具及其他纯手工艺术品。品牌以“工艺”为核心价值追求，每件作品都甄选最上等的木料，精雕细琢、精益求精，为世人创造出一件又一件传世臻品。</p>
+            <p>[香凝工艺]在专注于传承古典手工艺的同时，也关注文化、精神与情怀，在古典与现代、东方与西方之间达成人性的平衡与和谐。“暗香疏影，凝瞩不转”， [香凝工艺]希望每一件作品都能留给收藏者和品鉴者一个如此的永久印象。</p>
+        </div>
+    </div>
+    @Html.Action("_FNav", "XNProducts")
+    <div id="gotop" class="gotop"></div>
+    <script type="text/javascript">
+        $(function () {
+        //返回顶部插件引用
+        $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+    });
+
+    </script>
+</body>
+</html>

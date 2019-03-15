@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>工艺礼品</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/proDetail.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/News.css")" rel="stylesheet" type="text/css">
+    <link href="~/css/protype.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/goTops.js")"></script>
+</head>
+<body data-marpad="padding" data-fixtop="44" data-fixbot="50">
+    <!--header Start-->
+    <header id="header" class="header ycpurple">
+        @*<div class="aubgs icon-back" onclick="goUrl('@Url.Action("Index","Home")')"></div>*@
+        <h1 class="bfx02 wh">香凝产品</h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+    @Html.Action("_RNav", "XNProducts")
+    <!--header end-->
+    <div class="content">
+        <h2>工艺礼品</h2>
+        <h6>上海市青浦区朱枫公路1355号（近沈砖路）</h6>
+    </div>
+    <section class="myorde por">
+        
+        @Html.Action("List", "Products", new { ParentId = 0, TypeId = 15, PageSize = 100 })
+    </section>
+    @Html.Action("_FNav", "XNProducts")
+    <div id="gotop" class="gotop"></div>
+    <script type="text/javascript">
+        $(function () {
+            //返回顶部插件引用
+            $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+        });
+
+    </script>
+</body>
+</html>

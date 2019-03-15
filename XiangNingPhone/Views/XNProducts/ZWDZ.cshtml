@@ -1,5 +1,4 @@
-﻿@model ModelProject.NewsModel
-@{
+﻿@{
     Layout = null;
 }
 
@@ -8,7 +7,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>新闻资讯</title>
+    <title>整屋定制</title>
     <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
     <meta content="telephone=no" name="format-detection" />
     <meta content="email=no" name="format-detection" />
@@ -22,40 +21,28 @@
 <body data-marpad="padding" data-fixtop="44" data-fixbot="50">
     <!--header Start-->
     <header id="header" class="header ycpurple">
-        <div class="aubgs icon-back" id="goback"></div>
-        <h1 class="bfx02 wh">新闻资讯</h1>
+        @*<div class="aubgs icon-back" onclick="goUrl('@Url.Action("Index","Home")')"></div>*@
+        <h1 class="bfx02 wh">香凝产品</h1>
         <div class="aubgs icon-menu" id="navmore"></div>
     </header>
-    <div class="navmorelist" id="navmorelist">
-        <ul class="f14">
-            <li><a onclick="goUrl('@Url.Action("Index","Home")')">首页</a></li>
-            <li><a onclick="goUrl('@Url.Action("Index","Products")')">产品中心</a></li>
-            <li><a onclick="goUrl('@Url.Action("Index","News")')">新闻中心</a></li>
-            <li><a href="javascript:;" onclick="location.reload();">刷新本页</a></li>
-        </ul>
-    </div>
+     @Html.Action("_RNav", "XNProducts")
     <!--header end-->
-
-    <p class="godbg godge"></p>
     <div class="content">
-        <h2>@Model.Name</h2>
-        <h6>@Convert.ToDateTime(Model.UpTime).ToString("yyyy-dd-MM")</h6>
-        <div class="article mt10" id="godsConTxt">
-            @Html.Raw(Model.StrContent)
+        <h2>整屋定制</h2>
+        <h6>展示厅：上海市澳门路168号月星家居4楼D059木紫香凝</h6>
+        <div class="article mt10">
+
+            <img src="~/images/a2.png" />
         </div>
     </div>
+    @Html.Action("_FNav", "XNProducts")
     <div id="gotop" class="gotop"></div>
     <script type="text/javascript">
         $(function () {
-            //返回顶部插件引用
-            $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
-        });
-        $('#godsConTxt img').each(function () {
-            var value = $(this).attr("src");
-            value = "http://sale.xiangninghm.com" + value;
-            $(this).attr("src", value);
-        });
+        //返回顶部插件引用
+        $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+    });
+
     </script>
 </body>
-
 </html>

@@ -1,5 +1,4 @@
-﻿@model ModelProject.NewsModel
-@{
+﻿@{
     Layout = null;
 }
 
@@ -8,13 +7,15 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>新闻资讯</title>
+    <title>家具保养</title>
     <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
     <meta content="telephone=no" name="format-detection" />
     <meta content="email=no" name="format-detection" />
     <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
     <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
     <link href="@Url.Content("~/css/News.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/proDetail.css")" rel="stylesheet" type="text/css">
+
     <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
     <script type="text/javascript" src="@Url.Content("/js/goTops.js")"></script>
@@ -22,40 +23,31 @@
 <body data-marpad="padding" data-fixtop="44" data-fixbot="50">
     <!--header Start-->
     <header id="header" class="header ycpurple">
-        <div class="aubgs icon-back" id="goback"></div>
-        <h1 class="bfx02 wh">新闻资讯</h1>
+        @*<div class="aubgs icon-back" onclick="goUrl('@Url.Action("Index","Home")')"></div>*@
+        <h1 class="bfx02 wh">香凝服务</h1>
         <div class="aubgs icon-menu" id="navmore"></div>
     </header>
-    <div class="navmorelist" id="navmorelist">
-        <ul class="f14">
-            <li><a onclick="goUrl('@Url.Action("Index","Home")')">首页</a></li>
-            <li><a onclick="goUrl('@Url.Action("Index","Products")')">产品中心</a></li>
-            <li><a onclick="goUrl('@Url.Action("Index","News")')">新闻中心</a></li>
-            <li><a href="javascript:;" onclick="location.reload();">刷新本页</a></li>
-        </ul>
-    </div>
+    @Html.Action("_RNav", "XNServe")
     <!--header end-->
-
-    <p class="godbg godge"></p>
     <div class="content">
-        <h2>@Model.Name</h2>
-        <h6>@Convert.ToDateTime(Model.UpTime).ToString("yyyy-dd-MM")</h6>
-        <div class="article mt10" id="godsConTxt">
-            @Html.Raw(Model.StrContent)
+        <h2>售后服务</h2>
+        <h6>热情周到的维修服务，严格的维修纪律！</h6>
+        <div class="article mt10">
+            <h2>服务范围</h2>
+            <p>保养、修理各种中高档家具及工艺品，实木家具、红木家具、古董家具、木质装潢家具、实木地板；家俱损坏如：划伤、裂痕、碰伤、掉漆、改色、爆裂、木质收缩等，都可以技术修复。修复之后没有颜色差别。</p>
+            <h2>我们的承诺</h2>
+            <p>只要您选择了香凝红木家具，我们将两年内为您提供免费维修保养服务，直到您满意为止!</p>
+            <p>感谢所有用户一直以来对我们香凝红木的长期以来的支持，我们也将以热忱的服务来回馈社会和我们亲爱的用户。</p>
         </div>
     </div>
+    @Html.Action("_FNav", "XNProducts")
     <div id="gotop" class="gotop"></div>
     <script type="text/javascript">
         $(function () {
-            //返回顶部插件引用
-            $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
-        });
-        $('#godsConTxt img').each(function () {
-            var value = $(this).attr("src");
-            value = "http://sale.xiangninghm.com" + value;
-            $(this).attr("src", value);
-        });
+        //返回顶部插件引用
+        $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+    });
+
     </script>
 </body>
-
 </html>

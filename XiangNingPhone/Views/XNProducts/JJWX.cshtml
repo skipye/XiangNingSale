@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>家具维修</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/News.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/proDetail.css")" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/js/goTops.js")"></script>
+</head>
+<body data-marpad="padding" data-fixtop="44" data-fixbot="50">
+    <!--header Start-->
+    <header id="header" class="header ycpurple">
+        @*<div class="aubgs icon-back" onclick="goUrl('@Url.Action("Index","Home")')"></div>*@
+        <h1 class="bfx02 wh">香凝产品</h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+    @Html.Action("_RNav","XNProducts")
+    <!--header end-->
+    <div class="content">
+        <h2>家具维修</h2>
+        <h6>上海市青浦区朱枫公路1355号（近沈砖路）</h6>
+        <div class="article mt10">
+            <h3>一、服务范围</h3>
+            <h4>A） 家具维修</h4>
+            <p>保养、修理各种中高档家具及工艺品，实木家具、红木家具、古董家具、木质装潢家具、实木地板；家俱损坏如：划伤、裂痕、碰伤、掉漆、改色、爆裂、木质收缩等，都可以技术修复。修复之后没有颜色差别。</p>
+            <h4>B）家具加工</h4>
+            <p>包括来料加工、来样加工、定做各类红木、实木家具，各类成品及半成品的红木、实木家具的木工和油漆加工；</p>
+            <h4>C）旧家具翻新</h4>
+            <p>提供各种红木实木家俱翻新（旧家俱翻新）</p>
+            <h3>二、服务家俱种类</h3>
+            <p>套房、餐桌椅、书橱柜、茶几、盆景、楼梯和落地钟等红木、实木家具；</p>
+            <h4>家庭家具维修服务项目</h4>
+            <p>旧家具翻新、做旧：提供各种红木实木家具翻新【旧家具翻新】 仿古【仿制古香古色风格的家具】：对各种残缺的旧家具，古老家具修复【修旧如旧】</p>
+            <p>补漆： 地板补漆、楼梯补漆、家具补漆、裂缝划痕修复。各类中高档红木制品维修、翻新、做旧、仿古、改色、上光、哑光、打蜡。 办公家具维修服务项目：木质.实木.板式.纤维板式.办公桌维修补漆、老板椅皮/木补漆、沙发决口修补、发霉处理、破损补伤、清洗、翻新、改色、填充海棉。</p>
+            <h4>皮革家具维修服务项目</h4>
+            <p>皮面修补与翻新----为各类中沙发等高档皮革制品如皮沙法、决口修补、发霉处理、破损补伤、清洗、翻新、改色、填充海棉。</p>
+            <h4>楼梯维修服务项目</h4>
+            <p>楼梯、扶手、立柱磕碰维修修漆。 木门维修服务项目：原木门、实木门、复合门、烤漆门、免漆门掉漆、碰伤、划伤、干裂维修修复。</p>
+            <h4>地板维修服务项目</h4>
+            <p>地板划伤修复；地板磕碰维修；地板补漆、翻新 ,打蜡。</p>
+            <h3>服务流程：</h3>
+            <h4>第一步：拨打服务电话</h4>
+            <p>我们的服务遍及全上海市，当您的家具需要维修和保养时。请拨打下面服务热线，直接拨打！</p>
+            <h4>第二步：描述需要服务具体情况</h4>
+            <p>以便派出合适人选去解决。您需要描述家具损坏程度和需要哪方面的服务或者拍摄图片通过邮箱发送过来给你做一个大概的费用评估。留下您的联系方式及地址，要根据您的时间安排和我们的调度安排而商量出一个适当的上门服务时间。</p>
+            <h4>第三步：应约上门服务</h4>
+            <p>我们会按照预约的上门服务时间，准时到达指定地点。如果是比较小的工作量，在方便的情况下我们维
+            <h4>第四步：预报所需费用</h4>
+            <p>在我们维修人员上门后根据实际情况报出所需维修费用，以便让您做到心中有数。同时，您也可以因为价格超出预算而放弃维修。如果放弃维修，我们只收取上门检修费50元。</p>
+            <h4>第五步：达成协议认同解决方案</h4>
+            <p>如果您认同服务所需费用，小工作量我们维修人员将马上为您维修现场修复，直到您认为满意为止。如工作量大，要运回修理厂修复的，我们要签订一份家具修复合同。</p>
+            <h4>第六步：修复完成，满意之后再付款，欢迎广大新老客户提宝贵意见。</h4>
+            <h4>第七步：清理服务现场，如清理维修垃圾、还原之前因维修所挪动的物品。</h4>
+            <h4>第八步：结束服务过程</h4>
+            <p>到此，感谢您对我们服务的支持！如果您以后还有别的需要，我们会继续为您提供满意的服务。</p>
+        </div>
+    </div>
+    @Html.Action("_FNav","XNProducts")
+    <div id="gotop" class="gotop"></div>
+    <script type="text/javascript">
+        $(function () {
+        //返回顶部插件引用
+        $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+    });
+    
+    </script>
+</body>
+</html>

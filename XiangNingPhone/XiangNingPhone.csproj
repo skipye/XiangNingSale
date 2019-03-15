@@ -110,6 +110,9 @@
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\XNAboutController.cs" />
+    <Compile Include="Controllers\XNProductsController.cs" />
+    <Compile Include="Controllers\XNServeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -146,6 +149,8 @@
     <Content Include="images\640-1.jpg" />
     <Content Include="images\640-2.jpg" />
     <Content Include="images\640-3.jpg" />
+    <Content Include="images\a2.png" />
+    <Content Include="images\about_1.jpg" />
     <Content Include="images\bt1.png" />
     <Content Include="images\crossico.png" />
     <Content Include="images\feibg.jpg" />
@@ -296,6 +301,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\XiangNingPhone.pubxml" />
+    <Content Include="Views\XNProducts\JJWX.cshtml" />
+    <Content Include="Views\XNProducts\ZWDZ.cshtml" />
+    <Content Include="Views\XNProducts\_RNav.cshtml" />
+    <Content Include="Views\XNProducts\_FNav.cshtml" />
+    <Content Include="Views\XNProducts\GYLP.cshtml" />
+    <Content Include="Views\XNServe\CXHD.cshtml" />
+    <Content Include="Views\XNServe\_RNav.cshtml" />
+    <Content Include="Views\News\PicList.cshtml" />
+    <Content Include="Views\XNServe\Detail.cshtml" />
+    <Content Include="Views\XNServe\JJBY.cshtml" />
+    <Content Include="Views\XNServe\SHFW.cshtml" />
+    <Content Include="Views\XNServe\ZSJM.cshtml" />
+    <Content Include="Views\XNAbout\_RNav.cshtml" />
+    <Content Include="Views\XNAbout\LXWM.cshtml" />
+    <Content Include="Views\XNAbout\QYLN.cshtml" />
+    <Content Include="Views\XNAbout\XNZX.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

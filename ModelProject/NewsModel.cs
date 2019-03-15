@@ -44,6 +44,7 @@ namespace ModelProject
         public int PageIndex { get; set; }
         public List<CRMItem> AreaList { get; set; }
         public List<CRMItem> TypeList { get; set; }
+        public int? ParentId { get; set; }
     }
     public class NewsItmeModel
     {

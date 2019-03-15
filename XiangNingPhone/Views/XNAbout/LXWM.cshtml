@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>联系我们</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/News.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/proDetail.css")" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/js/goTops.js")"></script>
+</head>
+<body data-marpad="padding" data-fixtop="44" data-fixbot="50">
+    <header id="header" class="header ycpurple">
+        <h1 class="bfx02 wh">关于香凝</h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+    @Html.Action("_RNav", "XNAbout")
+    <div class="content">
+        <h2>联系我们</h2>
+        <h6>我们一直在努力，只为您提供更好的家居生活！</h6>
+        <div class="article">
+            <p style="color: #0a83d8; font-weight:700; font-size:1.6rem;margin-top:30px;">上海香凝工艺家具有限公司</p>
+            <p>公司地址：上海市青浦区朱枫公路1355号（近沈砖路）</p>
+            <h4>旗舰店：</h4>
+            <p>1、上海市真北路1108号红星美凯龙南馆6楼H8009</p>
+            <P>2、上海市沪南路2178号红星美凯龙6楼F8088</P>
+            <p>3、上海市澳门路168号月星家居4楼D059木紫香凝</p>
+            <p>4、上海市徐汇区文定路200号盛源大地4楼香凝红木</p>
+            <p>鉴赏热线：高经理：<a href="tel:13311601955"></a>13311601955</p>
+        </div>
+        <div id="map" style="width:98%;height:400px;margin:0px auto;"></div>
+    </div>
+    @Html.Action("_FNav", "XNProducts")
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ow29ANFSyXM6nf6cYl14GdDI"></script>
+    <script type="text/javascript">
+            // 百度地图API功能
+            var map = new BMap.Map("map");
+            var point = new BMap.Point(121.058537, 31.082668);
+            var marker = new BMap.Marker(point);  // 创建标注
+            map.addOverlay(marker);              // 将标注添加到地图中
+            marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+            map.centerAndZoom(point, 15);
+            map.enableScrollWheelZoom(true);
+            var opts = {
+                width: 250,     // 信息窗口宽度
+                height: 80,     // 信息窗口高度
+                title: "<span style='font-size:16px;color:#0a79d8;font-weight: bold'>香凝红木-生产基地</span>", // 信息窗口标题
+                enableMessage: true,//设置允许信息窗发送短息
+                message: "上海市青浦区朱枫公路1355号<br />（近沈砖路） +鉴赏热线：13311601955"
+            }
+            var infoWindow = new BMap.InfoWindow("<p style='font-size:14px;line-height:140%'>上海市青浦区朱枫公路1355号<br />（近沈砖路） <br />++鉴赏热线：13311601955</p>", opts);  // 创建信息窗口对象
+            map.openInfoWindow(infoWindow, point); //开启信息窗口
+            marker.addEventListener("click", function () {
+                map.openInfoWindow(infoWindow, point); //开启信息窗口
+            });
+    </script>
+
+</body>
+</html>
+
+
+
+
+
