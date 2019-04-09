@@ -60,7 +60,7 @@ function login() {
         success: function (d) {
             m.close(pageLogin);
             var data = d.indexOf("&");
-            //alert(data);
+            //alert(ReturnUrl);
             if (data > 0) {
                 UsTips("登录成功！");
                 if (ReturnUrl != null && ReturnUrl != "")
@@ -70,9 +70,11 @@ function login() {
                 var arrRult = d.split("&");
                 //alert(arrRult[0]);
                 if (arrRult[1] == "True") {
-                    if (confirm('是否去完善信息？第一次完善个人信息可获得10000积分。'))
-                        window.location.href = "/Member/Index";
-                    else { window.location.href = "/Cart/Index"; }
+                    window.location.href = "/Member/Index";
+                    //if (confirm('是否去完善信息？第一次完善个人信息可获得10000积分。'))
+                    //    window.location.href = "/Member/Index";
+                    //else { window.location.href = "/Cart/Index"; 
+                   
                 }
                 else { window.location.href = "/Cart/Index"; }
                 }

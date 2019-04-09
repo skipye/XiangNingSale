@@ -33,5 +33,11 @@ namespace DataBase
         public DbSet<Web_Customers> Web_Customers { get; set; }
         public DbSet<Sale_Finance_FR> Sale_Finance_FR { get; set; }
         public DbSet<Sale_Finance_FR_Logs> Sale_Finance_FR_Logs { get; set; }
+        public DbSet<Address_Info> Address_Info { get; set; }
+        public DbSet<MemberInfo> MemberInfo { get; set; }
+        public DbSet<OrderInfo> OrderInfo { get; set; }
+        public DbSet<OrderProductsInfo> OrderProductsInfo { get; set; }
+        public DbSet<Sale_Finance_FR_Logs11> Sale_Finance_FR_Logs11 { get; set; }
+        public DbSet<MemberMessage> MemberMessage { get; set; }
     }
 }

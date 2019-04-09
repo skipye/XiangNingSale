@@ -16,6 +16,14 @@
         <EntityTypeShape EntityType="XingNingSaleModel.Sale_Finance_FR" Width="1.5" PointX="0.5" PointY="6.125" />
         <EntityTypeShape EntityType="XingNingSaleModel.Sale_Finance_FR_Logs" Width="1.5" PointX="2.75" PointY="5.875" />
         <AssociationConnector Association="XingNingSaleModel.Sale_Contract_HeaderSale_Finance_FR" />
+        <EntityTypeShape EntityType="XingNingSaleModel.Address_Info" Width="1.5" PointX="5.375" PointY="8.75" />
+        <EntityTypeShape EntityType="XingNingSaleModel.MemberInfo" Width="1.5" PointX="5.75" PointY="14" />
+        <EntityTypeShape EntityType="XingNingSaleModel.OrderInfo" Width="1.5" PointX="8" PointY="8.5" />
+        <EntityTypeShape EntityType="XingNingSaleModel.OrderProductsInfo" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="XingNingSaleModel.Sale_Finance_FR_Logs11" Width="1.5" PointX="2.75" PointY="10.75" />
+        <AssociationConnector Association="XingNingSaleModel.FK_OrderInfo_Address_Info" />
+        <AssociationConnector Association="XingNingSaleModel.FK_OrderInfo_MemberInfo" />
+        <EntityTypeShape EntityType="XingNingSaleModel.MemberMessage" Width="1.5" PointX="10.375" PointY="7.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

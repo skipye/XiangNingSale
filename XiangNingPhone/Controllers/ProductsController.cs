@@ -4,7 +4,7 @@ using System.Web.Mvc;
 
 namespace XiangNingPhone.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private static readonly NewsService NSer = new NewsService();
         public ActionResult Index(SNewsModel SModel)
@@ -34,6 +34,17 @@ namespace XiangNingPhone.Controllers
         public ActionResult Detail(int Id)
         {
             var Models = NSer.GetDetailById(Id);
+
+            var existingCart = this.Carts;
+            if (existingCart != null && existingCart.Count>0)
+            {
+                int CartCount = 0;
+                foreach (var item in existingCart)
+                {
+                    CartCount += item.Amount;
+                }
+                Models.CartCount = CartCount;
+            }
             return View(Models);
         }
         public ActionResult Search(string keyWord)

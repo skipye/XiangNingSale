@@ -1,0 +1,16 @@
+﻿@using ServiceProject;
+@{
+    ViewBag.Title = "会员须知";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    NewsService NSer = new NewsService();
+}
+<div class="usernots">
+    @Html.Raw(NSer.GetDetailById(194).StrContent)
+</div>
+
+<script type="text/javascript">
+    $(function () {//返回顶部插件引用
+        $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+        loadNoticesList();
+    });
+</script>

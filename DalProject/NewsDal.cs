@@ -224,6 +224,8 @@ namespace DalProject
                                   AreaName = p.AreaType.Name,
                                   HitTimes = p.HitTimes,
                                   UpTime=p.UpTime,
+                                  SalePrice=p.SalePrices
+
                               }).SingleOrDefault();
                 tables.GalleryItems = GetNewsImgs(Id);
 

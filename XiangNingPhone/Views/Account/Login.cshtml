@@ -1,0 +1,56 @@
+﻿@{
+    Layout = null;
+    var ReturnUrl = ViewBag.ReturnUrl;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <meta charset="utf-8">
+    <title>登录</title>
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/member.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/js/mdialog.css")" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/mDialog.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/login.js")"></script>
+</head>
+<body class="lognew">
+    <!--header Start-->
+    <!--<header id="header" class="header">
+        <div class="aubgs icon-back" id="goback"></div>
+        <h1 class="bfx02 wh"></h1>
+    </header>-->
+    <div class="logback icon-back" id="goback"></div>
+    <div class="lognewbox"></div>
+    <!--header end-->
+    <div class="lognewcon f14">
+        <input id="ReturnUrl" name="ReturnUrl" type="hidden" value="@ReturnUrl">
+        <ul>
+            <li>
+                <input type="text" class="lognewinput loguser f14" id="userCode" placeholder="请输入昵称或者手机号码">
+            </li>
+            <li>
+                <input type="password" class="lognewinput logpass f14" id="passWord" placeholder="请输入登录密码">
+            </li>
+            <li class="mt5"><button type="button" class="lognewbtn f16 rdu5" onclick="login()">LOGIN 登录</button></li>
+        </ul>
+    </div>
+    <div class="lognewother">
+        <ul class="ovh f14">
+            <li class="bfx01" onclick="goUrl('@Url.Action("Register", "Account")')"><em class="nicoa logzhuc"></em><p class="ntext">注册账号</p></li>
+            @*<li class="bfx01" id="wechat_login" onclick="wxlogin()"><em class="nicob logweix"></em><p class="ntext">微信登录</p></li>*@
+            <li class="bfx01" onclick="goUrl('@Url.Action("BackPassword", "Account")')"><em class="nicoa logsuo"></em><p class="ntext">忘记密码</p></li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -29,6 +29,8 @@ namespace ModelProject
         public string AreaName { get; set; }
         public List<SelectListItem> AreaDroList { get; set; }
         public DateTime? UpTime { get; set; }
+        public decimal? SalePrice { get; set; }
+        public int? CartCount { get; set; }
     }
     public class SNewsModel
     {

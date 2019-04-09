@@ -1,0 +1,85 @@
+﻿@model ModelProject.MemberModel
+@{
+    ViewBag.Title = "个人信息";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    List<SelectListItem> SexList = new List<SelectListItem>();
+
+}
+
+<article class="resetpass f14">
+    @using (Ajax.BeginForm("MemberSubmit", "Member", new AjaxOptions { HttpMethod = "Form", OnSuccess = "AjaxSubmit" }, new { id = "updateMember" }))
+    {
+
+            <!-- <form id = "adressForm" method="post" enctype="multipart/form-data">  -->
+        <ul>
+            @Html.HiddenFor(k => k.Id)
+            <p class="mb5 ml5 g6 f15">昵称</p>
+            <li class="otinp mb10 rdu5">
+                @Html.TextBoxFor(k => k.Name, new { @class = "addres_addinput", @readonly = "readonly" })
+            </li>
+            <p class="mb5 ml5 g6 f15">会员号</p>
+            <li class="otinp mb10 rdu5">
+                @Html.TextBoxFor(k => k.MemberNumber, new { @class = "addres_addinput", @readonly = "readonly" })
+            </li>
+            @*<p class="mb5 ml5 g6 f15">真实姓名</p>
+                <li class="otinp mb10 rdu5">
+                    @Html.TextBoxFor(k => k.RealName, new { @class = "addres_addinput", @readonly = "readonly" })
+                </li>*@
+            <p class="mb5 ml5 g6 f15">手机号码</p>
+            <li class="otinp mb10 rdu5">
+                @Html.TextBoxFor(k => k.Telphone, new { @class = "addres_addinput", @readonly = "readonly" })
+            </li>
+            <p class="mb5 ml5 g6 f15">性别</p>
+            <li class="otinp mb10 rdu5">
+                <div class="select-text">
+                    @Html.DropDownListFor(k => k.Sex, new List<SelectListItem>(){
+                       new SelectListItem(){Text = "请选择性别", Value = ""},
+                       new SelectListItem(){Text = "男性", Value = "男性"},
+                       new SelectListItem(){Text = "女性", Value = "女性"},
+                       new SelectListItem(){Text = "保密", Value = "保密"}
+                       },
+                       new { @class = "area-select", @placeholder = "性别", })
+                </div>
+            </li>
+            @*<p class="mb5 ml5 g6 f15">所属区域</p>
+            <li class="otinp mb10 rdu5">
+                <div class="select-text">
+                    @Html.DropDownListFor(k => k.AreaId, Model.AreaList, new { @class = "area-select", @placeholder = "所属区域", })
+                </div>
+            </li>
+            <p class="mb5 ml5 g6 f15">所属行业</p>
+            <li class="otinp mb10 rdu5">
+                <div class="select-text">
+                    @Html.DropDownListFor(k => k.IndustryId, Model.IndustryList, new { @class = "area-select", @placeholder = "所属行业", })
+                </div>
+            </li>*@
+            <p class="mb5 ml5 g6 f15">年龄</p>
+            <li class="otinp mb10 rdu5">
+                @Html.TextBoxFor(k => k.Age, new { @class = "addres_addinput", @placeholder = "年龄" })
+            </li>
+            <p class="mb5 ml5 g6 f15">邮箱</p>
+            <li class="otinp mb10 rdu5">
+                @Html.TextBoxFor(k => k.Email, new { @class = "addres_addinput", @placeholder = "邮箱" })
+            </li>
+
+        </ul>
+
+    }
+    <p class="updateMember p15"><span class="perexitBtn db g6 f14">保存信息</span></p>
+    @*<p class="p15" id="wechat_perple" style="display: none;"> <button type="button" class="btngreen f16 rdu5 tc" onclick="updatePhone()"><span>绑定手机号码</span></button> </p>*@
+</article>
+
+<script type="text/javascript">
+    $(function () {
+        $(".updateMember").click(function () {
+            $("#updateMember").submit();
+        });
+
+    });
+    function AjaxSubmit(d) {
+        if (d == "1")
+        { UsTips("修改成功!"); goUrl('@Url.Action("Index","Member")'); }
+        else { UsTips("修改失败！"); }
+    }
+</script>
+

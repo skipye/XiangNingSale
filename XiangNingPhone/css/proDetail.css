@@ -130,7 +130,7 @@
 .godstabcent .parameter{padding:8px 4px;display:none;}
 .godstabcent .parameter li{width:50%;float:left; -webkit-box-sizing:border-box; -moz-box-sizing:border-box;box-sizing:border-box; text-align:center;}
 .godstabcent .parameter li .gcont{ border:1px #DFDFDF solid;margin:4px;position:relative; background:#fff;border-radius:5px;}
-.godstabcent .parameter li .gcopic{position: relative;padding-top:63%;}
+.godstabcent .parameter li .gcopic{position: relative;padding-top:60%;}
 .godstabcent .parameter li .gcopic span{width:98%;height:98%;position: absolute;top: 0;left: 0;z-index: 2;background-repeat: no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%; margin:1%;border-radius:5px;}
 .godstabcent .parameter li p{ line-height:140%; text-align:left;}
 .godstabcent .parameter li .mtit{max-height: 20px; line-height:20px;text-align:left;padding:5px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
@@ -146,7 +146,7 @@
 .godstabcent .parameter3{padding:8px 4px;}
 .godstabcent .parameter3 li{width:33.33%;float:left; -webkit-box-sizing:border-box; -moz-box-sizing:border-box;box-sizing:border-box; text-align:center;}
 .godstabcent .parameter3 li .gcont{ border:1px #DFDFDF solid;margin:4px;position:relative; background:#fff;border-radius:5px;}
-.godstabcent .parameter3 li .gcopic{position: relative;padding-top:63%;}
+.godstabcent .parameter3 li .gcopic{position: relative;padding-top:60%;}
 .godstabcent .parameter3 li .gcopic span{width:98%;height:98%;position:absolute;top:0;left:0;z-index: 2;background-repeat: no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;margin:1%;border-radius:5px; }
 .godstabcent .parameter3 li p{ line-height:140%; text-align:left;}
 .godstabcent .parameter3 li .mtit{max-height: 20px; line-height:20px;text-align:left;padding:5px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
@@ -155,7 +155,7 @@
 .godstabcent .parameter1{padding:8px 4px;}
 .godstabcent .parameter1 li{width:100%;float:left; -webkit-box-sizing:border-box; -moz-box-sizing:border-box;box-sizing:border-box; text-align:center;}
 .godstabcent .parameter1 li .gcont{ border:1px #DFDFDF solid;margin:4px;position:relative; background:#fff;border-radius:5px;}
-.godstabcent .parameter1 li .gcopic{position: relative;padding-top:63%;}
+.godstabcent .parameter1 li .gcopic{position: relative;padding-top:60%;}
 .godstabcent .parameter1 li .gcopic span{width:98%;height:98%;position:absolute;top:0;left:0;z-index: 2;background-repeat: no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;margin:1%;border-radius:5px; }
 .godstabcent .parameter1 li p{ line-height:140%; text-align:left;}
 .godstabcent .parameter1 li .mtit{max-height: 20px; line-height:20px;text-align:left;padding:5px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}

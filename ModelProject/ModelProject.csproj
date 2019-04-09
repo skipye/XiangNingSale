@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
@@ -44,11 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressModel.cs" />
+    <Compile Include="CartModel.cs" />
     <Compile Include="ContractModel.cs" />
     <Compile Include="CustomerModel.cs" />
     <Compile Include="FinanceModel.cs" />
     <Compile Include="LabelsModel.cs" />
+    <Compile Include="MemberModel.cs" />
     <Compile Include="MenuModel.cs" />
+    <Compile Include="MessageModel.cs" />
+    <Compile Include="OrderModel.cs" />
     <Compile Include="RoleModel.cs" />
     <Compile Include="CategoryModel.cs" />
     <Compile Include="NewsModel.cs" />

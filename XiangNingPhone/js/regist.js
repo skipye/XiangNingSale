@@ -143,7 +143,7 @@ function register() {
         success: function (d) {
             if (d == "True") {
                 dialogMsg("注册成功！");
-                goUrl('/Member/PersonalInfo');//change to real 
+                goUrl('/Member/Index');//change to real 
             } else {
                 // UsTips(data.message);
                 register_false = false;

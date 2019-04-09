@@ -48,11 +48,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressDal.cs" />
+    <Compile Include="ChinaDal.cs" />
     <Compile Include="ContractHeaderDal.cs" />
     <Compile Include="INVDal.cs" />
     <Compile Include="FinanceDal.cs" />
+    <Compile Include="MemberDal.cs" />
     <Compile Include="MenuDal.cs" />
     <Compile Include="CustomerDal.cs" />
+    <Compile Include="MessageDal.cs" />
+    <Compile Include="OrderDal.cs" />
     <Compile Include="RoleDal.cs" />
     <Compile Include="CategoryDal.cs" />
     <Compile Include="NewsDal.cs" />

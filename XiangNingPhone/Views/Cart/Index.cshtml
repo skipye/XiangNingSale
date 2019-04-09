@@ -1,0 +1,191 @@
+﻿@model List<ModelProject.CartModel>
+@{
+    Layout = null;
+    double ShangPinTolit = 0;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <meta charset="utf-8">
+    <title>我的购物车</title>
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/cartorder.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/js/mdialog.css")" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/mDialog.min.js")"></script>
+
+</head>
+
+<body data-marpad="padding" data-fixtop="44" data-fixbot="50">
+    <!--header Start-->
+    <header id="header" class="header ycpurple">
+        <div class="aubgs icon-back" id="goback"></div>
+        <h1 class="bfx02 wh">我的购物车</h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+    <div class="navmorelist" id="navmorelist">
+        <ul class="f14">
+            <li><a onclick="goUrl('@Url.Action("Index","Home")');">首页</a></li>
+            <li><a onclick="goUrl('@Url.Action("Index","Member")');">会员中心</a></li>
+            <li><a href="javascript:;" onclick="location.reload();">刷新本页</a></li>
+        </ul>
+    </div>
+    <!--header end-->
+    @if (Model != null && Model.Any())
+    {
+        <div class="cart_info">
+            <ul class="cart_list">
+                @{
+                    double subTotal = 0;//商品总价
+                    for (int i = 0; i < Model.Count; i++)
+                    {
+                        string IPicPath = "http://sale.xiangninghm.com/" + Model[i].Product.ConvertImg;
+                        // 選擇商品數量的選單只能選擇 1 ~ 10
+                        //var ddlAmountList = new SelectList(Enumerable.Range(1, 10), Model[i].Amount);
+                        double YLPrice = Convert.ToDouble(Model[i].Product.SalePrice); ;//原来商品价格
+                        double ToProPrice = 0;//商品总价
+                        double ProPrice = 0;//单个商品价格
+                        if (Model[i].Product.SalePrice > 0)
+                        {
+                            double Sale =1;
+                            ProPrice = Convert.ToDouble(Model[i].Product.SalePrice) * Sale;
+                            ToProPrice = ProPrice * Model[i].Amount;
+
+                        }
+                        else
+                        {
+                            ToProPrice = Convert.ToDouble(Model[i].Product.SalePrice) * Model[i].Amount;
+                            ProPrice = Convert.ToDouble(Model[i].Product.SalePrice);
+                        }
+                        subTotal += ToProPrice;
+                        ShangPinTolit = subTotal;
+                        <li>
+                            <div class="listinfo">
+
+                                <input type="hidden" class="countNum@(Model[i].Product.Id)" value="" />
+                                @*<input type="checkbox" onclick="checkState(this);" class="cart-radio choose" name="cart" value="1214405" data-cartnum="3" data-name="De Leaf Thanaka 美白皂 100g" data-value="1" data-num="477" data-leid="2098" data-mid="54">*@
+                                <a href="@Url.Action("ProductsDetail", "Home", new { Id = Model[i].Product.Id })"><img src="@IPicPath" alt="@Model[i].Product.Name"></a>
+                            </div>
+                            <div class="listinfo pl15 bfx01">
+                                <a href="@Url.Action("ProductsDetail", "Home", new { Id = Model[i].Product.Id })">
+                                    <h3 class="f12">@Model[i].Product.Name</h3>
+                                    <p class="shopjia">
+                                        &yen;<em class="cartprice f14" id="cartprice@(Model[i].Product.Id)">@ProPrice.ToString("0.00")</em>
+                                        @if (Model[i].Product.SalePrice > 0)
+                                        {
+                                            <em class="sale" style="text-decoration:line-through">&yen;@YLPrice.ToString("0.00")</em>}
+                                    </p>
+                                </a>
+                                <p class="cartgo">
+                                    <em class="cartmin" ref="@Model[i].Product.Id">-</em>
+                                    <input name="@Model[i].Amount" class="cartnum" id="cartnum@(Model[i].Product.Id)" value="@Model[i].Amount" readonly="readonly">
+                                    <em class="cartadd" ref="@Model[i].Product.Id">+</em>
+                                    @*@Ajax.ActionLink("刪除", "Remove", "Cart", new { ProductId = Model[i].Product.Id }, ajaxOption, new { @class = "delCart  fr" })*@
+                                    <i class="delCart fr" ref="@Model[i].Product.Id"></i>
+                                </p>
+                            </div>
+                            <p class="mse g9 f12 tr">本产品实付：<span class="red">&yen;<em id="mse@(Model[i].Product.Id)" ref="@ToProPrice">@ToProPrice.ToString("0.00")</em></span></p>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+                    }
+                    else
+                    {
+                        <section class="db" style="margin-top:50px">
+                            <article class="cart_list">
+                                <div class="cart_nopro mt30" style="display: block;" id="cart_nopro">
+                                    <p class="f12 tc"><span class="pt5 pb5 g9">╯▂╰ 购物车都饿扁了，快去喂它吧</span></p>
+                                    <a href="@Url.Action("Index","Home")"><p class="pt30 pl30 pr30"><span class="grayBtn g6 f16">亲，去首页逛逛吧！</span></p></a>
+                                </div>
+                            </article>
+                        </section>
+                    }
+
+    <footer class="shopfix">
+        @*<div class="listinfo pl5 pr5 f14">
+                <label class="db f12"><input type="checkbox" class="cart-radio choose" id="checkAll"><p class="tc">全选</p></label>
+            </div>*@
+        <div class="listinfo pl10">
+            <span class="total">
+                @*<em class="f14">总金额： <i class="red b">¥</i><i id="countPrice"></i></em><br>*@
+                <em class="f12">总金额：<i class="red">¥</i><i id="dutyTotal">@ShangPinTolit.ToString("0.00")</i></em>
+            </span>
+        </div>
+        <div class="settlBtn">
+            @if (Model != null && Model.Any())
+            {
+                @*<a href="javascript:void(0)" class="db f15 pl10 pr10 mr10 fl settl-btn" style="background:#DA1C1C; ">赠送他人</a>*@
+                @*<a href="@Url.Action("GiveIndex","Give")" class="db f15 pl10 pr10 mr10 fl settl-btn" style="background:#DA1C1C; ">赠送他人</a>*@
+                <a href="@Url.Action("CartOrder", "Cart")" class="db f15 pl10 pr10 mr10 fl settl-btn">立即购买</a>
+            }
+            else
+            {
+                @*<button type="button" class="db f15 pl10 mr10 fl settl-btn-gray">赠送他人</button>*@
+                <button type="button" class="db f15 pl10 mr10 fl settl-btn-gray">立即购买</button>
+            }
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+           //BOOK FORM
+           var UpdateCart = "/Cart/UpdateAmount";
+           var RemoveCart = "/Cart/Remove";
+           $(".cartadd").bind("click", function () {
+               var ProductId = $(this).attr("ref");
+               var iCount = parseInt($(".countNum" + ProductId).val());//库存数量
+               var iBookCount = parseInt($("#cartnum" + ProductId).val());//当前产品数量
+               var cartprice = parseFloat($("#cartprice" + ProductId).html());//货架产品价格
+               var NowCartToPrice = parseFloat($("#mse" + ProductId).attr("ref"));//当前产品合计价格
+               iBookCount = iBookCount >= iCount ? iCount : iBookCount + 1;
+
+               if (iBookCount == iCount) { UsTips("已至最大库存量！"); return; }
+               else { $(this).parent().children(".cartnum").val(iBookCount); }
+
+               $.post(UpdateCart, { ProductId: ProductId, Amount: iBookCount }, function (date) {
+                   var crrprice = parseFloat($("#dutyTotal").html()) + cartprice;
+                   var BenProPrice = NowCartToPrice + cartprice;
+                   $("#mse" + ProductId).html(formatNum(BenProPrice));
+                   $("#mse" + ProductId).attr("ref", BenProPrice);
+                   $("#dutyTotal").html(formatNum(crrprice));
+               });
+
+           });
+           $(".cartmin").bind("click", function () {
+               var CrrCartCount = 0;
+               var ProductId = $(this).attr("ref");
+               var iCount = parseInt($(".countNum" + ProductId).val());
+               var iBookCount = parseInt($("#cartnum" + ProductId).val());
+               var cartprice = parseFloat($("#cartprice" + ProductId).html());
+               var NowCartToPrice = parseFloat($("#mse" + ProductId).attr("ref"));
+               iBookCount = iBookCount < 1 ? 1 : iBookCount - 1;
+
+               if (iBookCount < 1) { UsTips("产品数量不能为0！"); return; }
+               else { $(this).parent().children(".cartnum").val(iBookCount); }
+               $.post(UpdateCart, { ProductId: ProductId, Amount: iBookCount }, function (date) {
+                   var crrprice = parseFloat($("#dutyTotal").html()) - cartprice;
+                   var BenProPrice = NowCartToPrice - cartprice;
+                   $("#mse" + ProductId).html(formatNum(BenProPrice));
+                   $("#mse" + ProductId).attr("ref", BenProPrice);
+                   $("#dutyTotal").html(formatNum(crrprice));
+               });
+           });
+           $(".delCart").bind("click", function () {
+               sureAndGoto("您確定要从购物车删除这个商品吗？", "");
+               var ProductId = $(this).attr("ref");
+               $.post(RemoveCart, { ProductId: ProductId }, function (date) {
+                   UsTips("移除成功"); location.reload();
+               });
+
+           });
+    </script>
+</body>
+</html>

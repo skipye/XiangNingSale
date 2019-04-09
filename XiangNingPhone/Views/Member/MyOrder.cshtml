@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "我的订单";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+}
+
+<link href="@Url.Content("~/css/cartorder.css")" rel="stylesheet" type="text/css">
+<script src="~/js/goTops.js"></script>
+<script src="~/js/dropload.js"></script>
+<script src="~/js/laytpl.min.js"></script>
+<script src="~/js/myorder.js" type="text/javascript"></script>
+<section>
+    <div class="formalsosbox sosbg por">
+        <input name="productSearch" type="text" class="intext f14" id="formalSearchTxt" placeholder="请输入您想查询的订单号">
+        <span class="formalbtn f16 poa" id="formalbtn" onclick="search()">搜索</span><i class="corss" id="corss"></i>
+    </div>
+</section>
+<section class="myorde por">
+    <section class="myorde_nocart mt30" style="display: none;" id="myorde_nocart" onclick="goUrl('@Url.Action("Index","Home")')">
+        <p class="f14 db tc"><span class="pt10 pb5 g9 db">╯▂╰ 暂无你要的订单，快去下单吧！</span></p>
+    </section>
+    <div id="myOrderlist"></div>
+    <div class="loadingbox" id="loadaimbox" style="display: -webkit-box;">
+        <i class="loadingrdu"><img src="/images/loading.gif" /></i>
+        <em class="ml5 f15">正在努力加载</em>
+    </div>
+</section>
+<div id="gotop" class="gotop"></div>
+<script type="text/javascript">
+    
+    loadSodList();
+  
+</script>
+

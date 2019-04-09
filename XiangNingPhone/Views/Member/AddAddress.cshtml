@@ -1,0 +1,50 @@
+﻿@using ServiceProject;
+@model ModelProject.AddressModel
+@{
+    ViewBag.Title = Model.Id > 0 ? "编辑收货地址" : "添加收货地址";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    var PDList=new ChinaService().GetPDropdownlist(Model.ProvinceId);
+    var CDList = new ChinaService().GetCDropdownlist(Model.ProvinceId,Model.CityId);
+    var ADList = new ChinaService().GetADropdownlist(Model.CityId, Model.RegionId);
+}
+<link href="@Url.Content("~/css/member.css")" rel="stylesheet" type="text/css">
+<script src="@Url.Content("~/js/addaddress.js")" type="text/javascript"></script>
+<article class="addres_add m10 f14 ovh">
+    @Html.HiddenFor(k=>Model.ReturnUrl)
+    <ul>
+       @Html.HiddenFor(k=>k.Id)
+        <li>
+            @Html.TextBoxFor(k => k.Name, new { @class="addres_addinput", @placeholder="请输入收货人真实姓名", @onblur="checkName(this.value);"})
+        </li>
+        <li>
+            @Html.TextBoxFor(k => k.Telphone, new { @class = "addres_addinput", @placeholder = "请输入收货人电话", @onblur = "checkMobile(this.value);" })
+        </li>
+        <li>
+            <div class="select-text">
+                @Html.DropDownListFor(k => k.ProvinceId, PDList, new { @class = "area-select", @onchange = "findAreaById('c');" })
+               
+            </div>
+        </li>
+        <li>
+            <div class="select-text">
+                @Html.DropDownListFor(k => k.CityId, CDList, new { @class = "area-select", @onchange = "findAreaById('r');" })
+               
+            </div>
+        </li>
+        <li>
+            <div class="select-text">
+                @Html.DropDownListFor(k => k.RegionId, ADList, new { @class = "area-select"})
+               
+            </div>
+        </li>
+        <li>
+            @Html.TextAreaFor(k => k.addressNo, new { @class="addres_addtextarea" ,@placeholder="请输入详细地址"})
+           
+        </li>
+       
+    </ul>
+    <!-- </form> -->
+</article>
+<!-- <div class="addres_btn mt15 mb15 f16" onclick="saveAddressAndImage();">保存</div> -->
+<div class="addres_btn mt15 mb15 f16" onclick="saveAddress();">保存</div>
+

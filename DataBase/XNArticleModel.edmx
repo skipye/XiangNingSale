@@ -44,6 +44,7 @@
           <Property Name="UploadName" Type="nvarchar" MaxLength="100" />
           <Property Name="EidtName" Type="nvarchar" MaxLength="100" />
           <Property Name="AreaId" Type="int" />
+          <Property Name="SalePrices" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="A_News_File">
           <Key>
@@ -208,6 +209,7 @@
           <Property Name="EidtName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AreaId" Type="Int32" />
           <NavigationProperty Name="AreaType" Relationship="XNArticleModel.FK_A_News_AreaType" FromRole="A_News" ToRole="AreaType" />
+          <Property Name="SalePrices" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="A_News_File">
           <Key>
@@ -303,6 +305,10 @@
             <End Role="AreaType" EntitySet="AreaType" />
             <End Role="A_News" EntitySet="A_News" />
           </AssociationSet>
+          <AssociationSet Name="FK_AreaType_AreaType" Association="XNArticleModel.FK_AreaType_AreaType">
+            <End Role="AreaType" EntitySet="AreaType" />
+            <End Role="AreaType1" EntitySet="AreaType" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_A_NewsType_A_NewsType">
           <End Type="XNArticleModel.A_NewsType" Role="A_NewsType" Multiplicity="0..1" />
@@ -366,6 +372,8 @@
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="state" Type="Boolean" />
           <NavigationProperty Name="A_News" Relationship="XNArticleModel.FK_A_News_AreaType" FromRole="AreaType" ToRole="A_News" />
+          <NavigationProperty Name="AreaType1" Relationship="XNArticleModel.FK_AreaType_AreaType" FromRole="AreaType" ToRole="AreaType1" />
+          <NavigationProperty Name="AreaType2" Relationship="XNArticleModel.FK_AreaType_AreaType" FromRole="AreaType1" ToRole="AreaType" />
           </EntityType>
         <Association Name="FK_A_News_AreaType">
           <End Type="XNArticleModel.AreaType" Role="AreaType" Multiplicity="0..1" />
@@ -379,6 +387,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AreaType_AreaType">
+          <End Type="XNArticleModel.AreaType" Role="AreaType" Multiplicity="1" />
+          <End Type="XNArticleModel.AreaType" Role="AreaType1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AreaType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AreaType1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -388,6 +408,7 @@
           <EntitySetMapping Name="A_News">
             <EntityTypeMapping TypeName="XNArticleModel.A_News">
               <MappingFragment StoreEntitySet="A_News">
+                <ScalarProperty Name="SalePrices" ColumnName="SalePrices" />
                 <ScalarProperty Name="AreaId" ColumnName="AreaId" />
                 <ScalarProperty Name="EidtName" ColumnName="EidtName" />
                 <ScalarProperty Name="UploadName" ColumnName="UploadName" />

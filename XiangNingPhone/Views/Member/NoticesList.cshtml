@@ -1,0 +1,21 @@
+﻿@model List<ModelProject.ReplyModel>
+@{
+    Layout = null;
+}
+
+<div class="arrival-notice">
+   @if (Model != null && Model.Any()) { 
+    <h4 class="tc"><em>留言中心</em></h4>
+    <ul>
+        @foreach (var item in Model) {
+        <li>
+            <dl>@item.CreateTime</dl>
+            <span>
+                <b><font size="3px">@item.UserName 给您回复：</font></b>
+                <i>@item.StrContent</i>
+            </span>
+        </li>
+        }
+    </ul>
+   }
+</div>

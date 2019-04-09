@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
     </Reference>
@@ -47,10 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressService.cs" />
+    <Compile Include="ChinaService.cs" />
     <Compile Include="ContractHeaderService.cs" />
     <Compile Include="FinanceService.cs" />
     <Compile Include="INVService.cs" />
     <Compile Include="CustomerService.cs" />
+    <Compile Include="MemberService.cs" />
+    <Compile Include="MessageService.cs" />
+    <Compile Include="OrderService.cs" />
     <Compile Include="RoleService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="CategoryService.cs" />

@@ -1,0 +1,95 @@
+﻿@model List<ModelProject.AddressModel>
+@{
+    ViewBag.Title = "地址管理";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    string ReturnUrl = ViewBag.ReturnUrl;
+}
+<link href="@Url.Content("~/Content/member.css")" rel="stylesheet" type="text/css">
+
+<h3 style="height:40px;line-height:40px;font-weight:bold;text-indent:10px;">友情提示：<span style="color:red;">在购物时，点击地址可以直接选择当前。编辑地址只能点击编辑编辑！</span></h3>
+<article class="addres_list">
+    <ul>
+        @if (Model != null && Model.Any())
+{
+    foreach (var item in Model.Take(Model.Count - 1))
+    {
+        <li>
+            <div class="arowlibtn" ref="@item.Id">
+                <p class="dep01 pt10 pl10 pr10 f14"><span class="mr30 fl">@item.Name</span><span class="fr">@item.Telphone</span><div class="clear"></div></p>
+
+                <p class="dep01 pl10 pr10 f14"><span class="mr30">@item.Province @item.City @item.Region </span></p>
+                <p class="dep02 pl10 pr10 f14">@item.addressNo</p>
+            </div>
+            <p class="eidel mt10 ovh">
+
+                <label class="setlabel fl f12">
+                    <input type="radio" name="radio-1-set" onclick="addreschoose(@item.Id)" class="vt addres-radio choose @(item.IsTop != null && item.IsTop == true ? "checked" : "")"> &nbsp;默认地址
+                </label>
+                <span class="fr">
+                    <em class="deedit fl rdu g6 db f12" onclick="goUrl('@Url.Action("AddAddress", "Member", new { Id = item.Id, ReturnUrl = ReturnUrl })')">编辑</em>
+                    <!--<em class="dedel fl rdu g6 ml15 db f12" onclick = "delAddress('{{d[j].addressId}}');">删除</em> -->
+                </span>
+
+                @*<label class="setlabel fl f12">
+                        <input type="radio" onclick="defaultAddress('{{d[j].addressId}}');" id="r01" name="radio-1-set" class="vt addres-radio choose"> &nbsp;设为默认地址
+                    </label>
+                    <span class="fr">
+                        <em class="deedit fl rdu g6 db f12" onclick="goUrl('addres-edit.html?tmn=tmn&addressId={{d[j].addressId}}')">编辑</em>
+                        <em class="dedel fl rdu g6 ml15 db f12" onclick="delAddress('{{d[j].addressId}}');">删除</em>
+                    </span>*@
+
+            </p>
+        </li>
+    }
+}
+    </ul>
+</article>
+
+
+<article class="addres_list">
+    <ul>
+        <li>
+            <div class="arowlibtn">
+                <p class="dep01 pt10 pl10 pr10 f14"><span class="mr30 fl">香凝工厂店</span><span class="fr">13311601955</span><div class="clear"></div></p>
+                <p class="dep01 pl10 pr10 f14"><span class="mr30">上海市青浦区朱枫公路1355号</span></p>
+                <p class="dep02 pl10 pr10 f14">上海香凝工艺品有限公司</p>
+            </div>
+            <p class="eidel mt10 ovh">
+                <h3 style="height:40px;line-height:40px;font-weight:bold;text-indent:10px;">选择自提点<span style="color:red;">(选择自提地址，需要客户上门取件！)</span></h3>
+            </p>
+        </li>
+         
+    </ul>
+</article>
+
+
+
+<div class="addres_btn f16 mt20 mb20" onclick="goUrl('@Url.Action("AddAddress", "Member", new { ReturnUrl = ReturnUrl })')">添加一个新地址</div>
+
+<script type="text/javascript">
+    function addreschoose(Id) {
+        var IsTopUrl = '/Member/IsTopAddress';
+        var ReturnUrl = '@ReturnUrl';
+        $.post(IsTopUrl, { "Id": Id }, function (d) {
+            if (d == "1") {
+                UsTips("设置默认地址成功！");
+                window.location.reload();
+            }//goUrl("/Cart/CartOrder");
+            else { UsTips("设置默认地址失败！"); }
+        });
+    };
+    $(".arowlibtn").click(function () {
+        var ReturnUrl = '@ReturnUrl';
+        if (ReturnUrl == "" || ReturnUrl == null)
+        { return false;}
+        var AddId = $(this).attr("ref");
+
+        if (ReturnUrl != null && ReturnUrl != "") {
+            if (ReturnUrl.indexOf("?") > 0) {
+                ReturnUrl = ReturnUrl + "&AddId=" + AddId;
+            } else { ReturnUrl = ReturnUrl + "?AddId=" + AddId; }
+
+            goUrl(ReturnUrl);
+        } else { UsTips("网络错误！"); }
+    });
+</script>

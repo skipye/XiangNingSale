@@ -1,0 +1,81 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <meta charset="utf-8">
+    <title>注册账号</title>
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/member.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/js/mdialog.css")" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/mDialog.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/regist.js")"></script>
+</head>
+
+<body class="membg" data-marpad="padding" data-fixtop="44">
+    <!--header Start-->
+    <header id="header" class="header ycpurple">
+        <div class="aubgs icon-back" onclick="window.location.href='/Home/Index'"></div>
+        <h1 class="bfx02 wh">香凝红木注册账号</h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+    <div class="navmorelist" id="navmorelist">
+        <ul class="f14">
+            <li><a onclick="goUrl('@Url.Action("Index","Home")')">首页</a></li>
+            <li><a href="javascript:;" onclick="location.reload();">刷新本页</a></li>
+        </ul>
+    </div>
+    <!--header end-->
+    <div class="reglogs f14">
+        <input type="hidden" class="addinput f14" id="RealName" name="RealName" value="本站注册用户（微信）" >
+        <ul>
+            <li class="otinp mb10 rdu5">
+                <input type="text" class="addinput f14" id="memberYCID" name="memberYCID" placeholder="请输入昵称" onblur="validateMemberYCID()">
+            </li>
+            @*<li class="otinp mb10 rdu5">
+                <input type="text" class="addinput f14" id="RealName" name="RealName" placeholder="请输入真实姓名，一经提交不得修改">
+            </li>*@
+            <li class="otinp mb10 rdu5">
+                <input type="text" class="addinput f14" id="memberPhone" name="memberPhone" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" placeholder="请输入手机号码">
+            </li>
+            @*<li class="otinp mb10 rdu5">
+                <input type="text" class="addinput f14" id="Email" name="Email" placeholder="请输入真实邮箱地址,密码找回用到此邮箱！">
+            </li>*@
+            <li class="otinp mb10 rdu5">
+                <input type="password" class="addinput f14" id="password1" name="password" placeholder="登陆密码(6-20位数字或字母)">
+            </li>
+            <li class="otinp mb10 rdu5">
+                <input type="password" class="addinput f14" id="password2" placeholder="确认密码(6-20位数字或字母)">
+            </li>
+            <li class="otinp mb10 rdu5">
+                <input type="text" class="addinput f14" value="@ViewBag.MemberNumber" id="RequestNumber" placeholder="请输入对方验证码或会员号，如没不需要填写！">
+            </li>
+            <li class="regli por mb10 rdu5">
+                <input type="text" class="reginput f14" id="yzm" placeholder="请输入验证码">
+                <input type="button" class="regbtn poa f14" onclick="sendYzCode();" value="获取验证码" id="zphone">
+            </li>
+            <!-- <li class="mt10"><input type="button" class="btnpurp f16 rdu5" value="确认注册" onclick="register();"></li> -->
+            <li class="mt10">
+                <div onclick="register();" id="submitbefor" class="loadingbox btnpurp rdu5 f16" style="text-align: center;"><em>确认注册</em></div>
+                <div id="submitafter" class="loadingbox btnpurp rdu5 f16" style="text-align: center;display: none">
+                    <img src="/images/loading.gif" /><em class="ml5">加载中</em>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</body>
+<div id="memberYCIDfald" style="display: none;">0</div><!--昵称重复判断位，0 可用，1 不可用  -->
+</html>

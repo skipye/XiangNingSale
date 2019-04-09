@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ChinaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="S_Area">
+          <Key>
+            <PropertyRef Name="autoId" />
+          </Key>
+          <Property Name="autoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="500" />
+          <Property Name="cityId" Type="int" />
+        </EntityType>
+        <EntityType Name="S_City">
+          <Key>
+            <PropertyRef Name="autoId" />
+          </Key>
+          <Property Name="autoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="500" />
+          <Property Name="zipCode" Type="varchar" MaxLength="6" />
+          <Property Name="provinceId" Type="int" />
+        </EntityType>
+        <EntityType Name="S_Province">
+          <Key>
+            <PropertyRef Name="autoId" />
+          </Key>
+          <Property Name="autoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="500" />
+          <Property Name="Price" Type="int" />
+        </EntityType>
+        <Association Name="FK_S_Area_S_City">
+          <End Role="S_City" Type="Self.S_City" Multiplicity="0..1" />
+          <End Role="S_Area" Type="Self.S_Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_City">
+              <PropertyRef Name="autoId" />
+            </Principal>
+            <Dependent Role="S_Area">
+              <PropertyRef Name="cityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_S_City_S_Province">
+          <End Role="S_Province" Type="Self.S_Province" Multiplicity="0..1" />
+          <End Role="S_City" Type="Self.S_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_Province">
+              <PropertyRef Name="autoId" />
+            </Principal>
+            <Dependent Role="S_City">
+              <PropertyRef Name="provinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChinaModelStoreContainer">
+          <EntitySet Name="S_Area" EntityType="Self.S_Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_City" EntityType="Self.S_City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="S_Province" EntityType="Self.S_Province" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_S_Area_S_City" Association="Self.FK_S_Area_S_City">
+            <End Role="S_City" EntitySet="S_City" />
+            <End Role="S_Area" EntitySet="S_Area" />
+          </AssociationSet>
+          <AssociationSet Name="FK_S_City_S_Province" Association="Self.FK_S_City_S_Province">
+            <End Role="S_Province" EntitySet="S_Province" />
+            <End Role="S_City" EntitySet="S_City" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChinaModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="S_Area">
+          <Key>
+            <PropertyRef Name="autoId" />
+          </Key>
+          <Property Name="autoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="cityId" Type="Int32" />
+          <NavigationProperty Name="S_City" Relationship="Self.FK_S_Area_S_City" FromRole="S_Area" ToRole="S_City" />
+        </EntityType>
+        <EntityType Name="S_City">
+          <Key>
+            <PropertyRef Name="autoId" />
+          </Key>
+          <Property Name="autoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="zipCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="provinceId" Type="Int32" />
+          <NavigationProperty Name="S_Area" Relationship="Self.FK_S_Area_S_City" FromRole="S_City" ToRole="S_Area" />
+          <NavigationProperty Name="S_Province" Relationship="Self.FK_S_City_S_Province" FromRole="S_City" ToRole="S_Province" />
+        </EntityType>
+        <EntityType Name="S_Province">
+          <Key>
+            <PropertyRef Name="autoId" />
+          </Key>
+          <Property Name="autoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Int32" />
+          <NavigationProperty Name="S_City" Relationship="Self.FK_S_City_S_Province" FromRole="S_Province" ToRole="S_City" />
+        </EntityType>
+        <Association Name="FK_S_Area_S_City">
+          <End Role="S_City" Type="Self.S_City" Multiplicity="0..1" />
+          <End Role="S_Area" Type="Self.S_Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_City">
+              <PropertyRef Name="autoId" />
+            </Principal>
+            <Dependent Role="S_Area">
+              <PropertyRef Name="cityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_S_City_S_Province">
+          <End Role="S_Province" Type="Self.S_Province" Multiplicity="0..1" />
+          <End Role="S_City" Type="Self.S_City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="S_Province">
+              <PropertyRef Name="autoId" />
+            </Principal>
+            <Dependent Role="S_City">
+              <PropertyRef Name="provinceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChinaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="S_Area" EntityType="Self.S_Area" />
+          <EntitySet Name="S_City" EntityType="Self.S_City" />
+          <EntitySet Name="S_Province" EntityType="Self.S_Province" />
+          <AssociationSet Name="FK_S_Area_S_City" Association="Self.FK_S_Area_S_City">
+            <End Role="S_City" EntitySet="S_City" />
+            <End Role="S_Area" EntitySet="S_Area" />
+          </AssociationSet>
+          <AssociationSet Name="FK_S_City_S_Province" Association="Self.FK_S_City_S_Province">
+            <End Role="S_Province" EntitySet="S_Province" />
+            <End Role="S_City" EntitySet="S_City" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChinaModelStoreContainer" CdmEntityContainer="ChinaEntities">
+          <EntitySetMapping Name="S_Area">
+            <EntityTypeMapping TypeName="ChinaModel.S_Area">
+              <MappingFragment StoreEntitySet="S_Area">
+                <ScalarProperty Name="autoId" ColumnName="autoId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cityId" ColumnName="cityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_City">
+            <EntityTypeMapping TypeName="ChinaModel.S_City">
+              <MappingFragment StoreEntitySet="S_City">
+                <ScalarProperty Name="autoId" ColumnName="autoId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="zipCode" ColumnName="zipCode" />
+                <ScalarProperty Name="provinceId" ColumnName="provinceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="S_Province">
+            <EntityTypeMapping TypeName="ChinaModel.S_Province">
+              <MappingFragment StoreEntitySet="S_Province">
+                <ScalarProperty Name="autoId" ColumnName="autoId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

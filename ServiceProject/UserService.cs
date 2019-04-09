@@ -2,14 +2,22 @@
 using ModelProject;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web.Mvc;
 
 namespace ServiceProject
 {
     public class UserService
     {
+        public UserIdOrNameModel GetUserIdOrName()
+        {
+            UserIdOrNameModel models = new UserIdOrNameModel();
+            if (!string.IsNullOrEmpty(System.Web.HttpContext.Current.User.Identity.Name))
+            {
+                models.MemberId = Guid.Parse(System.Web.HttpContext.Current.User.Identity.Name.Split('|')[1]);
+                models.Name = System.Web.HttpContext.Current.User.Identity.Name.Split('|')[0];
+            }
+            return models;
+        }
         private static readonly UserDal UDal = new UserDal();
         public void AddWorkLogs(WorkLogsModel tables)
         {

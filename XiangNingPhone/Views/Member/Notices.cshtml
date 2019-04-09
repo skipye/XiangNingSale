@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "信息中心";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+}
+<script type="text/javascript" src="@Url.Content("~/js/dropload.js")"></script>
+<script src="~/js/notice.js" type="text/javascript"></script>
+<!--到货通知-->
+<div id="indexData">
+    @Html.Action("NoticesList", "Member", new { PageSize = 10, PageIndex =1})
+</div>
+<!--到货通知 End-->
+<div class="loadingbox" id="loadaimbox" style="display: -webkit-box;">
+    <i class="loadingrdu"><img src="/images/loading.gif" /></i>
+    <em class="ml5 f15">正在努力加载</em>
+</div>
+
+<p id="no_record" style="display: none;" class="f14 db tc">
+    <span class="pt10 pb5 g9 db">╯▂╰ 暂无信息！</span>
+</p>
+<!--返回头部-->
+<div id="gotop" class="gotop"></div>
+<!--返回头部 End-->
+
+<script type="text/javascript">
+    $(function () {//返回顶部插件引用
+        $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+        loadNoticesList();
+    });
+</script>

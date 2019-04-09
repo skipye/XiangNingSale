@@ -1,0 +1,192 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <meta charset="utf-8">
+    <title>绑定手机号码</title>
+    <link href="@Url.Content("~/Content/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/Content/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/Content/member.css")" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+</head>
+<body class="membg" data-marpad="padding" data-fixtop="44">
+    <!--header Start-->
+    <header id="header" class="header ycpurple">
+        <div class="aubgs icon-back" id="goback"></div>
+        <h1 class="bfx02 wh">绑定手机号码</h1>
+        <div class="aubgs icon-menu" ></div>
+    </header>
+    <!--header end-->
+    <div class="backpass f14">
+        <ul>
+            <p class="mb5 ml5 g6 f15" style="color:red">请认真填写下面信息，您填写的信息将作为本站唯一登录凭证！</p>
+            @*<li class="otinp mb10 rdu5">
+                    <input type="text" class="addinput f14" id="userName" name="userName" placeholder="请输入注册时的会员名">
+                </li>*@
+            <li class="otinp mb10 rdu5">
+                <input type="text" class="addinput f14" id="memberPhone" name="memberPhone" placeholder="请输入您的手机号码">
+            </li>
+            <li class="getbks por rdu5">
+                <input type="text" class="getinput f14" placeholder="请输入验证码" id="yzm">
+                <input type="button" class="getbtn poa f14" value="获取验证码" onclick="sendYzCode();" id="zphone">
+            </li>
+            <li class="otinp mb10 rdu5" style="margin-top: 10px;">
+                <input type="password" class="addinput f14" id="password1" name="password" placeholder="登录密码(6-20位数字或字母)">
+            </li>
+            <li class="otinp mb10 rdu5">
+                <input type="password" class="addinput f14" id="password2" placeholder="确认密码(6-20位数字或字母)">
+            </li>
+            <li class="mt10"><input type="button" class="btngreen f16 rdu5" onclick="SubPhone();" value="提交"></li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        var iTime = 59;
+        var Account;
+        function RemainTime() {
+            $('#zphone').attr("disabled", true);
+            var iSecond, sSecond = "", sTime = "";
+            if (iTime >= 0) {
+                iSecond = parseInt(iTime % 60);
+                iMinute = parseInt(iTime / 60)
+                if (iSecond >= 0) {
+                    if (iMinute > 0) {
+                        sSecond = iMinute + "分" + iSecond + "秒";
+                    } else {
+                        sSecond = iSecond + "秒";
+                    }
+                }
+                sTime = sSecond;
+                if (iTime == 0) {
+                    clearTimeout(Account);
+                    sTime = '获取手机验证码';
+                    iTime = 59;
+                    $('#zphone').removeAttr("disabled");
+                } else {
+                    Account = setTimeout("RemainTime()", 1000);
+                    iTime = iTime - 1;
+                }
+            } else {
+                sTime = '没有倒计时';
+            }
+            $('#zphone').val(sTime);
+        }
+        function sendYzCode() {
+            var memberPhone = $('#memberPhone').val();
+            var SMSURl = '/WXPayApi/SMSpost.aspx';
+            if (memberPhone == null || memberPhone == '') {
+                UsTips("请您填写手机号码.");
+                return false;
+            }
+            if (!moblieReg.test(memberPhone)) {
+                UsTips("请输入正确的手机号码.");
+                return false;
+            }
+            $.ajax({
+                type: "POST",
+                data: { "Phone": memberPhone },
+                url: "/Account/IsSamePhone",
+                dataType: "json",
+                success: function (data) {
+                    if (data == 1) {//如果没有注册，发送验证码
+                        UsTips("该手机号码已绑定过，请去用此手机登录！");
+                        return false;
+                    } else {
+                        $.ajax({
+                            type: "GET",
+                            url: SMSURl,
+                            data: { "mobile": memberPhone },
+                            //url: "/Account/GetValidatorGraphics",
+                            //dataType: "json",
+                            success: function (data) {
+                                alert("验证码以发送，亲注意查收！");
+                                if (data == '提交成功') {
+                                    RemainTime();
+                                }
+                            },
+                            error: function () {
+                                UsTips("network error.");
+                            }
+                        });
+                    }
+                },
+                error: function () {
+                    UsTips("network error.");
+                }
+            });
+        }
+        function SubPhone() {
+            var memberPhone = $('#memberPhone').val();
+            //var userName = $('#userName').val();
+            var yzm = $('#yzm').val();
+            var password1 = $('#password1').val();
+            var password2 = $('#password2').val();
+            if (memberPhone == null || memberPhone == '') {
+                alert("请您填写手机号码.");
+                return false;
+            }
+            var reg = /^((\(\d{3}\))|(\d{3}\-))?1(3|5|7|8)\d{9}$/;
+            if (!reg.test(memberPhone)) {
+                UsTips("请输入正确的手机号码.");
+                return false;
+            }
+            if (yzm == null || yzm == "" || typeof (yzm) == undefined) {
+                UsTips("请输入验证码");
+                return;
+            }
+            /*if (password1 == null || password1 == "" || typeof(password1) == undefined){
+                UsTips("请输入验密码");
+                return ;
+            }*/
+            var regPw = /^[0-9a-zA-Z]+$/;
+            if (password1.length < 6 || password1.length > 20) {
+                UsTips("请输入6-20位数字或字母");
+                return;
+            } else if (!regPw.test(password1)) {
+                UsTips("只能输入6-20位数字或字母");
+                return;
+            }
+            if (password1 != password2) {
+                UsTips("您两次输入的密码不一致！");
+                return false;
+            }
+            $.ajax({
+                type: 'get',
+                data: { "Phone": memberPhone, "yzm": yzm, "password": password1 },
+                url: "/Account/HPhone",
+                success: function (data) {
+                    var d = data.indexOf("&");
+                    if (d > 0) {
+                        var Numcout = data.split("&")[0];
+                        var message = data.split("&")[1];
+                        if (Numcout == "1") {
+                            window.location.href = message;
+                        }
+                        else {
+                            UsTips(message);
+                            return;
+                        }
+                    }
+                    else {
+                        UsTips("数据错误！请核实！");
+                        return;
+                    }
+                },
+                error: function () {
+                UsTips("network error.");
+            }
+            });
+        }
+    </script>
+</body>
+</html>
