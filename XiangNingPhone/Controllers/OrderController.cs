@@ -53,7 +53,7 @@ namespace XiangNingPhone.Controllers
                 string UserModel = Session["User"].ToString();
                 MemberId = new Guid(UserModel.Split('|')[1]);
             }
-            else { return Content("3"); }
+            //else { return RedirectToAction("Login", "Account",new { ReturnUrl ="/Member"}); }
             var models = OSer.GetOrderList(KeyWord, MemberId, TimeOut, PageSize, PageIndex, PayState);
             return View(models);
         }

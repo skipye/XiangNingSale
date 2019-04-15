@@ -1,0 +1,93 @@
+﻿@model List<ModelProject.OrderModel>
+
+@{Layout = null;}
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <article class="myorde_list mb10" id="delorder-@(item.Id)">
+            <div class="placeorder f14 ovh">
+                <span class="fl">订单号：@item.Ordernum</span><span class="fr nobtn dn ovh red tr"></span>
+                <span class="delorder f12 rdu fr">
+                    <ul>
+                        @if (item.TimeOut == true && item.PayState == false)
+                        {
+                            var posturl = "/ObtainWXOpenId/GetOpenId?orderId=" + item.Ordernum;
+                            //var posturl = "/WXPay/Index?orderId=" + item.Ordernum + "&openid=oSdHwv3Q_wLheVP3oFNoTRZa9bdk" ;
+                            <li class="zhifubtn f14" url="@posturl"><span class="perexitBtn db g6 f14">支付</span></li>
+                        }
+                        else if (item.PayState == true)
+                        {
+                            if (item.YState != null)
+                            {
+                                if (item.YState == 1)
+                                {
+                <b>已发货，运单：@item.YunDan（@item.YSCompany）</b>}
+                            }
+                            else
+                            {
+                <b>已支付</b>}
+
+                        }
+                        else
+                        {
+                            <li class="DelOrder f14" ref="@item.Id"><span class="perexitBtn db g6 f14">删除</span></li>
+                        }
+                    </ul>
+
+                </span>
+            </div>
+
+            <h2 class="orderdeta_tit mb5 f15" style="border-top: 1px #dfdfdf dotted;height:30px;line-height:30px;">配送信息<span class="pl10">下单时间：<em class="f16">@Convert.ToDateTime(item.CreateTime).ToString("yyyy-MM-dd HH:mm")</em></span></h2>
+            <div class="settlement f14 arowli" onclick="goUrl('@Url.Action("AddAddress", "Member", new { Id = item.Addreess.Id, ReturnUrl = "/Member/MyOrder" })')">
+                <p style="height: 24px; line-height: 24px;">收货人：@item.Addreess.Name （@item.Addreess.Telphone）</p>
+                <p style="line-height:22px; ">收货人地址：@item.Addreess.Province @item.Addreess.City @item.Addreess.Region @item.Addreess.addressNo</p>
+            </div>
+
+            <div class="poincondan ovh">
+                <ul>
+                    @if (item.OrderProductList != null && item.OrderProductList.Any())
+                    {
+                        foreach (var Pitem in item.OrderProductList)
+                        {
+                            var PPic = "http://sale.xiangninghm.com/" + Pitem.ProductsConvertImg;
+                            <li class="arowli" onclick="goUrl('@Url.Action("ProductsDetail","Home",new{Id=Pitem.ProductsId})')">
+                                <div class="listinfo mr15"><img src="@PPic"></div>
+                                <div class="listinfo bfx01">
+                                    <h3 class="f14 fmy">@Pitem.ProductsName</h3>
+                                    <p class="pt5 f14 fmy">价值：<em class="red">&yen;@Convert.ToDouble(Pitem.Saleprice).ToString("0.00")</em>&nbsp;&nbsp;x @Pitem.Amount</p>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="settlement f14 ovh">
+                @*<span class="fl mr10">抵扣：<em class="f16 red">&yen;@Convert.ToDouble(item.DKPrce).ToString("0.00")</em></span>
+                <span class="fl mr10">减免：<em class="f16 red">&yen;@Convert.ToDouble(item.SubtractPrice).ToString("0.00")</em></span>
+                <span class="fl">运费：<em class="f16 red">&yen;@Convert.ToDouble(item.YunFei).ToString("0.00")</em></span>*@
+                <span class="fr">合计：<em class="f16 red">&yen;@Convert.ToDouble(item.TotalPrice - item.SubtractPrice).ToString("0.00")</em></span>
+            </div>
+        </article>
+
+
+    }
+}
+
+<script type="text/javascript">
+    $(".DelOrder").click(function () {
+        var Id = $(this).attr("ref");
+        var DelOrder = '@Url.Action("DelOrder", "Order")';
+        $.post(DelOrder, { Id: Id }, function (d) {
+            if (d == "1") {
+                UsTips("删除成功！");
+                $("#delorder-" + Id).remove();
+            } else { UsTips("删除失败！请稍后再试！"); }
+        });
+    });
+    $(".zhifubtn").click(function () {
+        var url = $(this).attr("url");
+        window.location.href = url;
+    });
+</script>

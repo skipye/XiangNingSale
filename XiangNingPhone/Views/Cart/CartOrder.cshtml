@@ -204,9 +204,9 @@
             $.post(AddOrderUrl, { "AddressId": AddressId, "DKGold": DKGold, "DKStock": DKStock, "DKPrce": DKPrce, "YunFei": YunFei, "TotalPrice": TotalPrice, "Remarks": Remarks }, function (d) {
                 var data = d.indexOf("&");
                 if (data > 0) {
-                    UsTips("下单成功！");
+                    UsTips("下单成功！谢谢您的支持！");
                     //var arrRult = d.split("&");
-                    goUrl("/Home/Index/");
+                    goUrl("/Member/MyOrder/");
                     //goUrl("/ObtainWXOpenId/GetOpenId?orderId=" + arrRult[1]);
                     //goUrl("/WXPayApi/NativePayPage.aspx");
                 }

@@ -346,6 +346,7 @@
     <Content Include="Views\Member\MyOrder.cshtml" />
     <Content Include="Views\Member\Notices.cshtml" />
     <Content Include="Views\Member\NoticesList.cshtml" />
+    <Content Include="Views\Order\OrderList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
