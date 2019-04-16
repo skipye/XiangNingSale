@@ -101,7 +101,7 @@ $(function(){
                 var o = paramArray[i];
                 param[o["name"]] = o["value"];
             };
-            ajaxRequest("post", "/Purchase/PostAdd", param, function (d) {
+            ajaxRequest("post", "/Purchase/PostAddNew", param, function (d) {
 
                 if (d == "1") {
                     if (editModel(window.location.href)) {

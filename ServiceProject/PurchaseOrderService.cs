@@ -23,6 +23,14 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
+        public bool AddOrUpdateNew(PurchaseOrderModel Models)
+        {
+            try { PODal.AddOrUpdateNew(Models); return true; }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public PurchaseOrderModel GetDetailById(int Id)
         {
             try { return PODal.GetDetailById(Id); }

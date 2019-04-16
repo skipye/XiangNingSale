@@ -93,6 +93,15 @@ namespace DalProject
                 db.SaveChanges();
             }
         }
+        public void AddOrUpdateNew(PurchaseOrderModel Models)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                var table = db.Purchase_Order.Where(k => k.Id == Models.Id).SingleOrDefault();
+                table.Remark = Models.Remark;
+                db.SaveChanges();
+            }
+        }
         public PurchaseOrderModel GetDetailById(int Id)
         {
             using (var db = new XiangNingSaleEntities())

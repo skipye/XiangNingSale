@@ -56,6 +56,15 @@ namespace XiangNingSale.Controllers
             }
             else { return View(Models); }
         }
+        [ValidateInput(false)]
+        public ActionResult PostAddNew(PurchaseOrderModel Models)
+        {
+            if (NSer.AddOrUpdateNew(Models) == true)
+            {
+                return Content("1");
+            }
+            else { return View(Models); }
+        }
         public ActionResult UserIndex()
         {
             SPurchaseOrderModel SModels = new SPurchaseOrderModel();

@@ -137,7 +137,7 @@ namespace XiangNingSale.Controllers
                     Directory.CreateDirectory(uploadPath);
                 }
                 //获取文件名
-                string fileName = DateTime.Now.Ticks.ToString() + System.IO.Path.GetExtension(hp.FileName);
+                string fileName = DateTime.Now.Ticks.ToString() + Path.GetExtension(hp.FileName);
                 //获取文件大小
                 long contentLength = hp.ContentLength;
                 //文件不能大于1M
