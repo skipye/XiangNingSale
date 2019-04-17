@@ -4,13 +4,21 @@
     Layout = "~/Views/Shared/_MLayout.cshtml";
     NewsService NSer = new NewsService();
 }
-<div class="usernots">
-    @Html.Raw(NSer.GetDetailById(194).StrContent)
+<link href="@Url.Content("~/css/News.css")" rel="stylesheet" type="text/css" />
+<div class="content">
+    <div class="article mt10" id="godsConTxt">
+        @Html.Raw(NSer.GetDetailById(194).StrContent)
+    </div>
 </div>
-
+<div id="gotop" class="gotop"></div>
 <script type="text/javascript">
-    $(function () {//返回顶部插件引用
-        $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
-        loadNoticesList();
-    });
+        $(function () {//返回顶部插件引用
+            $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+
+        });
+        $('#godsConTxt img').each(function () {
+            var value = $(this).attr("src");
+            value = "http://sale.xiangninghm.com" + value;
+            $(this).attr("src", value);
+        });
 </script>

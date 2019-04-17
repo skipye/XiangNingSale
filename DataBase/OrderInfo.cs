@@ -31,6 +31,7 @@ namespace DataBase
         public Nullable<int> DKGold { get; set; }
         public Nullable<int> DKStock { get; set; }
         public Nullable<decimal> DKPrce { get; set; }
+        public Nullable<System.DateTime> PayTime { get; set; }
     
         public virtual Address_Info Address_Info { get; set; }
         public virtual MemberInfo MemberInfo { get; set; }

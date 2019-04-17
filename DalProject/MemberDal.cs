@@ -31,19 +31,20 @@ namespace DalProject
                                   MemberNumber = p.MemberNumber,
                                   ZStock = p.ZStock
                               }).FirstOrDefault();
-                tables.MessageCount = UserMessageCount(UserId);
-                tables.UserOrderCount = UserOrderCount(UserId);
+                tables.OneRequestUserCount = RequestUserCount(tables.MemberNumber, 1);
+                tables.TowRequestUserCount = RequestUserCount(tables.MemberNumber, 2);
                 return tables;
             }
         }
         
-        //获取未支付订单个数
-        public int UserOrderCount(Guid UserId)
+        //获取一级客户、二级客户个数
+        public int RequestUserCount(string MemberNumber, int Request)
         {
-            DateTime TimeNow = DateTime.Now.AddDays(-1);
             using (var db = new XiangNingSaleEntities())
             {
-                return db.OrderInfo.Where(k => k.State == true && k.PayState == false && k.MemberId == UserId && k.CreateTime > TimeNow).Count();
+                if (Request == 1)
+                { return db.MemberInfo.Where(k => k.RequestNumber_1 == MemberNumber && k.State == true).Count(); }
+                else { return db.MemberInfo.Where(k => k.RequestNumber_2 == MemberNumber && k.State == true).Count(); }
             }
         }
         //获取未读信息

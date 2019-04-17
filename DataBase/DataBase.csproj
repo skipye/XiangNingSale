@@ -194,6 +194,9 @@
     <Compile Include="WorkLogs.cs">
       <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="WXReturnInfo.cs">
+      <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="XiangNingERPModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

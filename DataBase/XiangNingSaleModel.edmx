@@ -86,6 +86,7 @@
           <Property Name="DKGold" Type="int" />
           <Property Name="DKStock" Type="int" />
           <Property Name="DKPrce" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PayTime" Type="datetime" />
         </EntityType>
         <EntityType Name="OrderProductsInfo">
           <Key>
@@ -276,6 +277,22 @@
           <Property Name="MSGStatus" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="WXReturnInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="out_trade_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="transaction_id" Type="nvarchar" MaxLength="50" />
+          <Property Name="openid" Type="nvarchar" MaxLength="150" />
+          <Property Name="trade_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="bank_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="total_fee" Type="nvarchar" MaxLength="50" />
+          <Property Name="fee_type" Type="nvarchar" MaxLength="50" />
+          <Property Name="time_end" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="is_subscribe" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <Association Name="FK_OrderInfo_Address_Info">
           <End Role="Address_Info" Type="Self.Address_Info" Multiplicity="0..1" />
           <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
@@ -363,6 +380,7 @@
           <EntitySet Name="Sale_Finance_FR_Logs11" EntityType="Self.Sale_Finance_FR_Logs11" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Web_Customers" EntityType="Self.Web_Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkLogs" EntityType="Self.WorkLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WXReturnInfo" EntityType="Self.WXReturnInfo" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_OrderInfo_Address_Info" Association="Self.FK_OrderInfo_Address_Info">
             <End Role="Address_Info" EntitySet="Address_Info" />
             <End Role="OrderInfo" EntitySet="OrderInfo" />
@@ -459,6 +477,7 @@
             <End Role="OrderInfo" EntitySet="OrderInfo" />
           </AssociationSet>
           <EntitySet Name="MemberMessage" EntityType="XingNingSaleModel.MemberMessage" />
+          <EntitySet Name="WXReturnInfo" EntityType="XingNingSaleModel.WXReturnInfo" />
         </EntityContainer>
         <EntityType Name="Sale_Contract_Detail">
           <Key>
@@ -702,7 +721,8 @@
           <Property Name="DKGold" Type="Int32" />
           <Property Name="DKStock" Type="Int32" />
           <Property Name="DKPrce" Type="Decimal" Precision="18" Scale="2" />
-        </EntityType>
+          <Property Name="PayTime" Type="DateTime" Precision="3" />
+          </EntityType>
         <EntityType Name="OrderProductsInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -715,7 +735,7 @@
           <Property Name="ProductsName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="ProductsConvertImg" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="Ordernum" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="Sale_Finance_FR_Logs11">
           <Key>
             <PropertyRef Name="Id" />
@@ -768,6 +788,22 @@
           <Property Name="Checked" Type="Boolean" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="State" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="WXReturnInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="out_trade_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="transaction_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="openid" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="trade_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="bank_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="total_fee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fee_type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="time_end" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="is_subscribe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -995,6 +1031,7 @@
           <EntitySetMapping Name="OrderInfo">
             <EntityTypeMapping TypeName="XingNingSaleModel.OrderInfo">
               <MappingFragment StoreEntitySet="OrderInfo">
+                <ScalarProperty Name="PayTime" ColumnName="PayTime" />
                 <ScalarProperty Name="DKPrce" ColumnName="DKPrce" />
                 <ScalarProperty Name="DKStock" ColumnName="DKStock" />
                 <ScalarProperty Name="DKGold" ColumnName="DKGold" />
@@ -1056,6 +1093,23 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="MemberId" ColumnName="MemberId" />
                 <ScalarProperty Name="StrContent" ColumnName="StrContent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WXReturnInfo">
+            <EntityTypeMapping TypeName="XingNingSaleModel.WXReturnInfo">
+              <MappingFragment StoreEntitySet="WXReturnInfo">
+                <ScalarProperty Name="is_subscribe" ColumnName="is_subscribe" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="time_end" ColumnName="time_end" />
+                <ScalarProperty Name="fee_type" ColumnName="fee_type" />
+                <ScalarProperty Name="total_fee" ColumnName="total_fee" />
+                <ScalarProperty Name="bank_type" ColumnName="bank_type" />
+                <ScalarProperty Name="trade_type" ColumnName="trade_type" />
+                <ScalarProperty Name="openid" ColumnName="openid" />
+                <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+                <ScalarProperty Name="out_trade_no" ColumnName="out_trade_no" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

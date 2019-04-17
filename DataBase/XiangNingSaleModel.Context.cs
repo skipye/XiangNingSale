@@ -39,5 +39,6 @@ namespace DataBase
         public DbSet<OrderProductsInfo> OrderProductsInfo { get; set; }
         public DbSet<Sale_Finance_FR_Logs11> Sale_Finance_FR_Logs11 { get; set; }
         public DbSet<MemberMessage> MemberMessage { get; set; }
+        public DbSet<WXReturnInfo> WXReturnInfo { get; set; }
     }
 }

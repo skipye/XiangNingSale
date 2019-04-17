@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LitJSON">
+      <HintPath>..\packages\LitJSON.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -113,6 +116,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\WXPayController.cs" />
     <Compile Include="Controllers\XNAboutController.cs" />
     <Compile Include="Controllers\XNProductsController.cs" />
     <Compile Include="Controllers\XNServeController.cs" />
@@ -283,6 +287,10 @@
       <Project>{56b14c6f-be92-4b6f-af08-0664d0db4b80}</Project>
       <Name>ServiceProject</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WXPayAPI\WXPayAPI.csproj">
+      <Project>{1318f115-1531-4116-9e0d-7ccdb863bfeb}</Project>
+      <Name>WXPayAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Products\_RecommendPro.cshtml" />
@@ -347,6 +355,8 @@
     <Content Include="Views\Member\Notices.cshtml" />
     <Content Include="Views\Member\NoticesList.cshtml" />
     <Content Include="Views\Order\OrderList.cshtml" />
+    <Content Include="Views\Member\BuyService.cshtml" />
+    <Content Include="Views\Member\Point.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

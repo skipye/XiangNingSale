@@ -19,8 +19,8 @@
     if (UserSodCount > 0)
     { $("#SodNum").show(); }*@
     $(function () {
-        var gid = '';
-        var ParHref = "http://ycwap.yiju360.com/Account/Register?MemberNumber=" + gid;
+        var gid = '@Model.MemberNumber';
+        var ParHref = "http://m.xiangninghm.com/Account/Register?MemberNumber=" + gid;
         var qrCodeid = $('#erwmbox');
         $("#yaoqingma").on(isTap(), function () {
             qrCodeid.css({ display: '-webkit-box' });
@@ -65,15 +65,27 @@
             <i class="pwl pwc03"><span class="pwem f10" id="sod_yfh_count"></span></i>
             <em class="pwltxt f12">国内配送</em>
         </p>*@
-    <p class="bfx01 pt5 pb10" onclick="goUrl('@Url.Action("MyOrderReturn", "Member", new { RMessageCout = 2 })')">
+    <p class="bfx01 pt5 pb10" onclick="goUrl('@Url.Action("BuyService", "Member")')">
         <i class="pwl pwc04"><span class="pwem f10" id="sod_return_count"></span></i>
-        <em class="pwltxt f12">售后<span id="notice"><i style="display:none;" id="SodNum">3</i></span></em>
+        <em class="pwltxt f12">售后服务<span id="notice"><i style="display:none;" id="SodNum">3</i></span></em>
     </p>
 </article>
 <p class="membg ger"></p>
 <article class="pwlist">
     <ul>
-        <li class="arowli">
+        <li>
+            <a onclick="goUrl('@Url.Action("Give", "Member")')">
+                <em class="receive poa" style="background-color:#9132ca;"></em>
+                <p class="f14">我的下级<span class="f14 red">（一级：@Model.OneRequestUserCount 人</span><span class="f14 red pl10">二级：@Model.TowRequestUserCount 人）</span></p>
+            </a>
+        </li>
+        <li class="arowli no">
+            <a onclick="goUrl('@Url.Action("Point", "Member")')">
+                <em class="dianpu poa" style="background-color:#FC215E;"></em>
+                <p class="f14 red">我的佣金（可提佣：&yen; @Model.ZStock 元）</p>
+            </a>
+        </li>
+        <li class="arowli no">
             <a onclick="goUrl('@Url.Action("MyOrder","Member")')">
                 <em class="dingd poa" style="background-color:#FC215E;"></em>
                 <p class="f14">
@@ -81,7 +93,7 @@
                 </p>
             </a>
         </li>
-        <li id="home_pwlist_li3" class="arowli no">
+        <li class="arowli no">
             <a onclick="goUrl('@Url.Action("Address","Member")')">
                 <em class="diz poa" style="background-color:#4FC6EE;"></em>
                 <p class="f14">地址管理</p>
@@ -117,12 +129,14 @@
                 <p class="f14">修改密码</p>
             </a>
         </li>
-        <li class="arowli no">
+        @*<li class="arowli no">
             <a onclick="goUrl('@Url.Action("Notices", "Member", new { MessageCount =2 })')">
-                <em class="xxzx poa" style="background-color:#7f5d80;"></em><!-- class="redDot" -->
+                <em class="xxzx poa" style="background-color:#7f5d80;"></em> class="redDot" 
                 <p class="f14">信息中心<span id="notice"><i id="cartNum">6</i></span></p>
             </a>
-        </li>
+        </li>*@
+
+       
         <li class="arowli no">
             <a onclick="goUrl('@Url.Action("UserNots", "Member")')">
                 <em class="help poa" style="background-color:#f1594b;"></em>

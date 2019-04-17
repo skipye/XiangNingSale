@@ -1,0 +1,34 @@
+﻿@using ServiceProject;
+@{
+    ViewBag.Title = "售后服务";
+    Layout = "~/Views/Shared/_MLayout.cshtml";
+    NewsService NSer = new NewsService();
+}
+<link href="@Url.Content("~/css/News.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/css/proDetail.css")" rel="stylesheet" type="text/css">
+<div class="content">
+    <div class="article mt10" id="godsConTxt">
+        @Html.Raw(NSer.GetDetailById(196).StrContent)
+
+        <p class="red b">您可以直接点击下面的电话我们或者立即咨询联系我们，立即咨询---通过微信联系我们客服；电话我们---可以直接电话我们！</p>
+    </div>
+    
+</div>
+<footer id="footer" class="footer tc bg-white">
+
+    <p class="bfx01"><a href="tel:13311601955"><span class="btnliji wh db f15" style="background: rgb(85, 85, 85);">电话我们</span> </a></p>
+    <p class="bfx01 pl5" id="godsaddCart" onclick="WeixinJSBridge.call('closeWindow')"><span class="btnliji wh db f15">立即咨询</span></p>
+
+</footer>
+<div id="gotop" class="gotop"></div>
+    <script type="text/javascript">
+        $(function () {//返回顶部插件引用
+            $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+
+        });
+        $('#godsConTxt img').each(function () {
+            var value = $(this).attr("src");
+            value = "http://sale.xiangninghm.com" + value;
+            $(this).attr("src", value);
+        });
+    </script>

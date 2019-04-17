@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5F5676A1-FE37-4457-B494-EFBE99E6B70C}</ProjectGuid>
+    <ProjectGuid>{1318F115-1531-4116-9E0D-7CCDB863BFEB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ModelProject</RootNamespace>
-    <AssemblyName>ModelProject</AssemblyName>
+    <RootNamespace>WXPayAPI</RootNamespace>
+    <AssemblyName>WXPayAPI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -31,12 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web.Mvc">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="LitJSON">
+      <HintPath>..\packages\LitJSON.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,28 +48,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddressModel.cs" />
-    <Compile Include="CartModel.cs" />
-    <Compile Include="ContractModel.cs" />
-    <Compile Include="CustomerModel.cs" />
-    <Compile Include="FinanceModel.cs" />
-    <Compile Include="LabelsModel.cs" />
-    <Compile Include="MemberModel.cs" />
-    <Compile Include="MenuModel.cs" />
-    <Compile Include="MessageModel.cs" />
-    <Compile Include="OrderModel.cs" />
-    <Compile Include="RoleModel.cs" />
-    <Compile Include="CategoryModel.cs" />
-    <Compile Include="NewsModel.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="Data.cs" />
+    <Compile Include="Exception.cs" />
+    <Compile Include="HttpService.cs" />
+    <Compile Include="JsApiPay.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="NativePay.cs" />
+    <Compile Include="Notify.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PurchaseOrderModel.cs" />
-    <Compile Include="SemiModel.cs" />
-    <Compile Include="UserModel.cs" />
-    <Compile Include="WorkLogsModel.cs" />
-    <Compile Include="WXPayModel.cs" />
-    <Compile Include="WXReturnResultModel.cs" />
-    <Compile Include="WXUserModel.cs" />
-    <Compile Include="YuYueModel.cs" />
+    <Compile Include="ResultNotify.cs" />
+    <Compile Include="WxPayApi.cs" />
+    <Compile Include="WXReturnDal.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataBase\DataBase.csproj">
+      <Project>{3675373a-388c-43c3-8229-4cd2605859d5}</Project>
+      <Name>DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelProject\ModelProject.csproj">
+      <Project>{5f5676a1-fe37-4457-b494-efbe99e6b70c}</Project>
+      <Name>ModelProject</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

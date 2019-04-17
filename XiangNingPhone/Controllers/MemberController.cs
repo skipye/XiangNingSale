@@ -188,10 +188,20 @@ namespace XiangNingPhone.Controllers
             var models = MSSer.GetMemberReplyList(PageIndex, PageSize, MemberModel.MemberId);
             return View(models);
         }
+        //会员须知
         public ActionResult UserNots()
         {
             return View();
         }
-        
+        //售后服务
+        public ActionResult BuyService()
+        {
+            return View();
+        }
+        //我的佣金
+        public ActionResult Point()
+        {
+            return View();
+        }
     }
 }

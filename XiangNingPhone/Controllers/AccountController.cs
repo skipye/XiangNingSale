@@ -156,9 +156,9 @@ namespace XiangNingPhone.Controllers
         }
         public ActionResult LoginOut()
         {
-            System.Web.Security.FormsAuthentication.SignOut();//清除登录记录
-            Session["openId"] = null;
-            Session.Remove("openId");
+            //System.Web.Security.FormsAuthentication.SignOut();//清除登录记录
+            Session["User"] = null;
+            Session.Remove("User");
             //return RedirectToAction("Logon", "Account", new { area = "" });
             return RedirectToAction("Index", "Home");
         }

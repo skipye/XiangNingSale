@@ -38,8 +38,8 @@ namespace ModelProject
         public int UserPMCount { get; set; }
         public int UserSodCount { get; set; }
         public string OpenId { get; set; }
-        
-        
+        public int OneRequestUserCount { get; set; }
+        public int TowRequestUserCount { get; set; }
     }
     public class UserIdOrNameModel
     {
