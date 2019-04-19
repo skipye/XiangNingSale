@@ -30,6 +30,22 @@ namespace DalProject
                 return list;
             }
         }
+        public List<PointModel> GetMemberPointList(int PageIndex, int PageSize, Guid? UserId)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                var list = (from p in db.WX_Order_Commission_Logs.Where(k => k.MemberId == UserId)
+                            orderby p.CreateTime descending
+                            select new PointModel
+                            {
+                                UserName = p.MemberName,
+                                OrderNum = p.OrderNum,
+                                CreateTime = p.CreateTime,
+                                RequstPay = p.RequstPay
+                            }).Skip(PageIndex * PageSize).Take(PageSize).ToList();
+                return list;
+            }
+        }
         //更新会员信息阅读状态
         public void UpdateMemberMessageState(Guid UserId)
         {

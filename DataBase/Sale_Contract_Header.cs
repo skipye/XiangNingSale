@@ -17,7 +17,6 @@ namespace DataBase
         public Sale_Contract_Header()
         {
             this.Sale_Contract_Detail = new HashSet<Sale_Contract_Detail>();
-            this.Sale_Finance_FR = new HashSet<Sale_Finance_FR>();
         }
     
         public int Id { get; set; }
@@ -50,6 +49,5 @@ namespace DataBase
     
         public virtual ICollection<Sale_Contract_Detail> Sale_Contract_Detail { get; set; }
         public virtual Sale_Customers Sale_Customers { get; set; }
-        public virtual ICollection<Sale_Finance_FR> Sale_Finance_FR { get; set; }
     }
 }

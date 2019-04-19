@@ -576,6 +576,11 @@
     <Content Include="Views\Purchase\Show.cshtml" />
     <Content Include="Views\Finance\FR.cshtml" />
     <Content Include="Views\Purchase\AddContent.cshtml" />
+    <Content Include="Views\Finance\Show.cshtml" />
+    <Content Include="Views\Finance\WXOrder.cshtml" />
+    <Content Include="Views\Finance\WXFKShow.cshtml" />
+    <Content Include="Views\Order\WXOrderShow.cshtml" />
+    <Content Include="Views\Finance\WXSR.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -40,6 +40,7 @@ namespace ModelProject
         public string OpenId { get; set; }
         public int OneRequestUserCount { get; set; }
         public int TowRequestUserCount { get; set; }
+        public decimal? Commission { get; set; }
     }
     public class UserIdOrNameModel
     {

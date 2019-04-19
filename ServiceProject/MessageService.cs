@@ -19,6 +19,14 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
+        public List<PointModel> GetMemberPointList(int PageIndex, int PageSize, Guid? UserId)
+        {
+            try { return MDal.GetMemberPointList(PageIndex, PageSize, UserId); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void UpdateMemberMessageState(Guid UserId)
         {
             try { MDal.UpdateMemberMessageState(UserId); }

@@ -357,6 +357,7 @@
     <Content Include="Views\Order\OrderList.cshtml" />
     <Content Include="Views\Member\BuyService.cshtml" />
     <Content Include="Views\Member\Point.cshtml" />
+    <Content Include="Views\Member\PointList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

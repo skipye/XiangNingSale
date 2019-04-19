@@ -25,20 +25,21 @@ namespace DataBase
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Sale_Customers> Sale_Customers { get; set; }
-        public DbSet<WorkLogs> WorkLogs { get; set; }
-        public DbSet<Sale_Contract_Detail> Sale_Contract_Detail { get; set; }
-        public DbSet<Sale_Contract_Header> Sale_Contract_Header { get; set; }
-        public DbSet<Purchase_Order> Purchase_Order { get; set; }
-        public DbSet<Web_Customers> Web_Customers { get; set; }
-        public DbSet<Sale_Finance_FR> Sale_Finance_FR { get; set; }
-        public DbSet<Sale_Finance_FR_Logs> Sale_Finance_FR_Logs { get; set; }
         public DbSet<Address_Info> Address_Info { get; set; }
         public DbSet<MemberInfo> MemberInfo { get; set; }
+        public DbSet<MemberMessage> MemberMessage { get; set; }
         public DbSet<OrderInfo> OrderInfo { get; set; }
         public DbSet<OrderProductsInfo> OrderProductsInfo { get; set; }
-        public DbSet<Sale_Finance_FR_Logs11> Sale_Finance_FR_Logs11 { get; set; }
-        public DbSet<MemberMessage> MemberMessage { get; set; }
+        public DbSet<Purchase_Order> Purchase_Order { get; set; }
+        public DbSet<Sale_Contract_Detail> Sale_Contract_Detail { get; set; }
+        public DbSet<Sale_Contract_Header> Sale_Contract_Header { get; set; }
+        public DbSet<Sale_Customers> Sale_Customers { get; set; }
+        public DbSet<Sale_Finance_FR> Sale_Finance_FR { get; set; }
+        public DbSet<Sale_Finance_FR_Logs> Sale_Finance_FR_Logs { get; set; }
+        public DbSet<Web_Customers> Web_Customers { get; set; }
+        public DbSet<WorkLogs> WorkLogs { get; set; }
+        public DbSet<WX_Order_FR_Logs> WX_Order_FR_Logs { get; set; }
         public DbSet<WXReturnInfo> WXReturnInfo { get; set; }
+        public DbSet<WX_Order_Commission_Logs> WX_Order_Commission_Logs { get; set; }
     }
 }

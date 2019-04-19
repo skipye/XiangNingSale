@@ -1,0 +1,23 @@
+﻿@model List<ModelProject.PointModel>
+@{
+    Layout = null;
+}
+
+<div class="arrival-notice">
+    @if (Model != null && Model.Any())
+    {
+        <h4 class="tc"><em>返佣清单</em></h4>
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <dl>@item.CreateTime</dl>
+                    <span>
+                        <b><font size="3px">@item.UserName 订单：@item.OrderNum</font></b>
+                        <i>@item.RequstPay</i>
+                    </span>
+                </li>
+            }
+        </ul>
+    }
+</div>

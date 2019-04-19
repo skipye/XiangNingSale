@@ -35,5 +35,7 @@ namespace DataBase
     
         public virtual Address_Info Address_Info { get; set; }
         public virtual MemberInfo MemberInfo { get; set; }
+        public virtual OrderInfo OrderInfo1 { get; set; }
+        public virtual OrderInfo OrderInfo2 { get; set; }
     }
 }

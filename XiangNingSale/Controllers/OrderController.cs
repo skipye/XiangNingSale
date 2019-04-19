@@ -36,6 +36,15 @@ namespace XiangNingSale.Controllers
                 ContentType = "application/json"
             };
         }
+        public ActionResult WXPageList(SWXOrderModel SRmodels)
+        {
+            var models = NSer.GetWXPageList(SRmodels);
+            return new ContentResult
+            {
+                Content = new JavaScriptSerializer { MaxJsonLength = Int32.MaxValue }.Serialize(models),
+                ContentType = "application/json"
+            };
+        }
         public ActionResult Add(int? Id)
         {
             DateTime dt = new DateTime(DateTime.Now.Year, 1, 1);
@@ -166,6 +175,11 @@ namespace XiangNingSale.Controllers
         public ActionResult Show(int Id)
         {
             var Models = NSer.GetDetailById(Id);
+            return View(Models);
+        }
+        public ActionResult WXOrderShow(int Id)
+        {
+            var Models = NSer.GetWXOrderDetailById(Id);
             return View(Models);
         }
     }

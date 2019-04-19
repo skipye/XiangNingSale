@@ -1,28 +1,25 @@
-﻿@model ModelProject.SContractHeaderModel
+﻿@model ModelProject.SWXOrderModel
 @{
     Layout = null;
 }
 @Html.Action("_Meta", "Home")
 <nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i>首页<span class="c-gray en">&gt;</span>财务管理<span class="c-gray en">&gt;</span>订单列表
+    <i class="Hui-iconfont">&#xe67f;</i>首页<span class="c-gray en">&gt;</span>财务管理<span class="c-gray en">&gt;</span>微信订单
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
 </nav>
 <div class="page-container">
     <div class="text-c">
-        <span class="select-box inline">
-            @Html.DropDownListFor(k => k.DepartmentId, Model.DepartmentDroList, new { @class = "select" })
-        </span>
         @*日期范围：*@
         <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
         -
         <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
-        @*@Html.TextBoxFor(k => k.UserName, new { @placeholder = "客户名称", @style = "width:150px", @class = "input-text" })*@
+        @Html.TextBoxFor(k => k.UserName, new { @placeholder = "客户名称", @style = "width:150px", @class = "input-text" })
         <button id="btnSearch" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜素</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
-        <span class="f-l">
+        @*<span class="f-l">
             <a href="javascript:void(0);" onclick="checked(this,'0')" class="btn btn-primary radius" data-url="@Url.Action("CWChecked","Order")"><i class="Hui-iconfont">&#xe615;</i>批量审核</a>
-        </span>
+        </span>*@
         <span class="f-r pr-10 c-green" style="line-height:40px;">合同总金额：<b id="HTTotail"></b>元</span>
     </div>
     <div class="mt-20 checkmodel">
@@ -32,16 +29,11 @@
                 <tr class="text-l">
                     <th width="25"><input type="checkbox" name="" value=""></th>
                     <th>客户名称</th>
-                    <th>合同编号</th>
-                    <th>送货日期</th>
-                    <th>合同总金额</th>
-                    <th>预付款</th>
+                    <th>订单编号</th>
+                    <th>订单日期</th>
+                    <th>订单总金额</th>
                     <th>付款状态</th>
-                    <th>运费承担方</th>
-                    <th width="50px">是否需要上门测量</th>
-                    <th>销售人员</th>
-                    <th width="50px">是否审核</th>
-                    <th width="100">上传时间</th>
+                    <th>备注</th>
                     <th width="120">操作</th>
                 </tr>
             </thead>
@@ -58,15 +50,13 @@
 <script type="text/javascript">
 
     var param = {};
-    $(function () { param["CheckState"] = 1; search(param); });
+    $(function () {  search(param); });
     $("#btnSearch").click(function () {
         //搜索条件
-        var DepartmentId = $("#DepartmentId").val().trim();
         var UserName = $("#UserName").val().trim();
         var StartTime = $("#logmin").val().trim();
         var EndTime = $("#logmax").val().trim();
         //搜索
-        param["DepartmentId"] = DepartmentId;
         param["UserName"] = UserName;
         param["StartTime"] = StartTime;
         param["EndTime"] = EndTime;
@@ -84,7 +74,7 @@
             "autoWidth": true,
             "ordering": false, //设置所有不排序
             "ajax": function (data, callback, settings) {
-                ajaxRequest("post", "/Order/PageList", param, function (result) {
+                ajaxRequest("post", "/Order/WXPageList", param, function (result) {
                     //封装返回数据
                     var returnData = {};
                     returnData.data = result.data;
@@ -102,14 +92,10 @@
                         } else { return "";}
                     }
                 }, {
-                    targets: 12,//把第九列的样式改为超链接
+                    targets: 7,
                     render: function (data, type, row) {
                         var StrCheck = "";
-                        if (row.CWCheckStatus == 0)
-                        {
-                            StrCheck = '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="checked(this, \'' + row.Id + '\')" data-url=\'/Order/CWChecked\' title="审核"><i class="Hui-iconfont f-14">&#xe615;</i></a>';
-                        }
-                        StrCheck += '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="FR(\'收款\',\'/Finance/FR\', \'' + row.Id + '\', \'600\', \'300\')" data-url=\'/Finance/FR\' title="收款"><i class="Hui-iconfont f-14">&#xe637;</i></a>';
+                        StrCheck += '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="FR(\'收款\',\'/Finance/WXSR\', \'' + row.Id + '\', \'600\', \'300\')" data-url=\'/Finance/WXSR\' title="收款"><i class="Hui-iconfont f-14">&#xe637;</i></a>';
                         return StrCheck;
 
                     }
@@ -119,54 +105,30 @@
                         { "data": "Id" },
                         {
                             "data": "Customer", "className": "textoverflow", "render": function (data, type, row) {
-                                return "<u style=\"cursor:pointer\" class=\"text-primary\" onclick=\"show('" + data + "','/Finance/Show','" + row.Id + "','700','300')\">" + data + "</u>";
+                                return "<u style=\"cursor:pointer\" class=\"text-primary\" onclick=\"show('" + data + "','/Finance/WXFKShow','" + row.Id + "','700','300')\">" + data + "</u>";
                             }
                         },
                         {
-                            "data": "SN", "defaultContent": "", "render": function (data, type, row) {
-                                return "<u style=\"cursor:pointer\" class=\"text-primary\" onclick=\"show('" + data + "','/Order/Show','" + row.Id + "','900','600')\">" + data + "</u>";
+                            "data": "Ordernum", "defaultContent": "", "render": function (data, type, row) {
+                                return "<u style=\"cursor:pointer\" class=\"text-primary\" onclick=\"show('" + data + "','/Order/WXOrderShow','" + row.Id + "','900','600')\">" + data + "</u>";
                         } },
                         {
-                            "data": "delivery_date", "render": function (data) {
+                            "data": "CreateTime", "render": function (data) {
                                 var NewTime = parseInt(data.replace(/\D/igm, ""));
                                 return formatDate(NewTime);
                             }
                         },
-                        { "data": "Amount", "defaultContent": "", "className": "textoverflow" },
-                        { "data": "Prepay", "defaultContent": "", "className": "textoverflow" },
+                        { "data": "TotalPrice", "defaultContent": "", "className": "textoverflow" },
                         {
-                            "data": "FRFlag", "render": function (data, type, row) {
+                            "data": "PayState", "render": function (data, type, row) {
                                 var StatusName = "<span class=\"label label-warning radius\">未付款</span>";
-                                if (data == 1)
-                                { StatusName = "<span class=\"label label-success radius\">已付预付款</span>"; }
-                                if (data == 2) { StatusName = "<span class=\"label label-danger radius\">已付全款</span>"; }
+                                if (data == true)
+                                { StatusName = "<span class=\"label label-success radius\">已付全款</span>"; }
                                 return StatusName;
                             }
                         },
-                        { "data": "FreightCarrier", "defaultContent": "" },
-                        {
-                            "data": "MeasureFlag", "render": function (data) {
-                                var StrStatus = "<b class='c-warning'>否</b>";
-                                if (data == true)
-                                { StrStatus = "<b class='c-green'>是</b>"; }
-                                return StrStatus;
-                            }
-                        },
-                        { "data": "SaleUserName", "defaultContent": "" },
-                        {
-                            "data": "CWCheckStatus", "render": function (data) {
-                                var StrStatus = "<b class='c-warning'>否</b>";
-                                if (data == true)
-                                { StrStatus = "<b class='c-green'>是</b>"; }
-                                return StrStatus;
-                            }, "className": "checkedstatus",
-                        },
-                        {
-                            "data": "CreateTime", "render": function (data) {
-                                var NewTime = parseInt(data.replace(/\D/igm, ""));
-                                return formatDateTime(NewTime);
-                            }
-                        },
+                        { "data": "Remarks", "defaultContent": "" },
+                       
 
             ]
         });

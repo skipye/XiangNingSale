@@ -161,9 +161,6 @@
     <Compile Include="Sale_Finance_FR_Logs.cs">
       <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Sale_Finance_FR_Logs11.cs">
-      <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="SYS_colors.cs">
       <DependentUpon>XiangNingERPModel.tt</DependentUpon>
     </Compile>
@@ -195,6 +192,12 @@
       <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="WXReturnInfo.cs">
+      <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WX_Order_Commission_Logs.cs">
+      <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WX_Order_FR_Logs.cs">
       <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
     </Compile>
     <Compile Include="XiangNingERPModel.Context.cs">

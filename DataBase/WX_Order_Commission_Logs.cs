@@ -12,17 +12,15 @@ namespace DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class Sale_Finance_FR_Logs11
+    public partial class WX_Order_Commission_Logs
     {
-        public int Id { get; set; }
-        public Nullable<int> HTId { get; set; }
-        public string HTSN { get; set; }
-        public string Customer { get; set; }
-        public string PayModel { get; set; }
-        public Nullable<int> operator_id { get; set; }
-        public string operator_name { get; set; }
+        public System.Guid Id { get; set; }
+        public Nullable<System.Guid> MemberId { get; set; }
+        public Nullable<decimal> RequstPay { get; set; }
+        public Nullable<decimal> OrderPrice { get; set; }
+        public Nullable<int> OrderId { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
-        public Nullable<decimal> Amount { get; set; }
-        public string Remaks { get; set; }
+        public string MemberName { get; set; }
+        public string OrderNum { get; set; }
     }
 }

@@ -4,27 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3c4e8aa25578402985dcbbc01d3b12c8" Name="Diagram1">
-        <EntityTypeShape EntityType="XingNingSaleModel.Sale_Customers" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="XingNingSaleModel.WorkLogs" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="XingNingSaleModel.Sale_Contract_Detail" Width="1.5" PointX="9.375" PointY="0.75" />
-        <EntityTypeShape EntityType="XingNingSaleModel.Sale_Contract_Header" Width="1.5" PointX="7.125" PointY="0.625" />
-        <AssociationConnector Association="XingNingSaleModel.FK_Sale_Contract_Detail_Sale_Contract_Header" />
-        <AssociationConnector Association="XingNingSaleModel.FK_Sale_Contract_Header_Sale_Customers" />
-        <EntityTypeShape EntityType="XingNingSaleModel.Purchase_Order" Width="1.5" PointX="0.5" PointY="0.5" />
-        <EntityTypeShape EntityType="XingNingSaleModel.Web_Customers" Width="1.5" PointX="4.875" PointY="4.25" />
-        <EntityTypeShape EntityType="XingNingSaleModel.Sale_Finance_FR" Width="1.5" PointX="0.5" PointY="6.125" />
-        <EntityTypeShape EntityType="XingNingSaleModel.Sale_Finance_FR_Logs" Width="1.5" PointX="2.75" PointY="5.875" />
-        <AssociationConnector Association="XingNingSaleModel.Sale_Contract_HeaderSale_Finance_FR" />
-        <EntityTypeShape EntityType="XingNingSaleModel.Address_Info" Width="1.5" PointX="5.375" PointY="8.75" />
-        <EntityTypeShape EntityType="XingNingSaleModel.MemberInfo" Width="1.5" PointX="5.75" PointY="14" />
-        <EntityTypeShape EntityType="XingNingSaleModel.OrderInfo" Width="1.5" PointX="8" PointY="8.5" />
-        <EntityTypeShape EntityType="XingNingSaleModel.OrderProductsInfo" Width="1.5" PointX="0.75" PointY="10.75" />
-        <EntityTypeShape EntityType="XingNingSaleModel.Sale_Finance_FR_Logs11" Width="1.5" PointX="2.75" PointY="10.75" />
-        <AssociationConnector Association="XingNingSaleModel.FK_OrderInfo_Address_Info" />
-        <AssociationConnector Association="XingNingSaleModel.FK_OrderInfo_MemberInfo" />
-        <EntityTypeShape EntityType="XingNingSaleModel.MemberMessage" Width="1.5" PointX="10.375" PointY="7.875" />
-        <EntityTypeShape EntityType="XingNingSaleModel.WXReturnInfo" Width="1.5" PointX="11.375" PointY="0.75" />
+      <Diagram DiagramId="b110e439a7304b72bf29f4ecb52e1689" Name="Diagram1">
+        <EntityTypeShape EntityType="XiangNingSaleModel.Address_Info" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.MemberInfo" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.MemberMessage" Width="1.5" PointX="4.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.OrderInfo" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.OrderProductsInfo" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.Purchase_Order" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.Sale_Contract_Detail" Width="1.5" PointX="10.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.Sale_Contract_Header" Width="1.5" PointX="8" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.Sale_Customers" Width="1.5" PointX="5.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.Sale_Finance_FR" Width="1.5" PointX="8.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.Sale_Finance_FR_Logs" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.Web_Customers" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.WorkLogs" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.WX_Order_FR_Logs" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.WXReturnInfo" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="XiangNingSaleModel.FK_OrderInfo_Address_Info" ManuallyRouted="false" />
+        <AssociationConnector Association="XiangNingSaleModel.FK_OrderInfo_MemberInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="XiangNingSaleModel.FK_OrderInfo_OrderInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="XiangNingSaleModel.FK_OrderProductsInfo_OrderProductsInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="XiangNingSaleModel.FK_Sale_Contract_Detail_Sale_Contract_Header" ManuallyRouted="false" />
+        <AssociationConnector Association="XiangNingSaleModel.FK_Sale_Contract_Header_Sale_Customers" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.WX_Order_Commission_Logs" Width="1.5" PointX="9.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

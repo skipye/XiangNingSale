@@ -74,7 +74,7 @@
 <article class="pwlist">
     <ul>
         <li>
-            <a onclick="goUrl('@Url.Action("Give", "Member")')">
+            <a href="javascript:void(0)">
                 <em class="receive poa" style="background-color:#9132ca;"></em>
                 <p class="f14">我的下级<span class="f14 red">（一级：@Model.OneRequestUserCount 人</span><span class="f14 red pl10">二级：@Model.TowRequestUserCount 人）</span></p>
             </a>
@@ -82,7 +82,10 @@
         <li class="arowli no">
             <a onclick="goUrl('@Url.Action("Point", "Member")')">
                 <em class="dianpu poa" style="background-color:#FC215E;"></em>
-                <p class="f14 red">我的佣金（可提佣：&yen; @Model.ZStock 元）</p>
+
+
+
+                <p class="f14 red">我的佣金（可提佣：&yen; @Model.Commission 元）</p>
             </a>
         </li>
         <li class="arowli no">

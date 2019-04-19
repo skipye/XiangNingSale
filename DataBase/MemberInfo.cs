@@ -41,6 +41,7 @@ namespace DataBase
         public string OpenId { get; set; }
         public Nullable<int> ZStock { get; set; }
         public Nullable<bool> State { get; set; }
+        public Nullable<decimal> Commission { get; set; }
     
         public virtual ICollection<OrderInfo> OrderInfo { get; set; }
     }

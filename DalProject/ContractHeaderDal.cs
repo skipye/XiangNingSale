@@ -67,7 +67,43 @@ namespace DalProject
                 return Models;
             }
         }
-        
+        public WXOrderDataModel GetWXPageList(SWXOrderModel SModel)
+        {
+            DateTime StartTime = Convert.ToDateTime("1999-12-31");
+            DateTime EndTime = Convert.ToDateTime("2999-12-31");
+            if (!string.IsNullOrEmpty(SModel.StartTime))
+            {
+                StartTime = Convert.ToDateTime(SModel.StartTime);
+            }
+            if (!string.IsNullOrEmpty(SModel.EndTime))
+            {
+                EndTime = Convert.ToDateTime(SModel.EndTime).AddDays(1);
+            }
+            using (var db = new XiangNingSaleEntities())
+            {
+                var List = (from p in db.OrderInfo.Where(k => k.State == true)
+                            where !string.IsNullOrEmpty(SModel.UserName) ? p.MemberInfo.userName.Contains(SModel.UserName) : true
+                            where p.CreateTime > StartTime
+                            where p.CreateTime < EndTime
+                            orderby p.CreateTime descending
+                            select new WXOrderModel
+                            {
+                                Id = p.Id,
+                                Ordernum = p.Ordernum,
+                                Customer = p.MemberInfo.userName,
+                                CustomerId = p.MemberId,
+                                TelPhone = p.MemberInfo.Telphone,
+                                TotalPrice = p.TotalPrice,
+                                PayState = p.PayState,
+                                CreateTime = p.CreateTime,
+                                Remarks=p.Remarks,
+                            }).ToList();
+                WXOrderDataModel Models = new WXOrderDataModel();
+                Models.data = List;
+                Models.HTTotail = List.Sum(k => k.TotalPrice);
+                return Models;
+            }
+        }
         public void AddOrUpdate(ContractHeaderModel Models)
         {
             using (var db = new XiangNingSaleEntities())
@@ -151,7 +187,39 @@ namespace DalProject
                 return tables;
             }
         }
-       
+        public WXOrderModel GetWXOrderDetailById(int Id)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                var tables = (from p in db.OrderInfo.Where(k => k.Id == Id)
+
+                              orderby p.CreateTime descending
+                              select new WXOrderModel
+                              {
+                                  Id = p.Id,
+                                  Ordernum = p.Ordernum,
+                                  Customer = p.MemberInfo.userName,
+                                  CustomerId = p.MemberId,
+                                  TotalPrice = p.TotalPrice,
+                                  SubtractPrice = p.SubtractPrice,
+                                  PayState = p.PayState,
+                                  Remarks = p.Remarks,
+                                  DeliveryName = p.Address_Info.Name,
+                                  DeliveryAddress = p.Address_Info.Province + "" + p.Address_Info.City + "" + p.Address_Info.Region + ""+p.Address_Info.addressNo,
+                                  CreateTime = p.CreateTime,
+                                  OrderProductList = (from m in db.OrderProductsInfo.Where(k => k.Ordernum == p.Ordernum)
+                                                           select new OrderProductsModels
+                                                           {
+                                                               ProductsId = m.ProductsId,
+                                                               ProductsName = m.ProductsName,
+                                                               ProductsConvertImg = m.ProductsConvertImg,
+                                                               Saleprice = m.SalePrice,
+                                                               Amount = m.Amount
+                                                           })
+                              }).SingleOrDefault();
+                return tables;
+            }
+        }
         public void Delete(string ListId)
         {
             using (var db = new XiangNingSaleEntities())

@@ -19,6 +19,14 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
+        public WXOrderDataModel GetWXPageList(SWXOrderModel SModel)
+        {
+            try { return CHDal.GetWXPageList(SModel); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public bool AddOrUpdate(ContractHeaderModel Models)
         {
             try { CHDal.AddOrUpdate(Models); return true; }
@@ -30,6 +38,14 @@ namespace ServiceProject
         public ContractHeaderModel GetDetailById(int Id)
         {
             try { return CHDal.GetDetailById(Id); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public WXOrderModel GetWXOrderDetailById(int Id)
+        {
+            try { return CHDal.GetWXOrderDetailById(Id); }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);

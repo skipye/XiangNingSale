@@ -22,5 +22,8 @@ namespace DataBase
         public string ProductsName { get; set; }
         public string ProductsConvertImg { get; set; }
         public string Ordernum { get; set; }
+    
+        public virtual OrderProductsInfo OrderProductsInfo1 { get; set; }
+        public virtual OrderProductsInfo OrderProductsInfo2 { get; set; }
     }
 }

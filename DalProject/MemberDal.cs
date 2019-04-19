@@ -29,7 +29,8 @@ namespace DalProject
                                   AddStock = p.AddStock,
                                   Gold = p.Gold,
                                   MemberNumber = p.MemberNumber,
-                                  ZStock = p.ZStock
+                                  ZStock = p.ZStock,
+                                  Commission=p.Commission,
                               }).FirstOrDefault();
                 tables.OneRequestUserCount = RequestUserCount(tables.MemberNumber, 1);
                 tables.TowRequestUserCount = RequestUserCount(tables.MemberNumber, 2);

@@ -1,0 +1,47 @@
+﻿@model ModelProject.WXOrderModel
+@{
+    Layout = null;
+    int i = 1;
+}
+@Html.Action("_Meta", "Home")
+<div class="page-container">
+
+    <p class="ditem">订单编号：@Model.Ordernum</p>
+    <p class="ditem">客户姓名：@Model.Customer</p>
+    @*<p class="ditem">业务员：@Model.SaleUserName</p>*@
+    <p class="ditem">订单日期：@Convert.ToDateTime(Model.CreateTime).ToString("yyyy-MM-dd")</p>
+    <p class="ditem">是否付款：@(Model.PayState != null && Model.PayState == true ? "是" : "否")</p>
+    <p class="ditem">合同总金额：@Model.TotalPrice</p>
+    <p class="ditem">送货地址：@Model.DeliveryAddress</p>
+    <div style="clear:both"></div>
+   
+    @if (Model.OrderProductList != null && Model.OrderProductList.Any())
+    {
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>产品名称</th>
+                    <th>产品图片</th>
+                    <th>产品价格</th>
+                    <th>购买数量</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderProductList)
+                {
+                    var PPic = "http://sale.xiangninghm.com/" + item.ProductsConvertImg;
+                    <tr style="height:35px;">
+                        <td>@(i)</td>
+                        <td>@item.ProductsName</td>
+                        <td><img src="@PPic" style="height:50px;" /></td>
+                        <td>@item.Saleprice</td>
+                        <td>@item.Amount</td>
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+
+    }
+</div>

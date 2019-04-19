@@ -1,0 +1,40 @@
+﻿@model List<ModelProject.FinanceFRLogsModel>
+@{
+    Layout = null;
+    int i = 1;
+}
+@Html.Action("_Meta", "Home")
+@if (Model != null && Model.Any())
+{
+    <table class="table table-border table-bordered table-bg table-hover table-sort">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>合同号</th>
+                <th>客户</th>
+                <th>付款方式</th>
+                <th>付款金额</th>
+                <th>操作人</th>
+                <th>收款时间</th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+                {
+                <tr style="height:35px;">
+                    <td>@(i)</td>
+                    <td>@item.HTSN</td>
+                    <td>@item.Customer</td>
+                    <td>@item.PayModel</td>
+                    <td>@item.Amount</td>
+                    <td>@item.operator_name </td>
+                    <td>@item.CreateTime </td>
+                    <td>@item.Remaks </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+
+}

@@ -188,6 +188,17 @@ namespace XiangNingPhone.Controllers
             var models = MSSer.GetMemberReplyList(PageIndex, PageSize, MemberModel.MemberId);
             return View(models);
         }
+        public ActionResult PointList(int PageSize, int PageIndex)
+        {
+            var MemberModel = new UserIdOrNameModel();
+            if (USer.GetUserIdOrName() != null)
+            {
+                MemberModel = USer.GetUserIdOrName();
+            }
+            else { return RedirectToAction("Login", "Account",new { ReturnUrl="/Member/Point" }); }
+            var models = MSSer.GetMemberPointList(PageIndex, PageSize, MemberModel.MemberId);
+            return View(models);
+        }
         //会员须知
         public ActionResult UserNots()
         {

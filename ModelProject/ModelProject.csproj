@@ -49,12 +49,14 @@
     <Compile Include="CartModel.cs" />
     <Compile Include="ContractModel.cs" />
     <Compile Include="CustomerModel.cs" />
+    <Compile Include="FinanceFRLogsModel.cs" />
     <Compile Include="FinanceModel.cs" />
     <Compile Include="LabelsModel.cs" />
     <Compile Include="MemberModel.cs" />
     <Compile Include="MenuModel.cs" />
     <Compile Include="MessageModel.cs" />
     <Compile Include="OrderModel.cs" />
+    <Compile Include="PointModel.cs" />
     <Compile Include="RoleModel.cs" />
     <Compile Include="CategoryModel.cs" />
     <Compile Include="NewsModel.cs" />
@@ -63,6 +65,7 @@
     <Compile Include="SemiModel.cs" />
     <Compile Include="UserModel.cs" />
     <Compile Include="WorkLogsModel.cs" />
+    <Compile Include="WXOrderModel.cs" />
     <Compile Include="WXPayModel.cs" />
     <Compile Include="WXReturnResultModel.cs" />
     <Compile Include="WXUserModel.cs" />

@@ -23,6 +23,7 @@ namespace DalProject
                 SFLtable.HTSN = OrderTable.SN;
                 SFLtable.Customer = OrderTable.Sale_Customers.Name;
                 SFLtable.Amount = Models.Amount;
+                SFLtable.PayModel = Models.PayModel;
                 SFLtable.operator_id = Models.operator_id;
                 SFLtable.operator_name = Models.operator_name;
                 SFLtable.CreateTime = DateTime.Now;
@@ -60,6 +61,105 @@ namespace DalProject
                 if (Pay >= Total)
                 { OrderTable.FRFlag = 2; }
 
+
+                db.SaveChanges();
+            }
+        }
+        public void AddOrUpdateWX(FinanceModel Models)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                var OrderTable = db.OrderInfo.Where(k => k.Id == Models.Id).FirstOrDefault();
+                var Total = OrderTable.TotalPrice;
+                var MemberId = OrderTable.MemberId;
+                var Pay = Models.Amount;
+                var CrrPay = Pay;
+                //添加付款操作日志
+                WX_Order_FR_Logs SFLtable = new WX_Order_FR_Logs();
+                SFLtable.HTId = Models.Id;
+                SFLtable.HTSN = OrderTable.Ordernum;
+                SFLtable.Customer = OrderTable.MemberInfo.userName;
+                SFLtable.PayModel = Models.PayModel;
+                SFLtable.Amount = Models.Amount;
+                SFLtable.operator_id = Models.operator_id;
+                SFLtable.operator_name = Models.operator_name;
+                SFLtable.CreateTime = DateTime.Now;
+                SFLtable.Remaks = Models.Remaks;
+                db.WX_Order_FR_Logs.Add(SFLtable);
+
+                var table = db.WX_Order_FR_Logs.Where(k => k.HTId == Models.Id).ToList();//判断是否存在
+                if (table != null && table.Any())
+                {
+                    Pay = table.Sum(k => k.Amount) + CrrPay;
+                }
+                
+                if (Models.Amount > 0 && Pay >= Total)//更新合同的付款状态
+                {
+                    OrderTable.PayState = true;
+                    OrderTable.PayTime = DateTime.Now;
+                    OrderTable.DKPrce = Pay;
+                    var IsRus = db.WX_Order_Commission_Logs.Where(k => k.OrderId == OrderTable.Id).SingleOrDefault();
+                    if (IsRus == null)//判断是否结佣过
+                    {
+                        var Memtable = db.MemberInfo.Where(k => k.Id == MemberId).SingleOrDefault();
+                        if (Memtable != null)
+                        {
+                            var RequRequestNumber_1 = Memtable.RequestNumber_1;
+                            var RequRequestNumber_2 = Memtable.RequestNumber_2;
+
+                            if (string.IsNullOrEmpty(RequRequestNumber_2) == false)
+                            {
+                                var RMemtable = db.MemberInfo.Where(k => k.MemberNumber == RequRequestNumber_1).FirstOrDefault();
+                                RMemtable.Commission = RMemtable.Commission ?? 0 + Total * Convert.ToDecimal(0.04);
+
+                                WX_Order_Commission_Logs ComTab = new WX_Order_Commission_Logs();
+                                ComTab.Id = Guid.NewGuid();
+                                ComTab.MemberId = RMemtable.Id;
+                                ComTab.MemberName = RMemtable.userName;
+                                ComTab.OrderNum= OrderTable.Ordernum;
+                                ComTab.RequstPay = Total * Convert.ToDecimal(0.04);
+                                ComTab.OrderPrice = Total;
+                                ComTab.OrderId = OrderTable.Id;
+                                ComTab.CreateTime = DateTime.Now;
+                                db.WX_Order_Commission_Logs.Add(ComTab);
+
+
+                                var R1Memtable = db.MemberInfo.Where(k => k.MemberNumber == RequRequestNumber_2).FirstOrDefault();
+                                R1Memtable.Commission = R1Memtable.Commission ?? 0 + Total * Convert.ToDecimal(0.04);
+
+                                WX_Order_Commission_Logs ComTab1 = new WX_Order_Commission_Logs();
+                                ComTab1.Id = Guid.NewGuid();
+                                ComTab1.MemberId = R1Memtable.Id;
+                                ComTab.MemberName = R1Memtable.userName;
+                                ComTab.OrderNum = OrderTable.Ordernum;
+                                ComTab1.RequstPay = Total * Convert.ToDecimal(0.01);
+                                ComTab1.OrderPrice = Total;
+                                ComTab1.OrderId = OrderTable.Id;
+                                ComTab1.CreateTime = DateTime.Now;
+                                db.WX_Order_Commission_Logs.Add(ComTab1);
+                                
+
+                            }
+                            if (string.IsNullOrEmpty(RequRequestNumber_1) == false && string.IsNullOrEmpty(RequRequestNumber_2) == true)
+                            {
+                                var RMemtable = db.MemberInfo.Where(k => k.MemberNumber == RequRequestNumber_1).FirstOrDefault();
+                                RMemtable.Commission = RMemtable.Commission ?? 0 + Total * Convert.ToDecimal(0.04);
+
+                                WX_Order_Commission_Logs ComTab = new WX_Order_Commission_Logs();
+                                ComTab.Id = Guid.NewGuid();
+                                ComTab.MemberId = RMemtable.Id;
+                                ComTab.MemberName = RMemtable.userName;
+                                ComTab.OrderNum = OrderTable.Ordernum;
+                                ComTab.RequstPay = Total * Convert.ToDecimal(0.05);
+                                ComTab.OrderPrice = Total;
+                                ComTab.OrderId = OrderTable.Id;
+                                ComTab.CreateTime = DateTime.Now;
+                                db.WX_Order_Commission_Logs.Add(ComTab);
+                                
+                            }
+                        }
+                    }
+                }
 
                 db.SaveChanges();
             }
@@ -160,6 +260,44 @@ namespace DalProject
                 db.SaveChanges();
             }
 
+        }
+        public List<FinanceFRLogsModel> GetFinanceFRLogs(int HTId)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                var List = (from p in db.Sale_Finance_FR_Logs.Where(k => k.HTId == HTId)
+                            orderby p.CreateTime descending
+                            select new FinanceFRLogsModel
+                            {
+                                HTSN = p.HTSN,
+                                Customer = p.Customer,
+                                Remaks = p.Remaks,
+                                PayModel = p.PayModel,
+                                operator_name = p.operator_name,
+                                CreateTime = p.CreateTime,
+                                Amount = p.Amount,
+                            }).ToList();
+                return List;
+            }
+        }
+        public List<FinanceFRLogsModel> GetWXFinanceFRLogs(int HTId)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                var List = (from p in db.WX_Order_FR_Logs.Where(k => k.HTId == HTId)
+                            orderby p.CreateTime descending
+                            select new FinanceFRLogsModel
+                            {
+                                HTSN = p.HTSN,
+                                Customer = p.Customer,
+                                Remaks = p.Remaks,
+                                PayModel = p.PayModel,
+                                operator_name = p.operator_name,
+                                CreateTime = p.CreateTime,
+                                Amount = p.Amount,
+                            }).ToList();
+                return List;
+            }
         }
     }
 }
