@@ -73,6 +73,7 @@ namespace DalProject
                 var Total = OrderTable.TotalPrice;
                 var MemberId = OrderTable.MemberId;
                 var Pay = Models.Amount;
+                var OrderNum = OrderTable.Ordernum;
                 var CrrPay = Pay;
                 //添加付款操作日志
                 WX_Order_FR_Logs SFLtable = new WX_Order_FR_Logs();
@@ -102,6 +103,7 @@ namespace DalProject
                     if (IsRus == null)//判断是否结佣过
                     {
                         var Memtable = db.MemberInfo.Where(k => k.Id == MemberId).SingleOrDefault();
+                        var MemberUser = Memtable.userName;//购买人的昵称
                         if (Memtable != null)
                         {
                             var RequRequestNumber_1 = Memtable.RequestNumber_1;
@@ -115,8 +117,8 @@ namespace DalProject
                                 WX_Order_Commission_Logs ComTab = new WX_Order_Commission_Logs();
                                 ComTab.Id = Guid.NewGuid();
                                 ComTab.MemberId = RMemtable.Id;
-                                ComTab.MemberName = RMemtable.userName;
-                                ComTab.OrderNum= OrderTable.Ordernum;
+                                ComTab.MemberName = MemberUser;
+                                ComTab.OrderNum= OrderNum;
                                 ComTab.RequstPay = Total * Convert.ToDecimal(0.04);
                                 ComTab.OrderPrice = Total;
                                 ComTab.OrderId = OrderTable.Id;
@@ -130,8 +132,8 @@ namespace DalProject
                                 WX_Order_Commission_Logs ComTab1 = new WX_Order_Commission_Logs();
                                 ComTab1.Id = Guid.NewGuid();
                                 ComTab1.MemberId = R1Memtable.Id;
-                                ComTab.MemberName = R1Memtable.userName;
-                                ComTab.OrderNum = OrderTable.Ordernum;
+                                ComTab1.MemberName = MemberUser;
+                                ComTab1.OrderNum = OrderNum;
                                 ComTab1.RequstPay = Total * Convert.ToDecimal(0.01);
                                 ComTab1.OrderPrice = Total;
                                 ComTab1.OrderId = OrderTable.Id;
@@ -148,8 +150,8 @@ namespace DalProject
                                 WX_Order_Commission_Logs ComTab = new WX_Order_Commission_Logs();
                                 ComTab.Id = Guid.NewGuid();
                                 ComTab.MemberId = RMemtable.Id;
-                                ComTab.MemberName = RMemtable.userName;
-                                ComTab.OrderNum = OrderTable.Ordernum;
+                                ComTab.MemberName = MemberUser;
+                                ComTab.OrderNum = OrderNum;
                                 ComTab.RequstPay = Total * Convert.ToDecimal(0.05);
                                 ComTab.OrderPrice = Total;
                                 ComTab.OrderId = OrderTable.Id;

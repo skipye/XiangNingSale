@@ -16,10 +16,10 @@ namespace WxPayAPI
         * KEY：商户支付密钥，参考开户邮件设置（必须配置）
         * APPSECRET：公众帐号secert（仅JSAPI支付的时候需要配置）
         */
-        public const string APPID = "wx277d07db1a908b4f";
-        public const string MCHID = "1353181602";
+        public const string APPID = "wxb3e0f167eb3e4d8d";
+        public const string MCHID = "1532634841";
         public const string KEY = "sandra8225xroger3101091982020520";
-        public const string APPSECRET = "78d444f33db8fe52d89ca594cafd7fe7";
+        public const string APPSECRET = "06d9cd9a924e3526db5ad391a0620a50";
 
         //=======【证书路径设置】===================================== 
         /* 证书路径,注意应该填写绝对路径（仅退款、撤销订单时需要）
@@ -33,11 +33,11 @@ namespace WxPayAPI
         /* 支付结果通知回调url，用于商户接收支付结果
         */
         //public const string NOTIFY_URL = "http://paysdk.weixin.qq.com/example/ResultNotifyPage.aspx";
-        public const string NOTIFY_URL = "http://ycwap.yiju360.com/WXPayApi/ResultNotifyPage.aspx";
+        public const string NOTIFY_URL = "http://m.xiangninghm.com/WXPayApi/ResultNotifyPage.aspx";
         //=======【商户系统后台机器IP】===================================== 
         /* 此参数可手动配置也可在程序中自动获取
         */
-        public const string IP = "8.8.8.8";
+        public const string IP = "61.129.57.23";
 
 
         //=======【代理服务器设置】===================================

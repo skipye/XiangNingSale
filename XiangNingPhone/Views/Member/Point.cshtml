@@ -13,19 +13,19 @@
         <div id="indexData">
             @Html.Action("PointList", "Member", new { PageSize = 20, PageIndex = 1 })
         </div>
+        <div class="loadingbox" id="loadaimbox" style="display: -webkit-box;">
+            <i class="loadingrdu"><img src="/images/loading.gif" /></i>
+            <em class="ml5 f15">正在努力加载</em>
+        </div>
 
+        <p id="no_record" style="display: none;" class="f14 db tc">
+            <span class="pt10 pb5 g9 db">╯▂╰ 暂无信息！</span>
+        </p>
         <p class="red b">如你有任何疑问请联系我们，立即咨询---通过微信联系我们客服；电话我们---可以直接电话我们！</p>
     </div>
 
 </div>
-<div class="loadingbox" id="loadaimbox" style="display: -webkit-box;">
-    <i class="loadingrdu"><img src="/images/loading.gif" /></i>
-    <em class="ml5 f15">正在努力加载</em>
-</div>
 
-<p id="no_record" style="display: none;" class="f14 db tc">
-    <span class="pt10 pb5 g9 db">╯▂╰ 暂无信息！</span>
-</p>
 <footer id="footer" class="footer tc bg-white">
 
     <p class="bfx01"><a href="tel:13311601955"><span class="btnliji wh db f15" style="background: rgb(85, 85, 85);">电话我们</span> </a></p>

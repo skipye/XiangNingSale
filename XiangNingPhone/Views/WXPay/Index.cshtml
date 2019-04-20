@@ -1,0 +1,134 @@
+﻿@model ModelProject.WXPayModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>支付</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/member.css")" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+
+
+</head>
+<body class="membg" data-marpad="padding" data-fixtop="44" id="payment">
+    <!--header Start-->
+    @Html.HiddenFor(k => k.OrderId)
+    @Html.HiddenFor(k => k.openid)
+    <header id="header" class="header ycpurple">
+        <div class="aubgs icon-back" onclick="goUrl('@Url.Action("Index","Home")')"></div>
+        <h1 class="bfx02 wh">支付方式</h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+    <div class="navmorelist" id="navmorelist">
+        <ul class="f14">
+            <li><a onclick="goUrl('@Url.Action("Index","Home")')">首页</a></li>
+            <li><a onclick="goUrl('@Url.Action("Index","Cart")')">购 物 车</a></li>
+            <li><a onclick="goUrl('@Url.Action("Index","Member")')">会员中心</a></li>
+            <li><a href="javascript:;" onclick="location.reload();">刷新本页</a></li>
+        </ul>
+    </div>
+    <div class="topup_pay">
+        <ul>
+            <!--  <li onclick="qiandaibao();"> -->
+            <li id="WXPay" ref="1">
+                <label for="daif">
+                    <img src="/images/wxico.png">
+                    <p class="f16">微信公众号支付</p>
+                    <p class="f12 g6">微信用户使用</p>
+                </label>
+            </li>
+        </ul>
+        <center>
+            <img src="@Url.Action("NativePay", "WXPay", new { OrderId=Model.OrderId})" style="width:200px;height:200px;">
+            <p class="f16">微信跨境扫码支付</p>
+            <p class="f12 g6">推荐微信用户使用</p>
+        </center>
+    </div>
+    <div class="Payment_tips">各位会员们请注意，香凝工艺不会让各位加任何QQ、个人微信或者其他联系方式，唯一的联系方式都在首页的香凝工艺按钮里，请不要相信任何以退款或者其他关于钱财理由的链接，即使对方能报出您的联系方式和收货地址。</div>
+
+
+    <script type="text/javascript">
+        //初始化微信支付环境
+        $("#WXPay").click(function () {
+            var WXPayState = $(this).attr("ref");
+            if (WXPayState == "0")
+            { alert("已经提交！不需多次提交！"); return false; }
+            if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                }
+            } else {
+                fPostCharge();
+            }
+        });
+
+        //提交数据
+        function fPostCharge() {
+            $("#WXPay").attr("ref", "0");//防止多次点击
+            var OrderId = $("#OrderId").val();
+            var openid = $("#openid").val();
+            $.ajax({
+                type: "post",
+                data: { "OrderId": OrderId, "openid": openid },
+                url: "/WXPay/JsApiPay",
+                success: function (json) {
+                    if (json.msg == "1") {
+                        onBridgeReady(json);
+                    } else {
+                        alert(json.msg); $("#WXPay").attr("ref", "1");//失败之后可以再次提交
+                    }
+                },
+                error: function (d) {
+                    alert("调用微信支付模块失败，请稍后再试。"); $("#WXPay").attr("ref", "1");//失败之后可以再次提交
+                }
+            })
+        };
+            //调用微信支付模块
+        function onBridgeReady(json) {
+            WeixinJSBridge.invoke(
+           'getBrandWCPayRequest', {
+               "appId": json.appId,     //公众号名称，由商户传入
+               "timeStamp": json.timeStamp,         //时间戳，自1970年以来的秒数
+               "nonceStr": json.nonceStr, //随机串
+               "package": json.packageValue,
+               "signType": "MD5",         //微信签名方式:
+               "paySign": json.paySign //微信签名
+           }, function (res) {
+               if (res.err_msg == "get_brand_wcpay_request:ok") {
+                   alert("支付成功,请稍后查询余额,如有疑问,请联系管理员.");
+                   fAlreadyPay();//更新支付结果
+                   fBackHome();
+               }
+           });
+        };
+        function fAlreadyPay() {
+            var OrderId = $("#OrderId").val();
+            var UpdeteOrder = '@Url.Action("UpdateOrder", "Order")';
+            $.post(UpdeteOrder, { "OrderNumber": OrderId }, function (d) {
+            });
+        };
+        function fBackHome() {
+            location.href = "/";
+        };
+        function reloadSelf() {
+            //alert(0);
+            window.location.reload();
+        };
+    </script>
+</body>
+</html>

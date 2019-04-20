@@ -106,6 +106,9 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="ThoughtWorks.QRCode">
+      <HintPath>..\..\XiangNingERP\packages\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
@@ -213,6 +216,7 @@
     <Content Include="images\search.png" />
     <Content Include="images\status.gif" />
     <Content Include="images\trash_icon.png" />
+    <Content Include="images\wxico.png" />
     <Content Include="js\addaddress.js" />
     <Content Include="js\back-password.js" />
     <Content Include="js\cart.js" />
@@ -358,6 +362,8 @@
     <Content Include="Views\Member\BuyService.cshtml" />
     <Content Include="Views\Member\Point.cshtml" />
     <Content Include="Views\Member\PointList.cshtml" />
+    <Content Include="Views\WXPay\Index.cshtml" />
+    <Content Include="Views\WXPay\WXPayOrder.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
