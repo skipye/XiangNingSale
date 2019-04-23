@@ -45,6 +45,7 @@
           <Property Name="EidtName" Type="nvarchar" MaxLength="100" />
           <Property Name="AreaId" Type="int" />
           <Property Name="SalePrices" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SaleCount" Type="int" />
         </EntityType>
         <EntityType Name="A_News_File">
           <Key>
@@ -210,6 +211,7 @@
           <Property Name="AreaId" Type="Int32" />
           <NavigationProperty Name="AreaType" Relationship="XNArticleModel.FK_A_News_AreaType" FromRole="A_News" ToRole="AreaType" />
           <Property Name="SalePrices" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SaleCount" Type="Int32" />
         </EntityType>
         <EntityType Name="A_News_File">
           <Key>
@@ -408,6 +410,7 @@
           <EntitySetMapping Name="A_News">
             <EntityTypeMapping TypeName="XNArticleModel.A_News">
               <MappingFragment StoreEntitySet="A_News">
+                <ScalarProperty Name="SaleCount" ColumnName="SaleCount" />
                 <ScalarProperty Name="SalePrices" ColumnName="SalePrices" />
                 <ScalarProperty Name="AreaId" ColumnName="AreaId" />
                 <ScalarProperty Name="EidtName" ColumnName="EidtName" />

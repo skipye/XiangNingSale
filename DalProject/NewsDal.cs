@@ -131,7 +131,6 @@ namespace DalProject
                 return tables;
             }
         }
-        //新增和修改仓库设置
         public void AddOrUpdate(NewsModel Models)
         {
             using (var db = new XNArticleEntities())
@@ -153,6 +152,7 @@ namespace DalProject
                     table.CheckedStatus = 0;
                     table.UpTime = DateTime.Now;
                     table.AreaId = Models.AreaId;
+                    table.SalePrices = Models.SalePrice;
                     db.SaveChanges();
                 }
                 else
@@ -176,6 +176,7 @@ namespace DalProject
                     table.UploadName = Models.UploadName;
                     table.EidtName = Models.EidtAuthorName;
                     table.AreaId = Models.AreaId;
+                    table.SalePrices = Models.SalePrice;
                     db.A_News.Add(table);
                     db.SaveChanges();
                     Models.Id = table.Id;

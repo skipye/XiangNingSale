@@ -102,18 +102,17 @@ namespace XiangNingPhone.Controllers
             //return Content(openid + "&&" + code);
         }
         //JsApiPay
-        public ActionResult JsApiPay()
+        public ActionResult JsApiPay(string OrderId,string OpenId)
         {
             object objResult = "";
             int totalPrice = 0;
-            string orderId = "";
-            string openid = "";
+            string orderId = OrderId;
+            string openid = OpenId;
             if (Session["orderId"] != null)
             {
                 orderId = Session["orderId"].ToString();
                 openid= Session["openId"].ToString();
             }
-            else { return RedirectToAction("Index","Member"); }
 
             var models = OSer.GetOrderDetail(orderId);//正常订单
             if (models.TotalPrice != null && models.TotalPrice > 0)

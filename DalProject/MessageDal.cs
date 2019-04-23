@@ -41,7 +41,8 @@ namespace DalProject
                                 UserName = p.MemberName,
                                 OrderNum = p.OrderNum,
                                 CreateTime = p.CreateTime,
-                                RequstPay = p.RequstPay
+                                RequstPay = p.RequstPay,
+                                OrderPrice=p.OrderPrice,
                             }).Skip(PageIndex * PageSize).Take(PageSize).ToList();
                 return list;
             }

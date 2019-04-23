@@ -40,6 +40,7 @@ namespace DataBase
         public string EidtName { get; set; }
         public Nullable<int> AreaId { get; set; }
         public Nullable<decimal> SalePrices { get; set; }
+        public Nullable<int> SaleCount { get; set; }
     
         public virtual A_NewsType A_NewsType { get; set; }
         public virtual ICollection<A_News_File> A_News_File { get; set; }

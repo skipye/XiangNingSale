@@ -84,7 +84,7 @@
             var openid = $("#openid").val();
             $.ajax({
                 type: "post",
-                data: { "OrderId": OrderId, "openid": openid },
+                data: { "OrderId": OrderId, "OpenId": openid },
                 url: "/WXPay/JsApiPay",
                 success: function (json) {
                     if (json.msg == "1") {

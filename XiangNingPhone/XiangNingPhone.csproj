@@ -127,6 +127,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WXPayApi\ResultNotifyPage.aspx.cs">
+      <DependentUpon>ResultNotifyPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WXPayApi\ResultNotifyPage.aspx.designer.cs">
+      <DependentUpon>ResultNotifyPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WXPayApi\SMSpost.aspx.cs">
       <DependentUpon>SMSpost.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -250,6 +257,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="WXPayApi\ResultNotifyPage.aspx" />
     <Content Include="WXPayApi\SMSpost.aspx" />
   </ItemGroup>
   <ItemGroup>

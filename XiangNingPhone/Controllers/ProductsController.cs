@@ -18,10 +18,10 @@ namespace XiangNingPhone.Controllers
             var models = NSer.GetRandomNewsList(TypeId ?? 2, PageSize ?? 3);
             return View(models);
         }
-        public ActionResult PageList(SNewsModel SModel,int? PageSize)
+        public ActionResult PageList(SNewsModel SModel,int? Type,int? PageSize)
         {
             SModel.PageSize = PageSize??9;
-            var models = NSer.GetWebPageList(SModel, 2);
+            var models = NSer.GetWebPageList(SModel, Type??2);
             return View(models);
         }
         public ActionResult List(SNewsModel SModel, int? PageIndex, int? PageSize)

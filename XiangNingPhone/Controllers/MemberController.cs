@@ -190,13 +190,14 @@ namespace XiangNingPhone.Controllers
         }
         public ActionResult PointList(int PageSize, int PageIndex)
         {
-            var MemberModel = new UserIdOrNameModel();
-            if (USer.GetUserIdOrName() != null)
+            var MemberId = Guid.Empty;
+            if (Session["User"] != null)
             {
-                MemberModel = USer.GetUserIdOrName();
+                string UserModel = Session["User"].ToString();
+                MemberId = new Guid(UserModel.Split('|')[1]);
             }
             else { return RedirectToAction("Login", "Account",new { ReturnUrl="/Member/Point" }); }
-            var models = MSSer.GetMemberPointList(PageIndex, PageSize, MemberModel.MemberId);
+            var models = MSSer.GetMemberPointList(PageIndex, PageSize, MemberId);
             return View(models);
         }
         //会员须知

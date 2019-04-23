@@ -51,9 +51,9 @@
 <div class="indexnavlist listactive ovh">
     <ul>
         <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic01"></em><span class="texp f14">家具</span></a></li>
-        <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic02"></em><p class="texp f14">工艺品</p></a></li>
-        <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic03"></em><p class="texp f14">整屋定制</p></a></li>
-        <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic04"></em><p class="texp f14">家具维修</p></a></li>
+        <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/XNProducts/GYLP')"><em class="icem ic02"></em><p class="texp f14">工艺品</p></a></li>
+        <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/XNProducts/ZWDZ')"><em class="icem ic03"></em><p class="texp f14">整屋定制</p></a></li>
+        <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/XNProducts/JJWX')"><em class="icem ic04"></em><p class="texp f14">家具维修</p></a></li>
     </ul>
 </div>
 
@@ -89,12 +89,25 @@
 <article class="godstab">
     <div class="indextabnav f15">
         <ul>
-            <li class="on">新品推荐@*<a href="/Home/ProductsType?TypeId=123" class="more">更多&gt;</a>*@</li>
+            <li class="on">工艺礼品<a href="/XNProducts/GYLP" class="more">更多&gt;</a></li>
         </ul>
     </div>
     <div class="godstabcent">
         <div class="parameter ovh" style="display:block;">
-            @Html.Action("PageList", "Products", new { PageSize = 12 })
+            @Html.Action("PageList", "Products", new { Type=15,PageSize = 4 })
+        </div>
+    </div>
+</article>
+<p class="godbg godge"></p>
+<article class="godstab">
+    <div class="indextabnav f15">
+        <ul>
+            <li class="on">家具<a href="/Products/Index" class="more">更多&gt;</a></li>
+        </ul>
+    </div>
+    <div class="godstabcent">
+        <div class="parameter ovh" style="display:block;">
+            @Html.Action("PageList", "Products", new { Type = 2, PageSize = 6 })
         </div>
     </div>
 </article>

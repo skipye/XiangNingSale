@@ -99,7 +99,7 @@ namespace DalProject
                     OrderTable.PayState = true;
                     OrderTable.PayTime = DateTime.Now;
                     OrderTable.DKPrce = Pay;
-                    var IsRus = db.WX_Order_Commission_Logs.Where(k => k.OrderId == OrderTable.Id).SingleOrDefault();
+                    var IsRus = db.WX_Order_Commission_Logs.Where(k => k.OrderId == OrderTable.Id).FirstOrDefault();
                     if (IsRus == null)//判断是否结佣过
                     {
                         var Memtable = db.MemberInfo.Where(k => k.Id == MemberId).SingleOrDefault();
@@ -112,7 +112,9 @@ namespace DalProject
                             if (string.IsNullOrEmpty(RequRequestNumber_2) == false)
                             {
                                 var RMemtable = db.MemberInfo.Where(k => k.MemberNumber == RequRequestNumber_1).FirstOrDefault();
-                                RMemtable.Commission = RMemtable.Commission ?? 0 + Total * Convert.ToDecimal(0.04);
+                                var NewRPrice =  Total * Convert.ToDecimal(0.04);
+                                var ORprice = RMemtable.Commission ?? 0;
+                                RMemtable.Commission = ORprice + NewRPrice;
 
                                 WX_Order_Commission_Logs ComTab = new WX_Order_Commission_Logs();
                                 ComTab.Id = Guid.NewGuid();
@@ -127,7 +129,9 @@ namespace DalProject
 
 
                                 var R1Memtable = db.MemberInfo.Where(k => k.MemberNumber == RequRequestNumber_2).FirstOrDefault();
-                                R1Memtable.Commission = R1Memtable.Commission ?? 0 + Total * Convert.ToDecimal(0.04);
+                                var NewR1Price = Total * Convert.ToDecimal(0.01);
+                                var OR1price = RMemtable.Commission ?? 0;
+                                R1Memtable.Commission = OR1price + NewR1Price;
 
                                 WX_Order_Commission_Logs ComTab1 = new WX_Order_Commission_Logs();
                                 ComTab1.Id = Guid.NewGuid();
@@ -145,7 +149,9 @@ namespace DalProject
                             if (string.IsNullOrEmpty(RequRequestNumber_1) == false && string.IsNullOrEmpty(RequRequestNumber_2) == true)
                             {
                                 var RMemtable = db.MemberInfo.Where(k => k.MemberNumber == RequRequestNumber_1).FirstOrDefault();
-                                RMemtable.Commission = RMemtable.Commission ?? 0 + Total * Convert.ToDecimal(0.04);
+                                var NewRPrice = Total * Convert.ToDecimal(0.05);
+                                var ORprice = RMemtable.Commission ?? 0;
+                                RMemtable.Commission = ORprice + NewRPrice;
 
                                 WX_Order_Commission_Logs ComTab = new WX_Order_Commission_Logs();
                                 ComTab.Id = Guid.NewGuid();

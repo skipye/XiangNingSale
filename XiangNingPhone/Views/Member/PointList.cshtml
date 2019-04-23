@@ -6,15 +6,17 @@
 <div class="arrival-notice">
     @if (Model != null && Model.Any())
     {
-        <h4 class="tc"><em>返佣清单</em></h4>
+        
         <ul>
             @foreach (var item in Model)
             {
                 <li>
-                    <dl>@item.CreateTime</dl>
+                    <dl>@Convert.ToDateTime(item.CreateTime).ToString("yyyy-MM-dd")</dl>
                     <span>
-                        <b><font size="3px">@item.UserName 订单：@item.OrderNum</font></b>
-                        <i>@item.RequstPay</i>
+                        <b><font size="3px">昵称：@item.UserName </font></b>
+                        <p>订单：@item.OrderNum</p>
+                        <p class="red">订单总额：&yen; @item.OrderPrice 元 </p>
+                        <p class="red">返佣：&yen; @item.RequstPay 元</p>
                     </span>
                 </li>
             }

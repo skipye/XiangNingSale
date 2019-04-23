@@ -11,6 +11,7 @@ namespace ModelProject
         public string OrderNum { get; set; }
         public decimal? RequstPay { get; set; }
         public DateTime? CreateTime { get; set; }
+        public decimal? OrderPrice { get; set; }
 
     }
 }

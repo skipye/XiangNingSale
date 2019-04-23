@@ -40,6 +40,17 @@ namespace DalProject
                         OPModels.ProductsName = item.Product.Name;
                         OPModels.ProductsConvertImg = item.Product.ConvertImg;
                         AddOrderProducts(db, OPModels);
+
+                        using (var prdb = new XNArticleEntities())
+                        {
+                            var proTab = prdb.A_News.Where(k => k.Id == item.Product.Id).SingleOrDefault();
+                            if (proTab != null)
+                            {
+                                proTab.SaleCount = proTab.SaleCount ?? 0 + item.Amount;
+                            }
+                            prdb.SaveChanges();
+                        }
+                        
                         
                     }
                     db.SaveChanges();
@@ -63,15 +74,7 @@ namespace DalProject
         {
             DateTime TimeNow = DateTime.Now;
             string OrderNum = "";
-            string ProName = "";
-            if (!string.IsNullOrEmpty(KeyWord) && KeyWord.Contains("YC"))
-            {
-                OrderNum = KeyWord;
-            }
-            if (!string.IsNullOrEmpty(KeyWord) && !KeyWord.Contains("YC"))
-            {
-                ProName = KeyWord;
-            }
+           
             using (var db = new XiangNingSaleEntities())
             {
                 var orderlist = (from p in db.OrderInfo.Where(k => k.MemberId == MemberId && k.State == true)
