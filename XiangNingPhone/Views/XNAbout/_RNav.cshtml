@@ -3,10 +3,11 @@
 }
 <div class="navmorelist" id="navmorelist">
     <ul class="f14">
+        <li><a onclick="goUrl('@Url.Action("Index","Home")')">网站首页</a></li>
         <li><a onclick="goUrl('@Url.Action("LXWM","XNAbout")')">联系我们</a></li>
         <li><a onclick="goUrl('@Url.Action("QYLN","XNAbout")')">企业理念</a></li>
         <li><a onclick="goUrl('@Url.Action("XNZX","XNAbout")')">香凝资讯</a></li>
-        <li><a onclick="goUrl('http://m.xiangninghm.com/')">手机官网</a></li>
+        <li><a onclick="goUrl('@Url.Action("Index","Member")')">会员中心</a></li>
         <li><a href="javascript:;" onclick="location.reload()">刷新本页</a></li>
     </ul>
 </div>

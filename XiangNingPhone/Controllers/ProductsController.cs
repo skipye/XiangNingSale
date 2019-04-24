@@ -24,11 +24,11 @@ namespace XiangNingPhone.Controllers
             var models = NSer.GetWebPageList(SModel, Type??2);
             return View(models);
         }
-        public ActionResult List(SNewsModel SModel, int? PageIndex, int? PageSize)
+        public ActionResult List(SNewsModel SModel, int? Type, int? PageIndex, int? PageSize)
         {
             SModel.PageSize = PageSize ?? 10;
             SModel.PageIndex = PageIndex ?? 0;
-            var Models = NSer.GetNewsTypeList(SModel,2);
+            var Models = NSer.GetNewsTypeList(SModel, Type??2);
             return View(Models);
         }
         public ActionResult Detail(int Id)
