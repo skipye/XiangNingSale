@@ -60,39 +60,22 @@ namespace ServiceProject
                 return false;
             }
         }
-        /// <summary>
-        /// 登录
-        /// </summary>
-        /// <param name="UserName"></param>
-        /// <param name="PassWord"></param>
-        /// <param name="UserId"></param>
-        /// <param name="IsUserInfo"></param>
-        /// <returns></returns>
-        public bool IsLogin(string UserCode, string PassWord, out Guid UserId, out bool IsUserInfo, string openId, out string UserName)
+        public LoginModel IsWXLogin(string openId)
         {
-            try { return UDal.IsLogin(UserCode, PassWord, out UserId, out IsUserInfo, openId, out UserName); }
+            try { return UDal.IsWXLogin(openId); }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        /// <summary>
-        /// 微信登录
-        /// </summary>
-        /// <param name="UserName"></param>
-        /// <param name="PassWord"></param>
-        /// <param name="UserId"></param>
-        /// <param name="IsUserInfo"></param>
-        /// <returns></returns>
-        public bool IsWXLogin(string openId, out Guid UserId, out bool IsUserInfo, out bool IsOpenId)
+        public LoginModel IsLogin(string UserCode, string PassWord, string openId)
         {
-            try { return UDal.IsWXLogin(openId, out UserId, out IsUserInfo, out IsOpenId); }
+            try { return UDal.IsLogin(UserCode, PassWord, openId); }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        
         public bool IsSameName(string Name)
         {
             try { return UDal.IsSameName(Name); }

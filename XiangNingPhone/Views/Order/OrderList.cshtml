@@ -13,8 +13,9 @@
                     <ul>
                         @if (item.TimeOut == true && item.PayState == false)
                         {
-                            var posturl = "/WXPay/GetOpenId?orderId=" + item.Ordernum;
+                            //var posturl = "/WXPay/GetOpenId?orderId=" + item.Ordernum;
                             //var posturl = "/WXPay/WXpayOrder?orderId=" + item.Ordernum + "&openid=oSdHwv3Q_wLheVP3oFNoTRZa9bdk" ;
+                            var posturl = "/WXPay/Index?orderId=" + item.Ordernum;
                             <li class="zhifubtn f14" url="@posturl"><span class="perexitBtn db g6 f14">支付</span></li>
                         }
                         else if (item.PayState == true)

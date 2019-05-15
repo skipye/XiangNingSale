@@ -55,31 +55,19 @@ function login() {
     $.ajax({
         type: "post",
         url: LoginUrl,
-        data: { "userCode": userCode, "passWord": passWord},
+        data: { "userCode": userCode, "passWord": passWord },
         //dataType: "json",
         success: function (d) {
             m.close(pageLogin);
-            var data = d.indexOf("&");
-            //alert(ReturnUrl);
-            if (data > 0) {
+            if (d == "1") {
                 UsTips("登录成功！");
-                if (ReturnUrl != null && ReturnUrl != "")
-                {
+                if (ReturnUrl != null && ReturnUrl != "") {
                     window.location.href = ReturnUrl;
-                }else{
-                var arrRult = d.split("&");
-                //alert(arrRult[0]);
-                if (arrRult[1] == "True") {
+                } else {
                     window.location.href = "/Member/Index";
-                    //if (confirm('是否去完善信息？第一次完善个人信息可获得10000积分。'))
-                    //    window.location.href = "/Member/Index";
-                    //else { window.location.href = "/Cart/Index"; 
-                   
                 }
-                else { window.location.href = "/Cart/Index"; }
-                }
-
             } else { UsTips("登录错误！"); }
+
         }
     });
 
@@ -89,7 +77,7 @@ function login() {
     //    //alert(data);
     //    if (data > 0) {
     //        UsTips("登录成功！");
-            
+
     //        var arrRult = d.split("&");
     //        //alert(arrRult[0]);
     //        if (arrRult[1] == "True") {
@@ -101,7 +89,7 @@ function login() {
 
     //    } else { UsTips("登录错误！"); }
     //});
-    
+
 }
 function goLoginUrl(url) {
     if (tmn == null || tmn == "" || typeof (tmn) == undefined) {
@@ -138,8 +126,8 @@ function changeURLArg(url, arg, arg_val) {
 function wxlogin() {
     var ReturnUrl = $("#ReturnUrl").val();
     //alert(ReturnUrl);
-    var RUrl = "/WXPayApi/WXLogin.aspx?ReturnUrl="+ReturnUrl;
-    
+    var RUrl = "/WXPayApi/WXLogin.aspx?ReturnUrl=" + ReturnUrl;
+
     var wxurl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx277d07db1a908b4f&redirect_uri=http://ycwap.yiju360.com/WXPayApi/WXLogin.aspx&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
     //var tmn= parsURL(window.location.href).params.tmn;
     /*	if (tmn == 1 || tmn == 107) {

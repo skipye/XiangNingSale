@@ -16,6 +16,8 @@ namespace ModelProject
         public bool IsLogin { get; set; }
         public int departmentId { get; set; }
         public string department { get; set; }
+        public Guid? MemberId { get; set; }
+        public string MemberNumber { get; set; }
     }
     public class UsersModel
     {

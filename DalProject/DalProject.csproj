@@ -78,6 +78,10 @@
       <Project>{5f5676a1-fe37-4457-b494-efbe99e6b70c}</Project>
       <Name>ModelProject</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WXPayAPI\WXPayAPI.csproj">
+      <Project>{1318f115-1531-4116-9e0d-7ccdb863bfeb}</Project>
+      <Name>WXPayAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -26,10 +26,10 @@ namespace XiangNingPhone.Controllers
             models.OrderId = orderId;
             return View(models);
         }
-        public ActionResult Index()
+        public ActionResult Index(string orderId)
         {
             string openid = "";
-            string orderId = "";
+
             WXPayModel models = new WXPayModel();
             //检测是否给当前页面传递了相关参数
             if (Session["openid"] != null)
@@ -38,8 +38,6 @@ namespace XiangNingPhone.Controllers
             {
                 return Content("<script>alert('数据错误！请重新支付');history.back();</script>");
             }
-            if (Session["orderId"] != null) { orderId = Session["orderId"].ToString(); }
-            else { return Content("<script>alert('数据错误！请重新支付');history.back();</script>"); }
             models.openid = openid;
             models.OrderId = orderId;
             return View(models);

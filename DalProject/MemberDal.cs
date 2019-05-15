@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WxPayAPI;
 
 namespace DalProject
 {
@@ -101,7 +102,7 @@ namespace DalProject
                     Tabels.Gold = 0;
                     Tabels.State = Models.RealName != null && Models.RealName == "微信注册用户" ? false : true; 
                     Tabels.OpenId = Models.OpenId;
-                    Tabels.MemberNumber = "XN" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                    Tabels.MemberNumber = "XN" + WxPayApi.GenerateTimeStamp();
                     if (!string.IsNullOrEmpty(Models.RequestNumber))
                     {
                         Tabels.RequestNumber_1 = Models.RequestNumber;
@@ -122,16 +123,30 @@ namespace DalProject
                 db.SaveChanges();
             }
         }
-        /// <summary>
-        /// 登录
-        /// </summary>
-        /// <param name="UserName"></param>
-        /// <param name="PassWord"></param>
-        /// <param name="UserId"></param>
-        /// <param name="IsUserInfo"></param>
-        /// <returns></returns>
-        public bool IsLogin(string UserCode, string PassWord, out Guid UserId, out bool IsUserInfo, string openId, out string UserName)
+        public LoginModel IsWXLogin(string openId)
         {
+            LoginModel UserModels = new LoginModel();
+            using (var db = new XiangNingSaleEntities())
+            {
+                var Tables = (from p in db.MemberInfo.Where(k => k.State == true && k.OpenId == openId)
+                              select p).FirstOrDefault();
+
+                if (Tables != null)
+                {
+                    UserModels.UserName = Tables.userName;
+                    UserModels.MemberId = Tables.Id;
+                    UserModels.MemberNumber = Tables.MemberNumber;
+                    UserModels.IsLogin = true;
+                    Tables.LoginTimes = Tables.LoginTimes + 1;
+                    Tables.LastLoginTime = DateTime.Now;
+                    db.SaveChanges();
+                }
+            }
+            return UserModels;
+        }
+        public LoginModel IsLogin(string UserCode, string PassWord, string openId)
+        {
+            LoginModel UserModels = new LoginModel();
             string TuserName = "";
             string telphone = "";
             if (IsCount(UserCode) == true)
@@ -140,32 +155,31 @@ namespace DalProject
             using (var db = new XiangNingSaleEntities())
             {
 
-                var Tables = (from p in db.MemberInfo.Where(k => k.Password == PassWord && k.State == true)
+                var Tables = (from p in db.MemberInfo.Where(k => k.State == true && k.Password == PassWord)
                               where !string.IsNullOrEmpty(TuserName) ? p.userName == TuserName : true
                               where !string.IsNullOrEmpty(telphone) ? p.Telphone == telphone : true
                               select p).FirstOrDefault();
 
                 if (Tables != null)
                 {
-                    UserName = Tables.userName;
-                    UserId = Tables.Id;
+                    UserModels.UserName = Tables.userName;
+                    UserModels.MemberId = Tables.Id;
+                    UserModels.MemberNumber = Tables.MemberNumber;
+                    UserModels.IsLogin = true;
                     Tables.LoginTimes = Tables.LoginTimes + 1;
                     Tables.LastLoginTime = DateTime.Now;
-                    if (!string.IsNullOrEmpty(openId))
+                    if (string.IsNullOrEmpty(Tables.OpenId))
                     {
-                        Tables.OpenId = openId;
+                        if (string.IsNullOrEmpty(openId))
+                        {
+                            Tables.OpenId = openId;
+                        }
                     }
-                    
                     db.SaveChanges();
 
-                    if (Tables.Telphone == null || Tables.AreaId == null || Tables.Email == null || Tables.IndustryId == null)
-                    { IsUserInfo = true; }
-                    else { IsUserInfo = false; }
-
-                    return true;
                 }
-                else { UserId = Guid.Empty; IsUserInfo = false; UserName = ""; return false; }
             }
+            return UserModels;
         }
         public bool IsCount(string keyword)
         {
