@@ -58,30 +58,24 @@ namespace DalProject
             }
         }
         //添加和修改用户信息
-        public void AddUser(MemberModel Models, out Guid UserId)
+        public void AddUser(MemberModel Models, out Guid UserId, out string MemberNumber)
         {
-
+            string Mn = "";
             using (var db = new XiangNingSaleEntities())
             {
                 int Stoct = 0;
-                
+
                 if (Models.Id != null && Models.Id != Guid.Empty)
                 {
-                   
-
                     var Tabels = db.MemberInfo.Where(k => k.Id == Models.Id).FirstOrDefault();
                     Tabels.userName = Models.Name;
                     Tabels.RealName = Models.RealName;
                     Tabels.Telphone = Models.Telphone;
-                    Tabels.IndustryId = Models.IndustryId;
                     Tabels.Age = Models.Age;
-                    Tabels.AreaId = Models.AreaId;
                     Tabels.Email = Models.Email;
                     Tabels.Sex = Models.Sex;
                     Tabels.Stock = Tabels.Stock > 0 ? Tabels.Stock + Stoct : Stoct;
                     Tabels.ZStock = Tabels.ZStock > 0 ? Tabels.ZStock + Stoct : Stoct;
-
-                    
                 }
                 else
                 {
@@ -100,9 +94,10 @@ namespace DalProject
                     Tabels.ZStock = !string.IsNullOrEmpty(Models.RequestNumber) ? 100 : 20;
                     Tabels.AddStock = 0;
                     Tabels.Gold = 0;
-                    Tabels.State = Models.RealName != null && Models.RealName == "微信注册用户" ? false : true; 
+                    Tabels.State = Models.RealName != null && Models.RealName == "微信注册用户" ? false : true;
+                    Tabels.MemberNumber = "HT" + WxPayApi.GenerateTimeStamp();
+                    Mn = Tabels.MemberNumber;
                     Tabels.OpenId = Models.OpenId;
-                    Tabels.MemberNumber = "XN" + WxPayApi.GenerateTimeStamp();
                     if (!string.IsNullOrEmpty(Models.RequestNumber))
                     {
                         Tabels.RequestNumber_1 = Models.RequestNumber;
@@ -117,9 +112,10 @@ namespace DalProject
                         }
                     }
                     db.MemberInfo.Add(Tabels);
-                   
                 }
                 UserId = Models.Id;
+
+                MemberNumber = Mn;
                 db.SaveChanges();
             }
         }

@@ -31,6 +31,13 @@ namespace ModelProject
         public DateTime? UpTime { get; set; }
         public decimal? SalePrice { get; set; }
         public int? CartCount { get; set; }
+        public string timestamp { get; set; }
+        public string appId { get; set; }
+        public string nonceStr { get; set; }
+        public string finalsign { get; set; }
+        public string ticket { get; set; }
+        public string RUrl { get; set; }
+        public string MemberNumber { get; set; }
     }
     public class SNewsModel
     {

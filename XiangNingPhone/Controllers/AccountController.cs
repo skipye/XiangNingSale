@@ -95,9 +95,10 @@ namespace XiangNingPhone.Controllers
             if (IsSubmit == true)
             {
                 Guid UserId = Guid.Empty;
-                if (USer.AddUser(models, out UserId) == true)
+                string MemNum = "";
+                if (USer.AddUser(models, out UserId, out MemNum) == true)
                 {
-                    string UserAuthority = models.Name + "|" + UserId;
+                    string UserAuthority = models.Name + "|" + UserId + "" + MemNum;
                     Session["User"] = UserAuthority;
                     return Content("True");
                 }

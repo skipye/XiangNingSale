@@ -47,10 +47,11 @@ namespace XiangNingPhone.Controllers
         public ActionResult MemberSubmit(MemberModel Models)
         {
             Guid UserId = Models.Id;
-            if (USer.AddUser(Models, out UserId) == true)
+            string MemNum = "";
+            if (USer.AddUser(Models, out UserId,out MemNum) == true)
             {
-                string UserAuthority = Models.Name + "|" + Models.Id;
-                System.Web.Security.FormsAuthentication.SetAuthCookie(UserAuthority, false);
+                string UserAuthority = Models.Name + "|" + Models.Id+ "|" + MemNum;
+                Session["User"] = UserAuthority;
                 return RedirectToAction("Index", "Member");
             }
             else { return RedirectToAction("PersonalInfo", "Member"); }

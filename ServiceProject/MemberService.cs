@@ -28,12 +28,13 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
-        public bool AddUser(MemberModel Models, out Guid UserId)
+        public bool AddUser(MemberModel Models, out Guid UserId, out string MemNum)
         {
-            try { UDal.AddUser(Models, out UserId); return true; }
+            try { UDal.AddUser(Models, out UserId, out MemNum); return true; }
             catch (Exception)
             {
                 UserId = Guid.Empty;
+                MemNum = "";
                 return false;
             }
         }
