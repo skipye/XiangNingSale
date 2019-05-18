@@ -12,8 +12,8 @@
     <div class="bd">
         <ul id="sliderPic">
             <li><img src="~/images/640_400_01.jpg" /></li>
-            <li><img src="~/images/640_400_02.jpg" /></li>
-            <li><img src="~/images/640_400_03.jpg" /></li>
+            <li onclick="goUrl('/XNProducts/ZWDZ')"><img src="~/images/b2.jpg" /></li>
+            <li onclick="goUrl('/XNProducts/GYLP')"><img src="~/images/b3.jpg" /></li>
         </ul>
     </div>
     <div class="hd"><ul></ul></div>
@@ -48,31 +48,31 @@
     });
 </script>
 
-<div class="mod_menu clr">
+<div class="mod_menu clear">
     <div class="telnav01">
         <a href="javascript:void(0);" onclick="goUrl('/XNProducts/ZWDZ')">
-            <div class="telbtn c01">
+            <div class="telbtn c01 mod_menu_a">
                 <span class="f_l">整屋定制</span>
             </div>
         </a>
     </div>
     <div class="telnav02">
         <a href="javascript:void(0);" onclick="goUrl('/XNProducts/JJWX')">
-            <div class="telbtn c02">
+            <div class="telbtn c02 mod_menu_a">
                 <span class="f_l">家具维修</span>
             </div>
         </a>
     </div>
     <div class="telnav03">
         <a href="javascript:void(0);" onclick="goUrl('/Products/Index')">
-            <div class="telbtn c03">
+            <div class="telbtn c03 mod_menu_a">
                 <span class="f_l">精品家具</span>
             </div>
         </a>
     </div>
     <div class="telnav04">
         <a href="javascript:void(0);" onclick="goUrl('/XNProducts/GYLP')">
-            <div class="telbtn c04">
+            <div class="telbtn c04 mod_menu_a">
                 <span class="f_l">工艺礼品</span>
             </div>
         </a>
@@ -134,7 +134,7 @@
 <article class="godstab">
     <div class="indextabnav f15">
         <ul>
-            <li class="on">家具<a href="/Products/Index" class="more">更多&gt;</a></li>
+            <li class="on">精品家具<a href="/Products/Index" class="more">更多&gt;</a></li>
         </ul>
     </div>
     <div class="godstabcent">
@@ -149,7 +149,7 @@
     <link href="@Url.Content("~/css/member.css")" rel="stylesheet" type="text/css" />
     <div class="indextabnav f15">
         <ul>
-            <li class="on">我们的资讯<a href="@Url.Action("Index","News")" class="more">更多&gt;</a></li>
+            <li class="on">香凝资讯<a href="@Url.Action("Index","News")" class="more">更多&gt;</a></li>
         </ul>
     </div>
     <div class="godstabcent">
