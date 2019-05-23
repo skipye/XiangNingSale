@@ -48,9 +48,10 @@ namespace XiangNingPhone.Controllers
         {
             Guid UserId = Models.Id;
             string MemNum = "";
-            if (USer.AddUser(Models, out UserId,out MemNum) == true)
+            string tel = "";
+            if (USer.AddUser(Models, out UserId,out MemNum,out tel) == true)
             {
-                string UserAuthority = Models.Name + "|" + Models.Id+ "|" + MemNum;
+                string UserAuthority = Models.Name + "|" + Models.Id+ "|" + MemNum + "|" + tel;
                 Session["User"] = UserAuthority;
                 return RedirectToAction("Index", "Member");
             }

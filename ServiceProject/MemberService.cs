@@ -28,13 +28,14 @@ namespace ServiceProject
                 throw new Exception(ex.Message);
             }
         }
-        public bool AddUser(MemberModel Models, out Guid UserId, out string MemNum)
+        public bool AddUser(MemberModel Models, out Guid UserId, out string MemNum, out string telphone)
         {
-            try { UDal.AddUser(Models, out UserId, out MemNum); return true; }
+            try { UDal.AddUser(Models, out UserId, out MemNum,out telphone); return true; }
             catch (Exception)
             {
                 UserId = Guid.Empty;
                 MemNum = "";
+                telphone = "";
                 return false;
             }
         }
@@ -96,6 +97,15 @@ namespace ServiceProject
         public bool UpdatePhone(string Phone, string password, Guid UserId)
         {
             try { return UDal.UpdatePhone(Phone, password, UserId); }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        //根据会员号获取手机号
+        public string GetTelPhoneByMemberNum(string MemberNum)
+        {
+            try { return UDal.GetTelPhoneByMemberNum(MemberNum); }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);

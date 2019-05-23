@@ -34,7 +34,7 @@ namespace XiangNingPhone.Controllers
                 var Models = USer.IsWXLogin(openId);
                 if (Models!=null && Models.IsLogin == true)
                 {
-                    string UserAuthority = Models.UserName + "|" + Models.MemberId + "|" + Models.MemberNumber;
+                    string UserAuthority = Models.UserName + "|" + Models.MemberId + "|" + Models.MemberNumber + "|" + Models.Telephone;
                     Session["User"] = UserAuthority;
                     return Redirect(ReturnUrl);
                 }
@@ -58,7 +58,7 @@ namespace XiangNingPhone.Controllers
             var Models = USer.IsLogin(userCode, passWord, openId);
             if (Models.IsLogin == true)
             {
-                string UserAuthority = Models.UserName + "|" + Models.MemberId + "|" + Models.MemberNumber;
+                string UserAuthority = Models.UserName + "|" + Models.MemberId + "|" + Models.MemberNumber+ "|" + Models.Telephone;
                 //System.Web.Security.FormsAuthentication.SetAuthCookie(UserAuthority, false);
                 Session["User"] = UserAuthority;
                 //return RedirectToAction(returnUrl);
@@ -96,9 +96,10 @@ namespace XiangNingPhone.Controllers
             {
                 Guid UserId = Guid.Empty;
                 string MemNum = "";
-                if (USer.AddUser(models, out UserId, out MemNum) == true)
+                string telphone = "";
+                if (USer.AddUser(models, out UserId, out MemNum,out telphone) == true)
                 {
-                    string UserAuthority = models.Name + "|" + UserId + "" + MemNum;
+                    string UserAuthority = models.Name + "|" + UserId + "|" + MemNum+ "|" + telphone;
                     Session["User"] = UserAuthority;
                     return Content("True");
                 }

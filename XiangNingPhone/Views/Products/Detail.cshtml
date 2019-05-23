@@ -28,6 +28,7 @@
     <script type="text/javascript" src="@Url.Content("~/js/tabs.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/js/qrcode.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/js/mDialog.min.js")"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js" type="text/javascript"></script>
 </head>
 <body data-marpad="padding" data-fixtop="44" data-fixbot="50">
     <!--header Start-->
@@ -74,7 +75,7 @@
 
             <span class="f18 copurple" id="freePrice">@Model.HitTimes</span>
         </p>
-        <p class="ps"><span class="pl10">价值：</span><span class="f18 copurple">@(ProSalePrice>0?"&yen;"+ @ProSalePrice:"红木家具产品请到实体店购买")</span></p>
+        <p class="ps"><span class="pl10">价值：</span><span class="f18 copurple">@(ProSalePrice>0?"￥"+ @ProSalePrice:"红木家具产品请到实体店购买")</span></p>
         <div class="btnbox f10 tc" onclick="WXshare(@Model.Id)" ref="@Model.MemberNumber" id="WXshare">
             <span class="erwm fr gbs ovh db">分&nbsp;&nbsp;享</span>
         </div>
@@ -104,11 +105,14 @@
 
 
     <footer id="footer" class="footer tc bg-white">
-       
-        <p class="bfx01"><a href="tel:13311601955"><span class="btnliji wh db f15" style="background: rgb(85, 85, 85);">电话我们</span> </a></p>
-        <p class="bfx01 pr5" onclick="goUrl('@Url.Action("Index","Cart")')"><span class="btngowu red db"><em class="por f12">&nbsp;<i style="display:none;" id="cartNum"></i></em></span></p>
-        <p class="bfx01 pl5" id="godsaddCart" ref="@Model.Id"><span class="btnliji wh db f15">加入购物车</span></p>
 
+        <p class="bfx01"><a href="tel:@(!string.IsNullOrEmpty(Model.tel)?Model.tel:"13311601955")"><span class="btnliji wh db f15" style="background: rgb(85, 85, 85);">电话我们</span> </a></p>
+        @*<p class="bfx01 pr5" onclick="goUrl('@Url.Action("Index","Cart")')"><span class="btngowu red db"><em class="por f12">&nbsp;<i style="display:none;" id="cartNum"></i></em></span></p>*@
+
+        @if (ProSalePrice > 0)
+        {<p class="bfx01 pl5" id="godsaddCart" ref="@Model.Id"><span class="btnliji wh db f15">立即购买</span></p> }
+        else
+        { <p class="bfx01 pl5"><span class="btnliji wh db f15" onclick="goUrl('@Url.Action("KanDian","Home")')">预约看店</span></p>}
     </footer>
 
     <div id="gotop" class="gotop"></div>
@@ -130,8 +134,9 @@
                     success: function (data) {
                         var msg = "";
                         if (parseInt(data)>0) {
-                            showCartNum(parseInt(data));  // 重新计算购物车数量
-                            msg = "恭喜加入购物车成功！";
+                            //showCartNum(parseInt(data));  // 重新计算购物车数量
+                            window.location.href = "/Cart/";
+                            //msg = "恭喜加入购物车成功！";
                         }
                         else { msg = "此商品加入购物车失败！"; }
                         dialogMsg(msg);
@@ -140,19 +145,19 @@
             }, 500);
         });
         // 查看购物车数量
-        function showCartNum(i) {
-            if (i > 0) {
-                // 显示购物车数量
-                $("#cartNum").css({ display: "block" }).text(i);
-            } else {
-                // 如果未登录，则不显示数量提示
-                $("#cartNum").css({ display: "none" });
-            }
-        };
-        if (parseInt(CartCount) > 0)
-        {
-            $("#cartNum").css({ display: "block" }).text(parseInt(CartCount));
-        }
+        //function showCartNum(i) {
+        //    if (i > 0) {
+        //        // 显示购物车数量
+        //        $("#cartNum").css({ display: "block" }).text(i);
+        //    } else {
+        //        // 如果未登录，则不显示数量提示
+        //        $("#cartNum").css({ display: "none" });
+        //    }
+        //};
+        //if (parseInt(CartCount) > 0)
+        //{
+        //    $("#cartNum").css({ display: "block" }).text(parseInt(CartCount));
+        //}
 
 
         $(function () {

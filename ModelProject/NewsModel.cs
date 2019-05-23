@@ -38,6 +38,7 @@ namespace ModelProject
         public string ticket { get; set; }
         public string RUrl { get; set; }
         public string MemberNumber { get; set; }
+        public string tel { get; set; }
     }
     public class SNewsModel
     {

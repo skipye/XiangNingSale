@@ -58,9 +58,11 @@ namespace DalProject
             }
         }
         //添加和修改用户信息
-        public void AddUser(MemberModel Models, out Guid UserId, out string MemberNumber)
+        public void AddUser(MemberModel Models, out Guid UserId, out string MemberNumber,out string telphone)
         {
             string Mn = "";
+            Guid UId = Guid.Empty;
+            string tel = "";
             using (var db = new XiangNingSaleEntities())
             {
                 int Stoct = 0;
@@ -97,6 +99,8 @@ namespace DalProject
                     Tabels.State = Models.RealName != null && Models.RealName == "微信注册用户" ? false : true;
                     Tabels.MemberNumber = "HT" + WxPayApi.GenerateTimeStamp();
                     Mn = Tabels.MemberNumber;
+                    UId = Tabels.Id;
+                    tel = Tabels.Telphone;
                     Tabels.OpenId = Models.OpenId;
                     if (!string.IsNullOrEmpty(Models.RequestNumber))
                     {
@@ -113,8 +117,8 @@ namespace DalProject
                     }
                     db.MemberInfo.Add(Tabels);
                 }
-                UserId = Models.Id;
-
+                UserId = UId;
+                telphone = tel;
                 MemberNumber = Mn;
                 db.SaveChanges();
             }
@@ -132,6 +136,7 @@ namespace DalProject
                     UserModels.UserName = Tables.userName;
                     UserModels.MemberId = Tables.Id;
                     UserModels.MemberNumber = Tables.MemberNumber;
+                    UserModels.Telephone = Tables.Telphone;
                     UserModels.IsLogin = true;
                     Tables.LoginTimes = Tables.LoginTimes + 1;
                     Tables.LastLoginTime = DateTime.Now;
@@ -161,6 +166,7 @@ namespace DalProject
                     UserModels.UserName = Tables.userName;
                     UserModels.MemberId = Tables.Id;
                     UserModels.MemberNumber = Tables.MemberNumber;
+                    UserModels.Telephone = Tables.Telphone;
                     UserModels.IsLogin = true;
                     Tables.LoginTimes = Tables.LoginTimes + 1;
                     Tables.LastLoginTime = DateTime.Now;
@@ -279,6 +285,15 @@ namespace DalProject
                     db.SaveChanges(); return true;
                 }
                 else { return false; }
+            }
+        }
+        //根据会员号获取手机号
+        public string GetTelPhoneByMemberNum(string MemberNum)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                var dates = db.MemberInfo.Where(k => k.MemberNumber == MemberNum).Select(k => k.Telphone).FirstOrDefault();
+                return dates;
             }
         }
     }

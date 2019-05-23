@@ -13,6 +13,7 @@ namespace XiangNingPhone.Controllers
     public class ProductsController : BaseController
     {
         private static readonly NewsService NSer = new NewsService();
+        private static readonly MemberService Mser = new MemberService();
         public ActionResult Index(SNewsModel SModel)
         {
             SModel.AreaList = NSer.GetWebArealist();
@@ -39,18 +40,31 @@ namespace XiangNingPhone.Controllers
         }
         public ActionResult Detail(int Id, string t)
         {
+            string RTel = "";
+            string RMemNum = "";
             if (string.IsNullOrEmpty(t))
             {
                 Session["t"] = t;
+                RMemNum = t;
+            }
+            if (string.IsNullOrEmpty(RMemNum))
+            {
+                RTel = Mser.GetTelPhoneByMemberNum(RMemNum);
             }
             var Models = NSer.GetDetailById(Id);
             var MemberNumber = "";
+            string tel = RTel;
             if (Session["User"] != null)
             {
                 string UserModel = Session["User"].ToString();
                 MemberNumber = UserModel.Split('|')[2].ToString();
+                if(string.IsNullOrEmpty(tel))
+                { 
+                  tel= UserModel.Split('|')[3].ToString();
+                }
             }
             Models.MemberNumber = MemberNumber;
+            Models.tel = tel;
             var existingCart = this.Carts;
             if (existingCart != null && existingCart.Count>0)
             {
