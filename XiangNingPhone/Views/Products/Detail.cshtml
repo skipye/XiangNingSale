@@ -48,9 +48,10 @@
                     var StrArr = Model.GalleryItems.Split(';');
                     foreach (var item in StrArr)
                     {
-                        if (!string.IsNullOrEmpty(item)) { 
-                        var BigPic = "http://sale.xiangninghm.com/" + item.Replace("Thumbnails", "Published");
-                        <li><a href="javascript:void(0)"><img src="@BigPic" alt="香凝红木" /></a></li>}
+                        if (!string.IsNullOrEmpty(item))
+                        {
+                            var BigPic = "http://sale.xiangninghm.com/" + item.Replace("Thumbnails", "Published");
+                            <li><a href="javascript:void(0)"><img src="@BigPic" alt="香凝红木" /></a></li>}
                     }
                 }
             </ul>
@@ -66,27 +67,29 @@
             autoPage: true,//自动分页
             autoPlay: $('#godsconslider .bd li').length > 1 ? true : false  //自动播放
         });
-    </script>
+
+/**/</script>
     <h3 class="godsh3 f15 g3" id="godsAdv">@Model.Name</h3>
-    <h3 class="godsh3 f15 g9" id="godsTit">@Model.KeyWord</h3>
+    @*<h3 class="godsh3 f15 g9" id="godsTit">@Model.KeyWord</h3>*@
     <article class="pricesales listinfo ovh g6 f14">
         <p class="ps">
             <span class="pl10">点击：</span>
 
             <span class="f18 copurple" id="freePrice">@Model.HitTimes</span>
         </p>
-        <p class="ps"><span class="pl10">价值：</span><span class="f18 copurple">@(ProSalePrice>0?"￥"+ @ProSalePrice:"红木家具产品请到实体店购买")</span></p>
-        <div class="btnbox f10 tc" onclick="WXshare(@Model.Id)" ref="@Model.MemberNumber" id="WXshare">
+        <p class="ps"><span class="pl10">价值：</span><span class="f18 copurple">@(ProSalePrice > 0 ? "￥" + @ProSalePrice : "红木家具产品请到实体店购买")</span></p>
+        <a class="btnbox f10 tc" ref="@Model.MemberNumber" id="WXshare" href="#sharecontent" target="_self">
             <span class="erwm fr gbs ovh db">分&nbsp;&nbsp;享</span>
-        </div>
+        </a>
 
     </article>
     <article class="p10 g6 f14">
-            <p class="listinfo f16 g3">备注<span></span>：</p>
-            <p class="godcbtxt g9 f14" id="godcbTxt">@Model.Remarks</p>
-        </article>
+        <p class="listinfo f16 g3">备注<span></span>：</p>
+        <p class="godcbtxt g9 f14" id="godcbTxt">@Model.Remarks</p>
+    </article>
 
     <p class="godbg godge"></p>
+
     <article class="godstab" id="goodstab">
         <div class="godstabnav f15">
             <ul>
@@ -95,14 +98,30 @@
             </ul>
         </div>
         <div class="godstabcent">
-            <div class="detailed ovh" id="godsConTxt">@Html.Raw(Model.StrContent)</div>
+            <div class="detailed ovh" id="godsConTxt">
+
+                @Html.Raw(Model.StrContent)
+            </div>
             <div class="parameter ovh">
-                @Html.Action("_RecommendPro", "Products",new { PageSize=4})
+                @Html.Action("_RecommendPro", "Products", new { PageSize = 4 })
             </div>
         </div>
     </article>
     <div class="erwmbox csscentbox" id="erwmbox"><div class="erwmcon" id="erwmcon"></div></div>
-
+    <article class="p10">
+        @if (ProSalePrice > 0)
+        {
+            <img src="~/bg/shopshow.jpg" alt="香凝红木导购说明" style="width:100%" />
+            <p class="godbg godge"></p>
+            <img src="~/bg/xnabout.jpg" alt="香凝红木企业介绍" style="width:100%" />
+            
+        }
+    </article>
+    <article class="p10" id="sharecontent">
+        <p class="godbg godge"></p>
+        <p class="listinfo f16 red pb10 pt10" style="text-align:center;">备注<span></span>：登录成功之后长按下图，点击保存到手机，分享有惊喜！</p>
+        <div><img src="@Html.Action("GetWXSharPic","Products",new { Id=Model.Id,GalleryItems=Model.GalleryItems,t=Model.MemberNumber})" alt="香凝红木分享图" style="width:100%" /></div>
+    </article>
 
     <footer id="footer" class="footer tc bg-white">
 
@@ -174,67 +193,15 @@
             value = "http://sale.xiangninghm.com" + value;
             $(this).attr("src", value);
         });
-    function WXshare(id) {
-            var MemberNumber = $("#WXshare").attr("ref");
-            if (typeof (MemberNumber) == "undefined" || MemberNumber == null || MemberNumber == "") {
-                UsTips("请先去登录！");
-                return window.location.href = "/Account/Login?ReturnUrl=/Products/Detail/" + '@Model.Id';
-            }
-            /***************微信分享************************/
-            $.ajax({
-                type: "get",
-                url: "/Products/WXProductsDetail",
-                data: { "Id": id },
-                dataType: "json",
-                success: function (data) {
-                    UsTips("分享成功！请去右上角点击分享！");
-                    wx.config({
-                        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                        appId: data.appId, // 必填，公众号的唯一标识
-                        timestamp: data.timestamp, // 必填，生成签名的时间戳
-                        nonceStr: data.nonceStr, // 必填，生成签名的随机串
-                        signature: data.finalsign,// 必填，签名，见附录1
-                        jsApiList: [
-                                    'checkJsApi',
-                                    'onMenuShareTimeline',
-                                    'onMenuShareAppMessage'
-                        ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-                    });
-                    wx.ready(function () {
-                        wx.onMenuShareTimeline({
-                            title: data.Name, // 分享标题
-                            link: data.RUrl, // 分享链接
-                            imgUrl: "http://sale.xiangninghm.com/"+data.ConvertImg, // 分享图标
-                            success: function () {
-                                // 用户确认分享后执行的回调函数
-                                //alert("3q");
-                            },
-                            cancel: function () {
-                                // 用户取消分享后执行的回调函数
-                                //alert(" no 3q");
-                            }
-                        });
-                        wx.onMenuShareAppMessage({
-                            title: data.Name, // 分享标题
-                            desc: '香凝红木，您身边的健康管家！', // 分享描述
-                            link: data.RUrl,//'http://m.msyc.cc/wx/index.html?tmn='+tmn, // 分享链接
-                            imgUrl: "http://sale.xiangninghm.com" + data.ConvertImg, // 分享图标
-                            type: '', // 分享类型,music、video或link，不填默认为link
-                            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-                            success: function () {
-                                // 用户确认分享后执行的回调函数
-                            },
-                            cancel: function () {
-                                // 用户取消分享后执行的回调函数
-                            }
-                        });
-                        
-                    });
-                    
-                }
-            });
-            /***************微信分享 end************************/
+    $("#WXshare").click(function () {
+        var MemberNumber = $(this).attr("ref");
+        if (typeof (MemberNumber) == "undefined" || MemberNumber == null || MemberNumber == "") {
+            UsTips("请先去登录！");
+            return window.location.href = "/Account/Login?ReturnUrl=/Products/Detail/" + '@Model.Id';
         }
+
+
+    });
 
     </script>
 

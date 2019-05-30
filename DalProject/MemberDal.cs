@@ -41,6 +41,7 @@ namespace DalProject
         
         //获取一级客户、二级客户个数
         public int RequestUserCount(string MemberNumber, int Request)
+
         {
             using (var db = new XiangNingSaleEntities())
             {
