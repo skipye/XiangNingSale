@@ -200,6 +200,9 @@
     <Compile Include="WX_Order_FR_Logs.cs">
       <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="WX_Shar_Return.cs">
+      <DependentUpon>XiangNingSaleModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="XiangNingERPModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

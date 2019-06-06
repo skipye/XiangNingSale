@@ -115,6 +115,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\WXServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
@@ -135,6 +136,13 @@
     <Compile Include="WXPayApi\ResultNotifyPage.aspx.designer.cs">
       <DependentUpon>ResultNotifyPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="WXPayApi\WXService.aspx.cs">
+      <DependentUpon>WXService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WXPayApi\WXService.aspx.designer.cs">
+      <DependentUpon>WXService.aspx</DependentUpon>
+    </Compile>
     <Compile Include="WXPayApi\SMSpost.aspx.cs">
       <DependentUpon>SMSpost.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -150,6 +158,7 @@
     <Content Include="bg\logo.png" />
     <Content Include="bg\shopshow.jpg" />
     <Content Include="bg\xnabout.jpg" />
+    <Content Include="bg\xngy_erm.jpg" />
     <Content Include="bg\YuYueFootbg.png" />
     <Content Include="bg\YuYueTopBg.png" />
     <Content Include="css\cartorder.css" />
@@ -272,6 +281,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="WXPayApi\ResultNotifyPage.aspx" />
+    <Content Include="WXPayApi\WXService.aspx" />
     <Content Include="WXPayApi\SMSpost.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -386,6 +396,7 @@
     <Content Include="Views\Member\PointList.cshtml" />
     <Content Include="Views\WXPay\Index.cshtml" />
     <Content Include="Views\WXPay\WXPayOrder.cshtml" />
+    <Content Include="Views\Home\Guanzhu.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

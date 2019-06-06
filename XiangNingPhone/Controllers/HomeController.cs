@@ -1,6 +1,10 @@
-﻿using ModelProject;
+﻿using LitJson;
+using ModelProject;
 using ServiceProject;
+using System;
+using System.Web;
 using System.Web.Mvc;
+using WxPayAPI;
 
 namespace XiangNingPhone.Controllers
 {
@@ -10,6 +14,7 @@ namespace XiangNingPhone.Controllers
         private static readonly ChinaService CSer = new ChinaService();
         public ActionResult Index()
         {
+            
             return View();
         }
         public ActionResult Contact()
@@ -47,6 +52,11 @@ namespace XiangNingPhone.Controllers
         {
             string models = CSer.GetAoption(areaParentId).ToString();
             return Content(models);
+        }
+        
+        public ActionResult Guanzhu()
+        {
+            return View();
         }
     }
 }

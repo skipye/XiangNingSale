@@ -27,6 +27,7 @@
         <AssociationConnector Association="XiangNingSaleModel.FK_Sale_Contract_Detail_Sale_Contract_Header" ManuallyRouted="false" />
         <AssociationConnector Association="XiangNingSaleModel.FK_Sale_Contract_Header_Sale_Customers" ManuallyRouted="false" />
         <EntityTypeShape EntityType="XiangNingSaleModel.WX_Order_Commission_Logs" Width="1.5" PointX="9.375" PointY="12.75" />
+        <EntityTypeShape EntityType="XiangNingSaleModel.WX_Shar_Return" Width="1.5" PointX="11.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

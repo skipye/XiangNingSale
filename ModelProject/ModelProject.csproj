@@ -69,6 +69,7 @@
     <Compile Include="WXPayModel.cs" />
     <Compile Include="WXReturnResultModel.cs" />
     <Compile Include="WXUserModel.cs" />
+    <Compile Include="WX_Shar_ReturnModel.cs" />
     <Compile Include="YuYueModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

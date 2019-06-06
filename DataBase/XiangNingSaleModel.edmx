@@ -291,6 +291,20 @@
           <Property Name="Remaks" Type="nvarchar" MaxLength="500" />
           <Property Name="CreateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="WX_Shar_Return">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ToUserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FromUserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="MsgType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Event" Type="nvarchar" MaxLength="50" />
+          <Property Name="EventKey" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ticket" Type="nvarchar" MaxLength="50" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
         <EntityType Name="WXReturnInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -395,6 +409,7 @@
           <EntitySet Name="WorkLogs" EntityType="Self.WorkLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WX_Order_Commission_Logs" EntityType="Self.WX_Order_Commission_Logs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WX_Order_FR_Logs" EntityType="Self.WX_Order_FR_Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WX_Shar_Return" EntityType="Self.WX_Shar_Return" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WXReturnInfo" EntityType="Self.WXReturnInfo" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_OrderInfo_Address_Info" Association="Self.FK_OrderInfo_Address_Info">
             <End Role="Address_Info" EntitySet="Address_Info" />
@@ -839,6 +854,7 @@
             <End Role="Sale_Contract_Header" EntitySet="Sale_Contract_Header" />
           </AssociationSet>
           <EntitySet Name="WX_Order_Commission_Logs" EntityType="XiangNingSaleModel.WX_Order_Commission_Logs" />
+          <EntitySet Name="WX_Shar_Return" EntityType="XiangNingSaleModel.WX_Shar_Return" />
         </EntityContainer>
         <EntityType Name="WX_Order_Commission_Logs">
           <Key>
@@ -852,6 +868,20 @@
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="MemberName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OrderNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WX_Shar_Return">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ToUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FromUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="MsgType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Event" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EventKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ticket" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Remarks" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1173,6 +1203,21 @@
                 <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
                 <ScalarProperty Name="RequstPay" ColumnName="RequstPay" />
                 <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WX_Shar_Return">
+            <EntityTypeMapping TypeName="XiangNingSaleModel.WX_Shar_Return">
+              <MappingFragment StoreEntitySet="WX_Shar_Return">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="Ticket" ColumnName="Ticket" />
+                <ScalarProperty Name="EventKey" ColumnName="EventKey" />
+                <ScalarProperty Name="Event" ColumnName="Event" />
+                <ScalarProperty Name="MsgType" ColumnName="MsgType" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="FromUserName" ColumnName="FromUserName" />
+                <ScalarProperty Name="ToUserName" ColumnName="ToUserName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

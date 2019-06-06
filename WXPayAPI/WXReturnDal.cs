@@ -115,5 +115,24 @@ namespace WxPayAPI
                 db.SaveChanges();
             }
         }
+        public static void AddWX_Shar_Return(WX_Shar_ReturnModel models)
+        {
+            using (var db = new XiangNingSaleEntities())
+            {
+                WX_Shar_Return tables = new WX_Shar_Return();
+                tables.Id = Guid.NewGuid();
+                tables.ToUserName = models.ToUserName;
+                tables.FromUserName = models.FromUserName;
+                tables.CreateTime = DateTime.Now;
+                tables.MsgType = models.MsgType;
+                tables.Event = models.Event;
+                tables.EventKey = models.EventKey;
+                tables.Ticket = models.Ticket;
+                tables.Remarks = models.Remarks;
+                db.WX_Shar_Return.Add(tables);
+                db.SaveChanges();
+            }
+        }
+
     }
 }

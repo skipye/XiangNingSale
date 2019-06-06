@@ -41,5 +41,6 @@ namespace DataBase
         public DbSet<WX_Order_FR_Logs> WX_Order_FR_Logs { get; set; }
         public DbSet<WXReturnInfo> WXReturnInfo { get; set; }
         public DbSet<WX_Order_Commission_Logs> WX_Order_Commission_Logs { get; set; }
+        public DbSet<WX_Shar_Return> WX_Shar_Return { get; set; }
     }
 }

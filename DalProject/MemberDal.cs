@@ -98,7 +98,7 @@ namespace DalProject
                     Tabels.AddStock = 0;
                     Tabels.Gold = 0;
                     Tabels.State = Models.RealName != null && Models.RealName == "微信注册用户" ? false : true;
-                    Tabels.MemberNumber = "HT" + WxPayApi.GenerateTimeStamp();
+                    Tabels.MemberNumber = "XN" + WxPayApi.GenerateTimeStamp();
                     Mn = Tabels.MemberNumber;
                     UId = Tabels.Id;
                     tel = Tabels.Telphone;
