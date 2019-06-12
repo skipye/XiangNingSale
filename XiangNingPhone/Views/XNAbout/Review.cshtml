@@ -1,0 +1,51 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>往期回顾</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta content="email=no" name="format-detection" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/News.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/member.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/css/proDetail.css")" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/js/goTops.js")"></script>
+</head>
+<body data-marpad="padding" data-fixtop="44" data-fixbot="50">
+    <!--header Start-->
+    <header id="header" class="header ycpurple">
+        <div class="aubgs icon-back" onclick="goUrl('@Url.Action("Index","Home")')"></div>
+        <h1 class="bfx02 wh">往期回顾</h1>
+        <div class="aubgs icon-menu" id="navmore"></div>
+    </header>
+    @Html.Action("_RNav", "XNAbout")
+    <!--header end-->
+    <div class="content">
+        <h2>往期回顾</h2>
+        <h6>我们一直在努力，只为您提供更好的家居生活！</h6>
+        
+    </div>
+    <section class="myorde por">
+        @Html.Action("WXPicList", "News", new { PageSize = 100 ,TypeId=19})
+    </section>
+    @Html.Action("_FNav", "XNProducts")
+    <div id="gotop" class="gotop"></div>
+    <script type="text/javascript">
+        $(function () {
+        //返回顶部插件引用
+        $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+    });
+
+    </script>
+</body>
+</html>

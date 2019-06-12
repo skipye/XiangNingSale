@@ -17,7 +17,7 @@
 .content h6{color:#828282;height:30px;line-height:30px;border-bottom:solid 1px #888;}
 .content .article{color:#8a898a;line-height:23px;padding:10px 0;margin:10px;text-align:left;}
 .content .article img{width:100%;}
-.content .article p{line-height:22px;font-size:1.4rem;}
+.content .article p{line-height:22px;font-size:1.4rem;padding-top:5px;text-indent:2em;}
 
 .otinp{ padding:0 8px;height:38px; line-height:38px;background:#fff;border:1px #CECECE solid;}
 .area-select { display:inline-block; color:#333; width:98%;margin:0px auto; -webkit-box-sizing:border-box; box-sizing:border-box; border:none; height:44px; line-height:44px; -webkit-appearance:none; background:#ffffff;}

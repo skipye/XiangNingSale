@@ -31,5 +31,10 @@ namespace XiangNingPhone.Controllers
         {
             return View();
         }
+        //往期回顾
+        public ActionResult Review()
+        {
+            return View();
+        }
     }
 }

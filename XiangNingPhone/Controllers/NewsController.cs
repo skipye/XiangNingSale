@@ -26,6 +26,13 @@ namespace XiangNingPhone.Controllers
             var models = NSer.GetNewsTypeList(SModel, 1);
             return View(models);
         }
+        public ActionResult WXPicList(SNewsModel SModel, int? PageIndex, int? PageSize)
+        {
+            SModel.PageSize = PageSize ?? 20;
+            SModel.PageIndex = PageIndex ?? 0;
+            var models = NSer.GetNewsTypeList(SModel, 1);
+            return View(models);
+        }
         public ActionResult Detail(int Id)
         {
             var Models = NSer.GetDetailById(Id);

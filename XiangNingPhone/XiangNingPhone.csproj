@@ -397,6 +397,8 @@
     <Content Include="Views\WXPay\Index.cshtml" />
     <Content Include="Views\WXPay\WXPayOrder.cshtml" />
     <Content Include="Views\Home\Guanzhu.cshtml" />
+    <Content Include="Views\XNAbout\Review.cshtml" />
+    <Content Include="Views\News\WXPicList.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

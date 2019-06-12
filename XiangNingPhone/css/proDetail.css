@@ -22,11 +22,11 @@
 .telnav03{display:block; width:50%;float: left;background:#fff;}
 .telnav04{display:block; width:50%;float: right;background:#fff;}
 .telnav01 .telbtn{float:left;display:inline-block; width:100%;}
-.telnav01 .telbtn span, .telnav02 .telbtn span{display:inline-block; width:62%;color:#333; font-size:16px; text-align:center; padding:15% 0;}
+.telnav01 .telbtn span, .telnav02 .telbtn span{display:inline-block; width:62%;color:#333; font-size:16px; text-align:center; padding:15% 0;font-weight:bold;}
 
 .telnav02 .telbtn, .telnav03 .telbtn,.telnav04 .telbtn{float:left;display:block; width:100%;}
-.telnav03 .telbtn span{display:inline-block; width:100%;color:#333; font-size:16px; text-align:center; padding:58% 0 22%;}
-.telnav04 .telbtn span{display:inline-block; width:100%;color:#333; font-size:16px; text-align:center; padding:58% 0 22%;}
+.telnav03 .telbtn span{display:inline-block; width:100%;color:#333; font-size:16px; text-align:center; padding:58% 0 22%;font-weight:bold;}
+.telnav04 .telbtn span{display:inline-block; width:100%;color:#333; font-size:16px; text-align:center; padding:58% 0 22%;font-weight:bold;}
 .c01{background:no-repeat 80% center; background-size:20% 50%;background-image: url(../icons/zhngwudingzhi-icon.png);}
 .c02{background:no-repeat 80% center; background-size:20% 50%;background-image: url(../icons/weixiu-icon.png);}
 .c03{background:no-repeat 50% 40%; background-size:30% 30%;background-image: url(../icons/jiaju-icon.png);}
@@ -126,7 +126,7 @@
 .indextabnav{width:100%;max-width:100%;height:40px; display:block;}
 .indextabnav li{width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box; text-align:left;padding-left:5px;background:#EFEFEF;border-bottom:1px #dfdfdf solid;height:40px;line-height:40px;color:#666;position:relative;}
 .indextabnav li:before{content: "";width:4px;height:20px;background:#471b1f;position:absolute;top:10px;left:5px;}
-.indextabnav li.on{ height:40px;line-height:40px; background:#fff; border-bottom:1px #471b1f solid;color:#000;padding-left:16px;font-size:14px;}
+.indextabnav li.on{ height:40px;line-height:40px; background:#fff; border-bottom:1px #471b1f solid;color:#000;padding-left:16px;font-size:14px;font-weight:bold;}
 .indextabnav li.on:last-child{border-right:none; }
 .indextabnav li .more{position:absolute;right:10px;top:0px;}
 
