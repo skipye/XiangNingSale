@@ -90,7 +90,7 @@
 #navslider .hd ul{text-align: center;}
 #navslider .hd li{ display:none; width:0px; height:0px;}
 #navslider .hd li.on{ background:#ccc; border:1px #ccc solid;}
-#navslider .bd{position:relative; z-index:0;width:80%;margin-left:50px; }
+#navslider .bd{position:relative; z-index:0;width:85%;margin-left:20px; }
 #navslider .bd li{position:relative; text-align:center; }
 #navslider .bd li img{width:95%!important;max-width:100%;background:url(/images/loading.gif) center center no-repeat;  }
 /*产品详情 -标题-价格-二维码 -部分*/
