@@ -31,7 +31,7 @@ namespace DalProject
                             where SModel.ApplyUserId > 0 ? p.ApplyUserId == SModel.ApplyUserId : true
                             where p.CreateTime >= StartTime
                             where p.CreateTime < EndTime
-                            orderby p.CreateTime
+                            orderby p.CreateTime descending
                             select new PurchaseOrderModel
                             {
                                 Id = p.Id,

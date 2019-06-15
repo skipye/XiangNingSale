@@ -14,7 +14,6 @@ namespace XiangNingPhone.Controllers
         private static readonly ChinaService CSer = new ChinaService();
         public ActionResult Index()
         {
-            
             return View();
         }
         public ActionResult Contact()

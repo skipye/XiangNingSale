@@ -156,9 +156,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="bg\logo.png" />
+    <Content Include="bg\nav_gylp.png" />
+    <Content Include="bg\nav_jjwx.png" />
+    <Content Include="bg\nav_jpjj.png" />
+    <Content Include="bg\nav_zwdz.png" />
     <Content Include="bg\shopshow.jpg" />
     <Content Include="bg\xnabout.jpg" />
     <Content Include="bg\xngy_erm.jpg" />
+    <Content Include="bg\xnlogo_w.png" />
     <Content Include="bg\YuYueFootbg.png" />
     <Content Include="bg\YuYueTopBg.png" />
     <Content Include="css\cartorder.css" />
@@ -179,6 +184,11 @@
     <Content Include="icons\icon-menu.png" />
     <Content Include="icons\icon-news.png" />
     <Content Include="icons\jiaju-icon.png" />
+    <Content Include="icons\k1_icon.png" />
+    <Content Include="icons\k2_icon.png" />
+    <Content Include="icons\k3_icon.png" />
+    <Content Include="icons\k4_icon.png" />
+    <Content Include="icons\k5_icon.png" />
     <Content Include="icons\kt_icon.png" />
     <Content Include="icons\qt_icon.png" />
     <Content Include="icons\sf_icon.png" />
