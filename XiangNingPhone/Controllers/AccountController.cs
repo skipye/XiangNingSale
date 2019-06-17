@@ -30,7 +30,16 @@ namespace XiangNingPhone.Controllers
             ViewBag.ReturnUrl = ReturnUrl;
             if (Session["openId"] != null)
             {
-                string openId=Session["openId"].ToString();
+                string token = "";
+                string openId = Session["openId"].ToString();
+                if (Session["access_token"] == null)
+                {
+                    token = WXPayAPI.WXAPI.Getaccesstoken();
+                }
+                if (WXPayAPI.WXAPI.judgeIsFollow(token, openId) == false)
+                {
+                    return Content("<script>alert('您还未关注我们公众号！请先关注！');window.location.href = '/Home/Guanzhu';</script>");
+                }
                 var Models = USer.IsWXLogin(openId);
                 if (Models!=null && Models.IsLogin == true)
                 {
@@ -41,13 +50,11 @@ namespace XiangNingPhone.Controllers
                 else { return View(); }
             }
             else {
-                if (userAgent.IndexOf("MicroMessenger") <= -1)//不是微信浏览器
+                if (userAgent.IndexOf("MicroMessenger") >0)//是微信浏览器
                 {
-                    return View();
+                    GetOpenId();
                 }
-                else { GetOpenId(); }
             }
-
             return View();
         }
         public ActionResult LogOn(string userCode, string passWord)
@@ -235,7 +242,7 @@ namespace XiangNingPhone.Controllers
                 openid = (string)jd["openid"];
                 if (string.IsNullOrEmpty(openid))//如果没获取到OPenId
                 {
-                    return Content("<script>alert('网络错误！');history.go(-2);</script>");
+                    return Content("<script>alert('网络错误！');window.location.href = '/Home';</script>");
                 }
                 Session["openId"] = openid;
             }

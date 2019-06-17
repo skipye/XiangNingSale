@@ -48,7 +48,6 @@ namespace XiangNingPhone.Controllers
         }
         public ActionResult Detail(int Id, string t)
         {
-            Session["ProId"] = Id;
             string RTel = "";
             string RMemNum = "";
             if (!string.IsNullOrEmpty(t))
@@ -56,27 +55,6 @@ namespace XiangNingPhone.Controllers
                 Session["t"] = t;
                 RMemNum = t;
             }
-            string userAgent = Request.UserAgent;
-            if (userAgent.IndexOf("MicroMessenger") > -1)//不是微信浏览器
-            {
-                if (Session["openId"] == null)
-                {
-                    GetOpenId();
-                }
-            }
-            if (Session["openId"] != null)
-            {
-                if (Session["access_token"] == null)
-                {
-                    Getaccesstoken();
-                }
-                if (judgeIsFollow(Session["access_token"].ToString(), Session["openId"].ToString()) == false)
-                {
-                    return Content("<script>alert('您还没关注我们公众号！先去关注！');window.location.href = '/Home/Guanzhu';</script>");
-                    //return Content("<script>alert('您还没关注我们公众号！先去关注！');window.location.href = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI3MjIxOTM4NA==#wechat_redirect';</script>");
-                }
-            }
-            
             if (string.IsNullOrEmpty(RMemNum))
             {
                 RTel = Mser.GetTelPhoneByMemberNum(RMemNum);
@@ -126,7 +104,7 @@ namespace XiangNingPhone.Controllers
             Models.appId = WxPayConfig.APPID;
             Models.timestamp = WxPayApi.GenerateTimeStamp();
             Models.nonceStr = WxPayApi.GenerateNonceStr();
-            Models.finalsign = Getsignature(Models.nonceStr, Models.timestamp, RURL);
+            Models.finalsign = WXPayAPI.WXAPI.Getsignature(Models.nonceStr, Models.timestamp, RURL);
             Models.ticket = Session["ticket"].ToString();
             Models.RUrl = RURL;
             return new ContentResult
@@ -136,52 +114,6 @@ namespace XiangNingPhone.Controllers
             };
         }
 
-        /// <summary>
-        /// 获取access_token
-        /// </summary>
-        /// <returns></returns>
-        public string Getaccesstoken()
-        {
-            string urljson = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + WxPayConfig.APPID + "&secret=" + WxPayConfig.APPSECRET;
-            string strjson = "";
-            try
-            {
-                //请求url以获取数据
-                string result = HttpService.Get(urljson);
-                JsonData jd = JsonMapper.ToObject(result);
-                strjson = (string)jd["access_token"];
-                Session["access_token"] = strjson;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            return strjson;
-        }
-        /// <summary>
-        /// 获得jsapi_ticket
-        /// </summary>
-        /// <returns></returns>
-        public string Getjsapi_ticket()
-        {
-            string accesstoken = (string)Session["access_token"];
-            string urljson = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=" + accesstoken + "&type=jsapi";
-            string strjson = "";
-            try
-            {
-                //请求url以获取数据
-                string result = HttpService.Get(urljson);
-                JsonData jd = JsonMapper.ToObject(result);
-                strjson = (string)jd["ticket"];
-                Session["ticket"] = strjson;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-
-            return strjson;
-        }
         //获取创建二维码的ticket
         public string Geterm_ticket()
         {
@@ -203,59 +135,7 @@ namespace XiangNingPhone.Controllers
 
             return strjson;
         }
-        /// <summary>
-        /// 生成signature
-        /// </summary>
-        /// <param name="nonceStr"></param>
-        /// <param name="timespanstr"></param>
-        /// <returns></returns>
-        public string Getsignature(string nonceStr, string timespanstr, string RUrl)
-        {
-            if (Session["access_token"] == null)
-            {
-                Getaccesstoken();
-            }
-            if (Session["ticket"] == null)
-            {
-                Getjsapi_ticket();
-            }
-
-            string str = "jsapi_ticket=" + (string)Session["ticket"] + "&noncestr=" + nonceStr +
-                "&timestamp=" + timespanstr + "&url=" + RUrl;// +"&wxref=mp.weixin.qq.com";
-            string singature = getSha1(str).ToLower();
-            string ss = singature;
-            return ss;
-        }
-        public static String getSha1(String str)
-        {
-            //建立SHA1对象
-            SHA1 sha = new SHA1CryptoServiceProvider();
-            //将mystr转换成byte[] 
-            ASCIIEncoding enc = new ASCIIEncoding();
-            byte[] dataToHash = enc.GetBytes(str);
-            //Hash运算
-            byte[] dataHashed = sha.ComputeHash(dataToHash);
-            sha.Dispose();
-            //将运算结果转换成string
-            string hash = BitConverter.ToString(dataHashed).Replace("-", "");
-            return hash;
-        }
-        //获取带参数的微信二维码
-        public string GetWXERMPic()
-        {
-            string erm_token = "";
-            if (Session["access_token"] == null)
-            {
-                Getaccesstoken();
-            }
-            erm_token = Session["access_token"].ToString();
-            //if (Session["ermticket"] == null)
-            //{
-            //    Geterm_ticket();
-            //}
-            //string str = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket="+Session["ermticket"].ToString();
-            return erm_token;
-        }
+        //微信分享功能
         public string GetWXSharPic(int Id,string GalleryItems,string t)
         {
             int PicCount = 0;
@@ -409,30 +289,7 @@ namespace XiangNingPhone.Controllers
             imgToResize.Dispose();
             return (Image)b;
         }
-        /**
-         * 判断用户是否关注了公众号
-         * @param token
-         * @param openid
-         * @return
-         */
-        public static bool judgeIsFollow(string token, string openid)
-        {
-            bool IsGuanzhu = true;
-            string url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + token + "&openid=" + openid + "&lang=zh_CN";
-            try
-            {
-                string result = HttpService.Get(url);
-                JsonData jd = JsonMapper.ToObject(result);
-                int subscribe = (int)jd["subscribe"];
-                if (subscribe == 0)
-                { IsGuanzhu = false; }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            return IsGuanzhu;
-        }
+        
         public void GetOpenId()
         {
             //构造网页授权获取code的URL
@@ -488,7 +345,10 @@ namespace XiangNingPhone.Controllers
             {
                 return RedirectToAction("Detail", "Products", new { Id = (int)Session["ProId"] });
             }
-            else { return RedirectToAction("Index", "Home"); }
+            else {
+                //return Content("<script>window.history.go(-2);</script>");
+                return RedirectToAction("Index", "Home"); 
+            }
             //return Content("<script>alert('" + openid + "');window.location.href = '/Home';</script>");
             
             //return Content(openid + "&&" + code);

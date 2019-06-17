@@ -193,7 +193,7 @@ namespace DalProject
                               }).SingleOrDefault();
                 CHModels = CHTabl;
 
-                var CHDetail = (from p in db.Sale_Contract_Detail.Where(k => k.SaleContractHeadId == Id)
+                var CHDetail = (from p in db.Sale_Contract_Detail.Where(k => k.SaleContractHeadId == Id && k.DeleteFlag==false)
                                 orderby p.CreateTime descending
                                 select new ContractProductsModel
                                 {

@@ -38,7 +38,6 @@ namespace XiangNingPhone.Controllers
                 }
                 this.Carts.Add(new CartModel() { Product = product, Amount = Amount });
             }
-
             return Content(Count.ToString());
         }
         public ActionResult Index()
