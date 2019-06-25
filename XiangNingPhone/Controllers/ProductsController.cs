@@ -141,7 +141,6 @@ namespace XiangNingPhone.Controllers
             int PicCount = 0;
             string[] strBg = { };
             List<string> strList = new List<string>();
-
             if (!string.IsNullOrEmpty(GalleryItems))
             {
                 var StrArr = GalleryItems.Split(';');
@@ -176,11 +175,8 @@ namespace XiangNingPhone.Controllers
             i1.Dispose();
             b1.Dispose();
             strBg = strList.ToArray();
-            MergeImage(strBg, reqrPath);
-
-            string NewPicpath = "/UpLoads/new.jpg";
-
-
+            //MergeImage(strBg, reqrPath);
+            string NewPicpath = MergeImage(strBg, reqrPath);
             return NewPicpath;
         }
 
@@ -198,7 +194,7 @@ namespace XiangNingPhone.Controllers
             return filePath;
         }
         //拼图函数
-        private void MergeImage(string[] strBg, string strQr)
+        private string MergeImage(string[] strBg, string strQr)
         {
             // 数组元素个数(即要拼图的图片个数)
             int lenth = strBg.Length+1;
@@ -251,9 +247,14 @@ namespace XiangNingPhone.Controllers
                 //g2.FillRectangle(Brushes.LightGreen, new Rectangle(XPx, YPx, 260, 260));
             }
 
-            bitMap.Save(Server.MapPath("/UpLoads") + "/new.jpg");
+            string NewPicName = WxPayApi.GenerateTimeStamp() + ".jpg";
+            bitMap.Save(Server.MapPath("/UpLoads/") + NewPicName);
+
+            string PicPath= "/UpLoads/"+ NewPicName;
+
             g1.Dispose();
             bitMap.Dispose();
+            return PicPath;
         }
         //调整图像大小
         private static Image resizeImage(Image imgToResize, Size size)
