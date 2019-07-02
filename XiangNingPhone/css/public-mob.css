@@ -3,7 +3,7 @@
 html{font-size:62.5%;/*10 ÷ 16 × 100% = 62.5%*/-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin: 0;padding:0;}
 article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block;}
-body{min-width:320px;word-wrap:break-word;line-height:1;font-family:'microsoft yahei',Verdana,"\5FAE\8F6F\96C5\9ED1",Helvetica,Tahoma,sans-serif,"\5b8b\4f53",Arial;background:#fafafa;color:#000;-webkit-tap-highlight-color:rgba(255,255,255,0);-webkit-touch-callout:none;cursor:default;-ms-content-zooming:none;}
+body{min-width:320px;word-wrap:break-word;line-height:1;font-family:'microsoft yahei',Verdana,"\5FAE\8F6F\96C5\9ED1",Helvetica,Tahoma,sans-serif,"\5b8b\4f53",Arial;background:#f1f1f1;color:#000;-webkit-tap-highlight-color:rgba(255,255,255,0);-webkit-touch-callout:none;cursor:default;-ms-content-zooming:none;}
 h1,h2,h3,h4,h5,h6,button,input,select,textarea{font-weight:normal; font-style:normal;}
 audio,canvas,progress,video{display:inline-block;vertical-align:baseline;}
 audio:not([controls]){display:none;height:0;}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0;}
@@ -66,7 +66,7 @@ a:visited {color:#333;}
 /* Backgrounds */
 .bg-wh{background-color:#ffffff;/*白色*/}  .bg-mogray{background-color:#E6E6E6;/*默认-灰色*/}  .bg-blue{background-color:#0E90D2;/*蓝色*/}  .bg-qblue{background-color:#3BB4F2;/*浅蓝色*/}  .bg-green{background-color:#5EB95E;/*绿色*/}  .bg-orange{background-color:#F37B1D;/*橙色*/}  .bg-red{background-color:#DD514C;/*红色*/} 
 /* Colors */
-.g0{color:#000;}  .g3{color:#333;}  .g6{color:#666;}  .g9{color:#999;}  .ga{color:#aaa;} .gb{color:#bbb;} .gc{color:#ccc;} .gd{color:#ddd;} .ge{color:#eee;}  .wh{color:#fff;}
+.g0{color:#000;}  .g3{color:#333;}  .g6{color:#666;}  .g9{color:#999 !important;}  .ga{color:#aaa;} .gb{color:#bbb;} .gc{color:#ccc;} .gd{color:#ddd;} .ge{color:#eee;}  .wh{color:#fff;}
 .blue{color:#0E90D2;}.green{color:#5EB95E;}.orange{color:#F37B1D;}.red{color:#DD514C;}  a.links{color: #095f8a;text-decoration: underline;background-color: transparent;}
 a.blue{color:#0E90D2;}a.green {color:#5EB95E;}a.orange {color:#F37B1D;}a.red{color:#DD514C;}
 .receivecolor{color:#FE6401;}

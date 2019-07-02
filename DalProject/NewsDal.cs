@@ -31,7 +31,8 @@ namespace DalProject
                                 ConvertImg = p.ConvertPic,
                                 EidtAuthorName = p.EidtName,
                                 CheckedStatus = p.CheckedStatus,
-                                UpTime = p.UpTime
+                                UpTime = p.UpTime,
+                                SalePrice=p.SalePrices
                             }).Skip(SModel.PageSize * SModel.PageIndex).Take(SModel.PageSize).ToList();
                 return list;
             }
@@ -71,7 +72,8 @@ namespace DalProject
                                 ConvertImg = p.ConvertPic,
                                 EidtAuthorName = p.EidtName,
                                 CheckedStatus = p.CheckedStatus,
-                                UpTime=p.UpTime
+                                UpTime=p.UpTime,
+                                SalePrice=p.SalePrices
                             }).ToList();
                 return List.ToPagedList(SModel.PageIndex, SModel.PageSize);
             }

@@ -1,78 +1,51 @@
-﻿
-@{
-    ViewBag.Title = "首页";
-}
+﻿@{ Layout = null;}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>香凝工艺_香凝红木_上海香凝工艺家具官网</title>
+    <meta name="Keywords" content="香凝工艺、香凝红木、红木家具、红木家居、上海红木家具、上海红木、红木、上海红木家具维修、上海红木家具保养、红木家具维修保养、上海红木家居定制" />
+    <meta name="Description" content="上海红木家具维修保养，24h服务。上海香凝工艺家居，主营红木家具定制、红木家具整屋定制、红木家具保养、红木家具维修等业务。集生产设计为一体，在上海红木家具定制和设计都独具先天优势和地位。上海开设4家展厅分店和1个大型加工配送中心。" />
 
-<header id="header" class="headerindex">
-    <div class="disbox aubgslogo"></div>
-    <div class="formalsosbox sosbg por">
-        <input name="productSearch" type="text" class="intext f12" id="IndexformalSearchTxt" placeholder="请输入关键字">
-        <span class="formalindexbtn f14 poa" id="formalbtn">搜索</span>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <link href="@Url.Content("~/css/public-mob.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/index.css")" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="@Url.Content("~/js/zepto.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/goTops.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/js/TouchSlide-1.1.min.js")"></script>
+</head>
+<body data-marpad="padding" data-fixtop="60" data-fixbot="70">
+    <div id="preloader">
+        <div id="status">
+            <p style="width:100%;line-height:30px;font-size:14px;">
+                Loading the content...
+                <em style="min-width:640px;">Loading depends on your connection speed!</em>
+            </p>
+        </div>
     </div>
-</header>
+    <div class="all-elements">
 
+        <header id="header" class="headerindex">
+            <div class="disbox aubgslogo"></div>
+            <div class="formalsosbox sosbg por">
+                <input name="productSearch" type="text" class="intext f12" id="IndexformalSearchTxt" placeholder="请输入关键字">
+                <span class="formalindexbtn f14 poa" id="formalbtn">搜索</span>
+            </div>
+        </header>
 
-<article class="godsconslider" id="godsconslider">
-    <div class="bd">
-        <ul id="sliderPic">
-            <li onclick="goUrl('/XNAbout/QYLN')"><img src="~/images/b1.jpg" /></li>
-        </ul>
-    </div>
-    <div class="hd"><ul></ul></div>
-</article>
-<script type="text/javascript">
-    TouchSlide({
-        slideCell: "#godsconslider",
-        titCell: ".hd ul",
-        mainCell: ".bd ul",
-        effect: "leftLoop",
-        autoPage: true,//自动分页
-        autoPlay: $('#godsconslider .bd li').length > 1 ? true : false  //自动播放
-    });
-</script>
-
-
-<script type="text/javascript">
-    // 搜所按钮点击事件
-    $('#formalbtn').click(function () {
-        var serString = $("#IndexformalSearchTxt").val();
-        //var tmn = returnTmnNo();
-        if (serString == '') {
-            UsTips("请输入搜索关键字", 15500);
-            return false;
-        }
-        var sosurl = '/Products/Search?keyWord=' + serString;
-
-        goUrl(sosurl);
-    });
-</script>
-
-<div class="indexnavlist listactive ovh">
-        <ul class="pt20">
-            <li class="n5"><em class="icem ic01"></em><span class="texp f12">正规厂家品质保证</span></li>
-            <li class="n5"><em class="icem ic02"></em><span class="texp f12">权威评测安全放心</span></li>
-            <li class="n5"><em class="icem ic03"></em><span class="texp f12">注重细节雕刻精致</span></li>
-            <li class="n5"><em class="icem ic04"></em><span class="texp f12">传承工艺值得信赖</span></li>
-            <li class="n5"><em class="icem ic05"></em><span class="texp f12">售后完善放心购买</span></li>
-        </ul>
- </div>
-
-<article class="godstab mt10">
-    <div class="indextabnav">
-        <h3 class="navtitle"><span class="b">香凝服务</span><span class="f12 g9 pl10">The Main Service</span></h3>
-    </div>
-    <div class="godstabcent">
-        <article id="navslider">
-
+        <article id="navslider" class="navlist" style="overflow:hidden;">
             <div class="bd">
                 <ul id="sliderPic">
-                    <li onclick="goUrl('/XNProducts/GYLP')"><img src="~/bg/nav_gylp.png" /></li>
-                    <li onclick="goUrl('/Products/Index')"><img src="~/bg/nav_jpjj.png" /></li>
-                    <li onclick="goUrl('/XNProducts/ZWDZ')"><img src="~/bg/nav_zwdz.png" /></li>
-                    <li onclick="goUrl('/XNProducts/JJWX')"><img src="~/bg/nav_jjwx.png" /></li>
+                    <li onclick="goUrl('/')"><span>网站首页</span></li>
+                    <li onclick="goUrl('/Products/Index')"><span>精品家具</span></li>
+                    <li onclick="goUrl('/XNProducts/GYLP')"><span>工艺礼品</span></li>
+                    <li onclick="goUrl('/XNProducts/ZWDZ')"><span>整屋定制</span></li>
+                    <li onclick="goUrl('/XNProducts/JJWX')"><span>维修保养</span></li>
                 </ul>
             </div>
-            <div class="hd"><ul></ul></div>
+           <div class="hd"><ul></ul></div>
         </article>
         <script type="text/javascript">
             TouchSlide({
@@ -80,117 +53,142 @@
                 titCell: ".hd ul",
                 mainCell: ".bd ul",
                 effect: "leftLoop",
-                defaultIndex:"1",
                 autoPage: true,//自动分页
                 autoPlay: false,  //自动播放
-               
+
             });
         </script>
-    </div>
-</article>
 
-
-@*<div class="mod_menu clear mt10">
-    <div class="telnav01">
-        <a href="javascript:void(0);" onclick="goUrl('/XNProducts/ZWDZ')">
-            <div class="telbtn c01 mod_menu_a">
-                <span class="f_l">整屋定制</span>
+        <article class="godsconslider" id="godsconslider">
+            <div class="bd">
+                <ul id="sliderPic">
+                    <li onclick="goUrl('/Products/Detail/165')"><img src="~/images/b1.jpg" /></li>
+                    <li onclick="goUrl('/XNProducts/ZWDZ')"><img src="~/images/b2.jpg" /></li>
+                </ul>
             </div>
-        </a>
-    </div>
-    <div class="telnav02">
-        <a href="javascript:void(0);" onclick="goUrl('/XNProducts/JJWX')">
-            <div class="telbtn c02 mod_menu_a">
-                <span class="f_l">家具维修</span>
+            <div class="hd"><ul></ul></div>
+        </article>
+        <script type="text/javascript">
+            TouchSlide({
+                slideCell: "#godsconslider",
+                titCell: ".hd ul",
+                mainCell: ".bd ul",
+                effect: "leftLoop",
+                autoPage: true,//自动分页
+                autoPlay: $('#godsconslider .bd li').length > 1 ? true : false  //自动播放
+            });
+        </script>
+
+        <img src="~/images/ads1.jpg" style="width:100%;" />
+
+        <article class="godstab mt10">
+            <div class="navtitle f18 b">
+                <span class="p15">每周热品推荐</span>
             </div>
-        </a>
-    </div>
-    <div class="telnav03">
-        <a href="javascript:void(0);" onclick="goUrl('/Products/Index')">
-            <div class="telbtn c03 mod_menu_a">
-                <span class="f_l">精品家具</span>
+            <div class="godstabcent bg-wh">
+                <div class="parameter3 fl">
+                    <img src="~/images/sby.jpg" onclick="goUrl('/Products/Detail/165')"  />
+
+                </div>
+                <div class="parameter4 fr">
+                    <img src="~/images/gylpsbt.jpg" onclick="goUrl('/Products/Detail/220')"  />
+                    <img src="~/images/duobaoge.jpg" style="margin-top:4%;" onclick="goUrl('/Products/Detail/222')" />
+                </div>
+                <div style="clear:both;" class="mb20"></div>
             </div>
-        </a>
-    </div>
-    <div class="telnav04">
-        <a href="javascript:void(0);" onclick="goUrl('/XNProducts/GYLP')">
-            <div class="telbtn c04 mod_menu_a">
-                <span class="f_l">工艺礼品</span>
+        </article>
+
+        <article class="godstab mt10">
+            <!--每周推荐end-->
+            <div class="navtitle f18 b">
+                <span class="p15">人气推荐</span>
             </div>
-        </a>
-    </div>
-</div>*@
+            <div class="godstabcent">
+                <div class="parameter pb10">
+                    @Html.Action("_RecommendPro", "Products", new { PageSize = 2 })
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </article>
 
+        <img src="~/images/adslogo.jpg" style="width:100%;" class="mt10" /><!--公司广告end-->
+        <div class="gylptit mt10"><span class="f20 pl30">工艺礼品</span></div>
+        <!--工艺礼品end-->
+        <article class="godstab">
+            <div class="godstabcenttxt">
+                <div class="gylp mt20">
+                    @Html.Action("GYLPList", "Products", new { Type = 15, PageSize = 4 })
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            <div class="gylptit" style="background:#fff;" onclick="goUrl('/XNProducts/GYLP')"><span class="f16">查看全部&nbsp;&gt;</span></div>
+        </article>
 
-@*<div class="indexnavlist listactive ovh">
-        <ul>
-            <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic01"></em><span class="texp f14">家具</span></a></li>
-            <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/XNProducts/GYLP')"><em class="icem ic02"></em><p class="texp f14">工艺品</p></a></li>
-            <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/XNProducts/ZWDZ')"><em class="icem ic03"></em><p class="texp f14">定制</p></a></li>
-            <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/XNProducts/JJWX')"><em class="icem ic04"></em><p class="texp f14">维修</p></a></li>
-        </ul>
-    </div>*@
+        <article class="godstab mt10">
+            <div class="navtitle bg-wh">
+                <span class="p15 b f18">整屋定制</span><a href="@Url.Action("ZWDZ","XNProducts")" class="fr g9 pr10 f16">查看全部 &nbsp; &gt;</a>
+            </div>
+            <div class="godstabcenttxt" onclick="goUrl('/XNProducts/ZWDZ')">
+                <img src="~/images/zwdzpic1.jpg" />
+                <p class="f12 adstxt pl10">风格自定，材料自选，给您自由。<span class="readtimes">5647 人喜欢</span></p>
+                <img src="~/images/zwdzpic2.jpg" class="mt10" />
+                <p class="f12 adstxt pl10">专业设计，优质工匠，材料自选。<span class="readtimes">4513 人喜欢</span></p>
+            </div>
+        </article>
 
-@*<div class="indexnavlist listactive ovh">
-        <ul>
-            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><p class="icem ic01"></p><p class="texp f14">卧房</p></a></li>
-            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic02"></em><span class="texp f14">书房</span></a></li>
-            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic03"></em><span class="texp f14">客厅</span></a></li>
-            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic04"></em><span class="texp f14">餐厅</span></a></li>
-            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic05"></em><span class="texp f14">其它</span></a></li>
-            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic06"></em><span class="texp f14">特惠</span></a></li>
-        </ul>
-    </div>*@
+        <img src="~/images/adslogo.jpg" style="width:100%;" class="mt10" /><!--公司广告end-->
 
-<article class="godstab mt10">
-    <div class="indextabnav">
-        <ul>
-            <li class="on">每日推荐@*<a href="/Home/TJProducts" class="more">更多&gt;</a>*@</li>
-        </ul>
-    </div>
-    <div class="godstabcent">
-        <div class="parameter3 ovh">
-            @Html.Action("_RecommendPro", "Products")
-        </div>
-    </div>
-</article>
-@*<a href="javascript:void(0);" class="bg-wh" onclick="goUrl('@Url.Action("KanDian","Home")')">
-        <img src="~/images/bt1.png" style="width:100%;" />
-    </a>*@
+        <article class="godstab mt10">
+            <div class="navtitle">
+                <span class="p15 b f18">热卖家具</span>
+            </div>
+            <div class="godstabcenttxt">
+                <div class="parameter">
+                    @Html.Action("PageList", "Products", new { Type = 2, PageSize = 4 })
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </article>
 
-<article class="godstab mt10">
-    <div class="indextabnav f15">
-        <ul>
-            <li class="on">工艺礼品<a href="/XNProducts/GYLP" class="more">更多&gt;</a></li>
-        </ul>
+        <article class="godstab mt10">
+            <div class="navtitle bg-wh">
+                <span class="p15 b f18">官方推荐</span><a href="@Url.Action("Index","Products")" class="fr g9 pr10 f16">查看全部 &nbsp; &gt;</a>
+            </div>
+            <div class="godstabcenttxt">
+                <img src="~/images/adspic1.jpg" onclick="goUrl('/Products/Detail/223')"  />
+                <img src="~/images/adspic2.jpg" class="mt10" onclick="goUrl('/Products/Detail/132')" />
+                <img src="~/images/adspic3.jpg" class="mt10" onclick="goUrl('/Products/Detail/166')"  />
+            </div>
+        </article>
+
+        <article class="godstab mt10">
+            <div class="navtitle f18 b">
+                <span class="p15">公司简介</span>
+            </div>
+            <div class="godstabcent">
+                <img src="~/images/about_index.jpg" />
+                <p class="indexabout g6">“暗香疏影，凝瞩不转。”香凝红木，这颗骤然升起于天穹的亮星，诞生于江南水乡千年古镇——朱家角。独树“品质至上，信誉第一”的经营理念，于文化沃土，经十年发展，上海香凝工艺品有限公司力求为客户提供物超所值的产品和服务。公司主要业务有：传统家具、现代家具、工艺品的生产与销售，全屋定制及装修，旧家具维修。现如今，香凝红木更在业内率先推出“服务无极限”，扫清了购买红木家具的服务盲区。</p>
+            </div>
+        </article>
+
+        <footer id="footer" class="footer f14">
+            <p class="bfx01 pt10" onclick="goUrlByTmn('/')"><i class="ftbari fthome"></i><em class="ftbarem checked">首页</em></p>
+            <p class="bfx01 pt10" onclick="goUrl('/Products')"><i class="ftbari fproduct"><ins class="ftnum f10" id="cartNum" style="display: none;"></ins></i><em class="ftbarem">家具</em></p>
+            <p class="bfx01 pt10" onclick="goUrl('/XNAbout/LXWM')"><i class="ftbari fttel"></i><em class="ftbarem">联系</em></p>
+            <p class="bfx01 pt10" onclick="goUrl('/Member')"><i class="ftbari ftuser"><ins id="notice" class="ftnum" style="display:none;">22</ins></i><em class="ftbarem">我的</em></p>
+        </footer>
     </div>
-    <div class="godstabcent">
-        <div class="parameter ovh" style="display:block;">
-            @Html.Action("PageList", "Products", new { Type = 15, PageSize = 6 })
-        </div>
-    </div>
-</article>
-<article class="godstab mt10">
-    <div class="indextabnav f15">
-        <ul>
-            <li class="on">精品家具<a href="/Products/Index" class="more">更多&gt;</a></li>
-        </ul>
-    </div>
-    <div class="godstabcent">
-        <div class="parameter ovh" style="display:block;">
-            @Html.Action("PageList", "Products", new { Type = 2, PageSize = 6 })
-        </div>
-    </div>
-</article>
-<article class="godstab mt10">
-    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
-    <link href="@Url.Content("~/css/member.css")" rel="stylesheet" type="text/css" />
-    <div class="indextabnav f15">
-        <ul>
-            <li class="on">香凝资讯<a href="@Url.Action("Index","News")" class="more">更多&gt;</a></li>
-        </ul>
-    </div>
-    <div class="godstabcent">
-        @Html.Action("List", "News", new { PageSize = 10 })
-    </div>
-</article>
+    <div id="gotop" class="gotop"></div>
+
+    <script type="text/javascript">
+        $(window).goTops({ toBtnCell: "#gotop", posBottom: 70 });
+    </script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#preloader").delay(400).fadeOut("medium");
+        });
+    </script>
+
+</body>
+</html>

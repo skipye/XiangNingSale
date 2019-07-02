@@ -6,7 +6,7 @@
 
 @if (Model != null && Model.Any())
 {
-    <ul id="lookSee">
+    <ul>
         @foreach (var item in Model)
         {
             var Picpath = "/img/none.jpg";
@@ -18,9 +18,9 @@
                         <p class="gcopic">
                             <span style="background-image:url(@Picpath)"></span>
                         </p>
-                        <p class="f14 mtit mt5">@item.Name</p>
-                        <p class="f12 g6 pl5">匠心之作、工艺传承</p>
-                        <p class="f14 mpro"><span class="b pl20">@item.HitTimes</span></p>
+                        <p class="f14 mtit">@item.Name</p>
+                        <p class="f12 g6 pl5">材质可定制</p>
+                        <p class="f14 saleprice">￥:<span class="b">@item.SalePrice</span></p>
                     </a>
                     <div class="btnbox pt15" >
                         <span class="btncart fr rdu5" ref="@item.Id" rel=""><span class="wh">查看详情</span></span>

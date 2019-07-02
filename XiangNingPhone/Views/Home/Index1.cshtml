@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewBag.Title = "首页";
+}
+
+<header id="header" class="headerindex">
+    <div class="disbox aubgslogo"></div>
+    <div class="formalsosbox sosbg por">
+        <input name="productSearch" type="text" class="intext f12" id="IndexformalSearchTxt" placeholder="请输入关键字">
+        <span class="formalindexbtn f14 poa" id="formalbtn">搜索</span>
+    </div>
+</header>
+
+
+<article class="godsconslider" id="godsconslider">
+    <div class="bd">
+        <ul id="sliderPic">
+            <li onclick="goUrl('/XNAbout/QYLN')"><img src="~/images/b1.jpg" /></li>
+        </ul>
+    </div>
+    <div class="hd"><ul></ul></div>
+</article>
+<script type="text/javascript">
+    TouchSlide({
+        slideCell: "#godsconslider",
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        effect: "leftLoop",
+        autoPage: true,//自动分页
+        autoPlay: $('#godsconslider .bd li').length > 1 ? true : false  //自动播放
+    });
+</script>
+
+
+<script type="text/javascript">
+    // 搜所按钮点击事件
+    $('#formalbtn').click(function () {
+        var serString = $("#IndexformalSearchTxt").val();
+        //var tmn = returnTmnNo();
+        if (serString == '') {
+            UsTips("请输入搜索关键字", 15500);
+            return false;
+        }
+        var sosurl = '/Products/Search?keyWord=' + serString;
+
+        goUrl(sosurl);
+    });
+</script>
+
+<div class="indexnavlist listactive ovh">
+        <ul class="pt20">
+            <li class="n5"><em class="icem ic01"></em><span class="texp f12">正规厂家品质保证</span></li>
+            <li class="n5"><em class="icem ic02"></em><span class="texp f12">权威评测安全放心</span></li>
+            <li class="n5"><em class="icem ic03"></em><span class="texp f12">注重细节雕刻精致</span></li>
+            <li class="n5"><em class="icem ic04"></em><span class="texp f12">传承工艺值得信赖</span></li>
+            <li class="n5"><em class="icem ic05"></em><span class="texp f12">售后完善放心购买</span></li>
+        </ul>
+ </div>
+
+<article class="godstab mt10">
+    <div class="indextabnav">
+        <h3 class="navtitle"><span class="b">香凝服务</span><span class="f12 g9 pl10">The Main Service</span></h3>
+    </div>
+    <div class="godstabcent">
+        <article id="navslider">
+
+            <div class="bd">
+                <ul id="sliderPic">
+                    <li onclick="goUrl('/XNProducts/GYLP')"><img src="~/bg/nav_gylp.png" /></li>
+                    <li onclick="goUrl('/Products/Index')"><img src="~/bg/nav_jpjj.png" /></li>
+                    <li onclick="goUrl('/XNProducts/ZWDZ')"><img src="~/bg/nav_zwdz.png" /></li>
+                    <li onclick="goUrl('/XNProducts/JJWX')"><img src="~/bg/nav_jjwx.png" /></li>
+                </ul>
+            </div>
+            <div class="hd"><ul></ul></div>
+        </article>
+        <script type="text/javascript">
+            TouchSlide({
+                slideCell: "#navslider",
+                titCell: ".hd ul",
+                mainCell: ".bd ul",
+                effect: "leftLoop",
+                defaultIndex:"1",
+                autoPage: true,//自动分页
+                autoPlay: false,  //自动播放
+               
+            });
+        </script>
+    </div>
+</article>
+
+
+@*<div class="mod_menu clear mt10">
+    <div class="telnav01">
+        <a href="javascript:void(0);" onclick="goUrl('/XNProducts/ZWDZ')">
+            <div class="telbtn c01 mod_menu_a">
+                <span class="f_l">整屋定制</span>
+            </div>
+        </a>
+    </div>
+    <div class="telnav02">
+        <a href="javascript:void(0);" onclick="goUrl('/XNProducts/JJWX')">
+            <div class="telbtn c02 mod_menu_a">
+                <span class="f_l">家具维修</span>
+            </div>
+        </a>
+    </div>
+    <div class="telnav03">
+        <a href="javascript:void(0);" onclick="goUrl('/Products/Index')">
+            <div class="telbtn c03 mod_menu_a">
+                <span class="f_l">精品家具</span>
+            </div>
+        </a>
+    </div>
+    <div class="telnav04">
+        <a href="javascript:void(0);" onclick="goUrl('/XNProducts/GYLP')">
+            <div class="telbtn c04 mod_menu_a">
+                <span class="f_l">工艺礼品</span>
+            </div>
+        </a>
+    </div>
+</div>*@
+
+
+@*<div class="indexnavlist listactive ovh">
+        <ul>
+            <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic01"></em><span class="texp f14">家具</span></a></li>
+            <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/XNProducts/GYLP')"><em class="icem ic02"></em><p class="texp f14">工艺品</p></a></li>
+            <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/XNProducts/ZWDZ')"><em class="icem ic03"></em><p class="texp f14">定制</p></a></li>
+            <li class="n4"><a href="javascript:void(0);" onclick="goUrl('/XNProducts/JJWX')"><em class="icem ic04"></em><p class="texp f14">维修</p></a></li>
+        </ul>
+    </div>*@
+
+@*<div class="indexnavlist listactive ovh">
+        <ul>
+            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><p class="icem ic01"></p><p class="texp f14">卧房</p></a></li>
+            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic02"></em><span class="texp f14">书房</span></a></li>
+            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic03"></em><span class="texp f14">客厅</span></a></li>
+            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic04"></em><span class="texp f14">餐厅</span></a></li>
+            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic05"></em><span class="texp f14">其它</span></a></li>
+            <li class="na"><a href="javascript:void(0);" onclick="goUrl('/Products/Index')"><em class="icem ic06"></em><span class="texp f14">特惠</span></a></li>
+        </ul>
+    </div>*@
+
+<article class="godstab mt10">
+    <div class="indextabnav">
+        <ul>
+            <li class="on">每日推荐@*<a href="/Home/TJProducts" class="more">更多&gt;</a>*@</li>
+        </ul>
+    </div>
+    <div class="godstabcent">
+        <div class="parameter3 ovh">
+            @Html.Action("_RecommendPro", "Products")
+        </div>
+    </div>
+</article>
+@*<a href="javascript:void(0);" class="bg-wh" onclick="goUrl('@Url.Action("KanDian","Home")')">
+        <img src="~/images/bt1.png" style="width:100%;" />
+    </a>*@
+
+<article class="godstab mt10">
+    <div class="indextabnav f15">
+        <ul>
+            <li class="on">工艺礼品<a href="/XNProducts/GYLP" class="more">更多&gt;</a></li>
+        </ul>
+    </div>
+    <div class="godstabcent">
+        <div class="parameter ovh" style="display:block;">
+            @Html.Action("PageList", "Products", new { Type = 15, PageSize = 6 })
+        </div>
+    </div>
+</article>
+<article class="godstab mt10">
+    <div class="indextabnav f15">
+        <ul>
+            <li class="on">精品家具<a href="/Products/Index" class="more">更多&gt;</a></li>
+        </ul>
+    </div>
+    <div class="godstabcent">
+        <div class="parameter ovh" style="display:block;">
+            @Html.Action("PageList", "Products", new { Type = 2, PageSize = 6 })
+        </div>
+    </div>
+</article>
+<article class="godstab mt10">
+    <link href="@Url.Content("~/css/mcomm.css")" rel="stylesheet" type="text/css">
+    <link href="@Url.Content("~/css/member.css")" rel="stylesheet" type="text/css" />
+    <div class="indextabnav f15">
+        <ul>
+            <li class="on">香凝资讯<a href="@Url.Action("Index","News")" class="more">更多&gt;</a></li>
+        </ul>
+    </div>
+    <div class="godstabcent">
+        @Html.Action("List", "News", new { PageSize = 10 })
+    </div>
+</article>

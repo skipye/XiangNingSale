@@ -39,6 +39,13 @@ namespace XiangNingPhone.Controllers
             var models = NSer.GetWebPageList(SModel, Type??2);
             return View(models);
         }
+        //工艺礼品
+        public ActionResult GYLPList(SNewsModel SModel, int? Type, int? PageSize)
+        {
+            SModel.PageSize = PageSize ?? 9;
+            var models = NSer.GetWebPageList(SModel, Type ?? 2);
+            return View(models);
+        }
         public ActionResult List(SNewsModel SModel, int? Type, int? PageIndex, int? PageSize)
         {
             SModel.PageSize = PageSize ?? 10;
