@@ -47,7 +47,6 @@ namespace XiangNingPhone.Controllers
                     Session["User"] = UserAuthority;
                     return Redirect(ReturnUrl);
                 }
-                else { return View(); }
             }
             else {
                 if (userAgent.IndexOf("MicroMessenger") >0)//是微信浏览器

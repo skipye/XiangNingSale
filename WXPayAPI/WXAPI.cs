@@ -113,9 +113,13 @@ namespace WXPayAPI
             string url = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + token + "&openid=" + openid + "&lang=zh_CN";
             try
             {
+                int subscribe = 1;
                 string result = HttpService.Get(url);
-                JsonData jd = JsonMapper.ToObject(result);
-                int subscribe = (int)jd["subscribe"];
+                if (result.Contains("subscribe") == true)
+                {
+                    JsonData jd = JsonMapper.ToObject(result);
+                    subscribe = (int)jd["subscribe"];
+                }
                 if (subscribe == 0)
                 { IsGuanzhu = false; }
             }
