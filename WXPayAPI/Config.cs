@@ -16,16 +16,16 @@ namespace WxPayAPI
         * KEY：商户支付密钥，参考开户邮件设置（必须配置）
         * APPSECRET：公众帐号secert（仅JSAPI支付的时候需要配置）
         */
-        public const string APPID = "wxb3e0f167eb3e4d8d";
-        public const string MCHID = "1532634841";
-        public const string KEY = "sandra8225xroger3101091982020520";
-        public const string APPSECRET = "06d9cd9a924e3526db5ad391a0620a50";
+        public const string APPID = "";
+        public const string MCHID = "";
+        public const string KEY = "";
+        public const string APPSECRET = "";
 
         //=======【证书路径设置】===================================== 
         /* 证书路径,注意应该填写绝对路径（仅退款、撤销订单时需要）
         */
-        public const string SSLCERT_PATH = "cert/apiclient_cert.p12";
-        public const string SSLCERT_PASSWORD = "1233410002";
+        public const string SSLCERT_PATH = "";
+        public const string SSLCERT_PASSWORD = "";
 
 
 
